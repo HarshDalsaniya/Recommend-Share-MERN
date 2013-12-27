@@ -971,10 +971,10 @@ a:hover {
 /* ###############  section 1  ############## */
 
 .bringing-back {
-    background: url('/assets/images/home-improvements-banner.jpg') 0% 0% no-repeat padding-box;
+    background: url('/images/home-improvements-banner.jpg') 0% 0% no-repeat padding-box;
     background-size: cover;
     padding: 3rem 0;
-    padding-top: 8rem;
+    /* padding-top: 8rem; */
 }
 
 .bringing-back-heading {
@@ -2735,7 +2735,7 @@ form ._select {
 }
 
 .site section.content {
-    margin-top: 50px;
+    margin-top: 0px;
 }
 
 a.nav-link:hover {

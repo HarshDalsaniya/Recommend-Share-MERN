@@ -1,13 +1,13 @@
-import React from "react"
-import App from 'next/app';
-import { wrapper } from "../redux/store"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "../assets/css/style.css"
+import "../assets/css/layout.css"
+import "../assets/css/login.css"
 import "../assets/css/forms.css"
 import "../assets/css/editor-css.css"
 import "../assets/css/grid.css"
-import "../assets/css/login.css"
-import "../assets/css/style.css"
-import "../assets/css/layout.css"
+import App from 'next/app';
+import React from 'react'
+import { wrapper } from "../redux/store"
 import { Footer } from '../components/layout/Footer'
 import { NavBar } from '../components/NavBar/NavBar'
 

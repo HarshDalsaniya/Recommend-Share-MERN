@@ -1,3 +1,6 @@
+.login-body{
+    background-color: #edf1f3;
+}
 .login-box{
     width:534px;
 }
@@ -5,12 +8,13 @@
     width:910px;
 }
 .postcode-btn {
-    padding: 0;
-    border: 0;
-    text-align: center;
-    width: 80px;
+    padding: 0 !important;
+    border: 0 !important;
+    text-align: center !important;
+    width: 80px !important;
     height: 50px;
-    line-height: 50px;
+    margin: 0 13px 0 0;
+    line-height: 50px !important;
     float: right;
 }
 .form-box{
