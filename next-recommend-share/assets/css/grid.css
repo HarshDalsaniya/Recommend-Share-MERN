@@ -1,0 +1,728 @@
+
+
+/* */
+
+
+
+.highlight-columns .column                      ,
+
+.highlight-columns .columns                     { background:red; }
+
+.highlight-columns .container                   { background:#ddd; }
+
+.highlight-columns .box                      { background:#00ff00; }
+
+  .highlight-columns .box .container         { background:transparent !important; margin-bottom:10px; }
+
+  .highlight-columns .box .column            ,
+
+  .highlight-columns .box .columns           { background:red; }
+
+
+
+/* Self Clearing Goodness */
+
+.container:after                                { content: "\0020"; display: block; height: 0; clear: both; visibility: hidden; }
+
+
+
+/* #Base 1200 Grid
+
+================================================== */
+
+
+
+    .outer-container                            { float:left; width:100%; }
+
+
+
+    /* .container                                  { position:relative; width:1098px; margin:0 auto; padding:0px 30px; z-index:2; box-sizing:initial; } */
+
+    .container                                  { margin-bottom:0px; }
+
+    .container.tall                             { margin-bottom:30px; }
+
+    .container .column,
+
+    .container .columns                         { float: left; display: inline; margin:0 0 0 30px; padding:0; box-sizing:initial; }
+
+
+
+    .container .column.bdr-right                ,
+
+    .container .columns.bdr-right               { border-right:1px solid #ecf0f3; }
+
+
+
+    /* Nested Column Classes */
+
+    .column.alpha, .columns.alpha               { margin-left: 0; clear:left; }
+
+    .column.omega, .columns.omega               { margin-right: 0; clear:right; }
+
+
+
+    /* Nested Column Classes */
+
+    .column.left, .columns.fleft                { float:left; }
+
+    .column.fright, .columns.fright, .columns.last { float:right; }
+
+
+
+    /* Base Grid */
+
+    .container .one.column,
+
+    .container .one.columns                     { width: 64px;  }
+
+    .container .two.columns                     { width: 158px; }
+
+    .container .three.columns                   { width: 252px; }
+
+    .container .one-third.column                ,
+
+    .container .four.columns                    { width: 346px; }
+
+    .container .five.columns                    { width: 440px; }
+
+    .container .six.columns                     { width: 534px; }
+
+    .container .seven.columns                   { width: 628px; }
+
+    .container .two-thirds.column               ,
+
+    .container .eight.columns                   { width: 722px; }
+
+    .container .nine.columns                    { width: 816px; }
+
+    .container .ten.columns                     { width: 910px; }
+
+    .container .eleven.columns                  { width: 1004px; }
+
+    .container .twelve.columns                  { width: 1098px; }
+
+
+
+    /* Offsets */
+
+    .container .offset-by-one                   { padding-left: 94px; }
+
+    .container .offset-by-two                   { padding-left: 188px; }
+
+    .container .offset-by-three                 { padding-left: 282px; }
+
+    .container .offset-by-four                  { padding-left: 376px; }
+
+    .container .offset-by-five                  { padding-left: 470px; }
+
+    .container .offset-by-six                   { padding-left: 564px; }
+
+    .container .offset-by-seven                 { padding-left: 658px; }
+
+    .container .offset-by-eight                 { padding-left: 752px; }
+
+    .container .offset-by-nine                  { padding-left: 846px; }
+
+    .container .offset-by-ten                   { padding-left: 940px; }
+
+    .container .offset-by-eleven                { padding-left: 1034px; }
+
+
+
+
+
+    /* padded grid (1% grid, style) */            
+
+    .box                                        { padding:30px; }
+
+      .box .container                           { position: relative; width: 99%; margin: 0 auto; padding:0 0 0 0.5%; z-index:2; }
+
+      .box .column, .box .columns               { float: left; display: inline; margin-left: 3%; margin-right: 0px; position:relative; padding:0 0.5%; }
+
+      .box .column.alpha, .box .columns.alpha   { margin-left:0; }
+
+
+
+      .box .one.column,
+
+      .box .one.columns                      { width: 4.5%; }
+
+      .box .onepointfive.column              ,
+
+      .box .onepointfive.columns             { width: 10%; }
+
+      .box .two.columns                      { width: 13%; }
+
+      .box .three.columns                    { width: 21.5%; }
+
+      .box .one-third.column                 ,
+
+      .box .four.columns                     { width: 30.25%; }
+
+      .box .five.columns                     { width: 38.5%; }
+
+      .box .six.columns                      { width: 47%; }
+
+      .box .seven.columns                    { width: 55.5%; }
+
+      .box .two-thirds.column                ,
+
+      .box .eight.columns                    { width: 64%; }
+
+      .box .nine.columns                     { width: 72.5%; }
+
+      .box .ten.columns                      { width: 81%; }
+
+      .box .tenpointfive.columns             { width: 84.5%; }
+
+      .box .eleven.columns                   { width: 89.5%; }
+
+      .box .twelve.columns                   { width: 98%; }
+
+
+
+
+
+
+
+/* #Desktop (1020)
+
+================================================== */
+
+
+
+    /* Note: Design for a width of 768px */
+
+    @media only screen and (min-width: 1024px) and (max-width: 1280px) {
+
+        /* .container                                  { width: 978px; padding:0 10px; } */
+
+        .container .column,
+
+        .container .columns                         { margin-left:30px; }
+
+
+
+        .column.alpha, .columns.alpha               { margin-left: 0; }
+
+
+
+        /* Base Grid */
+
+        .container .one.column,
+
+        .container .one.columns                     { width: 54px;  }
+
+        .container .two.columns                     { width: 138px; }
+
+        .container .three.columns                   { width: 222px; }
+
+        .container .one-third.column                ,
+
+        .container .four.columns                    { width: 306px; }
+
+        .container .five.columns                    { width: 390px; }
+
+        .container .six.columns                     { width: 474px; }
+
+        .container .seven.columns                   { width: 558px; }
+
+        .container .two-thirds.column               ,
+
+        .container .eight.columns                   { width: 642px; }
+
+        .container .nine.columns                    { width: 726px; }
+
+        .container .ten.columns                     { width: 810px; }
+
+        .container .eleven.columns                  { width: 894px; }
+
+        .container .twelve.columns                  { width: 978px; }
+
+
+
+        /* Offsets */
+
+        .container .offset-by-one                   { padding-left: 84px;  }
+
+        .container .offset-by-two                   { padding-left: 168px; }
+
+        .container .offset-by-three                 { padding-left: 252px; }
+
+        .container .offset-by-four                  { padding-left: 336px; }
+
+        .container .offset-by-five                  { padding-left: 420px; }
+
+        .container .offset-by-six                   { padding-left: 504px; }
+
+        .container .offset-by-seven                 { padding-left: 588px; }
+
+        .container .offset-by-eight                 { padding-left: 672px; }
+
+        .container .offset-by-nine                  { padding-left: 756px; }
+
+        .container .offset-by-ten                   { padding-left: 840px; }
+
+        .container .offset-by-eleven                { padding-left: 924px; }
+
+
+
+        /* padded grid (1% grid, style) */            
+
+        .box                                        { padding:20px; }
+
+          .box .container                           { position: relative; width: 99%; margin: 0 auto; padding:0 0 0 1%; z-index:2; }
+
+          .box .column, .box .columns               { float: left; display: inline; margin-left: 3%; margin-right: 0px; position:relative; padding:0 0.5%; }
+
+          .box .column.alpha, .box .columns.alpha   { margin-left:0; }
+
+
+
+          .box .one.column,
+
+          .box .one.columns                      { width: 4.5%; }
+
+          .box .two.columns                      { width: 13%; }
+
+          .box .three.columns                    { width: 21.5%; }
+
+          .box .one-third.column                 ,
+
+          .box .four.columns                     { width: 30%; }
+
+          .box .five.columns                     { width: 38.5%; }
+
+          .box .six.columns                      { width: 47%; }
+
+          .box .seven.columns                    { width: 55.5%; }
+
+          .box .two-thirds.column                ,
+
+          .box .eight.columns                    { width: 64%; }
+
+          .box .nine.columns                     { width: 72.5%; }
+
+          .box .ten.columns                      { width: 81%; }
+
+          .box .eleven.columns                   { width: 89.5%; }
+
+          .box .twelve.columns                   { width: 98%; }
+
+
+
+    }
+
+    /**/
+
+
+
+
+
+
+
+
+
+
+
+/* #Tablet (Portrait)
+
+================================================== */
+
+
+
+    /* Note: Design for a width of 768px */
+
+    @media only screen and (min-width: 768px) and (max-width: 1023px) {   
+
+        /* .container                                  { width: 724px; padding:0 10px; } */
+
+        .container .column,
+
+        .container .columns                         { margin-left:20px; }
+
+
+
+        .column.alpha, .columns.alpha               { margin-left: 0; }
+
+        .column.omega, .columns.omega               { margin-right: 0; }
+
+        .alpha.omega                                { margin-left: 0; margin-right: 0; }
+
+
+
+        .container .one.column,
+
+        .container .tab-one.columns                 ,
+
+        .container .one.columns                     { width: 42px; }
+
+        .container .tab-two.columns                 ,
+
+        .container .two.columns                     { width: 104px; }
+
+        .container .tab-three.columns               ,
+
+        .container .three.columns                   { width: 166px; }
+
+        .container .one-third.column                ,
+
+        .container .tab-four.columns                ,
+
+        .container .four.columns                    { width: 228px; }
+
+        .container .tab-five.columns                ,
+
+        .container .five.columns                    { width: 290px; }
+
+        .container .tab-six.columns                 ,
+
+        .container .six.columns                     { width: 352px; }
+
+        .container .tab-seven.columns               ,
+
+        .container .seven.columns                   { width: 414px; }
+
+        .container .tab-eight.columns               ,
+
+        .container .two-thirds.column               ,
+
+        .container .eight.columns                   { width: 476px; }
+
+        .container .tab-nine.columns                ,
+
+        .container .nine.columns                    { width: 538px; }
+
+        .container .tab-ten.columns                 ,
+
+        .container .ten.columns                     { width: 600px; }
+
+        .container .tab-eleven.columns              ,
+
+        .container .eleven.columns                  { width: 662px; }
+
+        .container .tab-twelve.columns              ,
+
+        .container .twelve.columns                  { width: 724px; }
+
+        
+
+        .container .offset-by-one                   { padding-left: 62px; }
+
+        .container .offset-by-two                   { padding-left: 124px; }
+
+        .container .offset-by-three                 { padding-left: 186px; }
+
+        .container .offset-by-four                  { padding-left: 248px; }
+
+        .container .offset-by-five                  { padding-left: 310px; }
+
+        .container .offset-by-six                   { padding-left: 372px; }
+
+        .container .offset-by-seven                 { padding-left: 434px; }
+
+        .container .offset-by-eight                 { padding-left: 496px; }
+
+        .container .offset-by-nine                  { padding-left: 558px; }
+
+        .container .offset-by-ten                   { padding-left: 620px; }
+
+        .container .offset-by-eleven                { padding-left: 682px; }
+
+
+
+        .container .tab-one.columns                 ,
+
+        .container .tab-two.columns                 ,
+
+        .container .tab-three.columns               ,
+
+        .container .one-third.column                ,
+
+        .container .tab-five.columns                ,
+
+        .container .tab-six.columns                 ,
+
+        .container .tab-seven.columns               ,
+
+        .container .tab-eight.columns               ,
+
+        .container .tab-nine.columns                ,
+
+        .container .tab-ten.columns                 ,
+
+        .container .tab-eleven.columns              ,
+
+        .container .tab-twelve.columns              { padding-left:0; }
+
+        
+
+        /* padded grid (1% grid, style) */            
+
+        .box                                        { padding:20px; }
+
+          .box .container                           { position: relative; width: 99%; margin: 0 auto; padding:0 0 0 1%; z-index:2; }
+
+          .box .column, .box .columns               { float: left; display: inline; margin-left: 3%; margin-right: 0px; position:relative; padding:0 0.5%; }
+
+          .box .column.alpha, .box .columns.alpha   { margin-left:0; }
+
+
+
+          .box .one.column,
+
+          .box .one.columns                      { width: 4.5%; }
+
+          .box .two.columns                      { width: 13%; }
+
+          .box .three.columns                    { width: 21.5%; }
+
+          .box .one-third.column                 ,
+
+          .box .four.columns                     { width: 30%; }
+
+          .box .five.columns                     { width: 38.5%; }
+
+          .box .six.columns                      { width: 47%; }
+
+          .box .seven.columns                    { width: 55.5%; }
+
+          .box .two-thirds.column                ,
+
+          .box .eight.columns                    { width: 64%; }
+
+          .box .nine.columns                     { width: 72.5%; }
+
+          .box .ten.columns                      { width: 81%; }
+
+          .box .eleven.columns                   { width: 89.5%; }
+
+          .box .twelve.columns                   { width: 98%; }
+
+
+
+          .box .tab-one.column,
+
+          .box .tab-one.columns                  { width: 4.5%; }
+
+          .box .tab-two.columns                  { width: 13%; }
+
+          .box .tab-three.columns                { width: 21.5%; }
+
+          .box .tab-one-third.columns            ,
+
+          .box .tab-four.columns                 { width: 30%; }
+
+          .box .tab-five.columns                 { width: 38.5%; }
+
+          .box .tab-six.columns                  { width: 47%; }
+
+          .box .tab-seven.columns                { width: 55.5%; }
+
+          .box .tab-two-thirds.columns           ,
+
+          .box .tab-eight.columns                { width: 64%; }
+
+          .box .tab-nine.columns                 { width: 72.5%; }
+
+          .box .tab-ten.columns                  { width: 81%; }
+
+          .box .tab-eleven.columns               { width: 89.5%; }
+
+          .box .tab-twelve.columns               { width: 98%; }
+
+          
+
+          .box .tab-alpha.column                 ,
+
+          .box .tab-alpha.columns                { clear:left; margin-left:0; }
+
+    }
+
+    /**/
+
+
+
+
+
+
+
+/* #Mobile (Landscape)
+
+================================================== */
+
+
+
+    /* Note: Design for a width of 480px */
+
+   @media only screen and (max-width: 767px) {
+
+        /* .container { width: 92%; padding:0 4%; } */
+
+        .container .columns,
+
+        .container .column { margin: 0; }
+
+
+
+        .container .column.bdr-right                ,
+
+        .container .columns.bdr-right               { border:inherit; }
+
+
+
+        .container .one.column,
+
+        .container .one.columns,
+
+        .container .two.columns,
+
+        .container .three.columns,
+
+        .container .four.columns,
+
+        .container .five.columns,
+
+        .container .six.columns,
+
+        .container .seven.columns,
+
+        .container .eight.columns,
+
+        .container .nine.columns,
+
+        .container .ten.columns,
+
+        .container .eleven.columns,
+
+        .container .twelve.columns,
+
+        .container .one-third.column,
+
+        .container .two-thirds.column  { width: 100%; }
+
+
+
+        .container .offset-by-one,
+
+        .container .offset-by-two,
+
+        .container .offset-by-three,
+
+        .container .offset-by-four,
+
+        .container .offset-by-five,
+
+        .container .offset-by-six,
+
+        .container .offset-by-seven,
+
+        .container .offset-by-eight,
+
+        .container .offset-by-nine,
+
+        .container .offset-by-ten,
+
+        .container .offset-by-eleven { padding-left: 0; }
+
+
+
+        .container .quarter.columns                 { width: 40.5%; margin:0; }
+
+          .container .quarter.columns               ,
+
+          .container .quarter.columns.alpha         ,
+
+          .container .quarter.columns.omega         { margin-left:6.5%; }
+
+
+
+        /* padded grid (1% grid, style) */            
+
+        .box                                     { padding:20px; }
+
+          .box .container                        { padding:0; }
+
+          
+
+          .box .one.column                       ,
+
+          .box .one.columns                      ,
+
+          .box .onepointfive.column              ,
+
+          .box .onepointfive.columns             ,
+
+          .box .two.columns                      ,
+
+          .box .three.columns                    ,
+
+          .box .one-third.column                 ,
+
+          .box .four.columns                     ,
+
+          .box .five.columns                     ,
+
+          .box .six.columns                      ,
+
+          .box .seven.columns                    ,
+
+          .box .two-thirds.column                ,
+
+          .box .eight.columns                    ,
+
+          .box .nine.columns                     ,
+
+          .box .ten.columns                      ,
+
+          .box .tenpointfive.columns             ,
+
+          .box .eleven.columns                   ,
+
+          .box .twelve.columns                   { width: 98%; padding:0 1%; margin:0; }
+
+
+
+          .box .mob-one.column,
+
+          .box .mob-one.columns                  { width: 4.5%; }
+
+          .box .mob-two.columns                  { width: 13%; }
+
+          .box .mob-three.columns                { width: 21.5%; }
+
+          .box .mob-one-third.columns            ,
+
+          .box .mob-four.columns                 { width: 30%; }
+
+          .box .mob-five.columns                 { width: 38.5%; }
+
+          .box .mob-six.columns                  { width: 47%; }
+
+          .box .mob-seven.columns                { width: 55.5%; }
+
+          .box .mob-two-thirds.columns           ,
+
+          .box .mob-eight.columns                { width: 64%; }
+
+          .box .mob-nine.columns                 { width: 72.5%; }
+
+          .box .mob-ten.columns                  { width: 81%; }
+
+          .box .mob-eleven.columns               { width: 89.5%; }
+
+          .box .mob-twelve.columns               { width: 98%; }
+
+          
+
+          .box .mob-alpha.column                 ,
+
+          .box .mob-alpha.columns                { clear:left; }
+
+
+
+    }
+
+    /**/
+

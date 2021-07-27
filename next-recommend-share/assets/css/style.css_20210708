@@ -1,0 +1,2265 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans JP';
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* ################ navbar ##################### */
+
+.navbar-header {
+    background: #153581 0% 0% no-repeat padding-box;
+    box-shadow: 0px -7px 30px #00000017;
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+}
+
+.navbar-items {
+    padding: 0 !important;
+}
+
+.nav-logo {
+    width: 200px;
+}
+
+.nav-logo a img {
+    max-width: 200px;
+    width: 100%;
+    display: inline-block;
+}
+
+.nav-logo a img:hover {
+    opacity: 0.6;
+}
+
+.navbar-item-bg {
+    max-width: 750px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.navbar-item-bg {
+    background: #fff;
+    border-radius: 27px;
+    padding: 0.2rem 0.5rem;
+}
+
+.login a {
+    background: #FFFFFF;
+    border-radius: 27px;
+    padding: 0.4rem 2rem;
+}
+
+.login {
+    margin-left: 2rem;
+}
+
+.navbar-item-bg li a {
+    padding: 0.2rem 1.5rem !important;
+    border-radius: 27px;
+}
+
+.navbar-item-bg li a,
+.login a {
+    font: normal normal normal 16px/24px Noto Sans JP;
+    letter-spacing: 0px;
+    color: #153581;
+}
+
+.navbar-item-bg li a:hover {
+    background: #153581;
+    border-radius: 27px;
+    color: #fff;
+}
+
+.login a:hover {
+    background: #12ABDF;
+    color: #fff;
+}
+
+.login a:hover {
+    color: #fff;
+}
+
+.active {
+    background: #153581;
+    color: #fff !important;
+}
+
+
+/* ###################### Hamburger menu ################### */
+
+#nav-icon3 {
+    width: 35px;
+    height: 45px;
+    position: relative;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
+    cursor: pointer;
+}
+
+#nav-icon3 span {
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background: #fff;
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .25s ease-in-out;
+    -moz-transition: .25s ease-in-out;
+    -o-transition: .25s ease-in-out;
+    transition: .25s ease-in-out;
+}
+
+#nav-icon3 span:nth-child(1) {
+    top: 10px;
+}
+
+#nav-icon3 span:nth-child(2),
+#nav-icon3 span:nth-child(3) {
+    top: 22px;
+}
+
+#nav-icon3 span:nth-child(4) {
+    top: 34px;
+}
+
+#nav-icon3.open span:nth-child(1) {
+    top: 18px;
+    width: 0%;
+    left: 50%;
+}
+
+#nav-icon3.open span:nth-child(2) {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+#nav-icon3.open span:nth-child(3) {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+#nav-icon3.open span:nth-child(4) {
+    top: 18px;
+    width: 0%;
+    left: 50%;
+}
+
+.hamburger-menu {
+    outline: none !important;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+/* ####################  uesr login  ##################### */
+
+#login-uesr-block {
+    display: none;
+    position: absolute;
+    top: 2px;
+    left: 40%;
+    width: 250px;
+    box-shadow: 0px 0px 30px #00000029;
+}
+
+.login-uesr a.nav-link {
+    color: #fff;
+}
+
+.login-uesr .nav-item>img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 1rem;
+    margin-right: 0.5rem;
+}
+
+.login-uesr .dropdown-menu {
+    width: 240px;
+    text-align: end;
+    margin-top: 0.5rem;
+    box-shadow: 0px 0px 30px #00000029;
+    padding: 0;
+}
+
+.login-uesr .dropdown-menu[data-bs-popper] {
+    left: -46px;
+}
+
+.arrow-up-relative {
+    position: relative;
+}
+
+.login-uesr .dropdown-menu a {
+    color: #153581;
+}
+
+.login-uesr .dropdown-menu li {
+    padding: 0.3rem 0;
+}
+
+.login-uesr .dropdown-menu li:hover,
+.login-uesr .dropdown-menu li:hover a {
+    background: #153581;
+    color: #fff;
+}
+
+.login-border {
+    background: #eee;
+    height: 3px;
+}
+
+.arrow-up {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 17px solid #fff;
+    right: 17px;
+    top: -17px;
+}
+
+
+
+/* ###############  footer  ############## */
+
+.footer-primary {
+    background: #FAFAFA;
+    padding: 2rem 0;
+}
+
+.footer-logo img {
+    max-width: 225px;
+    width: 100%;
+}
+
+.footer-logo img:hover {
+    opacity: 0.6;
+}
+
+.footer-heding,
+.media-link {
+    margin-top: 2.5rem;
+}
+
+.footer-address,
+.footer-link ul {
+    margin-top: 1rem;
+}
+
+.footer-address {
+    font: normal normal normal 16px/23px Noto Sans JP;
+    letter-spacing: 0.42px;
+    color: #77869C;
+}
+
+.footer-heding {
+    font: normal normal 500 20px/30px Noto Sans JP;
+    letter-spacing: 0.52px;
+    color: #153581;
+}
+
+.footer-link ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.footer-link ul a {
+    font: normal normal normal 16px/26px Noto Sans JP;
+    letter-spacing: 0.42px;
+    color: #77869C;
+}
+
+.footer-link ul a:hover {
+    opacity: 0.7;
+}
+
+.media-link div {
+    text-align: end;
+}
+
+.media-link a {
+    color: #12ABDF;
+    font-size: 28px;
+}
+
+.media-link a:hover {
+    opacity: 0.7;
+}
+
+.footer-secondary {
+    background: #12ABDF;
+    padding: 1rem 0;
+    font: normal normal normal 14px/34px Noto Sans JP;
+    letter-spacing: 0.36px;
+    color: #FFFFFF;
+}
+
+.footer-secondary a {
+    color: #FFFFFF;
+}
+
+
+/* ##################################  page 1  ##################################### */
+
+
+/* ###############  section 1  ############## */
+
+.building-trust {
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main-banner.jpg') 0% 0% no-repeat padding-box;
+    background-size: cover;
+    padding: 3rem 0;
+    padding-top: 8rem;
+}
+
+.building-heading {
+    font: normal normal normal 60px/68px 'Noto Sans JP';
+    color: #FFFFFF;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+
+.building-heading span {
+    font-weight: 900;
+}
+
+.building-text {
+    font: normal normal 300 23px/31px 'Noto Sans JP';
+    color: #FFFFFF;
+}
+
+.for-box {
+    background: #fff;
+    box-shadow: 0px 0px 25px #00000029;
+    border-radius: 16px;
+    padding: 1.3rem 0.5rem;
+}
+
+.for-box img {
+    max-width: 258px;
+    width: 100%;
+    height: 200px;
+}
+
+.for-btn a {
+    display: block;
+    text-align: center;
+    color: #FFFFFF;
+    border-radius: 27px;
+    padding: 0.2rem 0;
+}
+
+.for-consumers .for-btn a {
+    background: #153581;
+}
+
+.for-consumers .for-btn a:hover {
+    background: #12ABDF;
+}
+
+.for-businesses .for-btn a {
+    background: #12ABDF;
+}
+
+.for-businesses .for-btn a:hover {
+    background: #153581;
+}
+
+.community-profile {
+    text-align: center;
+    font-size: 14px;
+    color: #3C3C3C;
+    border-radius: 9px;
+    background: #E3E3E3;
+    padding: 0.2rem;
+}
+
+.community-profile span {
+    color: #12ABDF;
+}
+
+.for-heading {
+    font: normal normal 900 27px/24px 'Noto Sans JP';
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.for-text {
+    font: 300 15px/20px 'Noto Sans JP';
+    color: #3C3C3C;
+}
+
+.for-consumers .for-heading {
+    color: #153581;
+}
+
+.for-businesses .for-heading {
+    color: #12ABDF;
+}
+
+
+/* ###############  section 2  ############## */
+
+.the-power {
+    background: #fff;
+    padding: 3rem 0;
+}
+
+.the-power-image {
+    width: 100%;
+}
+
+.the-power-heading {
+    font: normal normal 900 40px/24px 'Noto Sans JP';
+    color: #153581;
+}
+
+.the-power-text {
+    font: 300 18px/24px 'Noto Sans JP';
+    color: #3C3C3C;
+    text-transform: uppercase;
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.where-genuine {
+    font: 300 18px/28px 'Noto Sans JP';
+    color: #3C3C3C;
+    margin-bottom: 3rem;
+}
+
+.the-power-icon-1 i,
+.the-power-icon-2 i {
+    font-size: 35px;
+    margin-bottom: 0.5rem;
+}
+
+.the-power-icon-1 h6,
+.the-power-icon-2 h6 {
+    font: normal normal 900 20px/24px 'Noto Sans JP';
+    margin-bottom: 0;
+}
+
+.the-power-icon-1 p,
+.the-power-icon-2 p {
+    font: normal normal bold 17px/24px 'Noto Sans JP';
+    color: #3C3C3C;
+}
+
+.the-power-icon-text {
+    font: 300 18px/28px 'Noto Sans JP';
+    color: #3C3C3C;
+    margin-bottom: 0;
+}
+
+.the-power-icon-1 i,
+.the-power-icon-1 h6 {
+    color: #4FBF65;
+}
+
+.the-power-icon-2 i,
+.the-power-icon-2 h6 {
+    color: #E43E3E;
+}
+
+
+/* ###############  section 3  ############## */
+
+.this-community {
+    background: url('http://rec.vmdev.co.uk/assets/images/hero2-banner.jpg') 0% 0% no-repeat padding-box;
+    background-size: cover;
+    border-radius: 16px;
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 4rem;
+}
+
+.this-community-text {
+    font: normal normal 500 20px/30px Noto Sans JP;
+    color: #FFFFFF;
+    margin-bottom: 3rem;
+}
+
+.this-community-btn a {
+    display: inline-block;
+    border-radius: 27px;
+    background: #12ABDF;
+    max-width: 580px;
+    width: 100%;
+    padding: 0.3rem 0;
+    color: #fff;
+}
+
+.this-community-btn a:hover {
+    background: #0b1f51;
+}
+
+
+/* ###############  section 4  ############## */
+
+.media-Profile {
+    border-radius: 16px;
+    background: #F7F7F7;
+    padding: 3rem 2rem;
+    margin-top: 2rem;
+}
+
+.profile-media-1 {
+    margin-bottom: 5rem;
+}
+
+.Profile-icon {
+    font: normal normal 800 26px/24px Noto Sans JP;
+    color: #12ABDF;
+    margin-bottom: 0.3rem;
+}
+
+.Profile-icon i {
+    font-size: 30px;
+}
+
+.Profile-heading {
+    font: normal normal bold 18px/24px Noto Sans JP;
+    color: #3C3C3C;
+    margin-bottom: 1rem;
+}
+
+.Profile-text {
+    font: 300 18px/28px Noto Sans JP;
+    color: #3C3C3C;
+}
+
+
+/* ###############  section 5  ############## */
+
+.how-does {
+    padding: 4rem 0;
+}
+
+.how-does-header {
+    font: normal normal 900 40px/24px Noto Sans JP;
+    color: #153581;
+    margin-bottom: 5rem;
+}
+
+.id-step span {
+    width: 23px;
+    height: 23px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #4FBF65;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 12px;
+    margin-bottom: 0.5rem;
+}
+
+.how-does-id-box {
+    min-height: 135px;
+}
+
+.id-image img {
+    width: 100%;
+}
+
+.id-text {
+    font: normal normal normal 16px/28px Noto Sans JP;
+    color: #3C3C3C;
+    line-height: 1.5rem;
+}
+
+.id-text span {
+    color: #12ABDF;
+}
+
+.garry-lewis {
+    border-radius: 16px;
+    background: #F7F7F7;
+    padding: 2rem;
+    position: relative;
+}
+
+.garry-lewis-text {
+    font: normal normal 100 25px/38px Noto Sans JP;
+    color: #3C3C3C;
+    line-height: 2rem;
+}
+
+.garry-lewis-light {
+    font: normal normal normal 13px/26px Noto Sans JP;
+    line-height: 1rem;
+    margin-top: 1.5rem;
+}
+
+.garry-lewis-light span {
+    font: normal normal 900 20px/26px Noto Sans JP;
+    color: #12ABDF;
+}
+
+.garry-lewis-image img {
+    position: absolute;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    top: -55px;
+    left: -55px;
+}
+
+
+/* ###############  section 6  ############## */
+
+.napit-section {
+    position: relative;
+}
+
+.napit-bg {
+    width: 96%;
+    height: 470px;
+}
+
+.napit-bg img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    object-fit: cover;
+    object-position: right top;
+}
+
+.napit-row {
+    position: absolute;
+    right: 0;
+    top: 3rem;
+}
+
+.napit-box,
+.lew-box {
+    background: #fff;
+    box-shadow: 0px 0px 20px #00000029;
+    border-radius: 16px;
+    padding: 1.7rem;
+    position: relative;
+    width: 93%;
+    min-height: 372px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    float: right;
+}
+
+.napit-text {
+    font: 300 18px/28px Noto Sans JP;
+    color: #3C3C3C;
+    line-height: 1.5rem;
+}
+
+.napit-box i,
+.lew-box i {
+    position: absolute;
+    transform: rotate(180deg);
+    color: #12ABDF;
+    background: #fff;
+    box-shadow: 0px 0px 20px #00000029;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    top: -20px;
+    left: -20px;
+}
+
+.napit-logo img {
+    width: 111px;
+}
+
+
+/* ###############  section 7  ############## */
+
+.our-champions {
+    position: relative;
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+}
+
+.our-champions-img img {
+    width: 100%;
+    height: 166px;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+.our-champions-position {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+}
+
+.our-champions-box {
+    text-align: center;
+    width: 80%;
+    box-shadow: 0px 0px 20px #00000029;
+    border-radius: 16px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 1.5rem 0;
+}
+
+.our-champions-box h3 {
+    font: normal normal 900 30px/24px Noto Sans JP;
+    color: #153581;
+    padding-bottom: 0.5rem;
+}
+
+.our-champions-box a {
+    border-radius: 27px;
+    background: #12ABDF;
+    color: #fff;
+    display: inline-block;
+    max-width: 500px;
+    width: 100%;
+    padding: 0.2rem 0;
+}
+
+.our-champions-box a:hover {
+    background: #0b1f51;
+}
+
+
+/* ##################################  page 2  ##################################### */
+
+
+/* ###############  section 1  ############## */
+
+.bringing-back {
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/inner-banner.jpg') 0% 0% no-repeat padding-box;
+    background-size: cover;
+    padding: 3rem 0;
+    padding-top: 8rem;
+}
+
+.bringing-back-heading {
+    font: normal normal 900 40px/52px Noto Sans JP;
+    color: #153581;
+    text-transform: capitalize;
+    background: #fff;
+    box-shadow: 0px 0px 25px #00000029;
+    border-radius: 16px;
+    padding: 1rem 1.5rem;
+    width: 90%;
+}
+
+.bringing-back-text {
+    font: normal normal bold 14px/31px Noto Sans JP;
+    text-transform: capitalize;
+    border-radius: 9px;
+    background: #fff;
+    color: #3C3C3C;
+    padding: 0.2rem 2rem;
+    display: inline-block;
+    margin-top: 0.5rem;
+    margin-bottom: 5rem;
+    background: #E3E3E3;
+}
+
+.bringing-back-text>span {
+    color: #12ABDF;
+}
+
+.bringing-for-box {
+    min-height: 180px;
+}
+
+.bringing-for-box img {
+    height: 100px;
+}
+
+
+/* ###############  section 2  ############## */
+
+.community-heading {
+    text-align: center;
+    font: normal normal 900 40px/24px Noto Sans JP;
+    color: #153581;
+    margin-bottom: 4rem;
+}
+
+.community-box1 {
+    background: #F7F7F7;
+    border-radius: 16px;
+    padding: 3rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.community-box1-text {
+    text-align: center;
+    font: normal normal 900 20px/32px Noto Sans JP;
+    color: #153581;
+    text-transform: capitalize;
+}
+
+.community-box1-img img {
+    width: 100%;
+}
+
+.community-color-box {
+    padding: 1rem 1.5rem;
+    color: #fff;
+    border-radius: 16px;
+}
+
+.community-color-box ul {
+    margin-bottom: 0;
+}
+
+.community-color-box1 {
+    background: #6D74BA;
+    margin-bottom: 1rem;
+}
+
+.community-color-box2 {
+    background: #12ABDF;
+    margin-bottom: 1rem;
+}
+
+.community-color-box3 {
+    background: #405564;
+}
+
+.community-color-link-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.community-color-box .color-box-labour {
+    font: normal normal bold 14px/20px Noto Sans JP;
+    border-radius: 9px;
+    padding: 0.3rem 1rem;
+}
+
+.community-color-box1 .color-box-labour {
+    background: #52578D;
+}
+
+.community-color-box2 .color-box-labour {
+    background: #0D7BA0;
+}
+
+.community-color-box3 .color-box-labour {
+    background: #33434E;
+}
+
+.color-box-link a {
+    font: normal normal bold 16px/24px Noto Sans JP;
+    color: #153581;
+    text-transform: capitalize;
+    background: #fff;
+    padding: 0.3rem 1.5rem;
+    border-radius: 27px;
+    display: inline-block;
+}
+
+.color-box-link a:hover {
+    background: #153581;
+    color: #fff;
+}
+
+.community-color-box ul li {
+    font: normal normal normal 16px/28px Noto Sans JP;
+    text-transform: capitalize;
+}
+
+
+/* ###############  section 3  ############## */
+
+.youtube-videos-box {
+    background: #F7F7F7;
+    padding: 3rem 0;
+}
+
+.video-text-box {
+    min-height: 130px;
+}
+
+.video-heading {
+    font: normal normal 900 30px/24px Noto Sans JP;
+    text-transform: capitalize;
+    margin-bottom: 1rem;
+}
+
+.video-text {
+    font: normal normal normal 18px/28px Noto Sans JP;
+    color: #3C3C3C;
+    margin-bottom: 3rem;
+}
+
+.the-problem .video-heading {
+    color: #E43E3E;
+}
+
+.the-solution .video-heading {
+    color: #4FBF65;
+}
+
+.youtube-videos-box iframe {
+    width: 100%;
+    height: 338px;
+}
+
+
+/* ###############  section 4  ############## */
+
+.power-recommendation-box {
+    padding: 3rem 0;
+}
+
+.the-power-recommendation {
+    font: normal normal 900 40px/24px Noto Sans JP;
+    color: #153581;
+    margin-bottom: 3rem;
+}
+
+.power-heading h3 {
+    font: normal normal 900 20px/24px Noto Sans JP;
+}
+
+.power-heading i {
+    font-size: 25px;
+    margin-bottom: 0.5rem;
+}
+
+.positive-box .power-heading {
+    color: #4FBF65;
+}
+
+.negative-box .power-heading {
+    color: #E43E3E;
+}
+
+.power-text {
+    font: normal normal normal 18px/28px Noto Sans JP;
+    color: #3C3C3C;
+}
+
+.power-btn a {
+    display: inline-block;
+    text-align: center;
+    font: normal normal bold 16px/24px Noto Sans JP;
+    color: #FFFFFF;
+    text-transform: capitalize;
+    background: #153581;
+    border-radius: 27px;
+    width: 40%;
+    margin-top: 2rem;
+    padding: 0.3rem 0;
+}
+
+.power-btn a:hover {
+    background: #12ABDF;
+}
+
+
+/* ###############  section 5  ############## */
+
+.the-four-pillars-box {
+    padding-top: 1rem;
+    padding-bottom: 10rem;
+    position: relative;
+}
+
+.four-pillars-img-box {
+    height: 430px;
+    border-radius: 16px;
+}
+
+.four-pillars-img-box img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top right;
+    border-radius: 16px;
+}
+
+.the-four-pillars-card-box {
+    position: absolute;
+    top: 3rem;
+    padding: 0 2rem;
+}
+
+.four-prillars-heading {
+    text-align: center;
+    font: normal normal bold 30px/38px Noto Sans JP;
+    color: #FFFFFF;
+    text-transform: capitalize;
+    margin-bottom: 3rem;
+}
+
+.prillars-cards .card {
+    background: #F7F7F7;
+    box-shadow: 0px 0px 25px #00000029;
+    border-radius: 16px;
+    border: none;
+    min-height: 375px;
+}
+
+.prillars-cards .card-img-top {
+    border-radius: 16px 16px 0px 0px;
+}
+
+.prillars-cards .card-title {
+    font: normal normal bold 14px/20px Noto Sans JP;
+    color: #FFFFFF;
+    background: #153581 0% 0% no-repeat padding-box;
+    border-radius: 9px;
+    display: inline-block;
+    padding: 0.3rem 1rem;
+}
+
+.prillars-cards .card-text {
+    font: normal normal normal 14px/24px Noto Sans JP;
+    color: #000000;
+    text-transform: capitalize;
+}
+
+
+/* ###############  section 6  ############## */
+
+.join-community-box {
+    padding-bottom: 3rem;
+}
+
+.join-facebook-box,
+.join-community-box .garry-lewis {
+    min-height: 275px;
+}
+
+.join-community-box .garry-lewis {
+    padding: 2.5rem 3rem;
+}
+
+.garry-lewis-heading {
+    font: normal normal 900 26px/24px Noto Sans JP;
+    color: #153581;
+    padding-bottom: 1.5rem;
+}
+
+.join-facebook-box {
+    border-radius: 16px;
+    background: #F7F7F7;
+    padding: 2.5rem 3rem;
+}
+
+.join-community-heading {
+    font: normal normal 900 26px/33px Noto Sans JP;
+    color: #153581;
+    text-transform: capitalize;
+}
+
+.join-icon-box {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.join-icon-box a {
+    color: #12ABDF;
+    font-size: 30px;
+}
+
+.join-icon-box span {
+    color: #fff;
+    background: #12ABDF;
+    padding: 4px 0.5rem;
+    border-radius: 4px;
+    margin-left: 0.7rem;
+    font: normal normal bold 14px/20px Noto Sans JP;
+}
+
+.join-icon-box span i {
+    margin-right: 0.2rem;
+}
+
+.join-community-btn {
+    display: block;
+    border-radius: 27px;
+    background: #153581;
+    text-align: center;
+    font: normal normal bold 16px/24px Noto Sans JP;
+    color: #FFFFFF;
+    text-transform: capitalize;
+    outline: none;
+    border: none;
+    width: 100%;
+    padding: 0.2rem 0;
+}
+
+.join-community-btn:hover {
+    background: #12ABDF;
+}
+
+/* ##################################  page 3  ##################################### */
+
+.all-blue-heading {
+    font: normal normal 900 33px/24px Noto Sans JP;
+    color: #153581;
+    text-transform: capitalize;
+    margin-bottom: 1.5rem;
+    line-height: 2.2rem;
+}
+
+.the-new-community .bringing-back-heading,
+.helping-genuine .bringing-back-heading,
+.Merchants-Showing .bringing-back-heading {
+    font-size: 35px;
+    width: 100%;
+    line-height: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.banner-heading-span {
+    margin-top: 2rem;
+    display: block;
+}
+
+.all-gray-text {
+    font: normal normal normal 18px/28px Noto Sans JP;
+    color: #3C3C3C;
+}
+
+.list-sky-color {
+    list-style: none;
+    padding-left: 0;
+}
+
+.list-sky-color li {
+    display: flex;
+    margin-bottom: 1rem;
+    align-items: flex-start;
+}
+
+.list-sky-color li::before {
+    content: "\2022";
+    color: #12ABDF;
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 1rem;
+    font-size: 30px;
+}
+
+
+/* ##################################  page 4  ##################################### */
+
+.helping-genuine .garry-lewis {
+    margin-top: 6rem;
+    margin-bottom: 4rem;
+    padding: 3rem;
+}
+
+.recommended-box .list-sky-color li {
+    margin-bottom: 0;
+}
+
+.all-icons-color {
+    display: flex;
+    align-items: center;
+}
+
+.all-icons-color i {
+    margin-right: 1rem;
+    color: #12ABDF;
+    font-size: 30px;
+}
+
+.providing-box {
+    background: #153581;
+    color: #fff;
+    padding: 4rem 0;
+}
+
+.providing-box .providing-box-heading {
+    font: normal normal 900 33px/24px Noto Sans JP;
+    text-transform: capitalize;
+    margin-bottom: 2rem;
+    line-height: 2.5rem;
+}
+
+.providing-box .providing-box-text {
+    font: normal normal 300 18px/28px Noto Sans JP;
+}
+
+.bussiness-tools-box {
+    background: #FAFAFA;
+    padding: 4rem 0;
+    margin-bottom: 2rem
+}
+
+.in-summary-box .list-sky-color li {
+    margin-bottom: 2rem;
+}
+
+.in-summary-box {
+    padding: 2rem 0;
+}
+
+
+/* ##################################  page 5  ##################################### */
+
+.Merchants-Showing .our-champions {
+    margin: 3rem 0;
+    padding-bottom: 7rem;
+}
+
+.Merchants-Showing .our-champions-box h3 {
+    margin-bottom: 1rem;
+}
+
+.Merchants-Showing .our-champions-box {
+    padding: 2rem 3rem;
+}
+
+.Merchants-Showing .our-champions-position {
+    top: 33%;
+}
+
+.heading-box {
+    text-align: center;
+    background: #FAFAFA;
+    padding: 4rem 0;
+}
+
+.heading-box .all-icons-color {
+    display: block;
+}
+
+.heading-box h4 {
+    font: normal normal 900 27px/24px Noto Sans JP;
+    color: #153581;
+    text-transform: capitalize;
+    margin-bottom: 1rem;
+}
+
+.heading-box h3 {
+    font: normal normal 900 30px/24px Noto Sans JP;
+    color: #153581;
+    margin-bottom: 1.5rem;
+}
+
+.the-problems-box h6 {
+    font: normal normal bold 18px/28px Noto Sans JP;
+    margin-bottom: 1rem;
+}
+
+.this-affects-text-box {
+    padding: 0 7rem;
+}
+
+.our-solition-box {
+    padding: 4rem 0;
+}
+
+.our-solition-box span {
+    font: normal normal bold 16px/24px Noto Sans JP;
+    color: #3C3C3C;
+    border-radius: 9px;
+    background: #E3E3E3;
+    padding: 0.3rem 1rem;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.this-affects-box {
+    background: #FAFAFA;
+    padding: 4rem 0;
+}
+
+.this-affects-box .all-blue-heading {
+    font-size: 27px;
+}
+
+.our-electrical-logo-box img {
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.charities-box {
+    padding: 4rem 0;
+    padding-bottom: 8rem;
+}
+
+.charities-heading-box {
+    text-align: center;
+    padding: 0 10rem;
+    margin-bottom: 2rem;
+}
+
+.charities-image-box img {
+    display: inline-block;
+    width: 230px;
+    margin-bottom: 1rem;
+}
+
+.charities-bg-box {
+    background: url('http://rec.vmdev.co.uk/assets/images/blue-banner.png') 0% 0% no-repeat padding-box;
+    background-size: cover;
+    background-position: right;
+    border-radius: 16px;
+    padding: 2rem 0;
+    position: relative;
+    min-height: 490px;
+}
+
+.charities-card-box {
+    padding: 0 5rem;
+    position: absolute;
+    top: 35%;
+}
+
+.charities-bg-box .all-blue-heading,
+.charities-bg-box .all-gray-text {
+    color: #fff;
+}
+
+.charities-card-box .card {
+    background: #F7F7F7;
+    box-shadow: 0px 0px 25px #00000029;
+    border-radius: 16px;
+    border: none;
+    min-height: 403px;
+    width: 80%;
+}
+
+.charities-card-box .card-img-top {
+    border-radius: 16px 16px 0px 0px;
+}
+
+.charities-card-box .card-body {
+    padding: 1rem 1.5rem;
+}
+
+
+/* ##################################  page 6  ##################################### */
+
+.profile-page-image {
+    height: 484px;
+    padding-top: 3.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.profile-page-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-text-box {
+    margin-bottom: 4rem;
+    position: relative;
+    z-index: 9;
+    margin-top: -260px;
+}
+
+
+/* ###############  section 1  ############## */
+
+.profile-box {
+    background: #fff;
+    box-shadow: 0px 0px 25px #00000029;
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+}
+
+.recieved-heading {
+    font: normal normal bold 17px/32px Noto Sans JP;
+}
+
+.recieved-number-1,
+.recieved-number-2 {
+    font: normal normal bold 62px/32px Noto Sans JP;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+}
+
+.recieved-number-1 {
+    color: #4FBF65;
+}
+
+.recieved-number-2 {
+    color: #E43E3E;
+}
+
+.recieved-text {
+    font: normal normal 500 16px/21px Noto Sans JP;
+}
+
+
+/* ###############  section 1  ############## */
+
+.inviteCustomer {
+    margin: 2rem 0;
+}
+
+.invite-box {
+    box-shadow: 0px 0px 25px #00000029;
+    border-radius: 16px;
+    background: #fff;
+    padding: 2rem;
+}
+
+.invite-heading {
+    font: normal normal bold 17px/32px Noto Sans JP;
+}
+
+.invite-text {
+    font: normal normal 100 16px/21px Noto Sans JP;
+}
+
+#customer-email {
+    border: 1px solid #DBDBDB;
+    border-radius: 10px;
+    display: inline-block;
+    font: normal normal 300 16px/21px Noto Sans JP;
+    letter-spacing: 0px;
+    color: #939393;
+    outline: none;
+    padding: 0.5rem 1rem;
+    width: 83%;
+}
+
+#invite-btn {
+    text-align: center;
+    font: normal normal bold 16px/24px Noto Sans JP;
+    color: #FFFFFF;
+    text-transform: capitalize;
+    background: #153581;
+    border-radius: 27px;
+    padding: 0.4rem 2rem;
+    border: none;
+    outline: none;
+    line-height: 23px;
+}
+
+#invite-btn:hover {
+    background: #12ABDF;
+}
+
+
+/* ###############  section 2  ############## */
+
+.user-name-box {
+    background: #153581;
+    box-shadow: 0px 0px 25px #00000029;
+    border-radius: 16px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.user-icons img {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+    object-fit: cover;
+    object-position: center;
+    display: none;
+}
+
+.user-icons i {
+    font-size: 75px;
+    margin-bottom: 0.5rem;
+}
+
+.user-name {
+    font: normal normal normal 17px/32px Noto Sans JP;
+}
+
+
+/* ###############  section 3  ############## */
+
+.start-box {
+    background: #fff;
+    box-shadow: 0px 0px 25px #00000029;
+    border-radius: 16px;
+    padding: 2rem;
+}
+
+.search-box {
+    color: #12ABDF;
+}
+
+.start-box .power-heading h3 {
+    font: normal normal bold 17px/32px Noto Sans JP;
+}
+
+.start-text {
+    font: normal normal 100 16px/21px Noto Sans JP;
+}
+
+.start-customer-name {
+    border: 1px solid #DBDBDB;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    color: #939393;
+}
+
+.start-customer-name i {
+    margin-right: 0.5rem;
+}
+
+.start-customer-name input {
+    border: none;
+    outline: none;
+    color: #939393;
+    width: 86%;
+}
+
+.start-btn button {
+    width: 100%;
+    background: #153581 0% 0% no-repeat padding-box;
+    border-radius: 27px;
+    border: none;
+    outline: none;
+    color: #fff;
+    padding: 0.3rem 0;
+}
+
+
+
+
+/* ##################################  media query  ##################################### */
+
+
+@media screen and (min-width: 768px) {
+    .login-uesr ul.dropdown-menu{
+        top: 100%;
+        right: 0;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .nav-logo a img {
+        max-width: 160px;
+    }
+    .navbar-item-bg li a {
+        padding: 0.5rem 1rem !important;
+    }
+    .navbar-item-bg {
+        padding: 0.2rem;
+    }
+    .for-box {
+        padding: 1rem 0;
+    }
+    .building-heading {
+        font-size: 50px;
+    }
+    .for-heading {
+        font-size: 20px;
+    }
+    .napit-bg {
+        height: 515px;
+    }
+    .napit-box,
+    .lew-box {
+        min-height: 420px;
+    }
+    /* ########  page 2 ########### */
+    .bringing-back-heading {
+        font-size: 30px;
+    }
+    .community-heading {
+        font-size: 30px;
+    }
+    .the-power-recommendation {
+        font-size: 30px;
+    }
+    .four-prillars-heading {
+        font-size: 25px;
+    }
+    .youtube-videos-box iframe {
+        height: 272px;
+    }
+    .prillars-cards .card {
+        min-height: 390px;
+    }
+    .join-community-box .garry-lewis-image img {
+        width: 80px;
+        height: 80px;
+        top: -35px;
+        left: -35px;
+    }
+    .join-community-heading,
+    .garry-lewis-heading {
+        font-size: 20px;
+    }
+    /* ########  page 3 ########### */
+    .all-blue-heading {
+        font-size: 26px;
+    }
+    /* ########  page 4 ########### */
+    .helping-genuine .garry-lewis-image img {
+        width: 80px;
+        height: 80px;
+        top: -40px;
+        left: -36px;
+    }
+    /* ########  page 5 ########### */
+    .charities-card-box .card {
+        min-height: 403px;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .building-trust {
+        padding-top: 7rem;
+    }
+    .building-text {
+        margin-bottom: 3rem;
+    }
+    .navbar-items .navbar-collapse {
+        padding: 1.5rem 0;
+    }
+    .navbar-item-bg li {
+        padding: 0.5rem;
+    }
+    .login {
+        margin-left: 0;
+        margin-top: 1rem;
+    }
+    .the-power-heading {
+        font-size: 25px;
+    }
+    .the-power-text {
+        font-size: 16px;
+    }
+    .our-champions-box {
+        width: 90%;
+    }
+    .napit-bg {
+        display: none;
+    }
+    .napit-row {
+        background: url('http://rec.vmdev.co.uk/assets/photos/testimonials-top.png') 0% 0% no-repeat padding-box;
+        background-size: cover;
+        position: initial;
+        padding: 2rem;
+        border-radius: 16px;
+    }
+    .how-does-header {
+        font-size: 25px;
+    }
+    .garry-lewis {
+        margin-top: 4rem;
+        padding-left: 4rem;
+        padding-top: 4rem;
+    }
+    .garry-lewis-image img {
+        top: -30px;
+        left: -20px;
+    }
+    .the-power-image {
+        width: 70%;
+        display: inherit;
+        margin: 0 auto;
+        margin-bottom: 2rem;
+    }
+    .this-community {
+        padding: 1.5rem 1rem;
+        background-position: right;
+    }
+    .this-community-text {
+        font-size: 16px;
+    }
+    .napit-box,
+    .lew-box {
+        width: 100%;
+        min-height: 300px;
+    }
+    .napit-box {
+        margin-bottom: 2rem;
+    }
+    .footer-logo img {
+        max-width: 195px;
+    }
+    /* ########  page 2 ########### */
+    .bringing-back {
+        padding-top: 7rem;
+    }
+    .for-btn a {
+        font-size: 14px;
+    }
+    .community-heading {
+        line-height: 40px;
+        margin-bottom: 2rem;
+    }
+    .video-heading {
+        font-size: 20px;
+    }
+    .video-text {
+        font-size: 14px;
+    }
+    .youtube-videos-box iframe {
+        height: 200px;
+    }
+    .power-btn a {
+        font-size: 14px;
+        width: 50%;
+    }
+    .four-pillars-img-box {
+        display: none;
+    }
+    .the-four-pillars-box {
+        padding-bottom: 3rem;
+    }
+    .the-four-pillars-card-box {
+        background: url('http://rec.vmdev.co.uk/assets/photos/testimonials-top.png') 0% 0% no-repeat padding-box;
+        background-size: cover;
+        position: initial;
+        padding: 2rem;
+        border-radius: 16px;
+    }
+    .four-prillars-heading {
+        font-size: 18px;
+        margin-bottom: 1rem;
+    }
+    .prillars-cards .card {
+        min-height: 350px;
+    }
+    .community-box1 {
+        flex-direction: row-reverse;
+        margin-bottom: 1rem;
+        height: auto;
+        padding: 2rem 1rem;
+    }
+    .community-box1-img img {
+        width: 70%;
+    }
+    .join-community-box .garry-lewis-image img {
+        top: -30px;
+        left: -25px;
+    }
+    .join-facebook-box,
+    .join-community-box .garry-lewis {
+        min-height: auto;
+    }
+    /* ########  page 3 ########### */
+    .the-new-community .bringing-back-heading,
+    .helping-genuine .bringing-back-heading,
+    .Merchants-Showing .bringing-back-heading {
+        font-size: 25px;
+    }
+    .all-blue-heading {
+        font-size: 21px;
+    }
+    .all-gray-text {
+        font-size: 14px;
+    }
+    .the-new-community .bringing-back-text {
+        margin-bottom: 3rem;
+    }
+    /* ########  page 4 ########### */
+    .helping-genuine .garry-lewis {
+        margin-top: 4rem;
+        padding-left: 3rem;
+        padding-top: 3rem;
+    }
+    .helping-genuine .garry-lewis-image img {
+        top: -23px;
+        left: -23px;
+    }
+    .providing-box .providing-box-heading {
+        font-size: 21px;
+    }
+    .providing-box .providing-box-text {
+        font-size: 14px;
+    }
+    /* ########  page 5 ########### */
+    .Merchants-Showing .our-champions-box {
+        padding: 1rem 2rem;
+    }
+    .Merchants-Showing .our-champions-position {
+        top: 40%;
+    }
+    .this-affects-box .all-blue-heading {
+        font-size: 21px;
+    }
+    .heading-box h3 {
+        font-size: 25px;
+    }
+    .heading-box h4 {
+        font-size: 21px;
+    }
+    .our-solition-box span {
+        font-size: 14px;
+    }
+    .charities-heading-box {
+        padding: 0;
+    }
+    .charities-card-box {
+        position: inherit;
+        padding: 0;
+    }
+    .charities-bg-box {
+        padding: 2rem;
+    }
+    /* ########  login uesr ########### */
+    #login-uesr-block {
+        display: block;
+    }
+    #login-uesr-block-2 {
+        display: none;
+    }
+    .login-uesr {
+        background: #fff;
+        border-radius: 27px;
+        padding: 0.3rem 1rem;
+    }
+    .login-uesr a.nav-link {
+        color: #153581;
+    }
+    .login-uesr .dropdown-toggle {
+        display: inline-block;
+    }
+    .login-uesr .nav-item>img {
+        margin-left: 0;
+    }
+    .login-uesr .dropdown-menu {
+        width: 100%;
+        text-align: start;
+        margin: 1rem 0;
+    }
+    .arrow-up {
+        left: 129px;
+    }
+    .login-uesr .dropdown-menu li {
+        margin-bottom: 0.2rem;
+    }
+    .login-uesr .dropdown-menu li,
+    .login-uesr .dropdown-menu li a {
+        background: #153581;
+        color: #fff;
+    }
+    .login-uesr .dropdown-menu li:hover,
+    .login-uesr .dropdown-menu li:hover a {
+        background: #fff;
+        color: #153581;
+    }
+    .arrow-up {
+        border-bottom: 17px solid #153581;
+    }
+}
+
+@media screen and (max-width: 572px) {
+    /* ########  login uesr ########### */
+    .login-uesr .dropdown-menu {
+        display: block;
+    }
+    #login-uesr-block {
+        display: none;
+    }
+    #login-uesr-block-2 {
+        display: block;
+    }
+    .navbar-item-bg {
+        border-radius: 27px;
+        width: 100%;
+        height: auto;
+    }
+    .login-uesr {
+        background: #fff;
+        border-radius: 27px;
+        padding: 0.5rem 1rem;
+        width: 100%;
+        height: auto;
+        margin-top: 1rem;
+        border-radius: 27px;
+    }
+    .navbar-item-bg {
+        padding: 0.5rem 0.2rem;
+    }
+    .navbar-item-bg li {
+        padding: 0.2rem 0.5rem;
+    }
+    .navbar-item-bg li a,
+    .login a {
+        font-size: 14px;
+    }
+    .navbar-item-bg li a {
+        padding: 0.2rem 1rem !important;
+    }
+    .login a {
+        text-align: center;
+        font-weight: bold;
+    }
+    .building-trust {
+        padding-top: 6rem;
+        background-position: center;
+    }
+    .nav-logo a img {
+        max-width: 125px;
+    }
+    #nav-icon3 {
+        height: 35px;
+    }
+    #nav-icon3 span:nth-child(1) {
+        top: 7px;
+    }
+    #nav-icon3 span:nth-child(2),
+    #nav-icon3 span:nth-child(3) {
+        top: 18px;
+    }
+    #nav-icon3 span:nth-child(4) {
+        top: 29px;
+    }
+    .the-power {
+        padding: 2rem 0;
+    }
+    .building-heading {
+        font: normal normal normal 27px/30px 'Noto Sans JP';
+    }
+    .building-text {
+        font: normal normal 300 14px/25px 'Noto Sans JP';
+    }
+    .for-box img {
+        max-width: 225px;
+        height: 120px;
+        margin: 0 auto;
+        display: inherit;
+        margin-bottom: 0.5rem;
+    }
+    .our-champions-position {
+        position: initial;
+        margin-top: 1rem;
+    }
+    .our-champions-box {
+        width: 100%;
+        padding: 1rem 0.5rem;
+    }
+    .our-champions-box h3 {
+        font-size: 18px;
+    }
+    .our-champions-box a {
+        font-size: 14px;
+    }
+    .our-champions {
+        padding-bottom: 0rem;
+    }
+    .napit-text {
+        font-size: 14px;
+    }
+    .media-link {
+        margin-top: 0;
+        text-align: center;
+    }
+    .media-link div {
+        display: inline-block;
+    }
+    .media-link a {
+        margin-right: 1rem;
+    }
+    .how-does {
+        padding: 2rem 0;
+    }
+    .garry-lewis {
+        text-align: center;
+        margin-top: 2rem;
+        padding: 2rem;
+    }
+    .garry-lewis-image img {
+        margin: 0 auto;
+        display: block;
+        margin-top: 1rem;
+        position: initial;
+    }
+    .this-community-text {
+        font-size: 14px;
+    }
+    .how-does-header {
+        line-height: 30px;
+        margin-bottom: 2rem;
+    }
+    .Profile-icon {
+        font-size: 18px;
+    }
+    .Profile-heading {
+        font-size: 16px;
+    }
+    .Profile-text {
+        font-size: 14px;
+    }
+    .Profile-heading {
+        margin-bottom: 0.5rem;
+    }
+    .profile-media-1 {
+        margin-bottom: 1.5rem;
+    }
+    .media-Profile {
+        padding: 2rem 1rem;
+    }
+    .footer-logo img {
+        margin-bottom: 1rem;
+    }
+    .footer-link ul a,
+    .footer-address {
+        font-size: 14px;
+    }
+    .footer-heding {
+        font-size: 16px;
+    }
+    .footer-heding,
+    .media-link {
+        margin-top: 1rem;
+    }
+    .footer-address,
+    .footer-link ul {
+        margin-top: 0.5rem;
+    }
+    /* ########  page 2 ########### */
+    .bringing-back {
+        padding-top: 6rem;
+    }
+    .bringing-back-heading {
+        font-size: 20px;
+        line-height: 40px;
+        width: 100%;
+    }
+    .bringing-back-text {
+        margin-bottom: 2rem;
+    }
+    .bringing-back .for-consumers {
+        margin-bottom: 1rem;
+    }
+    .for-heading {
+        font-size: 18px;
+    }
+    .bringing-back .for-text {
+        margin-bottom: 0;
+    }
+    .community-heading {
+        line-height: 35px;
+        font-size: 20px;
+    }
+    .community-box1 {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+    .community-box1-img img {
+        width: 35%;
+        margin-bottom: 1rem;
+    }
+    .community-color-box ul li {
+        font-size: 14px;
+    }
+    .color-box-link a {
+        font-size: 14px;
+        padding: 0.3rem 1rem;
+    }
+    .the-problem {
+        margin-bottom: 2rem;
+    }
+    .video-text {
+        margin-bottom: 1rem;
+    }
+    .video-text-box {
+        min-height: auto;
+    }
+    .the-power-recommendation {
+        font-size: 20px;
+        line-height: 30px;
+    }
+    .positive-box {
+        margin-bottom: 2rem;
+    }
+    .power-btn a {
+        width: 100%;
+    }
+    .power-recommendation-box {
+        padding: 2rem 0;
+    }
+    .the-four-pillars-box {
+        padding-bottom: 0;
+    }
+    .join-community-heading {
+        line-height: 25px;
+    }
+    .join-community-heading,
+    .garry-lewis-heading {
+        font-size: 18px;
+    }
+    .garry-lewis-text {
+        font-size: 18px;
+        line-height: 1.8rem;
+    }
+    .garry-lewis-light {
+        margin-top: 1rem;
+    }
+    .garry-lewis-light span {
+        display: inline-block;
+        margin-top: 0.5rem;
+    }
+    .join-community-box .garry-lewis,
+    .join-facebook-box {
+        padding: 1.5rem 2rem;
+    }
+    /* ########  page 3 ########### */
+    .all-blue-heading {
+        margin-bottom: 0.5rem;
+    }
+
+
+    .the-new-community .bringing-back-heading,
+    .helping-genuine .bringing-back-heading,
+    .Merchants-Showing .bringing-back-heading {
+        font-size: 21px;
+    }
+    .banner-heading-span {
+        margin-top: 1rem;
+    }
+
+
+
+    /* ########  page 4 ########### */
+    .the-new-community .bringing-back-heading,
+    .helping-genuine .bringing-back-heading,
+    .Merchants-Showing .bringing-back-heading {
+        line-height: 2rem;
+    }
+    .helping-genuine .garry-lewis {
+        padding: 2rem;
+        margin: 2rem 0;
+    }
+    .providing-box {
+        padding: 2rem 0;
+    }
+    .bussiness-tools-box {
+        padding: 2rem 0;
+    }
+    .in-summary-box .list-sky-color li {
+        margin-bottom: 1rem;
+    }
+    /* ########  page 5 ########### */
+    .our-electrical-logo-box img {
+        margin-bottom: 1rem;
+    }
+    .providing-box .providing-box-heading {
+        margin-bottom: 1rem;
+    }
+    .Merchants-Showing .our-champions {
+        margin: 0;
+        padding-bottom: 2rem;
+    }
+    .this-affects-text-box {
+        padding: 0 0.5rem;
+    }
+    .list-sky-color li {
+        margin-bottom: 0.5rem;
+    }
+    .charities-bg-box {
+        border-radius: 50px;
+    }
+    .charities-box {
+        padding: 2rem 0;
+    }
+    .charities-image-box .col-md-4 {
+        text-align: center;
+    }
+    /* ########  page 6 ########### */
+    .profile-box {
+        padding: 1rem 1.5rem;
+    }
+    .recieved-number-1,
+    .recieved-number-2 {
+        font-size: 50px;
+    }
+    .recieved-text {
+        font-size: 14px;
+    }
+    .invite-text {
+        font-size: 14px;
+    }
+    #customer-email {
+        width: 100%;
+        margin-bottom: 1rem;
+        font-size: 14px;
+    }
+    #invite-btn {
+        display: block;
+        width: 100%;
+        font-size: 14px;
+    }
+    .invite-box {
+        padding: 1rem 1.5rem;
+    }
+    .user-name-box {
+        width: 93%;
+        margin: 0 auto;
+        margin-top: 1rem;
+        padding: 1rem 0;
+    }
+    .user-name {
+        font-size: 14px;
+    }
+    .start-text {
+        font-size: 14px;
+    }
+    .start-customer-name input {
+        font-size: 14px;
+    }
+    .start-btn button {
+        font-size: 14px;
+    }
+}
+
+.site section.content {
+    margin-top: 50px;
+}
+
+a.nav-link:hover {
+    text-decoration: none;
+}
