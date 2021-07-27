@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Container,
-         Nav } from 'react-bootstrap';
+import { Container, Nav } from 'react-bootstrap';
+import Link from 'next/link'
 
 
 export const NavBar = (props) => {
@@ -75,10 +75,11 @@ export const NavBar = (props) => {
                                 </li>
                             </ul>
                             <div className="login">
-                                <a className="nav-link" href="/login">
-                                Login
-                                </a>
+                                <Link href="/login">                   
+                                <a className="nav-link"> Login </a>
+                               </Link>
                             </div>
+
                             <div className="login-uesr" id="login-uesr-block-2">
                                 <ul className="navbar-nav me-auto"></ul>
                             </div>
