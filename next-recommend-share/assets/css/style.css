@@ -20,7 +20,7 @@ a:hover {
 .navbar-header {
     background: #153581 0% 0% no-repeat padding-box;
     box-shadow: 0px -7px 30px #00000017;
-    position: fixed;
+    position: sticky;
     width: 100%;
     z-index: 9999;
 }

@@ -81,7 +81,7 @@ export const Footer = (props) => {
     <div className="container">
       <div>
         Copyright © 2021 Recommend &amp; Share.
-        <a href="javascript:void(0);">All Right Reserved</a>
+        <a href="">All Right Reserved</a>
       </div>
     </div>
   </div>
