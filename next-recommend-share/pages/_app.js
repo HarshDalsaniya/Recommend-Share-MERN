@@ -26,7 +26,7 @@ class MyApp extends App {
       <React.Fragment>
         <div className="site">
           <NavBar />
-          <Component {...pageProps} />
+            <Component {...pageProps} />
           <Footer />
         </div>
       </React.Fragment>
