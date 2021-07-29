@@ -1,11 +1,22 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { Field } from '../components/Formfield/Field'
 
-function contactUs() {
+export const contact_us = (props) => {
     return (
         <div>
+            <Field></Field>
             
         </div>
     )
 }
 
-export default contactUs
+const mapStateToProps = (state) => ({
+    
+})
+
+const mapDispatchToProps = {
+    
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(contact_us)

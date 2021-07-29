@@ -537,13 +537,13 @@ a:hover {
 /* ###############  section 1  ############## */
 
 .building-trust {
-    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/home-banner-new-D.jpg') 0% 0% no-repeat padding-box;
-    background-size: cover;
-    -moz-background-size: cover;
-    -webkit-background-size: cover;
-    -o-background-size: cover;
-    padding: 3rem 0;
-    padding-top: 8rem;
+    /* background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/home-banner-new-D.jpg') 0% 0% no-repeat padding-box; */
+    background-size: cover !important;
+    -moz-background-size: cover !important;
+    -webkit-background-size: cover !important;
+    -o-background-size: cover ;
+    padding: 3rem 0 ;
+    padding-top: 8rem ;
 }
 
 .building-heading {
@@ -2042,9 +2042,9 @@ form ._select {
     }
     .building-trust {
         padding-top: 7rem;
-        background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/home-banner-new-M.jpg') 0% 0% no-repeat padding-box;
-        background-position: center;
-        background-size: cover;
+        background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/banner/home-banner-new-M.jpg') 0% 0% no-repeat padding-box;
+        background-position: center !important;
+        background-size: cover !important;
         -moz-background-size: cover;
         -webkit-background-size: cover;
         -o-background-size: cover;
@@ -2356,8 +2356,8 @@ form ._select {
     }
     .building-trust {
         padding-top: 6rem;
-        background-position: center;
-        background-size: cover;
+        background-position: center !important;
+        background-size: cover !important;
         -moz-background-size: cover;
         -webkit-background-size: cover;
         -o-background-size: cover;
