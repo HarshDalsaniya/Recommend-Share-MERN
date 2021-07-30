@@ -19,7 +19,7 @@ export const HowDoes = (props) => {
                         <div className="see-what-people-slider howitworks-slider-box mb-3">
                             <div className="owl-carousel owl-theme howitworks-slider owl-loaded owl-drag">
                                 <Carousel>
-                                    <Carousel.Item clsaaName="item">
+                                    <Carousel.Item className="item">
                                         <img
                                             src="/banner/howitworks1_03.png"
                                             alt="First slide"
@@ -44,7 +44,7 @@ export const HowDoes = (props) => {
                                             <span>1</span> <small>Sign Up</small>
                                         </div>
                                     </Carousel.Item>
-                                    <Carousel.Item clsaaName="item">
+                                    <Carousel.Item className="item">
                                         <img
                                             src="/banner/howitworks2_03.png"
                                             alt="First slide"
@@ -53,7 +53,7 @@ export const HowDoes = (props) => {
                                             <span>2</span> <small>Create your FREE profile</small>
                                         </div>
                                     </Carousel.Item>
-                                    <Carousel.Item clsaaName="item">
+                                    <Carousel.Item className="item">
                                         <img
                                             src="/banner/howitworks3_03.png"
                                             alt="First slide"
@@ -62,7 +62,7 @@ export const HowDoes = (props) => {
                                             <span>3</span> <small>Confirm your identity</small>
                                         </div>
                                     </Carousel.Item>
-                                    <Carousel.Item clsaaName="item">
+                                    <Carousel.Item className="item">
                                         <img
                                             src="/banner/howitworks4_03.png"
                                             alt="First slide"
@@ -121,7 +121,7 @@ export const HowDoes = (props) => {
                                 <span>Garry Lewis</span>
                             </div>
                             <div className="garry-lewis-image">
-                                <img src="/banner/garry-lewis.png" alt />
+                                <img src="/banner/garry-lewis.png"  />
                             </div>
                         </div>
                     </Col>
