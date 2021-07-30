@@ -548,9 +548,9 @@ a:hover {
 
 .building-heading {
     font: normal normal normal 60px/68px 'Noto Sans JP';
-    color: #FFFFFF;
-    text-transform: uppercase;
-    margin-bottom: 2rem;
+    color: #FFFFFF !important;
+    text-transform: uppercase !important;
+    margin-bottom: 2rem !important;
 }
 
 .building-heading span {

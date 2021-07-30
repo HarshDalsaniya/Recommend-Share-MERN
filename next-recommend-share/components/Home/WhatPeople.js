@@ -30,28 +30,29 @@ export const WhatPeople = (props) => {
         { url: "/dashboard/slider_img_16.png" },
     ];
 
-    
+
     return (
-        <Container>
-            <div className="see-what-people-slider mb-3">
-                <div className="owl-carousel owl-theme people-slider owl-loaded owl-drag">
-                    <SimpleImageSlider
-                     style={'backgroundColor:#000000'}
-                        width={ 452 }
-                        height={ 80 }  
-                        images={ images } 
-                        showNavs
-                        slideDuration
-                        navSize={25}
-                        navStyle={3}
-                        bgColor={`backgroundColor:#000000`}
+        <>
+            <Container>
+                <div className="see-what-people-slider mb-3">
+                    <div className="owl-carousel owl-theme people-slider owl-loaded owl-drag">
+                        <SimpleImageSlider
+                          
+                            width={ 452 }
+                            height={ 80 }
+                            images={ images }
+                            showNavs
+                            slideDuration
+                            navSize={ 25 }
+                            navStyle={ 3 }
+                            bgColor={ `backgroundColor:#000000` }
                         />
 
+                    </div>
                 </div>
-            </div>
 
-        </Container>
-
+            </Container>
+        </>
     )
 }
 

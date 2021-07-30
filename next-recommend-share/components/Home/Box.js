@@ -11,6 +11,7 @@ import {
 
 export const Box = (props) => {
     return (
+        <>
         <Container>
             <Row>
                 <Col lg={ 6 }>
@@ -20,7 +21,7 @@ export const Box = (props) => {
                                 <Col md={ 6 }>
                                     <img
                                         src="/dashboard/hero-community-equal-relationship.svg"
-                                        alt
+                                        
                                     />
                                 </Col>
                                 <Col md={ 6 } className="d-flex flex-column justify-content-between ps-md-0">
@@ -51,8 +52,8 @@ export const Box = (props) => {
                     <div className="for-businesses for-box">
                         <Container>
                             <Row pb={ 3 }>
-                                <Col md={ 6 } calssName="d-flex">
-                                    <img src="/dashboard/hero-community-environment.svg" alt />
+                                <Col md={ 6 } className="d-flex">
+                                    <img src="/dashboard/hero-community-environment.svg"  />
                                 </Col>
                                 <Col md={ 6 } className="d-flex flex-column justify-content-between ps-md-0" >
                                     <div>
@@ -88,6 +89,7 @@ export const Box = (props) => {
 
 
         </Container>
+        </>
     )
 }
 

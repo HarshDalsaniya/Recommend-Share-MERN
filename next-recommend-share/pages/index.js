@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import React from 'react'
 import { Banner } from '../components/Home/Banner'
 import { Box } from '../components/Home/Box'
 import { HowDoes } from '../components/Home/HowDoes'
@@ -9,7 +10,7 @@ import { WhatPeople } from '../components/Home/WhatPeople'
 
 export default function Home() {
   return (
-    <>
+    <React.Fragment>
      <Banner 
      backgroundImage = "/banner/home-banner-new-D.jpg"/>
       <ThePower 
@@ -18,7 +19,7 @@ export default function Home() {
       <HowDoes />
       <Box />
       <WhatPeople/>
-    </>
+      </React.Fragment>
    
 
   )

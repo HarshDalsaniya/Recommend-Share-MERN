@@ -27,7 +27,7 @@ export const ThePower = (props) => {
                             <img
                                 className="the-power-image"
                                 src={`${props.powerImage}`} 
-                                alt
+                                
                             />
                         </Col>
                         <Col lg={7}>
