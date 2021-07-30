@@ -1,7 +1,10 @@
 import {
     LOGIN_USER,
     LOGIN_USER_SUCCESS,
-    LOGIN_USER_ERROR
+    LOGIN_USER_ERROR,
+    REGISTER_USER,
+    REGISTER_USER_SUCCESS,
+    REGISTER_USER_ERROR
 } from "../action-type"
 
 const INIT_STATE = {
@@ -25,6 +28,24 @@ export default (state = INIT_STATE, action) => {
                 currentUser: true
             }
         case LOGIN_USER_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error:action.payload 
+            }
+        case REGISTER_USER:
+            return {
+                ...state,
+                loading: true,
+                user: action.payload
+            }
+        case REGISTER_USER_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                currentUser: true
+            }
+        case REGISTER_USER_ERROR:
             return {
                 ...state,
                 loading: false,

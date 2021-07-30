@@ -5,7 +5,11 @@ const login = (user) => {
         .then((result) =>result)
         .catch((error) => console.log(error))
 }
+const register = (user) => {
+    
+}
 
 export {
-    login
+    login,
+    register
 }
