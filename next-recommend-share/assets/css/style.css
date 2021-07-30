@@ -428,14 +428,15 @@ a:hover {
 }
 
 /* ##################################  home slider  ##################################### */
-.howitworks-slider .active{
+
+.howitworks-slider .owl-item.active {
     background: transparent !important;
 }
+
 .howitworks-slider img {
     width: 200px !important;
     margin: 0 auto;
     margin-bottom: 1rem;
-    display: block;
 }
 
 .howitworks-slider-box {
@@ -482,6 +483,40 @@ a:hover {
 .howitworks-slider .howitworks-slider-btn {
     align-items: center;
     justify-content: space-between;
+}
+
+.howitworks-slider button.owl-dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 1px solid #00000029 !important;
+    margin-right: 0.2rem;
+}
+
+.howitworks-slider button.owl-dot.active {
+    background: #3C3C3C;
+}
+
+.howitworks-slider {
+    position: relative;
+}
+
+.howitworks-slider .owl-prev {
+    position: absolute;
+    left: 0.5rem;
+    bottom: 0;
+}
+
+.howitworks-slider .owl-next {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0;
+}
+
+.howitworks-slider .owl-prev span,
+.howitworks-slider .owl-next span {
+    font-size: 70px;
+    color: #00000029;
 }
 
 .howitworks-slider .owl-dots {
@@ -936,10 +971,10 @@ a:hover {
 /* ###############  section 1  ############## */
 
 .bringing-back {
-    background: url('/assets/images/home-improvements-banner.jpg') 0% 0% no-repeat padding-box;
+    background: url('/images/home-improvements-banner.jpg') 0% 0% no-repeat padding-box;
     background-size: cover;
     padding: 3rem 0;
-    padding-top: 8rem;
+    /* padding-top: 8rem; */
 }
 
 .bringing-back-heading {
@@ -986,7 +1021,6 @@ a:hover {
     font: normal normal 900 40px/24px Noto Sans JP;
     color: #153581;
     margin-bottom: 4rem;
-    margin-top: 3rem !important
 }
 
 .community-box1 {
@@ -2701,7 +2735,7 @@ form ._select {
 }
 
 .site section.content {
-    margin-top: 50px;
+    margin-top: 0px;
 }
 
 a.nav-link:hover {
