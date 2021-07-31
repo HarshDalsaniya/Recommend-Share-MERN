@@ -20,19 +20,36 @@ class MyApp extends App {
         : {}
     }
   }
-  render() {
-    const { Component, pageProps } = this.props
-
-    return (
-      <React.Fragment>
-        <div className="site">
-          <NavBar />
-            <Component {...pageProps} />
-          <Footer />
-        </div>
-      </React.Fragment>
-    );
+  constructor(props) {
+    super(props)
+    this.state = {
+      current: null
+    };
   }
+  componentDidMount() {
+    this.setState({
+      current : localStorage.getItem('Recommend_Share_current_user')
+  });
+}
+// var current = JSON.parse(localStorage.getItem('Recommend_Share_current_user'))
+// setCurrent(JSON.parse(localStorage.getItem('Recommend_Share_current_user')))
+
+
+
+render() {
+  const { Component, pageProps } = this.props
+
+  return (
+    <React.Fragment>
+      <div className="site">
+      {/* {console.log(this.state.current)} */}
+        <NavBar localstorageItem={this.state.current}/>
+        <Component { ...pageProps } />
+        <Footer />
+      </div>
+    </React.Fragment>
+  );
+}
 }
 
 export default wrapper.withRedux(MyApp);

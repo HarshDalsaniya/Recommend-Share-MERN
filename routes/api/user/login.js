@@ -32,6 +32,7 @@ var address = require('address');
 var { machineId, machineIdSync } = require('node-machine-id');
 
 
+
 router.use(cors())
 
 var general = gnl.func();
@@ -46,9 +47,7 @@ router.post('/login', cors(), function (req, res) {
     console.log("testestest", post)
 
     var required_params = ['email', 'password'];
-
-    // console.log(required_params); 
-
+    
     var elem = functions.validateReqParam(post, required_params);
     var valid = elem.missing.length == 0 && elem.blank.length == 0;
     if (valid) {
@@ -78,7 +77,7 @@ router.post('/login', cors(), function (req, res) {
                             response = general.response_format(false, messages.ERROR_PROCESSING, {});
                             res.send(response);
                         }
-                        console.log(result_2.length)
+                        
                         if (result_2.length == 0) {
 
                             let ID = machineIdSync()
@@ -93,8 +92,7 @@ router.post('/login', cors(), function (req, res) {
                                     response = general.response_format(false, messages.ERROR_PROCESSING, {});
                                     res.send(response);
                                 }
-                                // pushing token into response 
-                                console.log("fadsfhaff")
+                                // pushing token into response                                 
                                 var newData = {
                                     token: token
                                 }
@@ -251,5 +249,22 @@ router.post('/register', cors(), function (req, res, next) {
     }
 });
 
+
+router.post('/logout' , cors() , function (req,res,next){
+    response ={};
+
+    var sql=`delete from user_token where token="${req.params.token}"`
+    connection.query(sql, function (err, result) {
+        if (err) {
+            console.log(err);
+            response = general.response_format(false, messages.ERROR_PROCESSING, {});
+            res.send(response);
+        }else{
+            response = general.response_format(true, "Logout Successfully");
+            res.send(response);
+        }
+
+    });
+});
 
 module.exports = router;

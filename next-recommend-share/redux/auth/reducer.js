@@ -4,7 +4,10 @@ import {
     LOGIN_USER_ERROR,
     REGISTER_USER,
     REGISTER_USER_SUCCESS,
-    REGISTER_USER_ERROR
+    REGISTER_USER_ERROR,
+    LOGOUT_USER,
+    LOGOUT_USER_SUCCESS,
+    LOGOUT_USER_ERROR
 } from "../action-type"
 
 const INIT_STATE = {
@@ -51,6 +54,26 @@ export default (state = INIT_STATE, action) => {
                 loading: false,
                 error:action.payload 
             }
+        case LOGOUT_USER:
+            return{
+                ...state,
+                loading:true,
+                error: ''
+            }
+        case LOGOUT_USER_SUCCESS:
+            return{
+                ...state,
+                currentUser:null,
+                loading:false,
+                error: ''
+            }   
+        case LOGOUT_USER_ERROR:
+            return{
+                ...state,
+                loading:false,
+                error:payload.message
+            }      
+
         default:
             return { ...state }
     }
