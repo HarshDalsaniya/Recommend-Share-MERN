@@ -31,6 +31,7 @@ var cors = require("cors");
 var address = require('address');
 var { machineId, machineIdSync } = require('node-machine-id');
 
+
 router.use(cors())
 
 var general = gnl.func();
@@ -57,57 +58,76 @@ router.post('/login', cors(), function (req, res) {
                 email: post.email,
                 password: md5(post.password)
             };
-
             // c62ac98937679cd7fa090c411b5bba9c             
             var sql = `select * from user where email="${data.email}" and password="${data.password}"`;
             // const token = general.generateAccessToken({ email: req.body.email });
-
-
             connection.query(sql, function (err, result) {
-                // console.log(result);
-                // console.log(md5("ravi@123"));
                 console.log("this.sql======================>", this.sql);
                 if (err) {
                     console.log(err);
                     response = general.response_format(false, messages.ERROR_PROCESSING, {});
                     res.send(response);
                 }
-                var sql2 = `select * from user_token where user_device_id`
+                
                 if (result.length > 0) {
-
-
-
-                    // async function getMachineId() {
-                    //     var Device_Id = await machineId();
-
-                    //     return Device_Id, address
-                    // }
-                    const Device_Ip_Address = address.ip()
-                    let ID = async () => {
-                        var Device_Id = await machineId();
-
-                        return Device_Id
-                    }
-                    console.log(machineIdSync())
-
-
-                    const token = general.generateAccessToken({ id: result[0].id });
-                    var sql2 = `insert into user_token set userId=${result[0].id} , token="${token}" , user_device_Id="HP_Dalsaniya" , user_device_Ip="1"`
-                    connection.query(sql2, function (err, JSON_web_token) {
+                    // console.log(result)
+                    var sql2 = `select * from user_token where userId="${result[0].id}"`
+                    connection.query(sql2, function (err, result_2) {
                         if (err) {
                             console.log(err);
                             response = general.response_format(false, messages.ERROR_PROCESSING, {});
                             res.send(response);
                         }
-                        // pushing token into response 
-                        var newData = {
-                            token: token
-                        }
-                        result.push(newData);
-                        response = general.response_format(true, "Login Successfully", result, JSON_web_token);
+                        console.log(result_2.length)
+                        if (result_2.length == 0) {
 
-                        res.send(response);
-                    });
+                            let ID = machineIdSync()
+                            const Device_Ip_Address = address.ip()                           
+                            const token = general.generateAccessToken({ id: result[0].id });
+                            var sql3 = `insert into user_token set userId=${result[0].id} , token="${token}" , user_device_Id="${ID}" , user_device_Ip="${Device_Ip_Address}"`
+                            
+                            connection.query(sql3, function (err, JSON_web_token) {
+                                console.log("this.sql======================>", this.sql3);
+                                if (err) {
+                                    console.log(err);
+                                    response = general.response_format(false, messages.ERROR_PROCESSING, {});
+                                    res.send(response);
+                                }
+                                // pushing token into response 
+                                console.log("fadsfhaff")
+                                var newData = {
+                                    token: token
+                                }
+                                result.push(newData);
+                                response = general.response_format(true, "Login Successfully", result);
+
+                                res.send(response);
+                            });
+
+                        } else {
+                            
+                            let ID = machineIdSync()
+                            const Device_Ip_Address = address.ip()
+
+                            const token = general.generateAccessToken({ id: result[0].id });
+                            var sql4 = `update user_token set token="${token}" , user_device_Id="${ID}" , user_device_Ip="${Device_Ip_Address}" where userId="${result[0].id}"`
+                         
+                            connection.query(sql4, function (err, result_3) {
+                                console.log("this.sql======================>", this.sql4);
+                                if (err) {
+                                    console.log(err);
+                                    response = general.response_format(false, messages.ERROR_PROCESSING, {});
+                                    res.send(response);
+                                }
+                                var newData = {
+                                    token: token
+                                }
+                                result.push(newData);
+                                response = general.response_format(true, "Login Successfully", result);
+                                res.send(response);
+                            })
+                        }
+                    })
                 } else {
                     response = general.response_format(false, "Invalid username or password");
                     res.send(response);
