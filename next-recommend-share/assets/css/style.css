@@ -251,8 +251,23 @@ a:hover {
     right: 17px;
     top: -17px;
 }
+.login-uesr .btn-success{
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+.login-uesr .btn-check:active+.btn-success:focus, 
+.login-uesr .btn-check:checked+.btn-success:focus, 
+.login-uesr .btn-success.active:focus, 
+.login-uesr .btn-success:active:focus, 
+.login-uesr .show>.btn-success.dropdown-toggle:focus,
+.login-uesr .btn-check:focus+.btn-success, 
 
-
+.login-uesr .btn-success:focus{
+     border-color: transparent !important;
+     box-shadow:none !important;
+}
 /* ###############  footer  ############## */
 
 .footer-primary {

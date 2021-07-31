@@ -5,13 +5,13 @@ import reducers from './reducers'
 
 const middleware = [thunk]
 
-const composeEnhancers =
-  typeof window === 'object' &&
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?   
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
+// const composeEnhancers =
+//   typeof window === 'object' &&
+//   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?   
+//     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
 
-const enhancer = composeEnhancers(applyMiddleware(...middleware));
+// const enhancer = composeEnhancers(applyMiddleware(...middleware));
 
-const makeStore = () => createStore(reducers, enhancer)
+const makeStore = () => createStore(reducers, compose(applyMiddleware(...middleware)))
 
 export const wrapper = createWrapper(makeStore)

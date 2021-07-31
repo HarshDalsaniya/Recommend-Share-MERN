@@ -8,8 +8,8 @@ import {
     Button
 } from "react-bootstrap"
 
-export const Banner = (props) => {
-    console.log(props)
+export const Banner = (props) => {   
+    
     return (
         <div className="site">
             <section className="building-trust" style={ { background: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${props.backgroundImage}) 0% 0% no-repeat padding-box` } }>
