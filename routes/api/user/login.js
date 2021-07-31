@@ -120,5 +120,44 @@ router.post('/login', cors(), function (req, res) {
     }
 });
 
+router.post('/register', cors(), function (req, res, next) {
+    var post = req.body;
+    response = {};
+    console.log("testestest",post)
+
+    var required_params = ['first_name', 'first_name', 'email', 'phone', 'password'];
+   
+
+    var elem = functions.validateReqParam(post, required_params);
+    var valid = elem.missing.length == 0 && elem.blank.length == 0;
+    if (valid) {
+        console.log("in valid")
+        req.getConnection(function (err, connection) {
+                var sql = `SELECT * FROM user where id = 1;`;
+                connection.query(sql, function (err, email_rows) {
+                    console.log("this.sql======================>",this.sql);
+                 
+                    if (err) {
+                        console.log(err);
+                        response = general.response_format(false, messages.ERROR_PROCESSING, {});
+                        res.send(response);
+                    }
+                    else {
+                        response = general.response_format(true, "User Registered Successfully", email_rows);
+                        res.send(response);
+                    }
+                });
+
+        });
+
+    }
+    else {
+        console.log("in blank data")
+        var str = functions.loadErrorTemplate(elem);
+        response = general.response_format(false, messages.WRONG_MISSING_PARAM + str, {});
+        res.send(response);
+    }
+});
+
 
 module.exports = router;

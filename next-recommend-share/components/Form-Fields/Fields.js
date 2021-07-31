@@ -25,18 +25,6 @@ export const Fields = (props) => {
                 </div>
             </div>
         );
-    }else if (props.field == "inputGroupTextButton") {
-        return (
-            <div className="form-field">
-                <Form.Label className="form-lable">{props.fieldLabel}</Form.Label>
-                <div className="d-flex justify-content-between">
-                    <Form.Control type={props.field} name={props.fieldName} style={{width:"calc( 100% - 103px )"}} value={props.fieldValue} onChange={(e) => { props.fieldAction(e.target.value) }}/>
-                    <Button className="button square postcode-btn" >
-                    {props.buttonValue}
-                    </Button>
-                </div>
-            </div>
-        );
     }else if (props.field == "textarea") {
         return (
             <div className="form-field">

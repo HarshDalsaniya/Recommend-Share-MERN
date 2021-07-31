@@ -2,7 +2,7 @@ const withImages = require('next-images')
 const withPlugins = require('next-compose-plugins');
 
 const nextJsConfig = {
-    exportTrailingSlash: true,
+    trailingSlash: true,
     exportPathMap: function() {
         return {
             '/': { page: '/' },

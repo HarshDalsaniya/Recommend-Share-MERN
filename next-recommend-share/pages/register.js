@@ -5,12 +5,13 @@ import {
     Container,
     Row,
     Col,
-    Button
+    Button,
+    Form
 } from "react-bootstrap"
 import { registerUser } from '../redux/auth/action';
 import Fields from '../components/Form-Fields/Fields';
 import { useUrlSearchParams } from 'use-url-search-params';
-
+import axios from 'axios'
 export const register = (props) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -20,6 +21,7 @@ export const register = (props) => {
     const [password, setPassword] = useState('');
     const [confirm_password, setConfirm_password] = useState('');
     const [address_postcode, setAddress_postcode] = useState('');
+    const [select_postcode, setSelectPostcode] =useState('');
     const [address_line_1, setAddress_line_1] = useState('');
     const [address_line_2, setAddress_line_2] = useState('');
     const [address_town, setAddress_town] = useState('');
@@ -30,11 +32,27 @@ export const register = (props) => {
     const [onClickChackbox2, setOnClickChackbox2] = useState(false);
     const [params, setParams] = useUrlSearchParams()
 
+
+    const getAddress = () =>{
+        console.log("asdfasdf")
+        if(address_postcode!=''){
+            axios.get(`https://api.getaddress.io/find/${address_postcode}?api-key=xR5ryKXzb0SevSwn3OX7VQ31904`)
+                .then((res)=>{
+                    setSelectPostcode(res.data.addresses)
+                })
+        }   
+    }
+    const putAddress = (value) =>{
+        console.log(value);
+        setAddress_line_1(value.split(',')[0])
+        setAddress_line_2(value.split(',')[1])
+        setAddress_town(value.split(',')[5])
+        setSelectPostcode('')
+    }
     const onSubmit = (e) => {
         e.preventDefault();
         props.registerUser()
     }
-    console.log(params);
     return (
         <React.Fragment>
             <div className="login-body pt-3">
@@ -192,14 +210,27 @@ export const register = (props) => {
                                                 </Col>
                                                 <Col md={6}>
                                                     <h3>Your Address</h3>
-                                                    <Fields
-                                                        field="inputGroupTextButton"
-                                                        fieldLabel="Postcode"
-                                                        fieldName="address_postcode"
-                                                        buttonValue="LOOKUP"
-                                                        fieldValue={address_postcode}
-                                                        fieldAction={setAddress_postcode}
-                                                    />
+                                                    <div className="form-field">
+                                                        <Form.Label className="form-lable">Postcode</Form.Label>
+                                                        <div className="d-flex justify-content-between">
+                                                            <Form.Control type="text" name="address_postcode" style={{width:"calc( 100% - 103px )"}} value={address_postcode} onChange={(e) => { setAddress_postcode(e.target.value) }}/>
+                                                            <Button className="button square postcode-btn" onClick={()=>{getAddress()}}>
+                                                            LOOKUP
+                                                            </Button>
+                                                        </div>
+                                                        {select_postcode!=''?
+                                                            <>
+                                                            <span className="postcode-lookup results">
+                                                                <select className="postcode-lookup-sel" onChange={(e)=>putAddress(e.target.value)}>
+                                                                    <option value>Select your address</option>
+                                                                    {select_postcode.map((option)=>
+                                                                        <option value={option}>{option}</option>
+                                                                    )}
+                                                                </select>
+                                                            </span>
+                                                            </>
+                                                        :null}
+                                                    </div>
                                                     <Fields
                                                         field="text"
                                                         fieldLabel="Address Line 1"
