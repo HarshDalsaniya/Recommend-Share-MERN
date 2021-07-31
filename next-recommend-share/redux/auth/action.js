@@ -8,7 +8,8 @@ import { LOGIN_USER,
 import Router from "next/router"
 import {currentUser} from "../../constants/defaultValues";
 import {
-    login
+    login,
+    register
 } from "../../helper/api"
 import { setCurrentUser } from "../../helper/Utils";
 
@@ -45,7 +46,8 @@ export const loginUser = (user) => {
 export const registerUser = (user) => {
     return dispatch => {
         dispatch({type: REGISTER_USER,
-                payload: user})
+                    payload: user})
+        console.log(user)
         register(user)
             .then((result)=>{
                 if(result.data.status==true){

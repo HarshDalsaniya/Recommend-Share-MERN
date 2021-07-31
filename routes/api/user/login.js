@@ -68,7 +68,7 @@ router.post('/login', cors(), function (req, res) {
                     response = general.response_format(false, messages.ERROR_PROCESSING, {});
                     res.send(response);
                 }
-                
+
                 if (result.length > 0) {
                     // console.log(result)
                     var sql2 = `select * from user_token where userId="${result[0].id}"`
@@ -82,10 +82,10 @@ router.post('/login', cors(), function (req, res) {
                         if (result_2.length == 0) {
 
                             let ID = machineIdSync()
-                            const Device_Ip_Address = address.ip()                           
+                            const Device_Ip_Address = address.ip()
                             const token = general.generateAccessToken({ id: result[0].id });
                             var sql3 = `insert into user_token set userId=${result[0].id} , token="${token}" , user_device_Id="${ID}" , user_device_Ip="${Device_Ip_Address}"`
-                            
+
                             connection.query(sql3, function (err, JSON_web_token) {
                                 console.log("this.sql======================>", this.sql3);
                                 if (err) {
@@ -105,13 +105,13 @@ router.post('/login', cors(), function (req, res) {
                             });
 
                         } else {
-                            
+
                             let ID = machineIdSync()
                             const Device_Ip_Address = address.ip()
 
                             const token = general.generateAccessToken({ id: result[0].id });
                             var sql4 = `update user_token set token="${token}" , user_device_Id="${ID}" , user_device_Ip="${Device_Ip_Address}" where userId="${result[0].id}"`
-                         
+
                             connection.query(sql4, function (err, result_3) {
                                 console.log("this.sql======================>", this.sql4);
                                 if (err) {
@@ -143,34 +143,106 @@ router.post('/login', cors(), function (req, res) {
 router.post('/register', cors(), function (req, res, next) {
     var post = req.body;
     response = {};
-    console.log("testestest",post)
+    console.log("testestest", post)
 
-    var required_params = ['first_name', 'first_name', 'email', 'phone', 'password'];
-   
+    var required_params = ['password', 'confirm_password', 'email', 'name', 'mobile', 'address_postcode', 'address_line_1', 'address_town', 'address_county', 'terms_agreed_date', 'gdpr_agreed_date'];
 
     var elem = functions.validateReqParam(post, required_params);
     var valid = elem.missing.length == 0 && elem.blank.length == 0;
     if (valid) {
         console.log("in valid")
         req.getConnection(function (err, connection) {
-                var sql = `SELECT * FROM user where id = 1;`;
-                connection.query(sql, function (err, email_rows) {
-                    console.log("this.sql======================>",this.sql);
-                 
-                    if (err) {
-                        console.log(err);
-                        response = general.response_format(false, messages.ERROR_PROCESSING, {});
-                        res.send(response);
-                    }
-                    else {
-                        response = general.response_format(true, "User Registered Successfully", email_rows);
-                        res.send(response);
-                    }
-                });
+            // console.log(post);
 
+            var sql = `SELECT * FROM user where email='${post.email}' and mobile='${post.mobile}';`;
+            connection.query(sql, function (err, result) {
+                // console.log("this.sql======================>", this.sql);
+                if (err) {
+                    console.log(err);
+                    response = general.response_format(false, messages.ERROR_PROCESSING, {});
+                    res.send(response);
+                }
+                else {
+                    if (result.length == 0) {
+                        if (post.password == post.confirm_password) {
+                            var data = {
+                                password: md5(post.password),
+                                email: post.email,
+                                telephone: post.telephone,
+                                name: post.name,
+                                mobile: post.mobile,
+                                address_line_1: post.address_line_1,
+                                address_line_2: post.address_line_2,
+                                address_town: post.address_town,
+                                address_county: post.address_county,
+                                address_postcode: post.address_postcode,
+                                enabled: 1,
+                                system: 1,
+                                password_changed: 1,
+                                registration_complete: 1,
+                                verified: 1,
+                                notification_received_sms: 1,
+                                notification_received_email: 1,
+                                notification_marketing_email : 1
+                            }
+                            var insertSql = `insert into user set terms_agreed_date=NOW(), gdpr_agreed_date=NOW(), ?`;
+                            connection.query(insertSql, data, function (err, insertResult) {
+                                // console.log("this.sql======================>",this.sql);
+                                if (err) {
+                                    console.log(err);
+                                    response = general.response_format(false, messages.ERROR_PROCESSING, {});
+                                    res.send(response);
+                                } else {
+                                    if (typeof insertResult.insertId !='undefined') {
+                                        let ID = machineIdSync()
+                                        const Device_Ip_Address = address.ip()
+                                        const token = general.generateAccessToken({ id: insertResult.insertId });
+                                        var insertToken = `insert into user_token set userId=${insertResult.insertId} , token="${token}" , user_device_Id="${ID}" , user_device_Ip="${Device_Ip_Address}"`
+                                        connection.query(insertToken, function (err, tokenResult) {
+                                            if (err) {
+                                                var insertSql = `delete from user where id=${result.insertId}`;
+                                                connection.query(insertSql, data, function (err, insertResult) {
+                                                    if(err){
+                                                        console.log(err);
+                                                        response = general.response_format(false, messages.ERROR_PROCESSING, {});
+                                                        res.send(response);
+                                                    }else
+                                                    {
+                                                        response = general.response_format(false, messages.ERROR_PROCESSING, {});
+                                                        res.send(response);
+                                                    }
+                                                })
+                                            } else {
+                                                console.log("adfdasfasfd");
+                                                if (typeof tokenResult.insertId != 'undefined') {
+                                                    response = general.response_format(true, "Registration Successfully");
+                                                    res.send(response);
+                                                } else {
+                                                    response = general.response_format(false, tokenResult, {});
+                                                    res.send(response);
+                                                }
+                                            }
+                                        })
+                                    } else {
+                                        response = general.response_format(false, result, {});
+                                        res.send(response);
+                                    }
+                                }
+                            })
+                        }else{
+                            response = general.response_format(false, 'password not match', {});
+                            res.send(response);
+                        }
+                    }else{
+                        response = general.response_format(false, 'User Allready Exist', {});
+                        res.send(response);
+                    }
+                }
+            });
+            
         });
 
-    }
+}
     else {
         console.log("in blank data")
         var str = functions.loadErrorTemplate(elem);

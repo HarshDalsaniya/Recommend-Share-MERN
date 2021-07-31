@@ -26,10 +26,10 @@ export const register = (props) => {
     const [address_line_2, setAddress_line_2] = useState('');
     const [address_town, setAddress_town] = useState('');
     const [address_county, setAddress_county] = useState('');
+    const [terms_agreed_date, setTerms_agreed_date] = useState(false);
+    const [gdpr_agreed_date, setGdpr_agreed_date] = useState(false);
     const [tradespeopleName, setTradespeopleName] = useState('');
     const [tradespeopleTrade, settradespeopleTrade] = useState('');
-    const [onClickChackbox1, setOnClickChackbox1] = useState(false);
-    const [onClickChackbox2, setOnClickChackbox2] = useState(false);
     const [params, setParams] = useUrlSearchParams()
 
 
@@ -51,7 +51,26 @@ export const register = (props) => {
     }
     const onSubmit = (e) => {
         e.preventDefault();
-        props.registerUser()
+        const userData = { 
+            name : name,
+            email : email,
+            telephone : telephone,
+            mobile : mobile,
+            age_group : age_group,
+            password : password,
+            confirm_password : confirm_password,
+            address_postcode : address_postcode,
+            select_postcode : select_postcode,
+            address_line_1 : address_line_1,
+            address_line_2 : address_line_2,
+            address_town : address_town,
+            address_county : address_county,
+            terms_agreed_date : terms_agreed_date,
+            gdpr_agreed_date : gdpr_agreed_date,
+            tradespeopleName : tradespeopleName,
+            tradespeopleTrade : tradespeopleTrade
+        }
+        props.registerUser(userData)
     }
     return (
         <React.Fragment>
@@ -194,14 +213,14 @@ export const register = (props) => {
                                                         fieldAction={ setAge_group }
                                                     />
                                                     <Fields
-                                                        field="email"
+                                                        field="password"
                                                         fieldLabel="Password"
                                                         fieldName="password"
                                                         fieldValue={ password }
                                                         fieldAction={ setPassword }
                                                     />
                                                     <Fields
-                                                        field="email"
+                                                        field="password"
                                                         fieldLabel="Confirm Password"
                                                         fieldName="confirm_password"
                                                         fieldValue={ confirm_password }
@@ -267,14 +286,14 @@ export const register = (props) => {
                                                 <div className="twelve columns alpha">
                                                     <div className="form_row  checkbox">
                                                         <div className="field_container">
-                                                            <div className={ onClickChackbox1 == true ? "_checkbox on" : "_checkbox" }>
+                                                            <div className={ terms_agreed_date == true ? "_checkbox on" : "_checkbox" }>
                                                                 <input
                                                                     type="checkbox"
-                                                                    name="register_tradesperson[terms_and_conditions]"
+                                                                    name="terms_and_conditions"
                                                                     required="required"
                                                                     defaultValue={ 1 }
                                                                     className="_checkbox_input ready"
-                                                                    onClick={ () => setOnClickChackbox1(!onClickChackbox1) }
+                                                                    onClick={ () => setTerms_agreed_date(!terms_agreed_date) }
                                                                     style={ {
                                                                         opacity: 0,
                                                                         position: "absolute",
@@ -298,7 +317,7 @@ export const register = (props) => {
                                                     </div>
                                                     <div className="form_row  checkbox">
                                                         <div className="field_container">
-                                                            <div className={ onClickChackbox2 == true ? "_checkbox on" : "_checkbox" }>
+                                                            <div className={ gdpr_agreed_date == true ? "_checkbox on" : "_checkbox" }>
                                                                 <input
                                                                     type="checkbox"
                                                                     id="register_tradesperson_gdpr_policy"
@@ -306,7 +325,7 @@ export const register = (props) => {
                                                                     required="required"
                                                                     defaultValue={ 1 }
                                                                     className="_checkbox_input ready"
-                                                                    onClick={ () => setOnClickChackbox2(!onClickChackbox2) }
+                                                                    onClick={ () => setGdpr_agreed_date(!gdpr_agreed_date) }
                                                                     style={ {
                                                                         opacity: 0,
                                                                         position: "absolute",
