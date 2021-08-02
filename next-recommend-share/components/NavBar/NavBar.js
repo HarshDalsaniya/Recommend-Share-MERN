@@ -102,7 +102,7 @@ export const NavBar = (props,{logoutUser}) => {
                                                         <Dropdown.Item>My Dashboard</Dropdown.Item>
                                                         <Dropdown.Item>vm</Dropdown.Item>
                                                         <Dropdown.Item>Add a Business</Dropdown.Item>
-                                                        <Dropdown.Item>Edit My Account</Dropdown.Item>
+                                                        <Dropdown.Item><Link href="/profile">Edit My Account</Link></Dropdown.Item>
                                                         <Dropdown.Item>My Password</Dropdown.Item>
                                                         <Dropdown.Divider />
                                                         <Dropdown.Item onClick={ () => handleLogout() }>Logout</Dropdown.Item>
