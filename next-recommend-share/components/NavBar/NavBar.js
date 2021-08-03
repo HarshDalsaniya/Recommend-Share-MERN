@@ -97,13 +97,13 @@ export const NavBar = (props) => {
                                                             src="https://recommendandshare.com/media/cache/avatar_small/uploads/customers/sam-avatar-1626495954.png"
                                                             className="avatar"
                                                         />
-                                                        <span className="ms-2">harsh</span>
+                                                        <span className="ms-2">{JSON.parse(props.localstorageItem).name}</span>
                                                     </Dropdown.Toggle>
                                                     <Dropdown.Menu>
                                                         <Dropdown.Item>My Dashboard</Dropdown.Item>
                                                         <Dropdown.Item>vm</Dropdown.Item>
                                                         <Dropdown.Item>Add a Business</Dropdown.Item>
-                                                        <Dropdown.Item>Edit My Account</Dropdown.Item>
+                                                        <Dropdown.Item><Link href="/profile">Edit My Account</Link></Dropdown.Item>
                                                         <Dropdown.Item>My Password</Dropdown.Item>
                                                         <Dropdown.Divider />
                                                         <Dropdown.Item onClick={ () => handleLogout() }>Logout</Dropdown.Item>

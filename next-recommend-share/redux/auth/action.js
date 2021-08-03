@@ -33,6 +33,7 @@ export const loginUser = (user) => {
                     const item = {
                         ...currentUser,
                         id: result.data.data[0].id,
+                        name:result.data.data[0].name,
                         email: result.data.data[0].email,
                         token: result.data.data[1].token
 
