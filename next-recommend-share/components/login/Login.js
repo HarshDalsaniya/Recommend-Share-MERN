@@ -14,8 +14,11 @@ import Link from "next/link"
 export const Login = (props) => {
     const [_username, setUsername] = useState("");
     const [_password, setPassword] = useState("");
+    const [submitted, setSubmitted] = useState(false)
 
-    const onSubmit = () => {
+    const onSubmit = (e) => {
+        e.preventDefault();
+        setSubmitted(true)
         const user={
             email:_username,
             password:_password
@@ -42,6 +45,7 @@ export const Login = (props) => {
                                             fieldName = "_username"
                                             fieldValue = {_username}
                                             fieldAction = {setUsername}
+                                            fieldValidation = {submitted, _username, {message:"Please Enter your UserName"}, props.authUser.error}
                                         />
                                         <Fields 
                                             field = "password"
@@ -49,6 +53,7 @@ export const Login = (props) => {
                                             fieldName = "_password"
                                             fieldValue = {_password}
                                             fieldAction = {setPassword}
+                                            fieldValidation = {submitted, _password, {message:"Please Enter your Password"}, props.authUser.error}
                                         />
                                         <p className="tcenter small">Forgotten your password? <a className="form-link" href="/reset-password/">Request a new one</a>.</p>
                                         <div className="buttons tcenter">
@@ -75,8 +80,8 @@ export const Login = (props) => {
 }
 
 const mapStateToProps = (authUser) => {
-    const { loding, currentUser } = authUser
-    return {loding, currentUser};
+    const { loding, currentUser, error } = authUser
+    return {loding, currentUser, error };
 }
 
 const mapDispatchToProps = {

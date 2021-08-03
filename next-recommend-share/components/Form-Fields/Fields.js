@@ -1,15 +1,20 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { connect } from 'react-redux'
 import { Row, Col, Form, FormControl, Button, InputGroup } from "react-bootstrap"
 export const Fields = (props) => {
-    if (props.field == "password" || props.field =="email" || props.field =="text" || props.field =="numeric" ) {
+    if (props.field == "password" || props.field =="email" || props.field =="text" || props.field =="numeric" ) {        
         return (
+            <>
             <div className="form-field">
                 <Form.Label className="form-lable">{props.fieldLabel}</Form.Label>
                 <div>
                     <Form.Control type={props.field} className="form-control" name={props.fieldName} value={props.fieldValue} onChange={(e) => { props.fieldAction(e.target.value) }}></Form.Control>
                 </div>
+                {(props.fieldValidation[0] && !props.fieldValidation[1]) || (typeof props.fieldValidation[3]!='undefined'&&props.fieldValidation[3]!='' && props.fieldValidation[3].find((field)=>{return field==props.fieldName})==props.fieldName ) ?
+                    <div className="help-block" style={{color:'red'}}>{typeof props.fieldValidation[2]!="undefined"?props.fieldValidation[2].message:null}</div>
+                :null}
             </div>
+            </>
         );
     }else if (props.field == "select") {
         return (

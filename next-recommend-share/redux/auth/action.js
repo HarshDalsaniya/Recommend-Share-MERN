@@ -21,6 +21,7 @@ import { result } from "lodash";
 
 
 export const loginUser = (user) => {
+    console.log("login")
     return dispatch => {
         dispatch({
             type: LOGIN_USER,
@@ -36,7 +37,6 @@ export const loginUser = (user) => {
                         token: result.data.data[1].token
 
                     }
-                    console.log(item)
                     setCurrentUser(item)
                     Router.push("/")
                     dispatch({
@@ -46,7 +46,7 @@ export const loginUser = (user) => {
                 } else {
                     dispatch({
                         type: LOGIN_USER_ERROR,
-                        payload: result.data.message
+                        payload: [result.data.message.split("\n ")[1].replace(" should not be blank",'').split(",").includes("email")==true?"_username":"",result.data.message.split("\n ")[1].replace(" should not be blank",'').split(",").includes("password")==true?"_password":""]
                     })
                 }
             })
@@ -71,9 +71,10 @@ export const registerUser = (user) => {
                         payload: result.data
                     })
                 } else {
+                    // console.log(result.data.message.split("\n ")[1].replace(" should not be blank",'').split(","))
                     dispatch({
                         type: REGISTER_USER_ERROR,
-                        payload: result.data.message
+                        payload: result.data.message.split("\n ")[1].replace(" should not be blank",'').split(",")
                     })
                 }
             })
@@ -89,11 +90,11 @@ export const registerUser = (user) => {
              type :LOGOUT_USER,
              payload :history
          })
-         console.log("hina")
          logout(history)
          .then((result) => {
              if(result.data.status == true){
-                Router.push("/about")
+                localStorage.removeItem("Recommend_Share_current_user")
+                Router.push("/")
                 dispatch({
                     type: LOGOUT_USER_SUCCESS,
                     payload:"logout success"

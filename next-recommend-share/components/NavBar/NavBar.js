@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { Container, Navbar, Dropdown } from 'react-bootstrap';
 import Link from 'next/link'
-import { logoutUser } from '../../redux/auth/action';
+import { logoutUser} from '../../redux/auth/action';
 
 
-export const NavBar = (props,{logoutUser}) => {
-    // console.log(props.localstorageItem)
+export const NavBar = (props) => {
+    const birds = useSelector(state => state);
+    const dispatch = useDispatch();
+
     const handleLogout = () => {
-        console.log("logout.....!!!")
-        props.logoutUser();
+            dispatch(logoutUser())
     };
     return (
         <>
@@ -129,15 +130,5 @@ export const NavBar = (props,{logoutUser}) => {
     )
 }
 
-const mapStateToProps = (state) => ({
 
-})
-
-const mapDispatchToProps =(dispatch)=> {
-    return{
-    logout:()=>dispatch(logoutUser()),
-    dispatch,
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
+export default connect(null, null)(NavBar)

@@ -133,8 +133,9 @@ router.post('/login', cors(), function (req, res) {
             });
         });
     } else {
-        res.send('Please enter email and password!');
-        res.end();
+        var str = functions.loadErrorTemplate(elem);
+        response = general.response_format(false, messages.WRONG_MISSING_PARAM + str, {});
+        res.send(response);
     }
 });
 
@@ -143,7 +144,7 @@ router.post('/register', cors(), function (req, res, next) {
     response = {};
     console.log("testestest", post)
 
-    var required_params = ['password', 'confirm_password', 'email', 'name', 'mobile', 'address_postcode', 'address_line_1', 'address_town', 'address_county', 'terms_agreed_date', 'gdpr_agreed_date'];
+    var required_params = ['password', 'confirm_password', 'email', 'name', 'mobile', 'address_postcode', 'address_line_1', 'address_town', 'address_country', 'terms_agreed_date', 'gdpr_agreed_date'];
 
     var elem = functions.validateReqParam(post, required_params);
     var valid = elem.missing.length == 0 && elem.blank.length == 0;
@@ -172,7 +173,7 @@ router.post('/register', cors(), function (req, res, next) {
                                 address_line_1: post.address_line_1,
                                 address_line_2: post.address_line_2,
                                 address_town: post.address_town,
-                                address_county: post.address_county,
+                                address_country: post.address_country,
                                 address_postcode: post.address_postcode,
                                 enabled: 1,
                                 system: 1,
@@ -250,20 +251,21 @@ router.post('/register', cors(), function (req, res, next) {
 });
 
 
-router.post('/logout' , cors() , function (req,res,next){
+router.post('/logout/:token' , cors() , function (req,res,next){
     response ={};
+    req.getConnection(function (err, connection) {
+        var sql=`delete from user_token where token="${req.params.token}"`
+        connection.query(sql, function (err, result) {
+            if (err) {
+                console.log(err);
+                response = general.response_format(false, messages.ERROR_PROCESSING, {});
+                res.send(response);
+            }else{
+                response = general.response_format(true, "Logout Successfully");
+                res.send(response);
+            }
 
-    var sql=`delete from user_token where token="${req.params.token}"`
-    connection.query(sql, function (err, result) {
-        if (err) {
-            console.log(err);
-            response = general.response_format(false, messages.ERROR_PROCESSING, {});
-            res.send(response);
-        }else{
-            response = general.response_format(true, "Logout Successfully");
-            res.send(response);
-        }
-
+        });
     });
 });
 

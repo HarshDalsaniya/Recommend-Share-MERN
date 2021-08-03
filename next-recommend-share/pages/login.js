@@ -1,5 +1,5 @@
 import React,{useState} from "react"
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import { Container,
          Row,
          Col,
@@ -11,9 +11,11 @@ import Fields from '../components/Form-Fields/Fields';
 import Link from "next/link"
 
 export const login = (props) => {
+    const reState = useSelector(state => state);
     const [_username, setUsername] = useState("");
     const [_password, setPassword] = useState("");
-
+    const [submitted, setSubmitted] = useState(false)
+    
     const onSubmit = (e) => {
         e.preventDefault();
         const user={
@@ -21,7 +23,8 @@ export const login = (props) => {
             password:_password
         }
         if(user.email!=""&&user.password!=""){
-            props.login(user,"/")
+                props.login(user,"/")
+                
         }
     }
     return (
@@ -43,6 +46,7 @@ export const login = (props) => {
                                             fieldName = "_username"
                                             fieldValue = {_username}
                                             fieldAction = {setUsername}
+                                            fieldValidation = {[submitted, _username, {message:"Please Enter your UserName"}, reState.authUser.error]}
                                         />
                                         <Fields 
                                             field = "password"
@@ -50,6 +54,7 @@ export const login = (props) => {
                                             fieldName = "_password"
                                             fieldValue = {_password}
                                             fieldAction = {setPassword}
+                                            fieldValidation = {[submitted, _password, {message:"Please Enter your Password"}, reState.authUser.error]}
                                         />
                                         <p className="tcenter small">Forgotten your password? <a className="form-link" href="/reset-password/">Request a new one</a>.</p>
                                         <div className="buttons tcenter">
@@ -77,8 +82,8 @@ export const login = (props) => {
 }
 
 const mapStateToProps = (authUser) => {
-    const { loding, currentUser } = authUser
-    return {loding, currentUser};
+    const { loding, currentUser, error } = authUser
+    return {loding, currentUser, error};
 }
 
 const mapDispatchToProps = {

@@ -7,16 +7,14 @@ const login = (user) => {
         .catch((error) => console.log(error))
 }
 const register = (user) => {
-    console.log(user)
     return axios.post(`http://localhost:4000/api/user/register`, user)
-        .then((result) =>result)
+        .then((result) => result)
         .catch((error) => console.log(error))
 }
  const logout = () => {
-     const Tokne = localStorage.getItem('Recommend_Share_current_user')
-     console.log(Token)
-     return axios.post(`http://localhost:4000/api/user/logout/${Token}`)
-     .then((result) => console.log(result))
+     const Token = JSON.parse(localStorage.getItem('Recommend_Share_current_user'))
+     return axios.post(`http://localhost:4000/api/user/logout/${Token.token}`)
+     .then((result) => result)
      .catch((error) => console.log(error))
  }
 
