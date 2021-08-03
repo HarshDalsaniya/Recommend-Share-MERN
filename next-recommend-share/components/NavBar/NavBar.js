@@ -104,7 +104,7 @@ export const NavBar = (props) => {
                                                         <Dropdown.Item>vm</Dropdown.Item>
                                                         <Dropdown.Item>Add a Business</Dropdown.Item>
                                                         <Dropdown.Item><Link href="/profile">Edit My Account</Link></Dropdown.Item>
-                                                        <Dropdown.Item>My Password</Dropdown.Item>
+                                                        <Dropdown.Item><Link href="/password">My Password</Link></Dropdown.Item>
                                                         <Dropdown.Divider />
                                                         <Dropdown.Item onClick={ () => handleLogout() }>Logout</Dropdown.Item>
                                                     </Dropdown.Menu>
