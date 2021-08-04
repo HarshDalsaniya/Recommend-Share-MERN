@@ -13,7 +13,7 @@ export const Footer = (props) => {
                 <div className="footer-logo">
                   <a href="/">
                     <img
-                      src="/assets/images/logo-on-light.svg"
+                      src="/logo/logo-on-light.svg"
                       alt="Recommend and Share"
                     />
                   </a>
