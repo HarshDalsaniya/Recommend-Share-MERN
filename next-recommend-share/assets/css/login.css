@@ -54,7 +54,7 @@
     display: block;
     line-height: 1.4em;
     color: #03adec;
-    margin: 0 0 10px;
+    margin: 8px 0 10px;
     font-size: 16px;
     text-align: left;
     font-weight: 600;
@@ -62,3 +62,8 @@
 /* .form-checkbox{
 
 } */
+/* harsh dalsaniya */
+
+.resetpassword-field{
+    margin-left: 4px;
+}

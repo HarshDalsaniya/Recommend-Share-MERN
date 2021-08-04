@@ -2,13 +2,14 @@ const withImages = require('next-images')
 const withPlugins = require('next-compose-plugins');
 
 const nextJsConfig = {
-    trailingSlash: true,
+    trailingSlash: false,
     exportPathMap: function() {
         return {
             '/': { page: '/' },
             '/login': { page: '/login' },
             '/register': { page: '/register' },
-            '/reset-password': { page: '/reset' },
+            '/reset-password': { page: '/reset-password' },
+            '/reset-password/:uniqueKey': { page: '/reset-password' },
             '/about-us': { page: '/about-us' },
             '/contact-us': { page: '/contact-us' },
             '/champions': { page: '/champions' },

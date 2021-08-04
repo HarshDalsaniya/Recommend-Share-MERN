@@ -728,7 +728,7 @@ p.code-block-title {
 	background: 0;
 	color: #4a6da4;
 	padding-left: 0;
-	padding-right: 0;
+	padding-right: 10px;
 }
 
 .button.clear:hover, form button.clear:hover {
@@ -1857,6 +1857,8 @@ a.box:hover {
 
 .box.white {
 	background-color: #fff;
+
+	width: auto;
 }
 
 .box.logobox {
@@ -2711,6 +2713,29 @@ ul.notifications li.all a {
 .editprofiletitle h1, 
 .editprofiletitle p.h1{
     margin: 0 0 30px 0;
+    font-size: 24px;
+    line-height: 1.2em;
+    text-decoration: none;
+    text-transform: none;
+    font-style: normal;
+    font-weight: 500;
+    color: inherit;
+}
+
+.password-heading h1,
+.password-heading p.h1{
+    margin: 8px 0 30px 0;
+    font-size: 24px;
+    line-height: 1.2em;
+    text-decoration: none;
+    text-transform: none;
+    font-style: normal;
+    font-weight: 500;
+    color: inherit;
+}
+.resetpassword-heading h1,
+.resetpassword-heading p.h1{
+	margin: 8px 0 30px 0;
     font-size: 24px;
     line-height: 1.2em;
     text-decoration: none;

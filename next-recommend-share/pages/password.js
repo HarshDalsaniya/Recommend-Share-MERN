@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import ResetPassword from '../components/Profile/ResetPassword'
+import EditPassword  from '../components/Profile/EditPassword'
 
 
 export const password = (props) => {
     return (
-      <ResetPassword/>
+      <EditPassword/>
     )
 }
 
