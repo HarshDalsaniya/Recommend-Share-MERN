@@ -47,7 +47,7 @@ router.post('/login', cors(), function (req, res) {
     console.log("testestest", post)
 
     var required_params = ['email', 'password'];
-    
+
     var elem = functions.validateReqParam(post, required_params);
     var valid = elem.missing.length == 0 && elem.blank.length == 0;
     if (valid) {
@@ -77,7 +77,7 @@ router.post('/login', cors(), function (req, res) {
                             response = general.response_format(false, messages.ERROR_PROCESSING, {});
                             res.send(response);
                         }
-                        
+
                         if (result_2.length == 0) {
 
                             let ID = machineIdSync()
@@ -142,7 +142,7 @@ router.post('/login', cors(), function (req, res) {
 router.post('/register', cors(), function (req, res, next) {
     var post = req.body;
     response = {};
-    console.log("testestest", post)
+    // console.log("testestest", post)
 
     var required_params = ['password', 'confirm_password', 'email', 'name', 'mobile', 'address_postcode', 'address_line_1', 'address_town', 'address_country', 'terms_agreed_date', 'gdpr_agreed_date'];
 
@@ -182,7 +182,7 @@ router.post('/register', cors(), function (req, res, next) {
                                 verified: 1,
                                 notification_received_sms: 1,
                                 notification_received_email: 1,
-                                notification_marketing_email : 1
+                                notification_marketing_email: 1
                             }
                             var insertSql = `insert into user set terms_agreed_date=NOW(), gdpr_agreed_date=NOW(), ?`;
                             connection.query(insertSql, data, function (err, insertResult) {
@@ -192,33 +192,68 @@ router.post('/register', cors(), function (req, res, next) {
                                     response = general.response_format(false, messages.ERROR_PROCESSING, {});
                                     res.send(response);
                                 } else {
-                                    if (typeof insertResult.insertId !='undefined') {
+                                    if (typeof insertResult.insertId != 'undefined') {
                                         let ID = machineIdSync()
                                         const Device_Ip_Address = address.ip()
                                         const token = general.generateAccessToken({ id: insertResult.insertId });
                                         var insertToken = `insert into user_token set userId=${insertResult.insertId} , token="${token}" , user_device_Id="${ID}" , user_device_Ip="${Device_Ip_Address}"`
                                         connection.query(insertToken, function (err, tokenResult) {
                                             if (err) {
-                                                var insertSql = `delete from user where id=${result.insertId}`;
-                                                connection.query(insertSql, data, function (err, insertResult) {
-                                                    if(err){
+                                                var deleteSql = `delete from user where id=${result.insertId}`;
+                                                connection.query(deleteSql, data, function (err, insertResult) {
+                                                    if (err) {
                                                         console.log(err);
                                                         response = general.response_format(false, messages.ERROR_PROCESSING, {});
                                                         res.send(response);
-                                                    }else
-                                                    {
+                                                    } else {
                                                         response = general.response_format(false, messages.ERROR_PROCESSING, {});
                                                         res.send(response);
                                                     }
                                                 })
                                             } else {
-                                                console.log("adfdasfasfd");
-                                                if (typeof tokenResult.insertId != 'undefined') {
-                                                    response = general.response_format(true, "Registration Successfully");
-                                                    res.send(response);
+                                                if (typeof tokenResult.insertId != 'undefined' && typeof insertResult.insertId != 'undefined' && req.query.type && req.query.type == "tradesperson") {
+                                                    data.user_id = insertResult.insertId;
+                                                    data.trade_id = post.tradespeopleTrade;
+                                                    data.slug = post.name.toLowerCase().replace(' ', '-');
+                                                    delete data["enabled"];
+                                                    delete data["system"];
+                                                    delete data["password"];
+                                                    delete data["password_changed"];
+                                                    delete data["registration_complete"];
+                                                    // console.log(data);
+                                                    var tradePersonInsert = `insert into tradesperson set ?`;
+                                                    connection.query(tradePersonInsert, data, function (err, tradePersonResult) {
+                                                        if (err) {
+                                                            console.log(err);
+                                                            var deleteUserSql = `delete from user where id=${insertResult.insertId};delete from user_token where token="${token}"`;
+                                                            connection.query(deleteUserSql, data, function (err, deleteUserResult) {
+                                                                if (err) {
+                                                                    console.log(err);
+                                                                    response = general.response_format(false, messages.ERROR_PROCESSING, {});
+                                                                    res.send(response);
+                                                                } else {
+                                                                    response = general.response_format(false, messages.ERROR_PROCESSING, {});
+                                                                    res.send(response);
+                                                                }
+                                                            })
+                                                        } else {
+                                                            if (typeof tokenResult.insertId != 'undefined' && typeof tradePersonResult != 'undefined') {
+                                                                response = general.response_format(true, "Registration Successfully");
+                                                                res.send(response);
+                                                            } else {
+                                                                response = general.response_format(false, tokenResult, {});
+                                                                res.send(response);
+                                                            }
+                                                        }
+                                                    });
                                                 } else {
-                                                    response = general.response_format(false, tokenResult, {});
-                                                    res.send(response);
+                                                    if (typeof tokenResult.insertId != 'undefined') {
+                                                        response = general.response_format(true, "Registration Successfully");
+                                                        res.send(response);
+                                                    } else {
+                                                        response = general.response_format(false, tokenResult, {});
+                                                        res.send(response);
+                                                    }
                                                 }
                                             }
                                         })
@@ -228,20 +263,19 @@ router.post('/register', cors(), function (req, res, next) {
                                     }
                                 }
                             })
-                        }else{
+                        } else {
                             response = general.response_format(false, 'password not match', {});
                             res.send(response);
                         }
-                    }else{
+                    } else {
                         response = general.response_format(false, 'User Allready Exist', {});
                         res.send(response);
                     }
                 }
             });
-            
-        });
 
-}
+        });
+    }
     else {
         console.log("in blank data")
         var str = functions.loadErrorTemplate(elem);
@@ -251,16 +285,16 @@ router.post('/register', cors(), function (req, res, next) {
 });
 
 
-router.post('/logout/:token' , cors() , function (req,res,next){
-    response ={};
+router.post('/logout/:token', cors(), function (req, res, next) {
+    response = {};
     req.getConnection(function (err, connection) {
-        var sql=`delete from user_token where token="${req.params.token}"`
+        var sql = `delete from user_token where token="${req.params.token}"`
         connection.query(sql, function (err, result) {
             if (err) {
                 console.log(err);
                 response = general.response_format(false, messages.ERROR_PROCESSING, {});
                 res.send(response);
-            }else{
+            } else {
                 response = general.response_format(true, "Logout Successfully");
                 res.send(response);
             }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from "next/link"
 import { connect, useSelector } from 'react-redux'
 import {
@@ -34,7 +34,28 @@ export const register = (props) => {
     const [tradespeopleTrade, settradespeopleTrade] = useState('');
     const [submitted, setSubmitted] = useState(false);
     const [params, setParams] = useUrlSearchParams()
+    const [selectTreadOption,setSelectTreadOption] = useState([])
 
+    useEffect(() => {
+            axios.get(`http://localhost:4000/api/business/trade_options`)
+                .then((res)=>{
+                    const result = [];
+                    res.data.data.map((value)=>{
+                        result.push({value:value.id,title:value.name})
+                    })
+                    setSelectTreadOption(
+                        result.sort(function(a,b){
+                            if (a.title.toUpperCase() < b.title.toUpperCase()) {
+                                return -1;
+                            } 
+                            if (a.title.toUpperCase() > b.title.toUpperCase()) {
+                                return 1;
+                            }
+                            return 0;
+                        })
+                    )
+                })
+    }, [setSelectTreadOption])
     const getAddress = () =>{
         if(address_postcode!=''){
             axios.get(`https://api.getaddress.io/find/${address_postcode}?api-key=xR5ryKXzb0SevSwn3OX7VQ31904`)
@@ -67,12 +88,13 @@ export const register = (props) => {
                 address_town : address_town,
                 address_country : address_country,
                 terms_agreed_date : terms_agreed_date,
-                gdpr_agreed_date : gdpr_agreed_date,
-                tradespeopleName : tradespeopleName,
-                tradespeopleTrade : tradespeopleTrade
+                gdpr_agreed_date : gdpr_agreed_date
             }
-            props.registerUser(userData)
-            
+            typeof params.type != "undefined" && params.type == "tradesperson"?(
+                userData.tradespeopleName = tradespeopleName,
+                userData.tradespeopleTrade = tradespeopleTrade,
+                props.registerUser(userData,"/register?type=tradesperson")
+            ):props.registerUser(userData,"/register")
         // }
     }
     // console.log(reState.authUser.error)
@@ -205,66 +227,16 @@ export const register = (props) => {
                                                         fieldLabel="Business Name"
                                                         fieldName="tradespeopleName"
                                                         fieldValue={ tradespeopleName }
-                                                        fieldAction={ setName }
+                                                        fieldAction={ setTradespeopleName }
+                                                        fieldValidation={[submitted, tradespeopleName, {message:"Please Enter Business Name"}, reState.authUser.error]}
                                                     />
                                                     <Fields
                                                         field="select"
                                                         fieldLabel="Select a Trade"
                                                         fieldName="tradespeopleTrade"
-                                                        fieldOption={ [
-                                                            "Select a Trade",
-                                                            "Architecture",
-                                                            "Bathroom Fitter",
-                                                            "Blacksmith / Metal Worker",
-                                                            "Bricklayer",
-                                                            "Builder",
-                                                            "Carpenter / Joiner",
-                                                            "Carpet and Flooring",
-                                                            "CCTV / Satellites / Alarms",
-                                                            "Chimney",
-                                                            "Cleaner",
-                                                            "Conversions",
-                                                            "Damp Proofing",
-                                                            "Decking",
-                                                            "Drainage Specialist",
-                                                            "Driveway Pavers",
-                                                            "Electrician",
-                                                            "Extensions",
-                                                            "Facias/Soffits/Gutters",
-                                                            "Fencing",
-                                                            "Fireplace",
-                                                            "Floor Fitters",
-                                                            "Garage Remodelling",
-                                                            "Gardening and Landscaping",
-                                                            "Gas Work",
-                                                            "Handyman",
-                                                            "Insulation",
-                                                            "Kitchen Specialist",
-                                                            "Locksmith",
-                                                            "Loft Conversion Specialist",
-                                                            "Machinery Repairs",
-                                                            "Mechanic",
-                                                            "Metal Machinist",
-                                                            "Multi Trade",
-                                                            "Other Trades",
-                                                            "Painter and Decorator",
-                                                            "Pest Control",
-                                                            "Plasterer / Renderer",
-                                                            "Plumbing and Heating",
-                                                            "Removal",
-                                                            "Roofing",
-                                                            "Scaffolding",
-                                                            "Security Systems / Alarms",
-                                                            "Stoneworker / Stonemason",
-                                                            "Swimming Pool Specialist",
-                                                            "Tiler",
-                                                            "Traditional Craftsman",
-                                                            "Tree Surgeon",
-                                                            "Welder/Fabricator",
-                                                            " Windows and Doors / Conservatory Installer"
-                                                        ] }
-                                                        fieldValue={ ["", "40", "21", "22", "23", "24", "8", "9", "20", "41", "25", "43", "44", "45", "26", "10", "3", "46", "52", "11", "47", "27", "48", "12", "49", "28", "50", "13", "29", "30", "55", "51", "54", "56", "6", "5", "31", "1", "15", "32", "16", "17", "33", "35", "36", "37", "38", "39", "53", "18"] }
-                                                        fieldAction=""
+                                                        fieldOption={ selectTreadOption }
+                                                        fieldAction={settradespeopleTrade}
+                                                        fieldValidation={[submitted, tradespeopleTrade, {message:"Please Select Trade Option"}, reState.authUser.error]}
                                                     />
                                                 </>
                                                 : null }
@@ -277,6 +249,7 @@ export const register = (props) => {
                                                         <>
                                                         {typeof field.fieldOption!="undefined"?
                                                             <Fields
+                                                                key={"field_"+field.FieldName}
                                                                 field={field.field}
                                                                 fieldLabel={field.fieldLabel}
                                                                 fieldName={field.fieldName}

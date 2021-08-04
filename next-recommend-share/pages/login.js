@@ -18,13 +18,13 @@ export const login = (props) => {
     
     const onSubmit = (e) => {
         e.preventDefault();
+        setSubmitted(true)
         const user={
             email:_username,
             password:_password
         }
         if(user.email!=""&&user.password!=""){
                 props.login(user,"/")
-                
         }
     }
     return (
@@ -39,6 +39,9 @@ export const login = (props) => {
                             <div className="form-box">
                                 <p className="form-text">Please use your account details to log in. If you do not have an account, why not <Link href="/register"><a >create one</a></Link>?</p>
                                 <div className="form-content">
+                                {typeof reState.authUser.error!='undefined' && reState.authUser.error!=''?
+                                    <div className="help-block mb-2" style={{color:'red'}}>{reState.authUser.error[0]}</div>
+                                :null}
                                     <form onSubmit={onSubmit}>
                                         <Fields 
                                             field = "email"

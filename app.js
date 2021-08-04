@@ -31,6 +31,11 @@ app.use('/api/user', require('./routes/api/user/login'),function (err, req, res,
   console.log(err);
   res.json({status: 0,message: "Oops! Something went wrong"});
 });
+// business 
+app.use('/api/business', require('./routes/api/business/business'),function (err, req, res, next) {
+  console.log(err);
+  res.json({status: 0,message: "Oops! Something went wrong"});
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

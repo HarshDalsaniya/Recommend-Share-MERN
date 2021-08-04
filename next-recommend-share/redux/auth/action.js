@@ -33,7 +33,6 @@ export const loginUser = (user) => {
                     const item = {
                         ...currentUser,
                         id: result.data.data[0].id,
-                        name:result.data.data[0].name,
                         email: result.data.data[0].email,
                         token: result.data.data[1].token
 
@@ -45,9 +44,14 @@ export const loginUser = (user) => {
                         payload: result.data
                     })
                 } else {
+                    const error = new Array();
+                    result.data.message.includes("Invalid request: ")?
+                        error.push(result.data.message.includes("email")==true?"_username":"",result.data.message.includes("password")==true?"_password":"")
+                    :
+                        error.push(result.data.message)
                     dispatch({
                         type: LOGIN_USER_ERROR,
-                        payload: [result.data.message.split("\n ")[1].replace(" should not be blank",'').split(",").includes("email")==true?"_username":"",result.data.message.split("\n ")[1].replace(" should not be blank",'').split(",").includes("password")==true?"_password":""]
+                        payload: error
                     })
                 }
             })
@@ -57,13 +61,13 @@ export const loginUser = (user) => {
     }
 }
 
-export const registerUser = (user) => {
+export const registerUser = (user, path) => {
     return dispatch => {
         dispatch({
             type: REGISTER_USER,
             payload: user
         })
-        register(user)
+        register(user,path)
             .then((result) => {
                 if (result.data.status == true) {
                     Router.push("/")
