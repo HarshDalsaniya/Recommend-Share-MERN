@@ -14,6 +14,9 @@ import {
     RESET_PASSWORD,
     RESET_PASSWORD_SUCCESS,
     RESET_PASSWORD_ERROR,
+    CHANGE_PASSWORD,
+    CHANGE_PASSWORD_SUCCESS,
+    CHANGE_PASSWORD_ERROR,
     UNIQKEY_VERIFY
 } from "../action-type"
 
@@ -72,11 +75,11 @@ export default (state = INIT_STATE, action) => {
                 error: ''
             }
         case FORGOT_PASSWORD_SUCCESS:
-           
+
             return {
                 ...state,
-                loading: false,              
-                message:action.payload
+                loading: false,
+                message: action.payload
             }
 
         case FORGOT_PASSWORD_ERROR:
@@ -110,13 +113,33 @@ export default (state = INIT_STATE, action) => {
                 resetPasswordCode: '',
                 error: action.payload
             }
+// change password 
+        case CHANGE_PASSWORD:
+            return {
+                ...state,
+                loading: true,
+                error: ''
+            }
+        case CHANGE_PASSWORD_SUCCESS:
+            return {
+                ...state,
+                currentUser: null,
+                loading: false,
+                error: ''
+            }
+        case CHANGE_PASSWORD_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
 
         case UNIQKEY_VERIFY:
             // console.log(action.payload);
-            return{
+            return {
                 ...state,
-                loading:true,
-                key:action.payload
+                loading: true,
+                key: action.payload
             }
         case LOGOUT_USER:
             return {

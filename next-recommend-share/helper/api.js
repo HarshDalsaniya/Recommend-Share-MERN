@@ -2,8 +2,8 @@ import axios from "axios"
 
 
 const login = (user) => {
-    return axios.post(`http://localhost:4000/api/user/login`, {email:user.email,password:user.password})
-        .then((result) =>result)
+    return axios.post(`http://localhost:4000/api/user/login`, { email: user.email, password: user.password })
+        .then((result) => result)
         .catch((error) => console.log(error))
 }
 const register = (user, path) => {
@@ -11,33 +11,36 @@ const register = (user, path) => {
         .then((result) => result)
         .catch((error) => console.log(error))
 }
-const forgotPassword = (email)=>{
-    return axios.post(`http://localhost:4000/api/user/forgotpassword`,{email:email})
+const forgotPassword = (email) => {
+    return axios.post(`http://localhost:4000/api/user/forgotpassword`, { email: email })
         .then((result) => result)
-        .catch((error) =>console.log(error))
+        .catch((error) => console.log(error))
 }
-
 const resetPassword = (user) => {
     const queryParams = new URLSearchParams(window.location.search);
     const Key = queryParams.get('uniqueKey');
     console.log(Key);
-    return axios.post(`http://localhost:4000/api/user/reset-password?uniqueKey=${Key}`,user)
+    return axios.post(`http://localhost:4000/api/user/reset-password?uniqueKey=${Key}`, user)
         .then((result) => result)
         .catch((error) => console.log(error))
 }
-const VerifyKey = ()=> {
+const changePassword = (user) => {
+    return axios.post(`http://localhost:4000/api/user/changepassword`, user)
+        .then((result) => result)
+        .catch((error) => console.log(error))
+}
+const VerifyKey = () => {
     const queryParams = new URLSearchParams(window.location.search);
     const Key = queryParams.get('uniqueKey');
     return axios.get(`http://localhost:4000/api/user/uniqueKeyVerify/${Key}`)
         .then((result) => result)
         .catch((error) => console.log(error))
 }
-
 const logout = () => {
     const Token = JSON.parse(localStorage.getItem('Recommend_Share_current_user'))
     return axios.post(`http://localhost:4000/api/user/logout/${Token.token}`)
-    .then((result) => result)
-    .catch((error) => console.log(error))
+        .then((result) => result)
+        .catch((error) => console.log(error))
 }
 
 export {
@@ -46,5 +49,6 @@ export {
     logout,
     forgotPassword,
     resetPassword,
+    changePassword,
     VerifyKey
 }
