@@ -156,7 +156,10 @@ router.post('/register', cors(), function (req, res, next) {
     // console.log("testestest", post)
     var errors = new Array();
     errors = {blankValue:{},invalidValue:{},verifyError:{}};
-    var required_params = ['password', 'confirm_password', 'email', 'name', 'mobile', 'address_postcode', 'address_line_1', 'address_town', 'address_country', 'terms_agreed_date', 'gdpr_agreed_date',req.query.type && req.query.type == "tradesperson" && "tradespeopleTrade"];
+    var required_params = ['password', 'confirm_password', 'email', 'name', 'mobile', 'address_postcode', 'address_line_1', 'address_town', 'address_country', 'terms_agreed_date', 'gdpr_agreed_date'];
+    if(req.query.type && req.query.type == "tradesperson"){
+        required_params.push("tradespeopleTrade")
+    }
 
     var elem = functions.validateReqParam(post, required_params);
     var valid = elem.missing.length == 0 && elem.blank.length == 0;

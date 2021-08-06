@@ -7,26 +7,50 @@ import "../assets/css/editor-css.css"
 import "../assets/css/grid.css"
 
 import App from 'next/app';
-import React, {useState, useEffect} from 'react'
+import { DefaultSeo } from 'next-seo';
+import React, {Component} from 'react'
 import { wrapper } from "../redux/store"
 import { Footer } from '../components/layout/Footer'
 import { NavBar } from '../components/NavBar/NavBar'
+import isAuthenticate from "../helper/userAuthRedirect";
 
-function MyApp({ Component, pageProps }) {
-  const [current, setCurrent] = useState(null)
-  useEffect(() => {
-    setCurrent(localStorage.getItem('Recommend_Share_current_user'))
-  },[setCurrent])
-  return (
-    <React.Fragment>
-      <div className="site">
-      {/* {console.log(this.state.current)} */}
-        <NavBar localstorageItem={current}/>
-        <Component { ...pageProps } />
-        <Footer />
-      </div>
-    </React.Fragment>
-  )
+class MyApp extends App {
+  static async getInitialProps ({ Component, ctx }) {
+      isAuthenticate(ctx.pathname)
+      return {
+          pageProps: Component.getInitialProps
+          ? await Component.getInitialProps(ctx)
+          : {}
+      }
+  }
+  state = {
+    loading: true,
+    current:null
+  };
+  componentDidMount() {
+      isAuthenticate(window.location.pathname)
+      this.setState({current:localStorage.getItem('Recommend_Share_current_user')})
+      this.timerHandle = setTimeout(() => this.setState({ loading: false }), 2000); 
+  }
+  componentWillUnmount() {
+      if (this.timerHandle) {
+          clearTimeout(this.timerHandle);
+          this.timerHandle = 0;
+      }
+  }
+  render () {
+      const { Component, pageProps } = this.props
+    return (
+      <React.Fragment>
+        <div className="site">
+        {/* {console.log(this.state.current)} */}
+          <NavBar localstorageItem={this.state.current}/>
+          <Component { ...pageProps } />
+          <Footer />
+        </div>
+      </React.Fragment>
+    )
+  }
 }
 
 export default wrapper.withRedux(MyApp);
