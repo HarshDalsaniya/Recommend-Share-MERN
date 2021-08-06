@@ -2744,3 +2744,8 @@ ul.notifications li.all a {
     font-weight: 500;
     color: inherit;
 }
+
+.error_page{
+	text-align: center;
+	margin: 14rem 0 13rem 0;
+}

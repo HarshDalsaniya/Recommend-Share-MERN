@@ -40,12 +40,6 @@ router.use(cors())
 // router.use(multer())
 var general = gnl.func();
 
-router.post('/harsh', (req, res) => {
-    res.send("hello world");
-});
-
-
-
 // Forgotpasword Api
 router.post('/forgotpassword', cors(), function (req, res) {
     var post = req.body;
@@ -53,65 +47,160 @@ router.post('/forgotpassword', cors(), function (req, res) {
     console.log("testestest", post)
 
     var required_params = ['email'];
-    // post.email?required_params.push('email'):null;
-    // post.phone?required_params.push('phone'):null;
-    console.log(required_params);
 
     var elem = functions.validateReqParam(post, required_params);
     var valid = elem.missing.length == 0 && elem.blank.length == 0;
-    if (valid && post.email ) {    
+    if (valid && post.email) {
 
         req.getConnection(function (err, connection) {
             var data = {
-                email: post.email,         
-             
+                email: post.email,
             };
-            // c62ac98937679cd7fa090c411b5bba9c 
-            console.log("heloo");
 
-            var sql = `select _id, firstName, lastName, email, phone  from register where email='${data.email}'`;
-
+            var sql = `select * from user where email='${data.email}'`;
             if (err) throw err;
             let d = new Date();
             let timestamp = d.getTime();
-            console.log(timestamp);
-            // var sql = `select * from register where phone="${data.phone}" and password="${md5(post.password)}"`;
 
             connection.query(sql, function (err, result) {
-                // console.log(result[0].phone);
-                // console.log(md5("ravi@123"));
                 console.log("this.sql======================>", this.sql);
                 if (err) {
-                    console.log("con 3");
-                    console.log(err);
+                    // console.log(err);
                     response = general.response_format(false, messages.ERROR_PROCESSING, {});
                     res.send(response);
                 }
                 if (result.length > 0) {
-                    console.log("con 1");
-                    var uniqueKey = md5(timestamp);
-                    var sql = `update register set uniqueKey="${uniqueKey}" where email = "${(result[0].email)}" OR phone = "${(result[0].phone)}"`;
-                    connection.query(sql, function (err, data) {
-                        console.log(uniqueKey);
-                        response = general.response_format(true, "User Data", result);
-                        //  console.log(funcEmail());
-                        emailBody = `<h3>Dear User, ${result[0].firstName} ${result[0].lastName}</h3>, <br> your request for forget your password , <br>
-                                forget Url: <a href="http://localhost:3000/user/reset-password?uniqueKey=${uniqueKey}">http://localhost:3000/user/reset-password?uniqueKey${uniqueKey}</a>`;
-                        funcEmail(result[0].email, "forget password", emailBody);
-                        res.send(response);
+
+                    var sql = `select * from user_forgotpassword where email="${result[0].email}"`
+                    connection.query(sql, function (err, find) {
+
+                        if (err) throw err;
+                        if (find.length == 0) {
+                            var uniqueKey = md5(timestamp);
+                            var sql = `insert into user_forgotpassword set userId="${(result[0].id)}" , email="${(result[0].email)}", uniqueKey="${uniqueKey}"`;
+                            connection.query(sql, function (err, data) {
+                                response = general.response_format(true, "User Data", result);
+                                //  console.log(funcEmail());
+                                emailBody = [{name:result[0].name},{url:"http://localhost:3000/reset-password?uniqueKey="+uniqueKey}];
+                                funcEmail(result[0].email, "forget password", emailBody);
+                                res.send(response);
+                            });
+                        } else {
+                            var uniqueKey = md5(timestamp);
+                            var sql = `update user_forgotpassword set uniqueKey="${uniqueKey}" where email="${result[0].email}"`
+                            connection.query(sql, function (err, update) {
+                                if (err) throw err;
+                                response = general.response_format(true, "User Data", result);
+                                
+                              
+                                emailBody =[{name:result[0].name},{url:"http://localhost:3000/reset-password?uniqueKey="+uniqueKey}]
+                                funcEmail(result[0].email, "forget password", emailBody);
+                                // console.log(funcEmail());
+                                res.send(response);
+                            });
+                        }
                     });
-                } else {
-                    console.log("con 2");
-                    response = general.response_format(false, "Invalid email or phone", result);
+                }
+                else {
+
+                    response = general.response_format(false, "Invalid email", result);
                     res.send(response);
                 }
             });
         });
     } else {
-        res.send('Please enter email OR phone!');
-        res.end();
+        response = general.response_format(false, "Please enter email !");
+        res.send(response);
+
     }
 });
+
+
+// Reset-password API
+
+router.post('/reset-password', cors(), function (req, res) {
+    var post = req.body;
+    // var id = req.query.id;
+    // var uniqueKey = req.query.uniqueKey;
+    response = {};
+    console.log(req.query.uniqueKey)
+    var required_params = ['New_password', 'confirm_New_password'];
+
+    var elem = functions.validateReqParam(post, required_params);
+    var valid = elem.missing.length == 0 && elem.blank.length == 0;
+    if (valid && post.New_password && post.confirm_New_password) {
+        req.getConnection(function (err, connection) {
+            if (err) throw err;
+            // console.log(req.params.uniqueKey);
+
+            var sql = `select uniqueKey from user_forgotpassword where uniqueKey="${req.query.uniqueKey}"`;
+            connection.query(sql, function (err, uniqueKeyschema) {
+                if (err) throw err;
+                // console.log(uniqueKeyschema.length);
+                if (uniqueKeyschema.length == 0) {
+                    response = general.response_format(true, "invalid User", uniqueKeyschema);
+                    res.send(response);
+                } else {
+                    var data = {
+                        New_password: post.New_password,
+                        confirm_New_password: post.confirm_New_password,
+                    };
+
+                    if (data.New_password == data.confirm_New_password) {
+                        var sql = `update user,user_forgotpassword set password="${md5(data.New_password)}" where user.email=user_forgotpassword.email and user_forgotpassword.uniqueKey="${uniqueKeyschema[0].uniqueKey}"`;
+                        connection.query(sql, function (err, result) {
+                            if (err) throw err;
+                            var sql = ` delete from user_forgotpassword where uniqueKey="${uniqueKeyschema[0].uniqueKey}"`;
+                            connection.query(sql, function (err, finalResult) {
+                                if (err) throw err;
+                                response = general.response_format(true, "resset-Password successFully", result);
+                                res.send(response);
+                            });
+                        });
+                    } else {
+                        response = general.response_format(false, "password did not match");
+                        res.send(response);
+                    }
+                }
+            });
+
+        });
+    } else {
+        response = general.response_format(false, "Please enter Password and Confirm Password");
+        res.send(response);
+
+    }
+});
+
+// check uniqueKey API 
+router.get("/uniqueKeyVerify/:uniqueKey" , cors(), function(req,res){
+    response ={};
+    req.getConnection(function (err, connection) {
+        if (err) {
+            console.log(err);
+            response = general.response_format(false, messages.DATABASE_CONNECTION_ERROR, {});
+            res.send(response);
+        } else {
+            var sql = `select * from user_forgotpassword where uniqueKey="${req.params.uniqueKey}"`;
+            connection.query(sql, function (err, data) {
+                console.log("this.sql======================>", this.sql);
+                if (err) {
+                    console.log(err);
+                    response = general.response_format(false, messages.ERROR_PROCESSING, {});
+                    res.send(response);
+                }
+                else if (!data.length > 0) {
+                    response = general.response_format(false, "Invalid Link", data);
+                    res.send(response);
+                }
+                else {
+                    response = general.response_format(true, "User Data", data);
+                    res.send(response);
+                }
+            });
+        }
+    })
+})
 
 
 module.exports = router;

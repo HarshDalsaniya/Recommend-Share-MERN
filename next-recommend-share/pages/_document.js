@@ -11,6 +11,7 @@ class MyDocument extends Document {
         return (
             <Html lang="zxx">
                 <Head>
+                    
                 <link href="https://fonts.googleapis.com/css?family=Open+Sans|Work+Sans" rel="stylesheet" />
                 </Head>
                 <body className="marketing">

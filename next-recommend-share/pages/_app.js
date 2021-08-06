@@ -11,6 +11,8 @@ import React, {useState, useEffect} from 'react'
 import { wrapper } from "../redux/store"
 import { Footer } from '../components/layout/Footer'
 import { NavBar } from '../components/NavBar/NavBar'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function MyApp({ Component, pageProps }) {
   const [current, setCurrent] = useState(null)
@@ -21,7 +23,9 @@ function MyApp({ Component, pageProps }) {
     <React.Fragment>
       <div className="site">
       {/* {console.log(this.state.current)} */}
+    
         <NavBar localstorageItem={current}/>
+        
         <Component { ...pageProps } />
         <Footer />
       </div>
