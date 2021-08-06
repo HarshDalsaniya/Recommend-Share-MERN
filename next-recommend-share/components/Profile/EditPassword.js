@@ -37,7 +37,7 @@ export const EditPassword = (props) => {
     }
 
     return (
-        <selection className="content">
+        <selection className="content login-body">
             <Container>
                 <div className="contained">
                     <div className=" six columns alpha offset-by-three password-heading ">
