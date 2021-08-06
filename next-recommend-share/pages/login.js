@@ -9,13 +9,14 @@ import { Container,
 import { loginUser } from '../redux/auth/action';
 import Fields from '../components/Form-Fields/Fields';
 import Link from "next/link"
+import { formFieldValidation } from "../services/formValidation"
 
 export const login = (props) => {
     const reState = useSelector(state => state);
+    const { error } = reState.authUser;
     const [_username, setUsername] = useState("");
     const [_password, setPassword] = useState("");
     const [submitted, setSubmitted] = useState(false)
-    
     const onSubmit = (e) => {
         e.preventDefault();
         setSubmitted(true)
@@ -23,9 +24,9 @@ export const login = (props) => {
             email:_username,
             password:_password
         }
-        if(user.email!=""&&user.password!=""){
+        // if(user.email!=""&&user.password!=""){
                 props.login(user,"/")
-        }
+        // }
     }
     return (
         <div className="login-body pt-3">
@@ -39,8 +40,8 @@ export const login = (props) => {
                             <div className="form-box">
                                 <p className="form-text">Please use your account details to log in. If you do not have an account, why not <Link href="/register"><a >create one</a></Link>?</p>
                                 <div className="form-content">
-                                {typeof reState.authUser.error!='undefined' && reState.authUser.error!=''?
-                                    <div className="help-block mb-2" style={{color:'red'}}>{reState.authUser.error[0]}</div>
+                                {typeof error.verifyError!='undefined' && error.verifyError!=''?
+                                    <div className="help-block mb-2" style={{color:'red'}}>{error.verifyError.userNotFound}</div>
                                 :null}
                                     <form onSubmit={onSubmit}>
                                         <Fields 
@@ -49,7 +50,7 @@ export const login = (props) => {
                                             fieldName = "_username"
                                             fieldValue = {_username}
                                             fieldAction = {setUsername}
-                                            fieldValidation = {[submitted, _username, {message:"Please Enter your UserName"}, reState.authUser.error]}
+                                            fieldValidation = {[submitted, _username, formFieldValidation(error,"email",_username)]}
                                         />
                                         <Fields 
                                             field = "password"
@@ -57,7 +58,7 @@ export const login = (props) => {
                                             fieldName = "_password"
                                             fieldValue = {_password}
                                             fieldAction = {setPassword}
-                                            fieldValidation = {[submitted, _password, {message:"Please Enter your Password"}, reState.authUser.error]}
+                                            fieldValidation = {[submitted, _password, formFieldValidation(error,"password",_password)]}
                                         />
                                         <p className="tcenter small">Forgotten your password? <a className="form-link" href="/reset-password/">Request a new one</a>.</p>
                                         <div className="buttons tcenter">

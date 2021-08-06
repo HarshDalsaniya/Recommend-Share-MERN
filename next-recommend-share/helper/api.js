@@ -7,7 +7,7 @@ const login = (user) => {
         .catch((error) => console.log(error))
 }
 const register = (user, path) => {
-    return axios.post(`http://localhost:4000/api/user/${path}`, user)
+    return axios.post(`http://localhost:4000/api/user${path}`, user)
         .then((result) => result)
         .catch((error) => console.log(error))
 }

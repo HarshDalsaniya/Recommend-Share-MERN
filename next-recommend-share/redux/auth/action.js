@@ -17,11 +17,9 @@ import {
     logout
 } from "../../helper/api"
 import { setCurrentUser } from "../../helper/Utils";
-import { result } from "lodash";
 
 
 export const loginUser = (user) => {
-    console.log("login")
     return dispatch => {
         dispatch({
             type: LOGIN_USER,
@@ -44,14 +42,16 @@ export const loginUser = (user) => {
                         payload: result.data
                     })
                 } else {
-                    const error = new Array();
-                    result.data.message.includes("Invalid request: ")?
-                        error.push(result.data.message.includes("email")==true?"_username":"",result.data.message.includes("password")==true?"_password":"")
-                    :
-                        error.push(result.data.message)
+                    // console.log(result)
+                    // const error = new Array();
+                    // result.data.message[0].includes("Invalid request: ")?
+                    //     error.blank=result.data.message[0].split("\n ")[1].replace(" should not be blank",'').split(",")
+                    // :null
+                    // error.notValid=result.data.message[1]
+                    // console.log(error)
                     dispatch({
                         type: LOGIN_USER_ERROR,
-                        payload: error
+                        payload: result.data.message
                     })
                 }
             })
@@ -76,10 +76,15 @@ export const registerUser = (user, path) => {
                         payload: result.data
                     })
                 } else {
-                    // console.log(result.data.message.split("\n ")[1].replace(" should not be blank",'').split(","))
+                    // const error = new Array();
+                    // result.data.message[0].includes("Invalid request: ")?
+                    //     error.blank=result.data.message[0].split("\n ")[1].replace(" should not be blank",'').split(",")
+                    // :null
+                    // error.notValid=result.data.message[1]
+                    console.log(result.data.message)
                     dispatch({
                         type: REGISTER_USER_ERROR,
-                        payload: result.data.message.split("\n ")[1].replace(" should not be blank",'').split(",")
+                        payload: result.data.message
                     })
                 }
             })

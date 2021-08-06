@@ -12,22 +12,24 @@ import { registerUser } from '../redux/auth/action';
 import Fields from '../components/Form-Fields/Fields';
 import { useUrlSearchParams } from 'use-url-search-params';
 import axios from 'axios'
+import { formFieldValidation } from "../services/formValidation"
+
 export const register = (props) => {
-    const { loding, error } = props;
     const reState = useSelector(state => state);
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [telephone, setTelephone] = useState('');
-    const [mobile, setMobile] = useState('');
-    const [age_group, setAge_group] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirm_password, setConfirm_password] = useState('');
-    const [address_postcode, setAddress_postcode] = useState('');
+    const { error } = reState.authUser;
+    const [name, setName] = useState('maulik');
+    const [email, setEmail] = useState('maulik@gmail.com');
+    const [telephone, setTelephone] = useState('24523455345');
+    const [mobile, setMobile] = useState('9714220411');
+    const [age_group, setAge_group] = useState('16-24');
+    const [password, setPassword] = useState('maulik@123');
+    const [confirm_password, setConfirm_password] = useState('maulik@123');
+    const [address_postcode, setAddress_postcode] = useState('M32BY');
     const [select_postcode, setSelectPostcode] =useState('');
-    const [address_line_1, setAddress_line_1] = useState('');
-    const [address_line_2, setAddress_line_2] = useState('');
-    const [address_town, setAddress_town] = useState('');
-    const [address_country, setAddress_country] = useState('');
+    const [address_line_1, setAddress_line_1] = useState('Ladbrokes Ltd');
+    const [address_line_2, setAddress_line_2] = useState(' 123 Deansgate');
+    const [address_town, setAddress_town] = useState('Manchester');
+    const [address_country, setAddress_country] = useState('london');
     const [terms_agreed_date, setTerms_agreed_date] = useState(false);
     const [gdpr_agreed_date, setGdpr_agreed_date] = useState(false);
     const [tradespeopleName, setTradespeopleName] = useState('');
@@ -35,7 +37,6 @@ export const register = (props) => {
     const [submitted, setSubmitted] = useState(false);
     const [params, setParams] = useUrlSearchParams()
     const [selectTreadOption,setSelectTreadOption] = useState([])
-
     useEffect(() => {
             axios.get(`http://localhost:4000/api/business/trade_options`)
                 .then((res)=>{
@@ -97,7 +98,6 @@ export const register = (props) => {
             ):props.registerUser(userData,"/register")
         // }
     }
-    // console.log(reState.authUser.error)
     const col1=[
         {
             field:"text",
@@ -105,7 +105,7 @@ export const register = (props) => {
             fieldName:"name",
             fieldValue:name,
             fieldAction:setName,
-            fieldValidation: [submitted, name, {message:"Please Enter your Full name"}, reState.authUser.error]
+            fieldValidation: [submitted, name, formFieldValidation(error,"name",name)]
         },
         {
             field:"email",
@@ -113,7 +113,7 @@ export const register = (props) => {
             fieldName:"email",
             fieldValue:email,
             fieldAction:setEmail,
-            fieldValidation: [ submitted, email, {message:"Please Enter your Email"}, reState.authUser.error]
+            fieldValidation: [ submitted, email, formFieldValidation(error,"email",email)]
         },
         {
             field:"numeric",
@@ -129,13 +129,13 @@ export const register = (props) => {
             fieldName:"mobile",
             fieldValue:mobile,
             fieldAction:setMobile,
-            fieldValidation: [ submitted, mobile, {message:"please Enter your Mobile No"}, reState.authUser.error]
+            fieldValidation: [ submitted, mobile, formFieldValidation(error,"mobile",mobile)]
         },
         {
             field:"select",
             fieldLabel:"Age Group",
             fieldName:"age_group",
-            fieldOption:["16-24", "25-34", "35-44", "44-55", "56-64", "65+"] ,
+            fieldOption:[{title:"16-24", value:"16-24"},{title: "25-34", value: "25-34"}, {title:"35-44", value:"35-44"}, {title:"44-55", value:"44-55"},{title: "56-64", value: "56-64"}, {title:"65+", value:"65+"}] ,
             fieldValue:age_group,
             fieldAction:setAge_group,
             fieldValidation: [submitted]
@@ -146,7 +146,7 @@ export const register = (props) => {
             fieldName:"password",
             fieldValue:password,
             fieldAction:setPassword,
-            fieldValidation:[ submitted, password, {message:"Please Enter your Password"}, reState.authUser.error]
+            fieldValidation:[ submitted, password, formFieldValidation(error,"password",password)]
         },
         {
             field:"password",
@@ -154,7 +154,7 @@ export const register = (props) => {
             fieldName:"confirm_password",
             fieldValue:confirm_password,
             fieldAction:setConfirm_password,
-            fieldValidation: [ submitted, confirm_password, {message:"Please Enter your Confirm Password"}, reState.authUser.error]
+            fieldValidation: [ submitted, confirm_password, formFieldValidation(error,"confirm_password",confirm_password)]
         }
     ];
     const col2=[
@@ -164,7 +164,7 @@ export const register = (props) => {
             fieldName:"address_line_1",
             fieldValue:address_line_1,
             fieldAction:setAddress_line_1,
-            fieldValidation: [submitted, address_line_1, {message:"Please Enter yout address"}, reState.authUser.error ]
+            fieldValidation: [submitted, address_line_1, formFieldValidation(error,"address_line_1",address_line_1)]
         },
         {
             field:"text",
@@ -180,7 +180,7 @@ export const register = (props) => {
             fieldName:"address_town",
             fieldValue:address_town,
             fieldAction:setAddress_town,
-            fieldValidation:[submitted, address_town, {message:"Please Enter yout Town"}, reState.authUser.error ]
+            fieldValidation:[submitted, address_town, formFieldValidation(error,"address_town",address_town)]
         },
         {
             field:"text",
@@ -188,7 +188,7 @@ export const register = (props) => {
             fieldName:"address_country",
             fieldValue:address_country,
             fieldAction:setAddress_country,
-            fieldValidation: [submitted, address_country, {message:"Please Enter yout Country"}, reState.authUser.error ]
+            fieldValidation: [submitted, address_country, formFieldValidation(error,"address_country",address_country)]
         }
     ]
     return (
@@ -218,17 +218,21 @@ export const register = (props) => {
                                         </p>
                                     }
                                     <form onSubmit={ onSubmit }>
+                                        {typeof error.verifyError!='undefined' && error.verifyError!=''?
+                                            <div className="help-block mb-2" style={{color:'red'}}>{error.verifyError.registerError}</div>
+                                        :null}
                                         <div className="contained">
                                             { typeof params.type != "undefined" && params.type == "tradesperson" ?
                                                 <>
                                                     <h3>Business Details</h3>
                                                     <Fields
+                                                        key="field_tradespeopleName"
                                                         field="text"
                                                         fieldLabel="Business Name"
                                                         fieldName="tradespeopleName"
                                                         fieldValue={ tradespeopleName }
                                                         fieldAction={ setTradespeopleName }
-                                                        fieldValidation={[submitted, tradespeopleName, {message:"Please Enter Business Name"}, reState.authUser.error]}
+                                                        fieldValidation={[submitted, tradespeopleName, formFieldValidation(error,"name",tradespeopleName)]}
                                                     />
                                                     <Fields
                                                         field="select"
@@ -236,7 +240,7 @@ export const register = (props) => {
                                                         fieldName="tradespeopleTrade"
                                                         fieldOption={ selectTreadOption }
                                                         fieldAction={settradespeopleTrade}
-                                                        fieldValidation={[submitted, tradespeopleTrade, {message:"Please Select Trade Option"}, reState.authUser.error]}
+                                                        fieldValidation={[submitted, tradespeopleTrade, formFieldValidation(error,"tradespeopleTrade",tradespeopleTrade)]}
                                                     />
                                                 </>
                                                 : null }
@@ -249,7 +253,7 @@ export const register = (props) => {
                                                         <>
                                                         {typeof field.fieldOption!="undefined"?
                                                             <Fields
-                                                                key={"field_"+field.FieldName}
+                                                                key={"field_"+field.fieldName}
                                                                 field={field.field}
                                                                 fieldLabel={field.fieldLabel}
                                                                 fieldName={field.fieldName}
@@ -260,6 +264,7 @@ export const register = (props) => {
                                                             />
                                                         :
                                                             <Fields
+                                                                key={"field_"+field.fieldName}
                                                                 field={field.field}
                                                                 fieldLabel={field.fieldLabel}
                                                                 fieldName={field.fieldName}
@@ -281,16 +286,16 @@ export const register = (props) => {
                                                             LOOKUP
                                                             </Button>
                                                         </div>
-                                                        {submitted && !address_postcode &&
-                                                            <div className="help-block" style={{color:'red'}}>Please Enter your Postcode</div>
+                                                        {submitted && formFieldValidation(error,"address_postcode",address_postcode)!="undefined" && formFieldValidation(error,"address_postcode",address_postcode)!="" &&
+                                                            <div className="help-block" style={{color:'red'}}>{typeof formFieldValidation(error,"address_postcode",address_postcode)!="undefined"?formFieldValidation(error,"address_postcode",address_postcode).message:formFieldValidation(error,"address_postcode",address_postcode)}</div>
                                                         }
                                                         {select_postcode!=''?
                                                             <>
                                                             <span className="postcode-lookup results">
-                                                                <select className="postcode-lookup-sel" onChange={(e)=>putAddress(e.target.value)}>
-                                                                    <option value>Select your address</option>
+                                                                <select className="postcode-lookup-sel" onChange={(e)=>putAddress(e.target.value)} defaultValue="">
+                                                                    <option disabled>Select your address</option>
                                                                     {select_postcode.map((option)=>
-                                                                        <option value={option}>{option}</option>
+                                                                        <option key={"key_"+option} value={option}>{option}</option>
                                                                     )}
                                                                 </select>
                                                             </span>
@@ -299,6 +304,7 @@ export const register = (props) => {
                                                     </div>
                                                     {col2.map((field)=>
                                                         <Fields
+                                                            key={"field_"+field.fieldName}
                                                             field={field.field}
                                                             fieldLabel={field.fieldLabel}
                                                             fieldName={field.fieldName}
@@ -320,7 +326,7 @@ export const register = (props) => {
                                                                     type="checkbox"
                                                                     name="terms_agreed_date"
                                                                     required="required"
-                                                                    defaultValue={ 1 }
+                                                                    value={ 1 }
                                                                     className="_checkbox_input ready"
                                                                     onClick={ () => setTerms_agreed_date(!terms_agreed_date) }
                                                                     style={ {
@@ -355,7 +361,7 @@ export const register = (props) => {
                                                                     id="register_tradesperson_gdpr_policy"
                                                                     name="gdpr_agreed_date"
                                                                     required="required"
-                                                                    defaultValue={ 1 }
+                                                                    value={ 1 }
                                                                     className="_checkbox_input ready"
                                                                     onClick={ () => setGdpr_agreed_date(!gdpr_agreed_date) }
                                                                     style={ {
