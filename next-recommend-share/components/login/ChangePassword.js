@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import {
     Container,
     Row,
@@ -9,12 +9,28 @@ import {
     Form
 } from "react-bootstrap"
 import Fields from '../Form-Fields/Fields';
+import { resetPasswordUser } from '../../redux/auth/action';
 
 export const ChangePassword = (props) => {
+
+    const birds = useSelector(state => state);
+    const dispatch = useDispatch();
 
     const [_userNewPassword, setUserNewPassword] = useState("");
     const [_userConfirmPassword, setUserConfirmPassword] = useState("");
     const [submitted, setSubmitted] = useState(false)
+
+    const onResetPassword = (e)=>{
+        e.preventDefault()
+        console.log("forgot password")
+        if(_userNewPassword !== ''){
+            const user = {
+                New_password:_userNewPassword,
+                confirm_New_password:_userConfirmPassword
+            }
+            dispatch(resetPasswordUser(user))
+        }
+    }
 
     return (
         <selection className="content">
@@ -24,7 +40,7 @@ export const ChangePassword = (props) => {
                     <h1>Password</h1>
                     <p>You can edit your password below.</p>
                     <div className="box white">
-                        <form method="post" action noValidate>                            
+                        <form onSubmit ={onResetPassword}>                            
                             <div className="form-content">
                                 <Fields
                                     field="password"
@@ -33,7 +49,9 @@ export const ChangePassword = (props) => {
                                     fieldValue={ null }
                                     fieldAction={ setUserNewPassword }
                                     fieldValidation={ submitted, _userNewPassword, { message: "Please Enter your UserName" } }
+                                    
                                 />
+                                   
                                 <label className="help">Enter New password.</label>
 
                             </div>
@@ -68,12 +86,12 @@ export const ChangePassword = (props) => {
     )
 }
 
-const mapStateToProps = (state) => ({
-    
-})
-
+const mapStateToProps = (authUser) => {
+    const { loding, userEmail, error } = authUser
+    return {loding, userEmail, error };
+}
 const mapDispatchToProps = {
-    
+    resetPasswordUserAction:resetPasswordUser
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChangePassword)
