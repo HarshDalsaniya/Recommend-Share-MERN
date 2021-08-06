@@ -14,6 +14,9 @@ import {
     RESET_PASSWORD,
     RESET_PASSWORD_SUCCESS,
     RESET_PASSWORD_ERROR,
+    CHANGE_PASSWORD,
+    CHANGE_PASSWORD_SUCCESS,
+    CHANGE_PASSWORD_ERROR,
     UNIQKEY_VERIFY,
 } from "../action-type"
 import Router from "next/router"
@@ -24,6 +27,7 @@ import {
     logout,
     forgotPassword,
     resetPassword,
+    changePassword,
     VerifyKey
 } from "../../helper/api"
 import { setCurrentUser } from "../../helper/Utils";
@@ -45,8 +49,6 @@ export const loginUser = (user) => {
                         email: result.data.data[0].email,
                         name: result.data.data[0].name,
                         token: result.data.data[1].token,
-
-
                     }
                     setCurrentUser(item)
                     Router.push("/")
@@ -146,14 +148,39 @@ export const resetPasswordUser = (user) => {
                         payload: result.data.message
                     })
                 }
-
             })
             .catch((err) => (
                 console.log(err)
             ))
     }
 }
-
+export const changeUserPassword = (user) => {
+    return dispatch => {
+        dispatch({
+            type : CHANGE_PASSWORD,
+            paylod: user
+        })
+        changePassword(user)       
+            .then((result) => {
+                console.log(user)
+                console.log(result)
+                if(result.data.status == true){
+                    dispatch({
+                        type : CHANGE_PASSWORD_SUCCESS,
+                        paylod : result.data.message
+                    })
+                }else{
+                    dispatch({
+                        type : CHANGE_PASSWORD_ERROR,
+                        paylod : result.data
+                    })
+                }
+            })
+            .catch((err)=> {
+                console.log(err)
+            })
+    }
+}
 export const verifyUniqueKey =() =>{
     return dispatch => {
         VerifyKey()

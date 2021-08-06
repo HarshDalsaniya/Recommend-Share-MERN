@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import {
     Container,
     Row,
@@ -9,12 +9,32 @@ import {
     Form
 } from "react-bootstrap"
 import Fields from '../Form-Fields/Fields';
+import { changeUserPassword } from '../../redux/auth/action';
 
 export const EditPassword = (props) => {
 
+    
+    const birds = useSelector(state => state);
+    const dispatch = useDispatch();
+
+
     const [_userCurrentPassword, setUserCurrentPassword] = useState("");
     const [_userNewPassword, setUserNewPassword] = useState("");
+    const [_userReapeatPassword ,setUsrRepeatPassword] = useState("");
     const [submitted, setSubmitted] = useState(false)
+
+       const onChnagePassword =(e)=>{
+        e.preventDefault()
+        console.log("change password") 
+        if(_userCurrentPassword !== ''|| _userNewPassword !== ''){
+            const user = {
+                currentPassword:_userCurrentPassword,
+                newPassword:_userNewPassword,
+                repeatNewPassword:_userReapeatPassword
+            }
+            dispatch(changeUserPassword(user))
+        }
+    }
 
     return (
         <selection className="content">
@@ -24,7 +44,7 @@ export const EditPassword = (props) => {
                         <h1>Password</h1>
                         <p>You can edit your password below.</p>
                         <div className="box white">
-                            <form method="post" action noValidate>
+                            <form onSubmit ={onChnagePassword}>
                                 <div className="form-content">
                                     <Fields
                                         field="password"
@@ -53,10 +73,10 @@ export const EditPassword = (props) => {
                                     <Fields
                                         field="password"
                                         fieldLabel="Repeat Password"
-                                        fieldName="_userCurrentPassword"
+                                        fieldName="_userReapeatPassword"
                                         fieldValue={ null }
-                                        fieldAction={ setUserCurrentPassword }
-                                        fieldValidation={ submitted, _userCurrentPassword, { message: "Please Enter your UserName" } }
+                                        fieldAction={ setUsrRepeatPassword }
+                                        fieldValidation={ submitted, _userReapeatPassword, { message: "Please Enter your UserName" } }
                                     />
                                 </div>
 
@@ -78,12 +98,12 @@ export const EditPassword = (props) => {
     )
 }
 
-const mapStateToProps = (state) => ({
-
-})
-
+const mapStateToProps = (authUser) => {
+    const { loding, currentUser, error } = authUser
+    return {loding, currentUser, error };
+}
 const mapDispatchToProps = {
-
+    changeUserPasswordAction:changeUserPassword
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditPassword)

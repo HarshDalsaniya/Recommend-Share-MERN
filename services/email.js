@@ -12,7 +12,7 @@ function funcEmail(to, subject, html, attachment = [], from = 'harshrdtl@gmail.c
         from: from, // sender address
         to: to, // list of receivers
         subject: subject, // Subject line
-        html: `${emailhtml(html[0].name,html[1].url,"http://localhost:4000/images/logo-on-dark.svg")} `                                     
+        html: `${emailhtml(html[0].name,html[1].url,"/assets/images/logo-on-light.svg")} `                                     
 
     };
 
