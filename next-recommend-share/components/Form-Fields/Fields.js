@@ -41,6 +41,9 @@ export const Fields = (props) => {
                 <div>
                     <Form.Control type={props.field} key={"field_:"+props.fieldName} className="form-control" as="textarea" rows={3} name={props.fieldName} onChange={(e) => { props.fieldAction(e.target.value) }}>{props.fieldValue}</Form.Control>
                 </div>
+                {props.fieldValidation!="undefined" && props.fieldValidation[0] && typeof props.fieldValidation[2]!="undefined" && (props.fieldValidation[2]!="" || !props.fieldValidation[1]) &&
+                    <div className="help-block" style={{color:'red'}}>{typeof props.fieldValidation[2]!="undefined"?props.fieldValidation[2].message:props.fieldValidation[2]}</div>
+                }
             </div>
         );
     }else{

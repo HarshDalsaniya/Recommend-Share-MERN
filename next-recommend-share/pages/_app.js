@@ -16,7 +16,6 @@ import isAuthenticate from "../helper/userAuthRedirect";
 
 class MyApp extends App {
   static async getInitialProps ({ Component, ctx }) {
-      isAuthenticate(ctx.pathname)
       return {
           pageProps: Component.getInitialProps
           ? await Component.getInitialProps(ctx)
@@ -27,10 +26,10 @@ class MyApp extends App {
     loading: true,
     current:null
   };
-  componentDidMount() {
-      isAuthenticate(window.location.pathname)
-      this.setState({current:localStorage.getItem('Recommend_Share_current_user')})
-      this.timerHandle = setTimeout(() => this.setState({ loading: false }), 2000); 
+  async componentDidMount() {
+    await isAuthenticate(window.location.pathname)
+    await this.setState({current:localStorage.getItem('Recommend_Share_current_user')})
+    this.timerHandle = setTimeout(() => this.setState({ loading: false }), 1000); 
   }
   componentWillUnmount() {
       if (this.timerHandle) {
@@ -42,12 +41,13 @@ class MyApp extends App {
       const { Component, pageProps } = this.props
     return (
       <React.Fragment>
-        <div className="site">
-        {/* {console.log(this.state.current)} */}
-          <NavBar localstorageItem={this.state.current}/>
-          <Component { ...pageProps } />
-          <Footer />
-        </div>
+        {this.state.loading==false?
+          <div className="site">
+            <NavBar localstorageItem={this.state.current}/>
+            <Component { ...pageProps } />
+            <Footer />
+          </div>
+        :null}
       </React.Fragment>
     )
   }
