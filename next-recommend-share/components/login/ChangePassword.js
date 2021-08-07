@@ -33,6 +33,7 @@ export const ChangePassword = (props) => {
     }
 
     return (
+        <div className="login-body">
         <selection className="content">
         <Container>
             <div className="contained">
@@ -83,6 +84,7 @@ export const ChangePassword = (props) => {
 
         </Container>
     </selection>
+    </div>
     )
 }
 

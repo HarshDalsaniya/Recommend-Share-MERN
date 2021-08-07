@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <React.Fragment>
-    
+  
      <Banner 
      backgroundImage = "/banner/home-banner-new-D.jpg"/>
       <ThePower 
@@ -22,6 +22,7 @@ export default function Home() {
       <HowDoes />
       <Box />
       <WhatPeople/>
+    
       </React.Fragment>
    
 

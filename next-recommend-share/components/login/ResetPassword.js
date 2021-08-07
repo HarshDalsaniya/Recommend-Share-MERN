@@ -43,7 +43,7 @@ export const ResetPassword = (props) => {
         <>
         {/* {flesh!="" ? <ToastContainer /> : null} */}
              
-            <section className="content">
+            <section className="content login-body">
                 <Container>
                     <div className="six columns alpha offset-by-three">
                         <div className="contained resetpassword-heading">

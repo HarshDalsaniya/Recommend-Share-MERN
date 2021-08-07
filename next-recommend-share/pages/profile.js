@@ -10,7 +10,7 @@ import { EditProfile } from '../components/Profile/EditProfile'
 
 export const profile = (props) => {
     return (
-        <div>
+        <div className="login-body">
             <EditProfile />
         </div>
     )

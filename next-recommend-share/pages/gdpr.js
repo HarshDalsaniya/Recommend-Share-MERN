@@ -4,7 +4,7 @@ import { Gdpr } from '../components/Information/Gdpr'
 
 export const gdpr = (props) => {
     return (
-        <div>
+        <div className="login-body">
             <Gdpr/>
         </div>
     )

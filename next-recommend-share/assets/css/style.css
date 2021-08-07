@@ -20,7 +20,7 @@ a:hover {
 .navbar-header {
     background: #153581 0% 0% no-repeat padding-box;
     box-shadow: 0px -7px 30px #00000017;
-    position: sticky;
+    position: fixed;
     width: 100%;
     z-index: 9999;
 }
@@ -93,7 +93,7 @@ a:hover {
 }
 
 .active {
-    background: #153581;
+    background: #153581 ;
     color: #fff !important;
 }
 
@@ -989,7 +989,7 @@ a:hover {
     background: url('/images/home-improvements-banner.jpg') 0% 0% no-repeat padding-box;
     background-size: cover;
     padding: 3rem 0;
-    /* padding-top: 8rem; */
+     padding-top: 8rem; 
 }
 
 .bringing-back-heading {

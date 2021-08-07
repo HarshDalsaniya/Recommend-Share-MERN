@@ -9,7 +9,7 @@ import { AboutBlog } from './AboutBlog';
 export const About = (props) => {
     console.log(props);
     return (
-        <div>
+        <div className="login-body">
             <section className="swipe garry-brick" style={{background:`url(${props.bannerbackgoudimg}) left bottom repeat-x`}} >           
                 <div className="container" style={{background:"url(/banner/garry-brick.png) right bottom no-repeat"}}>
                     <div className="twelve columns alpha tcenter">

@@ -4,7 +4,7 @@ import { TermOfUse } from '../components/Information/TermOfUse'
 
 export const terms_of_use = (props) => {
     return (
-        <div>
+        <div className="login-body">
             <TermOfUse/>
         </div>
     )
