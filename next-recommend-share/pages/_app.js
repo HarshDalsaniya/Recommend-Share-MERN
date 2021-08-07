@@ -43,6 +43,7 @@ class MyApp extends App {
       <React.Fragment>
         {this.state.loading==false?
           <div className="site">
+          {/* {console.log(this.state.current)} */}
             <NavBar localstorageItem={this.state.current}/>
             <Component { ...pageProps } />
             <Footer />

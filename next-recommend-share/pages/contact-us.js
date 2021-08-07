@@ -62,7 +62,7 @@ export const contact_us = (props) => {
                         <div className="contained shallow">
                             <form onSubmit={onSubmit}>
                                 {formField.map((value)=>(
-                                    <div className="contained shallow">
+                                    <div key={"field_"+value.fieldName} className="contained shallow">
                                         {value.fieldLabel=="Telephone"?
                                             <Row>
                                                 <Col md={6}>

@@ -44,13 +44,13 @@ form                                                                            
 
   form select                                                                     { border:0; background:#fff;  font-family:arial; font-size:14px; color:#414141; width:100%; }
 
-  form input.datepicker                                                           { background-image:url(/assets/images/form-icon-calendar.svg); background-position: calc( 100% - 15px ) center; background-repeat:no-repeat; background-size:20px 20px; }
+  form input.datepicker                                                           { background-image:url(/mages/form-icon-calendar.svg); background-position: calc( 100% - 15px ) center; background-repeat:no-repeat; background-size:20px 20px; }
 
   form input.focused                                                              ,
   form ._select.focused                                                           ,
   form textarea.focused                                                           { border-color:#03adec; }
 
-  form ._select                                                                   { text-align:left; overflow:hidden; position:relative; background-image:url(/assets/images/form-icon-select-bg.svg); background-position: calc( 100% - 15px ) center; background-repeat:no-repeat; background-size:11px 7px; }
+  form ._select                                                                   { text-align:left; overflow:hidden; position:relative; background-image:url(/images/form-icon-select-bg.svg); background-position: calc( 100% - 15px ) center; background-repeat:no-repeat; background-size:11px 7px; }
     form ._select select                                                          { z-index:10; }
     form ._select span                                                            { position:absolute; left:0px; top:0px; padding:0 12px; width:100%; line-height:46px; height:46px; z-index:2; box-sizing:border-box; font-family:'Work Sans', sans-serif; }
     form ._select .caret                                                          { position:absolute; right:0px; top:0px; line-height:36px; width:1px; display:none; }
@@ -59,9 +59,9 @@ form                                                                            
     form ._select.small span                                                      { font-size:14px; height:36px; line-height:32px; }
 
   form ._checkbox                                                                 { background:none; background-image:url(/images/form-icon-cbox.svg); overflow:hidden; position:relative; width:26px; height:26px; padding:0; margin:0; cursor:pointer; border:0; display:inline-block; background-position:center center; background-repeat:no-repeat; background-size:26px 26px; vertical-align:text-top; float:left; }
-  form ._radio                                                                    { background:none; background-image:url(/assets/images/form-icon-radio.svg); overflow:hidden; position:relative; width:26px; height:26px; padding:0; margin:0; cursor:pointer; border:0; display:inline-block; background-position:center center; background-repeat:no-repeat; background-size:26px 26px; vertical-align:text-top; }
+  form ._radio                                                                    { background:none; background-image:url(/images/form-icon-radio.svg); overflow:hidden; position:relative; width:26px; height:26px; padding:0; margin:0; cursor:pointer; border:0; display:inline-block; background-position:center center; background-repeat:no-repeat; background-size:26px 26px; vertical-align:text-top; }
   form ._checkbox.on                                                              { background-image:url(/images/form-icon-cbox-on.svg); }
-  form ._radio.on                                                                 { background-image:url(/assets/images/form-icon-radio-on.svg); }
+  form ._radio.on                                                                 { background-image:url(/images/form-icon-radio-on.svg); }
 
   form .expanded-list-wrapper                                                     { float:left; width:100%; overflow:hidden; margin-top:0px; }
     form .expanded-list-wrapper ul                                                { list-style:none; margin:0; padding:5px 0 0; float:left; overflow:hidden; width:100%;  }

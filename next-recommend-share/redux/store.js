@@ -11,21 +11,7 @@ const middleware = [thunk]
 //     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
 
 // const enhancer = composeEnhancers(applyMiddleware(...middleware));
-export function configureStore(initialState) {
-const store = createStore(
-    reducers,
-    initialState,
-    compose(applyMiddleware(...middlewares))
-  );
-  if (module.hot) {
-    module.hot.accept('./reducers', () => {
-      const nextRootReducer = require('./reducers');
-      store.replaceReducer(nextRootReducer);
-    });
-  }
 
-  return store;
-}
-// const makeStore = () => createStore(rootReducer, compose(applyMiddleware(...middleware)))
+const makeStore = () => createStore(rootReducer, compose(applyMiddleware(...middleware)))
 
-// export const wrapper = createWrapper(makeStore)
+export const wrapper = createWrapper(makeStore)

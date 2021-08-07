@@ -222,7 +222,7 @@ export const champions = (props) => {
                                     CLICK HERE TO SHOW YOUR SUPPORT!
                                 </a>
                                 <div className="garry-lewis-image">
-                                    <img src="/images/garry-lewis.png" alt />
+                                    <img src="/images/garry-lewis.png" />
                                 </div>
                             </div>
                         </Col>
@@ -258,7 +258,7 @@ export const champions = (props) => {
                             <p className="tcenter">
                                 <a
                                     href="#"
-                                    onclick="copyCode();"
+                                    
                                     className="button small copy-to-clip"
                                 >
                                     Copy to Clipboard

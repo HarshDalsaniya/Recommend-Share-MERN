@@ -69,6 +69,7 @@ export const faq = (props) => {
             answer: "Yes, a tradesperson can share their Trade Profile to various social channels/SMS/Email by clicking on the blue link called 'View My Trade Profile' found in 'Your Trade Dashboard'. You can then see and use the share features from this page."
         }
     ]
+    var key=0;
     return (
         <div>
             <section className="content">
@@ -76,10 +77,13 @@ export const faq = (props) => {
                     <div className="twelve columns alpha">
                         <div className="contained">
                             <h1>Consumers &amp; Tradespeople</h1>
-                            { data.map((row) => (<Faq
-                                question={ row.question }
-                                answer={ row.answer }
-                            />)) }
+                            { data.map((row) => (
+                                <Faq
+                                    key={"qa_"+key++}
+                                    question={ row.question }
+                                    answer={ row.answer }
+                                />
+                            ))}
                         </div>
                         <p className="tcenter small">
                             Have a question? <a href="/contact-us.html">Contact us</a> for help.

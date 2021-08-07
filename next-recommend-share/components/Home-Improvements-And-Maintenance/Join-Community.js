@@ -20,7 +20,7 @@ export const JoinCommunity = (props) => {
                                 <span>Garry Lewis</span>
                             </div>
                             <div className="garry-lewis-image">
-                                <img src="/images/garry-lewis.png" alt />
+                                <img src="/images/garry-lewis.png" />
                             </div>
                         </div>
                     </Col>
