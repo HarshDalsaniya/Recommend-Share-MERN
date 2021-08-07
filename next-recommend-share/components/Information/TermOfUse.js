@@ -5,7 +5,7 @@ export const TermOfUse = (props) => {
     return (
         <div className="termofuse">
             <section className="content">
-                <div className="container">
+                <div className="container" style={{marginTop: "5rem"}}>
                     {/* // ContentBlock ID: terms-of-use // */ }
                     <h1>User Terms and Conditions</h1>
                     <p>

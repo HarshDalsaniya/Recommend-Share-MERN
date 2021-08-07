@@ -196,7 +196,7 @@ export const register = (props) => {
     return (
         <div className="login-body pt-3">
             <Container fluid>
-                <Row>
+                <Row style={{marginTop: "5rem"}}>
                     <Col md="2">
                     </Col>
                     <Col md="8" className="mb-4">

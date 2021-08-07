@@ -12,7 +12,7 @@ export const champions = (props) => {
                 <Container>
                     <Row>
                         {/*twelve columns alpha*/}
-                        <div className="contained">
+                        <div className="contained" style={{marginTop : "5rem"}}>
                             {/* // ContentBlock ID: champions_page_intro // */}
                             <h1 style={{ textAlign: "center" }}>OUR CHAMPIONS</h1>
                             <p style={{ textAlign: "center" }}>

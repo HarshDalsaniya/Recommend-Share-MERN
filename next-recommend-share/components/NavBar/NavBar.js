@@ -102,7 +102,7 @@ export const NavBar = (props) => {
                                                     <Dropdown.Menu>
                                                         <Dropdown.Item>My Dashboard</Dropdown.Item>
                                                         <Dropdown.Item>vm</Dropdown.Item>
-                                                        <Dropdown.Item>Add a Business</Dropdown.Item>
+                                                        <Dropdown.Item><Link href="/tradespeople">Add a Business</Link></Dropdown.Item>
                                                         <Dropdown.Item><Link href="/profile">Edit My Account</Link></Dropdown.Item>
                                                         <Dropdown.Item><Link href="/password">My Password</Link></Dropdown.Item>
                                                         <Dropdown.Divider />
