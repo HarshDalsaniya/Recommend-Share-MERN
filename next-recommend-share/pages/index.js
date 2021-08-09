@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import React ,{useEffect , useState} from 'react'
 import { Banner } from '../components/Home/Banner'
 import { Box } from '../components/Home/Box'

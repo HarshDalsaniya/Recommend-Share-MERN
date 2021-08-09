@@ -6,7 +6,6 @@ import {
     Col,
     Container,
 } from "react-bootstrap"
-import Image from 'next/image'
 
 export const Box = (props) => {
     return (

@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import { connect } from 'react-redux'
 import {
     Container,
@@ -37,20 +38,24 @@ export const Banner = (props) => {
                     <div className="home-banner-btn-wrap">
                         <div className="for-consumers">
                             <div className="for-btn">
-                                <a href="/register">
+                                <Link href="/register"> 
+                                <a>
                                     CONSUMERS
                                     <br />
                                     Click here to Join the community
                                 </a>
+                                </Link>
                             </div>
                         </div>
                         <div className="for-businesses">
                             <div className="for-btn">
-                                <a href="/register?type=tradesperson">
+                                <Link href="/register?type=tradesperson">
+                                <a>
                                     BUSINESSES
                                     <br />
                                     Click here to Join the community
                                 </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
