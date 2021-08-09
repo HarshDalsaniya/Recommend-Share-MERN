@@ -54,7 +54,7 @@ export const contact_us = (props) => {
     return (
         <section className="login-body pt-3">
             <Container>
-                <div className="eight columns alpha offset-by-two">
+                <div className="eight columns alpha offset-by-two" style={{marginTop: "5rem"}}>
                     {/* // ContentBlock ID: contact-us // */}
                     <h1>Contact Us</h1>
                     <p>Please use the form below to get in touch.</p>

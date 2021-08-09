@@ -2721,6 +2721,26 @@ ul.notifications li.all a {
     font-weight: 500;
     color: inherit;
 }
+.tradeperson-heading h2 {
+	margin: 0 0 25px 0;
+    font-size: 20px;
+    line-height: 1.2em;
+    text-decoration: none;
+    text-transform: none;
+    font-style: normal;
+    font-weight: 500;
+    color: inherit;
+}
+.tradeperson-heading h1{
+	margin: 0 0 25px 0;
+    font-size: 20px;
+    line-height: 1.2em;
+    text-decoration: none;
+    text-transform: none;
+    font-style: normal;
+    font-weight: 500;
+    color: inherit;
+}
 
 .password-heading h1,
 .password-heading p.h1{

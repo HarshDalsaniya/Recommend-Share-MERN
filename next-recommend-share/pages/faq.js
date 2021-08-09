@@ -72,7 +72,7 @@ export const faq = (props) => {
     var key=0;
     return (
             <section className="content">
-                <div className="container">
+                <div className="container" style={{marginTop: "5rem"}}>
                     <div className="twelve columns alpha">
                         <div className="contained">
                             <h1>Consumers &amp; Tradespeople</h1>

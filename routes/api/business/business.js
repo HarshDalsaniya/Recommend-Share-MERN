@@ -54,4 +54,24 @@ router.get("/trade_options",cors(),(req,res)=>{
     })
 })
 
+router.get('/federation',cors(),(req,res) => {
+    req.getConnection((err,connection)=>{
+        if(err){
+            console.log(err);
+            response = general.response_format(false, messages.ERROR_PROCESSING, {});
+            res.send(response);
+        }
+        var sql = `select * from federation`
+        connection.query(sql,(err,result)=>{
+            if(err){
+                console.log(err);
+                response = general.response_format(false, messages.ERROR_PROCESSING, {});
+                res.send(response);
+            }
+            response = general.response_format(true, "Federation Options", result);
+            res.send(response);
+        })
+    })
+})
+
 module.exports = router

@@ -5,7 +5,7 @@ export const Gdpr = (props) => {
     return (
         <div className="gdpr">
             <section className="content">
-                <div className="container">
+                <div className="container" style={{marginTop: "5rem"}}>
                     {/* // ContentBlock ID: gdpr-policy // */ }
                     <h1>GDPR &amp; Privacy Policy</h1>
                     <p>Last updated: 13th September&nbsp;2018.</p>
