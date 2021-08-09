@@ -14,8 +14,8 @@ import { formFieldValidation } from "../services/formValidation"
 export const login = (props) => {
     const reState = useSelector(state => state);
     const { error } = reState.authUser;
-    const [_username, setUsername] = useState("");
-    const [_password, setPassword] = useState("");
+    const [_username, setUsername] = useState("maulikm@droptechnolab.com");
+    const [_password, setPassword] = useState("Maulik@123");
     const [submitted, setSubmitted] = useState(false)
     const onSubmit = (e) => {
         e.preventDefault();
@@ -60,7 +60,7 @@ export const login = (props) => {
                                             fieldAction = {setPassword}
                                             fieldValidation = {[submitted, _password, formFieldValidation(error,"password",_password)]}
                                         />
-                                        <p className="tcenter small">Forgotten your password? <a className="form-link" href="/reset-password/">Request a new one</a>.</p>
+                                        <p className="tcenter small">Forgotten your password? <Link href="/reset-password"><a className="form-link" >Request a new one</a></Link>.</p>
                                         <div className="buttons tcenter">
                                             <Button type="submit" className="light big">Login Now</Button>
                                         </div>

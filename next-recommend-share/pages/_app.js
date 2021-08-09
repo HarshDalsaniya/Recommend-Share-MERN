@@ -8,6 +8,7 @@ import "../assets/css/grid.css"
 
 import App from 'next/app';
 import { DefaultSeo } from 'next-seo';
+import Router from 'next/router'
 import React, {Component} from 'react'
 import { wrapper } from "../redux/store"
 import { Footer } from '../components/layout/Footer'
@@ -16,6 +17,7 @@ import isAuthenticate from "../helper/userAuthRedirect";
 
 class MyApp extends App {
   static async getInitialProps ({ Component, ctx }) {
+    await isAuthenticate(ctx.pathname)
       return {
           pageProps: Component.getInitialProps
           ? await Component.getInitialProps(ctx)
@@ -24,12 +26,10 @@ class MyApp extends App {
   }
   state = {
     loading: true,
-    current:null
   };
   async componentDidMount() {
-    await isAuthenticate(window.location.pathname)
-    await this.setState({current:localStorage.getItem('Recommend_Share_current_user')})
-    this.timerHandle = setTimeout(() => this.setState({ loading: false }), 1000); 
+    await isAuthenticate(Router.pathname)
+    this.timerHandle = setTimeout(() => this.setState({ loading: false }), 2000); 
   }
   componentWillUnmount() {
       if (this.timerHandle) {
@@ -37,14 +37,18 @@ class MyApp extends App {
           this.timerHandle = 0;
       }
   }
+  async componentDidUpdate(){
+    await isAuthenticate(Router.pathname)
+  }
   render () {
+    
       const { Component, pageProps } = this.props
     return (
       <React.Fragment>
         {this.state.loading==false?
           <div className="site">
           {/* {console.log(this.state.current)} */}
-            <NavBar localstorageItem={this.state.current}/>
+            <NavBar/>
             <Component { ...pageProps } />
             <Footer />
           </div>

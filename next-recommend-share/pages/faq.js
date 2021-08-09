@@ -71,7 +71,6 @@ export const faq = (props) => {
     ]
     var key=0;
     return (
-        <div>
             <section className="content">
                 <div className="container">
                     <div className="twelve columns alpha">
@@ -91,9 +90,6 @@ export const faq = (props) => {
                     </div>
                 </div>
             </section>
-
-
-        </div>
     )
 }
 

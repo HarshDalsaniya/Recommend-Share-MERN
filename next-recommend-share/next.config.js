@@ -23,14 +23,6 @@ const nextJsConfig = {
 
 module.exports = withPlugins ([
     [
-        withImages({
-            webpack(config, options) {
-                return config
-            }
-        })
-    ],
-
-    [
         nextJsConfig
     ]
 ])

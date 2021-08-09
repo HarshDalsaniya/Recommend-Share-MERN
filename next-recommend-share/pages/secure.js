@@ -7,7 +7,7 @@ export const secure = (props) => {
             <div className="container">
                 <div className="profile-page">
                     <section className="profile-page-image">
-                        <img src="/images/consumer_login.jpg" alt />
+                        <img src="/images/consumer_login.jpg" />
                     </section>
                     <section className="profile-text-box">
                         <div className="container">
@@ -58,7 +58,7 @@ export const secure = (props) => {
                                             <h3 className="invite-heading">Invite a Tradesperson</h3>
                                             <p className="invite-text">Invite a tradesperson and help us expand the Recommend &amp; Share community with tradespeople that consumers can rely on.</p>
                                             <form action="/secure/invite" className="d-block d-md-flex justify-content-between align-items-center" method="get">
-                                                <input type="email" name="email" id="customer-email" placeholder="Tradesperson's Email" required className />
+                                                <input type="email" name="email" id="customer-email" placeholder="Tradesperson's Email" required />
                                                 <button type="submit" id="invite-btn">
                                                     Invite
                                                 </button>
@@ -122,7 +122,7 @@ export const secure = (props) => {
                                     <div className="col-lg-4 mb-3 mb-lg-0">
                                         <div className="start-box">
                                             <div className="search-box power-heading">
-                                                <img src="/assets/images/search-icon.png" alt />
+                                                <img src="/assets/images/search-icon.png" />
                                                 <h3>Search a Recommended Tradesperson</h3>
                                             </div>
                                             <p className="start-text">If you're looking for a specific tradesperson in the Recommend &amp; Share community, you can search for them here.</p>

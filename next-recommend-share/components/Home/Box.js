@@ -4,10 +4,9 @@ import {
     Carousel,
     Row,
     Col,
-    Img,
-    Image,
     Container,
 } from "react-bootstrap"
+import Image from 'next/image'
 
 export const Box = (props) => {
     return (

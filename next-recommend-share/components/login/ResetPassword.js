@@ -12,12 +12,13 @@ import Fields from '../Form-Fields/Fields';
 import { forgotPasswordUser } from '../../redux/auth/action';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { formFieldValidation } from "../../services/formValidation"
 
 
 export const ResetPassword = (props) => {
 
-    const birds = useSelector(state => state);
+    const reState = useSelector(state => state);
+    const { error } = reState.authUser;
     const dispatch = useDispatch();
     // console.log(props)
 
@@ -33,7 +34,7 @@ export const ResetPassword = (props) => {
 
     const onForgotPassword = (e) => {
         e.preventDefault()
-        console.log("forgot password")
+        setSubmitted(true)
         if (_useremail !== '') {
             dispatch(forgotPasswordUser(_useremail))
         }
@@ -59,7 +60,7 @@ export const ResetPassword = (props) => {
                                                 fieldName="_useremail"
                                                 fieldValue={ null }
                                                 fieldAction={ setUserEmail }
-                                                fieldValidation={ submitted, _useremail, { message: "Please Enter your UserName" } }
+                                                fieldValidation={ [submitted, _useremail, formFieldValidation(error,"email",_useremail)] }
                                             />
                                         </div>
                                         <div className="buttons">

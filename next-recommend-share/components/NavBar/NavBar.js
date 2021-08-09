@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { connect, useDispatch, useSelector } from 'react-redux'
 import { Container, Navbar, Dropdown } from 'react-bootstrap';
 import Link from 'next/link'
@@ -8,6 +8,14 @@ import { logoutUser} from '../../redux/auth/action';
 export const NavBar = (props) => {
     const birds = useSelector(state => state);
     const dispatch = useDispatch();
+    const [localstorageItem, setLocalStorageItem] = useState(null)
+    
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setLocalStorageItem(JSON.parse(localStorage.getItem('Recommend_Share_current_user')));
+        }, 1000);
+        return () => clearInterval(interval);
+    }, [setLocalStorageItem])
 
     const handleLogout = () => {
             dispatch(logoutUser())
@@ -19,8 +27,8 @@ export const NavBar = (props) => {
                     <div className="navbar navbar-expand-lg">
                         <div className="container-fluid navbar-items">
                             <div className="nav-logo">
-                                <Link href="/">
-                                    <a className="navbar-brand">
+                                <Link className="navbar-brand" href="/">
+                                    <a>
                                         <img
                                             src="/logo/logo-on-dark.svg"
                                             alt="Recommend and Share"
@@ -50,8 +58,8 @@ export const NavBar = (props) => {
                             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul className="navbar-nav ms-auto mb-2 mb-lg-0 navbar-item-bg">
                                     <li className="nav-item">
-                                        <Link href="/home-improvements-and-maintenance">
-                                            <a className="nav-link">
+                                        <Link href="/home-improvements-and-maintenance" className="nav-link">
+                                            <a>
                                                 Home Improvements &amp; Maintenance
                                             </a>
                                         </Link>
@@ -79,7 +87,7 @@ export const NavBar = (props) => {
                                         </Link>
                                     </li>
                                 </ul>
-                                { props.localstorageItem == null ?
+                                { localstorageItem == null ?
                                     <div className="login">
                                         <Link href="/login">
                                             <a className="nav-link"> Login </a>
@@ -97,7 +105,7 @@ export const NavBar = (props) => {
                                                             src="https://recommendandshare.com/media/cache/avatar_small/uploads/customers/sam-avatar-1626495954.png"
                                                             className="avatar"
                                                         />
-                                                        <span className="ms-2">{JSON.parse(props.localstorageItem).name}</span>
+                                                        <span className="ms-2">{localstorageItem.name}</span>
                                                     </Dropdown.Toggle>
                                                     <Dropdown.Menu>
                                                         <Dropdown.Item>My Dashboard</Dropdown.Item>

@@ -88,6 +88,7 @@ router.post('/login', cors(), function (req, res, callBack) {
 
                             let ID = machineIdSync()
                             const Device_Ip_Address = address.ip()
+                            console.log(process.env.JWT_KEY);
                             const token = general.generateAccessToken({ id: result[0].id });
                             var sql3 = `insert into user_token set userId=${result[0].id} , token="${token}" , user_device_Id="${ID}" , user_device_Ip="${Device_Ip_Address}"`
 

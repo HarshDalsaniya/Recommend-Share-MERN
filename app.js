@@ -9,6 +9,7 @@ var dbConfig=require('./config/db.js');
 var session = require('express-session');
 var multer= require('multer');
 var bodyparser = require('body-parser');
+require('dotenv').config();
 
 var indexRouter = require('./routes/index');
 
