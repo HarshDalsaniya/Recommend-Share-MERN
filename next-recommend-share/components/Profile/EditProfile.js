@@ -27,7 +27,8 @@ export const EditProfile = (props) => {
     const [tradespeopleName, setTradespeopleName] = useState('');
     const [tradespeopleTrade, settradespeopleTrade] = useState('');
     const [onClickChackbox1, setOnClickChackbox1] = useState(false);
-    const [onClickChackbox2, setOnClickChackbox2] = useState(false);
+    const [onClickChackbox2, setOnClickChackbox2] = useState(false);    
+    const [submitted, setSubmitted] = useState(false);
     const [params, setParams] = useUrlSearchParams()
     return (
         <Container>
@@ -51,6 +52,7 @@ export const EditProfile = (props) => {
                                                     fieldName="tradespeopleName"
                                                     fieldValue={ tradespeopleName }
                                                     fieldAction={ setName }
+                                                    fieldValidation={ [submitted, tradespeopleName,] }
                                                 />
                                                 <Fields
                                                     field="select"
@@ -110,6 +112,7 @@ export const EditProfile = (props) => {
                                                     ] }
                                                     fieldValue={ ["", "40", "21", "22", "23", "24", "8", "9", "20", "41", "25", "43", "44", "45", "26", "10", "3", "46", "52", "11", "47", "27", "48", "12", "49", "28", "50", "13", "29", "30", "55", "51", "54", "56", "6", "5", "31", "1", "15", "32", "16", "17", "33", "35", "36", "37", "38", "39", "53", "18"] }
                                                     fieldAction=""
+                                                    fieldValidation={ [submitted, businessName,] }
                                                 />
                                             </>
                                             : null }
@@ -124,6 +127,7 @@ export const EditProfile = (props) => {
                                                     fieldName="name"
                                                     fieldValue={ name }
                                                     fieldAction={ setName }
+                                                     fieldValidation={ [submitted, businessName,] }
                                                 />
                                                 <Fields
                                                     field="email"
@@ -131,6 +135,7 @@ export const EditProfile = (props) => {
                                                     fieldName="email"
                                                     fieldValue={ email }
                                                     fieldAction={ setEmail }
+                                                     fieldValidation={ [submitted, businessName,] }
                                                 />
                                                 <Fields
                                                     field="numeric"
@@ -138,6 +143,7 @@ export const EditProfile = (props) => {
                                                     fieldName="telephone"
                                                     fieldValue={ telephone }
                                                     fieldAction={ setTelephone }
+                                                     fieldValidation={ [submitted, businessName,] }
                                                 />
                                                 <Fields
                                                     field="numeric"
@@ -153,6 +159,7 @@ export const EditProfile = (props) => {
                                                     fieldOption={ ["16-24", "25-34", "35-44", "44-55", "56-64", "65+"] }
                                                     fieldValue={ age_group }
                                                     fieldAction={ setAge_group }
+                                                     fieldValidation={ [submitted, businessName,] }
                                                 />
                                                 <Fields
                                                     field="email"
@@ -178,6 +185,7 @@ export const EditProfile = (props) => {
                                                     buttonValue="LOOKUP"
                                                     fieldValue={ address_postcode }
                                                     fieldAction={ setAddress_postcode }
+                                                     fieldValidation={ [submitted, businessName,] }
                                                 />
                                                 <Fields
                                                     field="text"
@@ -185,6 +193,7 @@ export const EditProfile = (props) => {
                                                     fieldName="address_line_1"
                                                     fieldValue={ address_line_1 }
                                                     fieldAction={ setAddress_line_1 }
+                                                     fieldValidation={ [submitted, businessName,] }
                                                 />
                                                 <Fields
                                                     field="text"
@@ -192,6 +201,7 @@ export const EditProfile = (props) => {
                                                     fieldName="address_line_2"
                                                     fieldValue={ address_line_2 }
                                                     fieldAction={ setAddress_line_2 }
+                                                     fieldValidation={ [submitted, businessName,] }
                                                 />
                                                 <Fields
                                                     field="text"
@@ -199,6 +209,7 @@ export const EditProfile = (props) => {
                                                     fieldName="address_town"
                                                     fieldValue={ address_town }
                                                     fieldAction={ setAddress_town }
+                                                     fieldValidation={ [submitted, businessName,] }
                                                 />
                                                 <Fields
                                                     field="text"
@@ -206,6 +217,7 @@ export const EditProfile = (props) => {
                                                     fieldName="address_county"
                                                     fieldValue={ address_county }
                                                     fieldAction={ setAddress_county }
+                                                     fieldValidation={ [submitted, businessName,] }
                                                 />
                                             </Col>
                                         </Row>

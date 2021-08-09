@@ -11,6 +11,11 @@ const register = (user, path) => {
         .then((result) => result)
         .catch((error) => console.log(error))
 }
+const tradesPeople = (tradespeople) => {
+    return axios.post(`http://localhost:4000/api/business/tradespeople` , tradespeople)
+        .then((result) => result)
+        .catch((error) => console.log(error))
+}
 const forgotPassword = (email) => {
     return axios.post(`http://localhost:4000/api/user/forgotpassword`, { email: email })
         .then((result) => result)
@@ -46,6 +51,7 @@ const logout = () => {
 export {
     login,
     register,
+    tradesPeople,
     logout,
     forgotPassword,
     resetPassword,

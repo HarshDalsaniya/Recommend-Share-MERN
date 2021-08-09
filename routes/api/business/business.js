@@ -30,8 +30,9 @@ const { sanitizeBody, matchedData } = require('express-validator/filter');
 var cors = require("cors");
 var address = require('address');
 var { machineId, machineIdSync } = require('node-machine-id');
-router.use(cors())
+const { json } = require('body-parser');
 
+router.use(cors())
 var general = gnl.func();
 
 router.get("/trade_options",cors(),(req,res)=>{
@@ -73,5 +74,111 @@ router.get('/federation',cors(),(req,res) => {
         })
     })
 })
+
+router.post('/tradespeople',cors(), function (req,res, callback){
+    var post = req.body;
+    resoponse ={};
+    var required_params=['name' , 'email']
+    var elem = functions.validateReqParam(post, required_params);
+    var valid = elem.missing.length == 0 && elem.blank.length == 0;   
+    if (valid) {
+        console.log('valid')
+        req.getConnection(function(err , connection){
+            var sql = `select * from tradesperson where email ="${post.email}" or mobile="${post.mobile}"`;           
+            connection.query(sql,function (err,result){
+                console.log(result);
+                if (err) {
+                    console.log(err);
+                    response = general.response_format(false, messages.ERROR_PROCESSING, {});
+                    res.send(response);
+                }
+               
+                else if (result.length == 0 ) { 
+                    var sql = `select * from user where email="${post.email}"`
+                    connection.query(sql,function (err , userData){
+                        if (err) {
+                            console.log(err);
+                            response = general.response_format(false, messages.ERROR_PROCESSING, {});
+                            res.send(response);
+                        }else{
+                            var data ={
+                                trade_id : 5 ,
+                                created : null,
+                                updated : null,
+                                name : post.name,
+                                email : post.email,
+                                telephone : post.phone,
+                                mobile : post.mobile,
+                                address_line_1 : post.address_line_1,
+                                address_line_2 : post.address_line_2,
+                                address_town : post.address_town,
+                                address_county : post.address_county,
+                                address_postcode : post.address_postcode,                             
+                                established : post.established,                                
+                                company_number : post.company_number,
+                                website : "droptechnolab.com",
+                                vat_registered : null,
+                                insured : null,
+                                verify_date : null,
+                                verify_code : null,
+                                verified : 1,
+                                image : null,
+                                latitude : null,
+                                longitude : null,                             
+                                slug : post.name.toLowerCase().replace(' ', '-'),
+                                notification_received_sms:1,
+                                notification_received_email:1,
+                                confirm_date : null,
+                                confirm_code : null,
+                                owner_name : post.owner_name,
+                                notification_marketing_email:1,    
+                                                                         
+                            };
+                            var insertsql = `insert into tradesperson set user_Id="${userData[0].id}", ?`
+                            connection.query(insertsql ,data, function(err,insert){
+                                if (err) {
+                                    console.log(err);
+                                    response = general.response_format(false, messages.ERROR_PROCESSING, {});
+                                    res.send(response);
+                                }
+                                // console.log(insert.insertId)
+                                if(insert.length != 0 ){
+                                    var data = {
+                                        federation_id:post.federation_id
+                                    }
+                                    var insertfedration = `insert into tradespeople_federations set tradesperson_id = "${insert.insertId}" , federation_id = "${data.federation_id}"`
+                                    connection.query(insertfedration, function(err,finalresult){
+                                        if (err) {
+                                            console.log(err);
+                                            response = general.response_format(false, messages.ERROR_PROCESSING, {});
+                                            res.send(response);
+                                        }
+                                        else{
+                                            response = general.response_format(true, "tradesperson register Successfully" , finalresult);
+                                            res.send(response);
+                                        }
+                                    });
+                                }
+                            });
+
+                        }
+                    });                 
+                                 
+                }else{
+                    response = general.response_format(false, "email is already registered", {});
+                    res.send(response);
+
+                }
+            })
+
+        });
+    }
+    else {
+        console.log("in blank data")     
+        response = general.response_format(false, "blank value", {});
+        res.send(response);
+    }
+
+});
 
 module.exports = router

@@ -128,7 +128,7 @@ function emailhtml(name, url , logo) {
               <tr>
                 <td align="center" valign="top" style="padding: 36px 24px;">
                   <a href="" target="_blank" style="display: inline-block;">
-                    <img src="${logo}"  border="0" width="48" style="display: block; width: 48px; max-width: 48px; min-width: 48px;">
+                    <img src="${logo}"  border="0" width="195px" style="display: block; width: 48px; max-width: 195px; min-width: 48px;">
                   </a>
                 </td>
               </tr>
