@@ -9,6 +9,7 @@ import { currentUser } from "../../constants/defaultValues";
 import {
     tradesPeople
 } from "../../helper/api"
+
 import { setCurrentUser } from "../../helper/Utils";
 
 
@@ -23,7 +24,7 @@ export const tradesPeopleRegister = (tradespeople) => {
             .then((result) => {
                 console.log(result)
                 if (result.data.status == true) {
-                    router.push('/')
+                    Router.push('/')
                     dispatch({
                         type: TRADES_PEOPLE_SUCCESS,
                         payload: result.data

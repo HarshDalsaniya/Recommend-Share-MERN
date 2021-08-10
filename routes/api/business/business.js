@@ -142,12 +142,14 @@ router.post('/tradespeople',cors(), function (req,res, callback){
                                     res.send(response);
                                 }
                                 // console.log(insert.insertId)
-                                if(insert.length != 0 ){
-                                    var data = {
-                                        federation_id:post.federation_id
-                                    }
-                                    var insertfedration = `insert into tradespeople_federations set tradesperson_id = "${insert.insertId}" , federation_id = "${data.federation_id}"`
+                                if(insert.length != 0 ){                                                         
+                                    var insertfedration=``;
+                                    post.federation_id.forEach(element => {
+                                        insertfedration += `insert into tradespeople_federations set tradesperson_id = "${insert.insertId}" , federation_id = "${element}";`
+                                    });
+                                    console.log(insertfedration)
                                     connection.query(insertfedration, function(err,finalresult){
+                                        console.log(insertfedration)
                                         if (err) {
                                             console.log(err);
                                             response = general.response_format(false, messages.ERROR_PROCESSING, {});

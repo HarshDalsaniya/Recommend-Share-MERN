@@ -90,12 +90,24 @@ export const tradespeople = (props) => {
         setAddress_town(value.split(',')[5])
         setSelectPostcode('')
     }
-  
+    
+    // const dateArray = established;
+    // const formate = dateArray.reverse();
+    // const formatedDate = formate.join("-")
+    // const finaldate = formatedDate
+// console.log(established.reverse().join("-"));
     const onSubmit = (e) => {
         e.preventDefault();
         setSubmitted(true)
-        console.log(federation)
+        // console.log(federation)
         if( ownerName !="" && email!="" && mobileNumber != ""){
+            // if(established.length == 3 ){
+            //     const dateArray = established;
+            //     const formate = dateArray.reverse();
+            //     const formatedDate = formate.join("-")
+            //     const finaldate = formatedDate
+
+            // }
             const tradepersonData = {
                 trade_id : trade ,
                 created : null,
@@ -109,7 +121,7 @@ export const tradespeople = (props) => {
                 address_town :  address_town,
                 address_county : address_county,
                 address_postcode : address_postcode,                             
-                established : established.join("-"),                                
+                established : (established.year+"-"+established.month+"-"+established.day),                                
                 company_number : companyNo,
                 website : webSite,
                 vat_registered : null,
@@ -127,14 +139,13 @@ export const tradespeople = (props) => {
                 confirm_code : null,
                 owner_name : ownerName,
                 notification_marketing_email:1,
-                federation_id: federation
+                federation_id: federationValue
             }
             dispatch(tradesPeopleRegister(tradepersonData))
-
+       
         }
     }
-
-    
+    console.log(established.year+"-"+established.month+"-"+established.day)
     const col2 = [
         {
             field: "text",
@@ -179,7 +190,7 @@ export const tradespeople = (props) => {
         }
     }
     // Month Array
-    var monthOfYear = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var monthOfYear = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
     // Year Loop   
     const Years = [];
     var D = new Date();
@@ -188,7 +199,7 @@ export const tradespeople = (props) => {
         Years.push(y);
     }
 
-
+    
 
     return (
         <div className="login-body pt-3">
@@ -221,9 +232,10 @@ export const tradespeople = (props) => {
                                                                 <div className="_select ">
                                                                     <select
                                                                         id="acdo_systembundle_tradesperson_established_day"
-                                                                        name="acdo_systembundle_tradesperson[established][day]"
+                                                                        name="established"
                                                                         className="_select_input ready"
-                                                                        onChange = {(e)=>{setEstablished(date=>[...date, date[0]=e.target.value])}}
+                                                                        value={established[0]}
+                                                                        onChange={(e)=>setEstablished({...established, day:e.target.value})}
                                                                         style={ {
                                                                             opacity: 0,
                                                                             cursor: "pointer",
@@ -236,7 +248,7 @@ export const tradespeople = (props) => {
                                                                     >
                                                                         <option value>Day</option>
                                                                         { daysOfMonth.map((day) =>
-                                                                            <option>{ day }</option>
+                                                                            <option key={"day_"+day}value={day}>{ day }</option>
                                                                         ) }
 
                                                                     </select>
@@ -248,7 +260,7 @@ export const tradespeople = (props) => {
                                                                         id="acdo_systembundle_tradesperson_established_month"
                                                                         name="acdo_systembundle_tradesperson[established][month]"
                                                                         className="_select_input ready"
-                                                                        onChange = {(e)=>{setEstablished(month=>[...month, month[1]=e.target.value])}}
+                                                                        onChange = {(e)=>{setEstablished({...established, month:e.target.value})}}
                                                                         style={ {
                                                                             opacity: 0,
                                                                             cursor: "pointer",
@@ -261,7 +273,7 @@ export const tradespeople = (props) => {
                                                                     >
                                                                         <option value>Month</option>
                                                                         { monthOfYear.map((month) =>
-                                                                            <option>{ month }</option>
+                                                                            <option key={"month_"+month} value={month}>{ month }</option>
                                                                         ) }
                                                                     </select>
                                                                     <a className="caret"></a>
@@ -272,7 +284,7 @@ export const tradespeople = (props) => {
                                                                         id="acdo_systembundle_tradesperson_established_year"
                                                                         name="acdo_systembundle_tradesperson[established][year]"
                                                                         className="_select_input ready"
-                                                                        onChange={(e)=>{setEstablished(year=>[...year, year[2]=e.target.value])}}
+                                                                        onChange={(e)=>{setEstablished({...established, year:e.target.value})}}
                                                                         style={ {
                                                                             opacity: 0,
                                                                             cursor: "pointer",
@@ -285,7 +297,7 @@ export const tradespeople = (props) => {
                                                                     >
                                                                         <option value>Year</option>
                                                                         { Years.map((year) =>
-                                                                            <option>{ year }</option>
+                                                                            <option key={"month_"+year} value={year} >{ year }</option>
                                                                         ) }
                                                                     </select>
                                                                     <a className="caret"></a>
@@ -375,14 +387,14 @@ export const tradespeople = (props) => {
                                                             Federation Memberships
                                                         </label>
                                                         <div className="field_container">
+                                                            {console.log(federationValue)}
                                                             <select
                                                                 id="acdo_systembundle_tradesperson_federations"
                                                                 name="acdo_systembundle_tradesperson[federations][]"
                                                                 size={ 10 }
                                                                 className="multiple"
-                                                                multiple="multiple"
-                                                                onChange={(e) => setFederationValue(e.target.value)}
-                                                                defaultValue=""
+                                                                multiple
+                                                                onChange={(e) => setFederationValue([...e.target.options].filter(option => option.selected).map(x => x.value))}
                                                             >
                                                                
                                                             {federation.map((fed)=>
@@ -628,7 +640,7 @@ export const tradespeople = (props) => {
                                                 When you are happy with the details above, use the button below to create
                                                 your free business listing.
                                             </p>
-                                            <button type="submit" className>
+                                            <button type="submit">
                                                 Create Business Listing
                                             </button>
                                             <p className="smaller tall-top shallow">
