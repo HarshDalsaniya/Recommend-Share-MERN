@@ -43,6 +43,12 @@ const logout = () => {
         .catch((error) => console.log(error))
 }
 
+const userData = (email) => {
+    return axios.post(`http://localhost:4000/api/profile`,{email:email})
+        .then((result) => result)
+        .catch((error) => console.log(error))
+}
+
 export {
     login,
     register,
@@ -50,5 +56,6 @@ export {
     forgotPassword,
     resetPassword,
     changePassword,
-    VerifyKey
+    VerifyKey,
+    userData
 }

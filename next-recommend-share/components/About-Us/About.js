@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Image from 'next/images'
 import {
     Container, Section,
 } from 'react-bootstrap';

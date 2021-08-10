@@ -44,6 +44,11 @@ app.use('/api/user', require('./routes/api/user/forgot-password'),function (err,
   res.json({status: 0,message: "Oops! Something went wrong"});
 });
 
+app.use('/api/profile', require('./routes/api/user/profile'),function (err, req, res, next) {
+  console.log(err);
+  res.json({status: 0,message: "Oops! Something went wrong"});
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
