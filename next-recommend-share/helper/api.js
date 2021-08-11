@@ -60,6 +60,13 @@ const updateProfile = (profileData) => {
         .catch((error) => console.log(error))
 }
 
+const updateProfilePhoto = (profilePhoto) => {
+    profilePhoto.append("email",JSON.parse(localStorage.getItem('Recommend_Share_current_user')).email)
+    return axios.post(`http://localhost:4000/api/profile/userProfilePic`,profilePhoto)
+        .then((result) => result)
+        .catch((error) => console.log(error))
+}
+
 export {
     login,
     register,
@@ -70,5 +77,6 @@ export {
     changePassword,
     VerifyKey,
     userData,
-    updateProfile
+    updateProfile,
+    updateProfilePhoto
 }

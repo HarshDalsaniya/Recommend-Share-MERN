@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import { connect, useDispatch, useSelector } from 'react-redux'
 import {
     Container,
@@ -13,6 +13,7 @@ export const profile = (props) => {
     const dispatch = useDispatch();
     const reState = useSelector(state => state);
     const {error, userData} = reState.profileReducer;
+    const [profile, setProfile] =useState('')
 
     useEffect(() => {
         dispatch(userProfile(JSON.parse(localStorage.getItem("Recommend_Share_current_user")).email))
@@ -38,7 +39,9 @@ export const profile = (props) => {
                             </div>
                             <div className="four columns">
                                 <ProfileStatus />
-                                <ProfileImage />
+                                <ProfileImage 
+                                setProfile={setProfile}
+                                />
                             </div>
                         </div>
                     </div>
@@ -49,7 +52,14 @@ export const profile = (props) => {
                     </p>
                 </div>
             </section>
+            <div className="featherlight" style={{ display: profile!=""?"block":"none" }}>
+                <div className="featherlight-content">
+                    <button className="featherlight-close-icon featherlight-close" aria-label="Close" onClick={()=>{setProfile("")}}>✕</button>
+                    <img src={profile} className="featherlight-image featherlight-inner" style={{ width: 148, height: 148 }}/>
+                </div>
+            </div>
         </div>
+
     )
 }
 

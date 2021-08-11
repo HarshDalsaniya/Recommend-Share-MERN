@@ -3,7 +3,7 @@ import { connect, useSelector, useDispatch } from 'react-redux'
 import { Row, Col, Button} from "react-bootstrap"
 import { formFieldValidation } from "../../services/formValidation"
 import Fields from '../Form-Fields/Fields'
-import { profileUpadate } from '../../redux/Profile/action';
+import { profileUpadate, profilePhotoUpdate } from '../../redux/Profile/action';
 
 export const ProfileForm = (props) => {
     const {error, userData} = props
@@ -160,7 +160,6 @@ export const ProfileForm = (props) => {
             fieldValidation: [submitted, address_county, formFieldValidation(error, "address_county", address_county)]
         }
     ]
-    console.log(name)
     return (
         <form onSubmit={onSubmit}>
             <div className="contained">
@@ -294,25 +293,48 @@ export const ProfileForm = (props) => {
 }
 
 export const ProfileImage = (props) => {
+    const dispatch = useDispatch();
+    const [profile_image, setProfile_image] = useState();
+    const [show_profile, setShowProfile] = useState();
+    const getBase64 = (e) => {
+        var file = e.target.files[0]
+        let reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = () => {
+            setShowProfile(reader.result)
+        };
+        reader.onerror = function (error) {
+          console.log('Error: ', error);
+        }
+      }
+    const onSubmit = (e) =>{
+        e.preventDefault();
+        if(profile_image!=""){
+            let formData = new FormData();
+            formData.append("profile_image",profile_image)
+            dispatch(profilePhotoUpdate(formData))
+        }
+    }
+    // console.log(profile_image)
     return (
         <div className="contained">
             <h2>Profile Image</h2>
             <div className="box white">
-                <form method="post" action="/profile/image" encType="multipart/form-data">
+                <form encType="multipart/form-data" onSubmit={onSubmit}>
                     <p className="semi-shallow tcenter">
-                        <a href="https://recommendandshare.com/media/cache/resolve/avatar_large/uploads/customers/sam-avatar-1626495954.png" data-featherlight="image" className="avatar-link">
-                            <img src="https://recommendandshare.com/media/cache/avatar/uploads/customers/sam-avatar-1626495954.png" className="avatar avatar-selector" />
+                        <a onClick={()=>{props.setProfile(typeof show_profile!="undefined"?show_profile:"https://recommendandshare.com/media/cache/avatar/assets/images/generic-avatar.png")}} data-featherlight="image" className="avatar-link">
+                            <img src={typeof show_profile!="undefined"?show_profile:"https://recommendandshare.com/media/cache/avatar/assets/images/generic-avatar.png"} className="avatar avatar-selector" />
                         </a>
                     </p>
                     <div id="profile_image">
                         <div className="form_row  file">
                             <div className="field_container">
-                                <div className="fileinput single" id="profile_image_temp_image_fi_parent">
+                                <div className="fileinput single">
                                     <a href="#" className="button white ">
                                         Browse
                                     </a>
-                                    <input type="file" id="profile_image_temp_image" name="profile_image[temp_image]" />
-                                    <span className="helptext psuedoinput" id="profile_image_temp_image_helptext" />
+                                    <input type="file" name="profile_image" onChange={(e)=>{setProfile_image(e.target.files[0]),getBase64(e)}}/>
+                                    <span className="helptext psuedoinput" >{typeof profile_image!="undefined"?profile_image.name:null}</span>
                                 </div>
                             </div>
                         </div>

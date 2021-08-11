@@ -4,9 +4,12 @@ import {
     USER_DATA_ERROR,
     USER_UPDATE,
     USER_UPDATE_SUCCESS,
-    USER_UPDATE_ERROR
+    USER_UPDATE_ERROR,
+    USER_UPDATE_PROFILE_PHOTO,
+    USER_UPDATE_PROFILE_PHOTO_SUCCESS,
+    USER_UPDATE_PROFILE_PHOTO_ERROR,
 } from "../action-type"
-import { userData, updateProfile } from "../../helper/api"
+import { userData, updateProfile, updateProfilePhoto } from "../../helper/api"
 
 export const userProfile = (userId) =>{
     return dispatch => {
@@ -48,6 +51,30 @@ export const profileUpadate = (profileData) =>{
                 } else {
                     dispatch({
                         type: USER_UPDATE_ERROR,
+                        payload: result.data.message
+                    })
+                }
+            })
+    }
+}
+
+export const profilePhotoUpdate = (profilPhoto) =>{
+    return dispatch => {
+        dispatch({
+            type:USER_UPDATE_PROFILE_PHOTO,
+            paload:profilPhoto
+        })
+        updateProfilePhoto(profilPhoto)
+            .then((result)=>{
+                console.log(result)
+                if (result.data.status == true) {
+                    dispatch({
+                        type: USER_UPDATE_PROFILE_PHOTO_SUCCESS,
+                        payload: result.data.data
+                    })
+                } else {
+                    dispatch({
+                        type: USER_UPDATE_PROFILE_PHOTO_ERROR,
                         payload: result.data.message
                     })
                 }

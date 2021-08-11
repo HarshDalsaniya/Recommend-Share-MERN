@@ -4,7 +4,10 @@ import {
     USER_DATA_ERROR,
     USER_UPDATE,
     USER_UPDATE_SUCCESS,
-    USER_UPDATE_ERROR
+    USER_UPDATE_ERROR,
+    USER_UPDATE_PROFILE_PHOTO,
+    USER_UPDATE_PROFILE_PHOTO_SUCCESS,
+    USER_UPDATE_PROFILE_PHOTO_ERROR
 } from "../action-type"
 
 const INIT_STATE ={
@@ -51,6 +54,24 @@ const profileReducer = ( state = INIT_STATE, action) =>{
                 loading:false,
                 profileUpdateError:action.payload
             }
+        case USER_UPDATE_PROFILE_PHOTO:
+            return {
+                ...state,
+                loading:true,
+                profilePhoto:action.payload
+            }
+        case USER_UPDATE_PROFILE_PHOTO_SUCCESS:
+            return {
+                ...state,
+                loading:false,
+                profilePhotoUpdate:action.payload
+            }
+        case USER_UPDATE_PROFILE_PHOTO_ERROR:
+            return {
+                ...state,
+                loading:false,
+                profilePhotoUpdateError:action.payload
+            }            
         default:
             return {
                 ...state

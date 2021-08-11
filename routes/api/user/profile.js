@@ -27,10 +27,12 @@ var md5 = require('md5');
 var session = require('express-session');
 const { check, validationResult } = require('express-validator/check');
 const { sanitizeBody, matchedData } = require('express-validator/filter');
+var upload = require('../../../config/file-upload');
 var cors = require("cors");
 var address = require('address');
 var { machineId, machineIdSync } = require('node-machine-id');
 const { json } = require('body-parser');
+
 
 
 
@@ -144,5 +146,55 @@ router.post('/userUpdate', cors(), function (req, res, next) {
         res.send(response);
     }
 });
+
+router.post('/userProfilePic', cors(), upload.fields([{name:"profile_image"}]), (req,res)=>{
+    response = {};
+    var errors = new Array();
+    errors = {blankValue:{},invalidValue:{},verifyError:{}};
+    if(typeof req.files!="undefined" && req.files.profile_image){
+        req.getConnection(function (err, connection) {
+            var sql = `SELECT * FROM user where email='${req.body.email}';`;
+            connection.query(sql, function (err, result) {
+                // console.log("this.sql======================>", this.sql);
+                if (err) {
+                    console.log(err);
+                    response = general.response_format(false, messages.ERROR_PROCESSING, {});
+                    res.send(response);
+                }
+                else {
+                    if (result.length > 0) {
+                        fs.readFile('./public/images/' + req.files.profile_image[0].filename, "utf8", function (err, data) {
+                            if (err) throw(err); 
+                            try{
+                                var sql = `update user set image='${req.files.profile_image[0].filename}' where email='${req.body.email}'`;
+                                connection.query(sql, function (err, updateResult) {
+                                    // console.log("this.sql======================>",this.sql);
+                                    if (err) {
+                                        console.log(err);
+                                        response = general.response_format(false, messages.ERROR_PROCESSING, {});
+                                        res.send(response);
+                                    } else {
+                                        response = general.response_format(true, "User Profile Photo Update SuccessFull");
+                                        res.send(response);
+                                    }
+                                })
+                            }catch(e){
+                                throw(e)
+                            }
+                        });
+                    } else {
+                        errors.verifyError.registerError="User not Found"
+                        response = general.response_format(false, errors, {});
+                        res.send(response);
+                    }
+                }
+            });
+        });
+    }else{
+        typeof req.files!="undefined" || typeof req.files.profile_image!="undefined"?errors.blankValue["profile_image"]="Please Select or Profile Photo":null
+        response = general.response_format(false, errors, {});
+        res.send(response);
+    }
+})
 
 module.exports = router
