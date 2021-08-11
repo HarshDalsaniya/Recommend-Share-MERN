@@ -51,10 +51,29 @@ router.get("/trade_options",cors(),(req,res)=>{
             }
             response = general.response_format(true, "Trade Options", result);
             res.send(response);
-        })
-    })
-})
+        });
+    });
+});
 
+router.get('/faq_question' , cors(),(req,res)=> {
+    req.getConnection((err,connection)=>{
+        if (err) {
+                    console.log(err);
+                    response = general.response_format(false, messages.ERROR_PROCESSING, {});
+                    res.send(response);
+        }
+        sql="select id, question , answer from faq_question"
+        connection.query(sql,(err,result)=>{
+            if (err) {
+                console.log(err);
+                response = general.response_format(false, messages.ERROR_PROCESSING, {});
+                res.send(response);
+            }
+            response = general.response_format(true, "faq questions", result);
+            res.send(response);
+        });
+    });    
+})
 router.get('/federation',cors(),(req,res) => {
     req.getConnection((err,connection)=>{
         if(err){
@@ -71,9 +90,32 @@ router.get('/federation',cors(),(req,res) => {
             }
             response = general.response_format(true, "Federation Options", result);
             res.send(response);
-        })
-    })
-})
+        });
+    });
+});
+
+router.post('/getuserbussiness',cors(),(req,res)=>{
+    req.getConnection((err,connection)=>{
+        if(err){
+            console.log(err);
+            response = general.response_format(false, message.ERROR_PROCESSING, {});
+            res.send(response);
+        }
+        console.log(req.body)
+        var sql = `select id , name from tradesperson where user_id="${req.body.id}"`
+        console.log(sql)
+        connection.query(sql,(err,result)=>{
+            console.log(sql)
+            if(err){
+                console.log(err);
+                response = general.response_format(false, messages.ERROR_PROCESSING, {});
+                res.send(response);
+            }
+            response = general.response_format(true, "user's registered bussinesses", result);
+            res.send(response);        
+        });
+    });
+});
 
 router.post('/tradespeople',cors(), function (req,res, callback){
     var post = req.body;

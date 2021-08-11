@@ -59,6 +59,12 @@ const updateProfile = (profileData) => {
         .then((result) => result)
         .catch((error) => console.log(error))
 }
+const userBusiness = (id)=>{
+    console.log(id)
+    return axios.post('http://localhost:4000/api/business/getuserbussiness',{id:id})
+        .then((result) => result)
+        .catch((error) => console.log(error))
+}
 
 export {
     login,
@@ -70,5 +76,6 @@ export {
     changePassword,
     VerifyKey,
     userData,
-    updateProfile
+    updateProfile,
+    userBusiness
 }

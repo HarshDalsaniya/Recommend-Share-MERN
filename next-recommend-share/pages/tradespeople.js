@@ -101,7 +101,7 @@ export const tradespeople = (props) => {
     // const formate = dateArray.reverse();
     // const formatedDate = formate.join("-")
     // const finaldate = formatedDate
-    console.log(established);
+    // console.log(established);
     const onSubmit = (e) => {
         e.preventDefault();
         setSubmitted(true)
