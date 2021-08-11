@@ -1,5 +1,5 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React,{useEffect} from 'react'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import {
     Container,
     Row,
@@ -7,8 +7,16 @@ import {
     Button
 } from "react-bootstrap"
 import { ConnectFacebook, ProfileForm, ProfileImage, ProfileStatus, RemoveAC } from '../components/Profile/Profile'
+import { userProfile } from '../redux/Profile/action'
 
 export const profile = (props) => {
+    const dispatch = useDispatch();
+    const reState = useSelector(state => state);
+    const {error, userData} = reState.profileReducer;
+
+    useEffect(() => {
+        dispatch(userProfile(JSON.parse(localStorage.getItem("Recommend_Share_current_user")).email))
+    }, [])
     return (
         <div className="login-body" style={{marginTop: "5.1rem"}}>
             <section className="content">
@@ -21,7 +29,10 @@ export const profile = (props) => {
                                 <h2>Account Details</h2>
                                 <div className="box white">
                                     <div className="row">
-                                       <ProfileForm />
+                                       <ProfileForm
+                                       userData={userData} 
+                                       error={error}
+                                       />
                                     </div>
                                 </div>
                             </div>

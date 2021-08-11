@@ -29,7 +29,7 @@ export const register = (props) => {
     const [address_line_1, setAddress_line_1] = useState('Ladbrokes Ltd');
     const [address_line_2, setAddress_line_2] = useState(' 123 Deansgate');
     const [address_town, setAddress_town] = useState('Manchester');
-    const [address_country, setAddress_country] = useState('london');
+    const [address_county, setAddress_country] = useState('london');
     const [terms_agreed_date, setTerms_agreed_date] = useState(false);
     const [gdpr_agreed_date, setGdpr_agreed_date] = useState(false);
     const [tradespeopleName, setTradespeopleName] = useState('');
@@ -76,7 +76,7 @@ export const register = (props) => {
     const onSubmit = (e) => {
         e.preventDefault();
         setSubmitted(true)
-        if (name != "" && email != "" && mobile != "" && password != "" && confirm_password != "" && address_postcode != "" && address_line_1 != "" && address_town != "" && address_county != "" && terms_agreed_date != true && gdpr_agreed_date != true) {
+        if (name != "" && email != "" && mobile != "" && password != "" && confirm_password != "" && address_postcode != "" && address_line_1 != "" && address_town != "" && address_county != "" && terms_agreed_date != false && gdpr_agreed_date != false) {
             const userData = {
                 name: name,
                 email: email,
@@ -89,7 +89,7 @@ export const register = (props) => {
                 address_line_1: address_line_1,
                 address_line_2: address_line_2,
                 address_town: address_town,
-                address_country: address_country,
+                address_county: address_county,
                 terms_agreed_date: terms_agreed_date,
                 gdpr_agreed_date: gdpr_agreed_date
             }
@@ -187,10 +187,10 @@ export const register = (props) => {
         {
             field: "text",
             fieldLabel: "Country",
-            fieldName: "address_country",
-            fieldValue: address_country,
+            fieldName: "address_county",
+            fieldValue: address_county,
             fieldAction: setAddress_country,
-            fieldValidation: [submitted, address_country, formFieldValidation(error, "address_country", address_country)]
+            fieldValidation: [submitted, address_county, formFieldValidation(error, "address_county", address_county)]
         }
     ]
     return (

@@ -2,6 +2,9 @@ import {
     USER_DATA, 
     USER_DATA_SUCCESS, 
     USER_DATA_ERROR,
+    USER_UPDATE,
+    USER_UPDATE_SUCCESS,
+    USER_UPDATE_ERROR
 } from "../action-type"
 
 const INIT_STATE ={
@@ -29,6 +32,24 @@ const profileReducer = ( state = INIT_STATE, action) =>{
                 ...state,
                 loading:false,
                 userData:action.payload
+            }
+        case USER_UPDATE:
+            return {
+                ...state,
+                loading:true,
+                userId:action.payload
+            }
+        case USER_UPDATE_SUCCESS:
+            return {
+                ...state,
+                loading:false,
+                profileUpdate:action.payload
+            }
+        case USER_UPDATE_ERROR:
+            return {
+                ...state,
+                loading:false,
+                profileUpdateError:action.payload
             }
         default:
             return {

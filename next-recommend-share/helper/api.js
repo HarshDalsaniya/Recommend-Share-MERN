@@ -54,6 +54,12 @@ const userData = (email) => {
         .catch((error) => console.log(error))
 }
 
+const updateProfile = (profileData) => {
+    return axios.post(`http://localhost:4000/api/profile/userUpdate`,profileData)
+        .then((result) => result)
+        .catch((error) => console.log(error))
+}
+
 export {
     login,
     register,
@@ -63,5 +69,6 @@ export {
     resetPassword,
     changePassword,
     VerifyKey,
-    userData
+    userData,
+    updateProfile
 }

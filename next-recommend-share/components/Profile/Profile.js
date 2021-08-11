@@ -3,31 +3,42 @@ import { connect, useSelector, useDispatch } from 'react-redux'
 import { Row, Col, Button} from "react-bootstrap"
 import { formFieldValidation } from "../../services/formValidation"
 import Fields from '../Form-Fields/Fields'
-import { userProfile } from '../../redux/Profile/action';
+import { profileUpadate } from '../../redux/Profile/action';
 
 export const ProfileForm = (props) => {
-    const reState = useSelector(state => state);
-    const { error, userData } = reState.profileReducer;
+    const {error, userData} = props
     const dispatch = useDispatch();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [telephone, setTelephone] = useState('');
     const [mobile, setMobile] = useState('');
-    const [age_group, setAge_group] = useState('');
+    const [age_group, setAge_group] = useState();
     const [address_postcode, setAddress_postcode] = useState('');
     const [address_line_1, setAddress_line_1] = useState('');
     const [address_line_2, setAddress_line_2] = useState('');
     const [address_town, setAddress_town] = useState('');
-    const [address_country, setAddress_country] = useState('');
-    const [notification_received_email, setNotification_received_email] = useState(typeof userData!="undefined"?userData.notification_received_email:false)
-    const [notification_received_sms, setNotification_received_sms] = useState(typeof userData!="undefined"?userData.notification_received_sms:false)
-    const [notification_marketing_email, setNotification_marketing_email] = useState(typeof userData!="undefined"?userData.notification_marketing_email:false)
+    const [address_county, setAddress_country] = useState('');
+    const [notification_received_email, setNotification_received_email] = useState(false)
+    const [notification_received_sms, setNotification_received_sms] = useState(false)
+    const [notification_marketing_email, setNotification_marketing_email] = useState(false)
     const [submitted, setSubmitted] = useState(false);
    
     useEffect(() => {
-        dispatch(userProfile(JSON.parse(localStorage.getItem("Recommend_Share_current_user")).email))  
-    }, [])
-
+        setName(typeof userData!="undefined" && typeof userData.name != "undefined" ? userData.name:'')
+        setEmail(typeof userData!="undefined" && typeof userData.email != "undefined" ? userData.email:'')
+        setTelephone(typeof userData!="undefined" && typeof userData.telephone != "undefined" ? userData.telephone:'')
+        setMobile(typeof userData!="undefined" && typeof userData.mobile != "undefined" ? userData.mobile:'')
+        setAddress_postcode(typeof userData!="undefined" && typeof userData.address_postcode != "undefined" ? userData.address_postcode:'')
+        setAddress_line_1(typeof userData!="undefined" && typeof userData.address_line_1 != "undefined" ? userData.address_line_1:'')
+        setAddress_line_2(typeof userData!="undefined" && typeof userData.address_line_2 != "undefined" ? userData.address_line_2:'')
+        setAddress_town(typeof userData!="undefined" && typeof userData.address_town != "undefined" ? userData.address_town:'')
+        setAddress_country(typeof userData!="undefined" && typeof userData.address_county != "undefined" ? userData.address_county:'')
+        setNotification_received_email(typeof userData!="undefined" && typeof userData.notification_received_email != "undefined" ? userData.notification_received_email:false)
+        setNotification_received_sms(typeof userData!="undefined" && typeof userData.notification_received_sms != "undefined" ? userData.notification_received_sms:false)
+        setNotification_marketing_email(typeof userData!="undefined" && typeof userData.notification_marketing_email != "undefined" ? userData.notification_marketing_email:false)
+    }, [props])
+    
+    
     const getAddress = () => {
         if (address_postcode != '') {
             axios.get(`https://api.getaddress.io/find/${address_postcode}?api-key=xR5ryKXzb0SevSwn3OX7VQ31904`)
@@ -45,7 +56,7 @@ export const ProfileForm = (props) => {
     const onSubmit = (e) => {
         e.preventDefault();
         setSubmitted(true);
-        // if (name != "" && email != "" && mobile != "" && address_postcode != "" && address_line_1 != "" && address_town != "" && address_county != "") {
+        if (name != "" && email != "" && mobile != "" && address_postcode != "" && address_line_1 != "" && address_town != "" && address_county != "") {
             const userData = {
                 name: name,
                 email: email,
@@ -56,21 +67,20 @@ export const ProfileForm = (props) => {
                 address_line_1: address_line_1,
                 address_line_2: address_line_2,
                 address_town: address_town,
-                address_country: address_country,
+                address_county: address_county,
                 notification_received_email: notification_received_email,
                 notification_received_sms: notification_received_sms,
                 notification_marketing_email: notification_marketing_email
             }
-            console.log(userData)
-            // props.profileUpadate(userData)
-        // }
+            dispatch(profileUpadate(userData))
+        }
     }
     const col1 = [
         {
             field: "text",
             fieldLabel: "Full Name",
             fieldName: "name",
-            fieldValue: typeof userData!="undefined"?userData.name:name,
+            fieldValue: name,
             fieldAction: setName,
             fieldValidation: [submitted, name, formFieldValidation(error, "name", name)]
         },
@@ -78,7 +88,7 @@ export const ProfileForm = (props) => {
             field: "email",
             fieldLabel: "Email Address",
             fieldName: "email",
-            fieldValue: typeof userData!="undefined"?userData.email:email,
+            fieldValue: email,
             fieldAction: setEmail,
             fieldValidation: [submitted, email, formFieldValidation(error, "email", email)]
         },
@@ -86,7 +96,7 @@ export const ProfileForm = (props) => {
             field: "numeric",
             fieldLabel: "Telephone",
             fieldName: "telephone",
-            fieldValue: typeof userData!="undefined"&&userData.telephone?userData.telephone:telephone,
+            fieldValue: telephone,
             fieldAction: setTelephone,
             fieldValidation: [submitted]
         },
@@ -94,7 +104,7 @@ export const ProfileForm = (props) => {
             field: "numeric",
             fieldLabel: "Mobile Telephone",
             fieldName: "mobile",
-            fieldValue: typeof userData!="undefined"?userData.mobile:mobile,
+            fieldValue: mobile,
             fieldAction: setMobile,
             fieldValidation: [submitted, mobile, formFieldValidation(error, "mobile", mobile)]
         },
@@ -103,7 +113,7 @@ export const ProfileForm = (props) => {
             fieldLabel: "Age Group",
             fieldName: "age_group",
             fieldOption: [{ title: "16-24", value: "16-24" }, { title: "25-34", value: "25-34" }, { title: "35-44", value: "35-44" }, { title: "44-55", value: "44-55" }, { title: "56-64", value: "56-64" }, { title: "65+", value: "65+" }],
-            fieldValue: typeof userData!="undefined" && userData.age_group?userData.age_group:age_group,
+            fieldValue: age_group,
             fieldAction: setAge_group,
             fieldValidation: [submitted]
         }
@@ -113,7 +123,7 @@ export const ProfileForm = (props) => {
             field: "text",
             fieldLabel: "Postcode",
             fieldName: "address_postcode",
-            fieldValue: typeof userData!="undefined"?userData.address_postcode:address_postcode,
+            fieldValue: address_postcode,
             fieldAction: setAddress_postcode,
             fieldValidation: [submitted, address_postcode, formFieldValidation(error, "address_postcode", address_postcode)]
         },
@@ -121,7 +131,7 @@ export const ProfileForm = (props) => {
             field: "text",
             fieldLabel: "Address Line 1",
             fieldName: "address_line_1",
-            fieldValue: typeof userData!="undefined"?userData.address_line_1:address_line_1,
+            fieldValue: address_line_1,
             fieldAction: setAddress_line_1,
             fieldValidation: [submitted, address_line_1, formFieldValidation(error, "address_line_1", address_line_1)]
         },
@@ -129,7 +139,7 @@ export const ProfileForm = (props) => {
             field: "text",
             fieldLabel: "Address Line 2",
             fieldName: "address_line_2",
-            fieldValue: typeof userData!="undefined"?userData.address_line_2:address_line_2,
+            fieldValue: address_line_2,
             fieldAction: setAddress_line_2,
             fieldValidation: [submitted]
         },
@@ -137,19 +147,20 @@ export const ProfileForm = (props) => {
             field: "text",
             fieldLabel: "Town",
             fieldName: "address_town",
-            fieldValue: typeof userData!="undefined"?userData.address_town:address_town,
+            fieldValue: address_town,
             fieldAction: setAddress_town,
             fieldValidation: [submitted, address_town, formFieldValidation(error, "address_town", address_town)]
         },
         {
             field: "text",
             fieldLabel: "Country",
-            fieldName: "address_country",
-            fieldValue: typeof userData!="undefined"?userData.address_country:address_country,
+            fieldName: "address_county",
+            fieldValue: address_county,
             fieldAction: setAddress_country,
-            fieldValidation: [submitted, address_country, formFieldValidation(error, "address_country", address_country)]
+            fieldValidation: [submitted, address_county, formFieldValidation(error, "address_county", address_county)]
         }
     ]
+    console.log(name)
     return (
         <form onSubmit={onSubmit}>
             <div className="contained">
@@ -369,12 +380,6 @@ export const RemoveAC = (props) => {
     )
 }
 
-const mapStateToProps = (profileReducer) => {
 
-}
 
-const mapDispatchToProps = {
-    userProfile:userProfile
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm, ProfileImage, ProfileStatus, ConnectFacebook, RemoveAC)
+export default connect(null, null)(ProfileForm, ProfileImage, ProfileStatus, ConnectFacebook, RemoveAC)

@@ -157,7 +157,7 @@ router.post('/register', cors(), function (req, res, next) {
     // console.log("testestest", post)
     var errors = new Array();
     errors = {blankValue:{},invalidValue:{},verifyError:{}};
-    var required_params = ['password', 'confirm_password', 'email', 'name', 'mobile', 'address_postcode', 'address_line_1', 'address_town', 'address_country', 'terms_agreed_date', 'gdpr_agreed_date'];
+    var required_params = ['password', 'confirm_password', 'email', 'name', 'mobile', 'address_postcode', 'address_line_1', 'address_town', 'address_county', 'terms_agreed_date', 'gdpr_agreed_date'];
     if(req.query.type && req.query.type == "tradesperson"){
         required_params.push("tradespeopleTrade")
     }
@@ -213,7 +213,7 @@ router.post('/register', cors(), function (req, res, next) {
                             address_line_1: post.address_line_1,
                             address_line_2: post.address_line_2,
                             address_town: post.address_town,
-                            address_country: post.address_country,
+                            address_county: post.address_county,
                             address_postcode: post.address_postcode,
                             enabled: 1,
                             system: 1,
