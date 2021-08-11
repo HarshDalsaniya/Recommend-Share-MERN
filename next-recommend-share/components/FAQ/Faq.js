@@ -2,12 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 export const Faq = (props) => {
+    console.log(props)
     return (
         <div className="box grey">
-            <h3>${ props.question }</h3>
+            <h3>Q. { props.question }</h3>
             <div className="faq-answer">
                 <p className="shallow">
-                    ${ props.answer }
+                    { props.answer }
                 </p>
             </div>
         </div>

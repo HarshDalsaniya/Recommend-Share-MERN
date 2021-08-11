@@ -59,6 +59,12 @@ const updateProfile = (profileData) => {
         .then((result) => result)
         .catch((error) => console.log(error))
 }
+const userBusiness = (id)=>{
+    console.log(id)
+    return axios.post('http://localhost:4000/api/business/getuserbussiness',{id:id})
+        .then((result) => result)
+        .catch((error) => console.log(error))
+}
 
 const updateProfilePhoto = (profilePhoto) => {
     profilePhoto.append("email",JSON.parse(localStorage.getItem('Recommend_Share_current_user')).email)
@@ -78,5 +84,6 @@ export {
     VerifyKey,
     userData,
     updateProfile,
-    updateProfilePhoto
+    updateProfilePhoto,
+    userBusiness
 }

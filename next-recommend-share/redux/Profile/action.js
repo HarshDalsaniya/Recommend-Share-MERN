@@ -31,6 +31,9 @@ export const userProfile = (userId) =>{
                     })
                 }
             })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 }
 
@@ -54,6 +57,9 @@ export const profileUpadate = (profileData) =>{
                         payload: result.data.message
                     })
                 }
+            })
+            .catch((err) => {
+                console.log(err)
             })
     }
 }

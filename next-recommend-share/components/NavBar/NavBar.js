@@ -3,20 +3,28 @@ import { connect, useDispatch, useSelector } from 'react-redux'
 import { Container, Navbar, Dropdown } from 'react-bootstrap';
 import Link from 'next/link'
 import { logoutUser} from '../../redux/auth/action';
+import {userTradeBussines} from '../../redux/bussiness/action'
+
 
 
 export const NavBar = (props) => {
-    const birds = useSelector(state => state);
+    const businessState = useSelector(state => state);
+    const {userbussines} = businessState.businessReducer;
+    // console.log(userbussines);
     const dispatch = useDispatch();
     const [localstorageItem, setLocalStorageItem] = useState(null)
+   
     
     useEffect(() => {
+        dispatch(userTradeBussines(JSON.parse(localStorage.getItem("Recommend_Share_current_user")).id))
+      
         const interval = setInterval(() => {
             setLocalStorageItem(JSON.parse(localStorage.getItem('Recommend_Share_current_user')));
         }, 1000);
         return () => clearInterval(interval);
     }, [setLocalStorageItem])
 
+    
     const handleLogout = () => {
             dispatch(logoutUser())
     };
@@ -108,8 +116,11 @@ export const NavBar = (props) => {
                                                         <span className="ms-2">{localstorageItem.name}</span>
                                                     </Dropdown.Toggle>
                                                     <Dropdown.Menu>
-                                                        <Dropdown.Item>My Dashboard</Dropdown.Item>
-                                                        <Dropdown.Item>vm</Dropdown.Item>
+                                                        <Dropdown.Item>My Dashboard</Dropdown.Item>                                                  
+                                                        {userbussines.map((bussines)=>
+                                                        <Dropdown.Item><Link href=" ">{bussines.name}</Link></Dropdown.Item>
+                                                        )}   
+                                                        {/* {console.log(userbussines)}                                                      */}
                                                         <Dropdown.Item><Link href="/tradespeople">Add a Business</Link></Dropdown.Item>
                                                         <Dropdown.Item><Link href="/profile">Edit My Account</Link></Dropdown.Item>
                                                         <Dropdown.Item><Link href="/password">My Password</Link></Dropdown.Item>
