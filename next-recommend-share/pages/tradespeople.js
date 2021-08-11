@@ -14,21 +14,21 @@ import { formFieldValidation } from "../services/formValidation"
 import { tradesPeopleRegister } from "../redux/bussiness/action"
 
 export const tradespeople = (props) => {
-  
-    
+
+
 
     const reState = useSelector(state => state);
+    const { error, tradespeople } = reState.businessReducer;
     const dispatch = useDispatch();
-    const { error } = reState.authUser;
     const [businessName, setBusinessName] = useState('');
     // const [day, setDay] = useState('');
     // const [month, setMonth] = useState('');
     // const [year, setYear] = useState('');
-    const [established , setEstablished] = useState([]);
+    const [established, setEstablished] = useState([]);
     const [companyNo, setcompanyName] = useState('');
     const [trade, setTrade] = useState('');
     const [ownerName, setOwnerName] = useState('');
-    const [email, setEmailAddress] = useState('');
+    const [email, setEmailAddress] = useState(typeof tradesPeople!='undefined' ?tradepeople.email:(JSON.parse(localStorage.getItem("Recommend_Share_current_user")).email));
     const [webSite, setWebSite] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [mobileNumber, setMobileNumber] = useState('');
@@ -38,13 +38,19 @@ export const tradespeople = (props) => {
     const [address_line_2, setAddress_line_2] = useState('');
     const [address_town, setAddress_town] = useState('');
     const [address_county, setAddress_country] = useState('');
-    const [federationValue, setFederationValue] = useState([])
-
+    const [federationValue, setFederationValue] = useState([]);
+    const [selectTreadOption, setSelectTreadOption] = useState([]);
+    const [federation, setFederationOption] = useState([]);
+    const [vat_registered, setVat_Register] = useState(typeof tradespeople != "undefined" ? tradespeople.vat_registered : false);
+    const [liability_insurance, setLiability_Insurance] = useState(typeof tradespeople != "undefined" ? tradespeople.liability_insurance : false);
+    const [notification_received_email, setNotification_received_email] = useState(typeof tradespeople!="undefined"?tradespeople.notification_received_email:true);
+    const [notification_received_sms, setNotification_received_sms] = useState(typeof tradespeople!="undefined"?tradespeople.notification_received_sms:true);
+    const [notification_marketing_email, setNotification_marketing_email] = useState(typeof tradespeople!="undefined"?tradespeople.notification_marketing_email:true);
     const [submitted, setSubmitted] = useState(false);
-    const [selectTreadOption, setSelectTreadOption] = useState([])
-    const [federation, setFederationOption] = useState([])
+
 
     useEffect(() => {
+
         axios.get(`http://localhost:4000/api/business/trade_options`)
             .then((res) => {
                 const result = [];
@@ -64,14 +70,14 @@ export const tradespeople = (props) => {
                 )
             })
         axios.get(`http://localhost:4000/api/business/federation`)
-            .then((res)=> {
+            .then((res) => {
                 const Federation = [];
-                res.data.data.map((value)=> {
-                    Federation.push({value:value.id, title:value.name})
+                res.data.data.map((value) => {
+                    Federation.push({ value: value.id, title: value.name })
                 })
                 setFederationOption(Federation)
             })
-    }, [setSelectTreadOption , setFederationOption])
+    }, [setSelectTreadOption, setFederationOption])
 
     const getAddress = () => {
         if (address_postcode != '') {
@@ -80,9 +86,9 @@ export const tradespeople = (props) => {
                     // console.log(res)
                     setSelectPostcode(res.data.addresses)
                 })
-                
+
         }
-    }    
+    }
     // console.log(federation)
     const putAddress = (value) => {
         setAddress_line_1(value.split(',')[0])
@@ -90,17 +96,17 @@ export const tradespeople = (props) => {
         setAddress_town(value.split(',')[5])
         setSelectPostcode('')
     }
-    
+
     // const dateArray = established;
     // const formate = dateArray.reverse();
     // const formatedDate = formate.join("-")
     // const finaldate = formatedDate
-// console.log(established.reverse().join("-"));
+    console.log(established);
     const onSubmit = (e) => {
         e.preventDefault();
         setSubmitted(true)
         // console.log(federation)
-        if( ownerName !="" && email!="" && mobileNumber != ""){
+        if (ownerName != "" && email != "" && mobileNumber != "") {
             // if(established.length == 3 ){
             //     const dateArray = established;
             //     const formate = dateArray.reverse();
@@ -109,43 +115,43 @@ export const tradespeople = (props) => {
 
             // }
             const tradepersonData = {
-                trade_id : trade ,
-                created : null,
-                updated : null,
-                name : businessName,
-                email : email,
-                telephone : phoneNumber,
-                mobile : mobileNumber,
-                address_line_1 : address_line_1,
-                address_line_2 : address_line_2,
-                address_town :  address_town,
-                address_county : address_county,
-                address_postcode : address_postcode,                             
-                established : (established.year+"-"+established.month+"-"+established.day),                                
-                company_number : companyNo,
-                website : webSite,
-                vat_registered : null,
-                insured : null,
-                verify_date : null,
-                verify_code : null,
-                verified : 1,
-                image : null,
-                latitude : null,
-                longitude : null,                             
-                slug : businessName.toLowerCase().replace(' ', '-'),
-                notification_received_sms:1,
-                notification_received_email:1,
-                confirm_date : null,
-                confirm_code : null,
-                owner_name : ownerName,
-                notification_marketing_email:1,
+                trade_id: trade,
+                created: null,
+                updated: null,
+                name: businessName,
+                email: email,
+                telephone: phoneNumber,
+                mobile: mobileNumber,
+                address_line_1: address_line_1,
+                address_line_2: address_line_2,
+                address_town: address_town,
+                address_county: address_county,
+                address_postcode: address_postcode,
+                established: (established.year + "-" + established.month + "-" + established.day),
+                company_number: companyNo,
+                website: webSite,
+                vat_registered: vat_registered,
+                insured: liability_insurance,
+                verify_date: null,
+                verify_code: null,
+                verified: 1,
+                image: null,
+                latitude: null,
+                longitude: null,
+                slug: businessName.toLowerCase().replace(' ', '-'),
+                notification_received_sms: notification_received_sms,
+                notification_received_email: notification_received_email,
+                confirm_date: null,
+                confirm_code: null,
+                owner_name: ownerName,
+                notification_marketing_email: notification_marketing_email,
                 federation_id: federationValue
             }
             dispatch(tradesPeopleRegister(tradepersonData))
-       
+
         }
     }
-    console.log(established.year+"-"+established.month+"-"+established.day)
+
     const col2 = [
         {
             field: "text",
@@ -153,7 +159,7 @@ export const tradespeople = (props) => {
             fieldName: "address_line_1",
             fieldValue: address_line_1,
             fieldAction: setAddress_line_1,
-            fieldValidation: [submitted, address_line_1, ]
+            fieldValidation: [submitted, address_line_1,]
         },
         {
             field: "text",
@@ -169,7 +175,7 @@ export const tradespeople = (props) => {
             fieldName: "address_town",
             fieldValue: address_town,
             fieldAction: setAddress_town,
-            fieldValidation: [submitted, address_town, ]
+            fieldValidation: [submitted, address_town,]
         },
         {
             field: "text",
@@ -177,7 +183,7 @@ export const tradespeople = (props) => {
             fieldName: "address_county",
             fieldValue: address_county,
             fieldAction: setAddress_country,
-            fieldValidation: [submitted, address_county, ]
+            fieldValidation: [submitted, address_county,]
         }
     ]
     //   dayLoop 
@@ -199,7 +205,7 @@ export const tradespeople = (props) => {
         Years.push(y);
     }
 
-    
+
 
     return (
         <div className="login-body pt-3">
@@ -209,7 +215,7 @@ export const tradespeople = (props) => {
                         <div className="contained tradeperson-heading">
                             <h1>Create a Business Listing</h1>
                             <p>Your new business details, profile image and address can be set below.</p>
-                            <form onSubmit={onSubmit}>
+                            <form onSubmit={ onSubmit }>
                                 <div className="eight columns alpha tradeperson-heading">
                                     <h2>Business Details</h2>
                                     <div className="box white">
@@ -230,14 +236,13 @@ export const tradespeople = (props) => {
                                                         <div className="field_container">
                                                             <div>
                                                                 <div className="_select ">
-                                                                    <select
-                                                                        id="acdo_systembundle_tradesperson_established_day"
+                                                                    <select                                                                        
                                                                         name="established"
                                                                         className="_select_input ready"
-                                                                        value={established[0]}
-                                                                        onChange={(e)=>setEstablished({...established, day:e.target.value})}
+                                                                        value={ established[0] }
+                                                                        onChange={ (e) => setEstablished({ ...established, day: e.target.value }) }
                                                                         style={ {
-                                                                            opacity: 0,
+                                                                            opacity: 1,
                                                                             cursor: "pointer",
                                                                             position: "absolute",
                                                                             width: "99.9%",
@@ -248,7 +253,7 @@ export const tradespeople = (props) => {
                                                                     >
                                                                         <option value>Day</option>
                                                                         { daysOfMonth.map((day) =>
-                                                                            <option key={"day_"+day}value={day}>{ day }</option>
+                                                                            <option key={ "day_" + day } value={ day }>{ day }</option>
                                                                         ) }
 
                                                                     </select>
@@ -257,12 +262,13 @@ export const tradespeople = (props) => {
                                                                 </div>
                                                                 <div className="_select">
                                                                     <select
-                                                                        id="acdo_systembundle_tradesperson_established_month"
+                                                                      
                                                                         name="acdo_systembundle_tradesperson[established][month]"
                                                                         className="_select_input ready"
-                                                                        onChange = {(e)=>{setEstablished({...established, month:e.target.value})}}
+                                                                        value={ established[1] }
+                                                                        onChange={ (e) => { setEstablished({ ...established, month: e.target.value }) } }
                                                                         style={ {
-                                                                            opacity: 0,
+                                                                            opacity: 1,
                                                                             cursor: "pointer",
                                                                             position: "absolute",
                                                                             width: "99.9%",
@@ -273,7 +279,7 @@ export const tradespeople = (props) => {
                                                                     >
                                                                         <option value>Month</option>
                                                                         { monthOfYear.map((month) =>
-                                                                            <option key={"month_"+month} value={month}>{ month }</option>
+                                                                            <option key={ "month_" + month } value={ month }>{ month }</option>
                                                                         ) }
                                                                     </select>
                                                                     <a className="caret"></a>
@@ -281,12 +287,13 @@ export const tradespeople = (props) => {
                                                                 </div>
                                                                 <div className="_select">
                                                                     <select
-                                                                        id="acdo_systembundle_tradesperson_established_year"
+                                                                     
                                                                         name="acdo_systembundle_tradesperson[established][year]"
                                                                         className="_select_input ready"
-                                                                        onChange={(e)=>{setEstablished({...established, year:e.target.value})}}
+                                                                        value={ established[2] }
+                                                                        onChange={ (e) => { setEstablished({ ...established, year: e.target.value }) } }
                                                                         style={ {
-                                                                            opacity: 0,
+                                                                            opacity: 1,
                                                                             cursor: "pointer",
                                                                             position: "absolute",
                                                                             width: "99.9%",
@@ -295,9 +302,9 @@ export const tradespeople = (props) => {
                                                                             right: 0
                                                                         } }
                                                                     >
-                                                                        <option value>Year</option>
+                                                                        {/* <option value>Year</option> */}
                                                                         { Years.map((year) =>
-                                                                            <option key={"month_"+year} value={year} >{ year }</option>
+                                                                            <option key={ "month_" + year } value={ year } >{ year }</option>
                                                                         ) }
                                                                     </select>
                                                                     <a className="caret"></a>
@@ -347,7 +354,7 @@ export const tradespeople = (props) => {
                                                         fieldAction={ setEmailAddress }
                                                         fieldValidation={ [submitted, email,] }
                                                     />
-                                                     <Fields
+                                                    <Fields
                                                         key="field_website"
                                                         field="text"
                                                         fieldLabel="Website"
@@ -387,37 +394,38 @@ export const tradespeople = (props) => {
                                                             Federation Memberships
                                                         </label>
                                                         <div className="field_container">
-                                                            {console.log(federationValue)}
+                                                            { console.log(federationValue) }
                                                             <select
                                                                 id="acdo_systembundle_tradesperson_federations"
                                                                 name="acdo_systembundle_tradesperson[federations][]"
                                                                 size={ 10 }
                                                                 className="multiple"
                                                                 multiple
-                                                                onChange={(e) => setFederationValue([...e.target.options].filter(option => option.selected).map(x => x.value))}
+                                                                onChange={ (e) => setFederationValue([...e.target.options].filter(option => option.selected).map(x => x.value)) }
                                                             >
-                                                               
-                                                            {federation.map((fed)=>
-                                                                <option key ={'opt_'+fed.value} value={fed.value}>{fed.title}</option>
-                                                            )}
-                                                                
+
+                                                                { federation.map((fed) =>
+                                                                    <option key={ 'opt_' + fed.value } value={ fed.value }>{ fed.title }</option>
+                                                                ) }
+
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div className="form_row  checkbox">
                                                         <div className="field_container">
-                                                            <div className="_checkbox">
+                                                            <div className={ vat_registered == true ? "_checkbox on " : "_checkbox" }>
                                                                 <input
                                                                     type="checkbox"
-                                                                    id="acdo_systembundle_tradesperson_vat_registered"
-                                                                    name="acdo_systembundle_tradesperson[vat_registered]"
-                                                                    defaultValue={ 1 }
+                                                                    name="vat_registered"
+                                                                    value={ 1 }
+                                                                    onClick={ () => setVat_Register(!vat_registered) }
                                                                     className="_checkbox_input ready"
                                                                     style={ {
                                                                         opacity: 0,
                                                                         position: "absolute",
                                                                         top: 0,
-                                                                        right: "-50px"
+                                                                        width: "26px",
+                                                                        height: "24px"
                                                                     } }
                                                                 />
                                                             </div>
@@ -431,18 +439,19 @@ export const tradespeople = (props) => {
                                                     </div>
                                                     <div className="form_row  checkbox">
                                                         <div className="field_container">
-                                                            <div className="_checkbox">
+                                                            <div className={ liability_insurance == true ? "_checkbox on" : "_checkbox" }>
                                                                 <input
                                                                     type="checkbox"
-                                                                    id="acdo_systembundle_tradesperson_insured"
-                                                                    name="acdo_systembundle_tradesperson[insured]"
-                                                                    defaultValue={ 1 }
+                                                                    name="insured"
+                                                                    value={ 1 }
+                                                                    onClick={ () => setLiability_Insurance(!liability_insurance) }
                                                                     className="_checkbox_input ready"
                                                                     style={ {
                                                                         opacity: 0,
                                                                         position: "absolute",
                                                                         top: 0,
-                                                                        right: "-50px"
+                                                                        width: "26px",
+                                                                        height: "24px"
                                                                     } }
                                                                 />
                                                             </div>
@@ -463,19 +472,21 @@ export const tradespeople = (props) => {
                                                     <h3>Notification Preferences</h3>
                                                     <div className="form_row  checkbox">
                                                         <div className="field_container">
-                                                            <div className="_checkbox  on  ">
+                                                            <div className={ notification_received_email == false ? "_checkbox" : "_checkbox  on" }>
                                                                 <input
                                                                     type="checkbox"
-                                                                    id="acdo_systembundle_tradesperson_notification_received_email"
-                                                                    name="acdo_systembundle_tradesperson[notification_received_email]"
-                                                                    defaultValue={ 1 }
-                                                                    defaultChecked="checked"
+                                                                    name="notification_received_email"
+                                                                    value={ 1 }
+                                                                    onClick={ () => setNotification_received_email(!notification_received_email) }
+
+                                                                    // defaultChecked="checked"
                                                                     className="_checkbox_input ready"
                                                                     style={ {
-                                                                        opacity: 0,
+                                                                        opacity: "0",
                                                                         position: "absolute",
-                                                                        top: 0,
-                                                                        right: "-50px"
+                                                                        top: "0px",
+                                                                        width: "26px",
+                                                                        height: "24px"
                                                                     } }
                                                                 />
                                                             </div>
@@ -489,19 +500,20 @@ export const tradespeople = (props) => {
                                                     </div>
                                                     <div className="form_row  checkbox">
                                                         <div className="field_container">
-                                                            <div className="_checkbox  on  ">
+                                                            <div className={notification_received_sms==false?"_checkbox ":"_checkbox on"}>
                                                                 <input
                                                                     type="checkbox"
-                                                                    id="acdo_systembundle_tradesperson_notification_received_sms"
-                                                                    name="acdo_systembundle_tradesperson[notification_received_sms]"
-                                                                    defaultValue={ 1 }
-                                                                    defaultChecked="checked"
+                                                                  
+                                                                    name="notification_received_sms"
+                                                                    value={ 1 }
+                                                                    onClick={()=>setNotification_received_sms(!notification_received_sms)}
                                                                     className="_checkbox_input ready"
                                                                     style={ {
-                                                                        opacity: 0,
+                                                                        opacity: "0",
                                                                         position: "absolute",
-                                                                        top: 0,
-                                                                        right: "-50px"
+                                                                        top: "0px",
+                                                                        width: "26px",
+                                                                        height: "24px"
                                                                     } }
                                                                 />
                                                             </div>
@@ -515,13 +527,12 @@ export const tradespeople = (props) => {
                                                     </div>
                                                     <div className="form_row  checkbox">
                                                         <div className="field_container">
-                                                            <div className="_checkbox  on  ">
+                                                            <div className={notification_marketing_email==false?"_checkbox":"_checkbox on"}>
                                                                 <input
-                                                                    type="checkbox"
-                                                                    id="acdo_systembundle_tradesperson_notification_marketing_email"
-                                                                    name="acdo_systembundle_tradesperson[notification_marketing_email]"
-                                                                    defaultValue={ 1 }
-                                                                    defaultChecked="checked"
+                                                                    type="checkbox"                                                                   
+                                                                    name="notification_marketing_email"
+                                                                    value={ 1 }
+                                                                    onClick={()=>setNotification_marketing_email(!notification_marketing_email)}
                                                                     className="_checkbox_input ready"
                                                                     style={ {
                                                                         opacity: 0,
@@ -550,44 +561,44 @@ export const tradespeople = (props) => {
                                         <h2>Business Address</h2>
                                         <div className="box white">
                                             <div className="form_row postcode text">
-                                            <label
-                                                htmlFor="acdo_systembundle_tradesperson_address_postcode"
-                                                className="required"
+                                                <label
+                                                    htmlFor="acdo_systembundle_tradesperson_address_postcode"
+                                                    className="required"
                                                 >
-                                                Postcode
+                                                    Postcode
                                                 </label>
-                                                    <Form.Control type="text" name="address_postcode" key="field_address_postcode" style={ { width: "calc( 100% - 103px )" } } value={ address_postcode } onChange={ (e) => { setAddress_postcode(e.target.value) } } />
-                                                <Button className="button square postcode-btn" style={{marginTop:"-50px"}} onClick={ () => { getAddress() } }>
+                                                <Form.Control type="text" name="address_postcode" key="field_address_postcode" style={ { width: "calc( 100% - 103px )" } } value={ address_postcode } onChange={ (e) => { setAddress_postcode(e.target.value) } } />
+                                                <Button className="button square postcode-btn" style={ { marginTop: "-50px" } } onClick={ () => { getAddress() } }>
                                                     LOOKUP
                                                 </Button>
-                                           
-                                            { submitted && formFieldValidation(error, "address_postcode", address_postcode) != "undefined" && formFieldValidation(error, "address_postcode", address_postcode) != "" &&
-                                                <div className="help-block" style={ { color: 'red' } }>{ typeof formFieldValidation(error, "address_postcode", address_postcode) != "undefined" ? formFieldValidation(error, "address_postcode", address_postcode).message : formFieldValidation(error, "address_postcode", address_postcode) }</div>
-                                            }
-                                            { select_postcode != '' ?
-                                                <>
-                                                    <span className="postcode-lookup results">
-                                                        <select className="postcode-lookup-sel" onChange={ (e) => putAddress(e.target.value) } defaultValue="">
-                                                            <option disabled>Select your address</option>
-                                                            { select_postcode.map((option) =>
-                                                                <option key={ "key_" + option } value={ option }>{ option }</option>
-                                                            ) }
-                                                        </select>
-                                                    </span>
-                                                </>
-                                                : null }
-                                             </div>
-                                             {col2.map((field) =>
-                                                    <Fields
-                                                        key={"field_" + field.fieldName}
-                                                        field={field.field}
-                                                        fieldLabel={field.fieldLabel}
-                                                        fieldName={field.fieldName}
-                                                        fieldValue={field.fieldValue}
-                                                        fieldAction={field.fieldAction}
-                                                        fieldValidation={field.fieldValidation}
-                                                    />
-                                                )}
+
+                                                { submitted && formFieldValidation(error, "address_postcode", address_postcode) != "undefined" && formFieldValidation(error, "address_postcode", address_postcode) != "" &&
+                                                    <div className="help-block" style={ { color: 'red' } }>{ typeof formFieldValidation(error, "address_postcode", address_postcode) != "undefined" ? formFieldValidation(error, "address_postcode", address_postcode).message : formFieldValidation(error, "address_postcode", address_postcode) }</div>
+                                                }
+                                                { select_postcode != '' ?
+                                                    <>
+                                                        <span className="postcode-lookup results">
+                                                            <select className="postcode-lookup-sel" onChange={ (e) => putAddress(e.target.value) } defaultValue="">
+                                                                <option disabled>Select your address</option>
+                                                                { select_postcode.map((option) =>
+                                                                    <option key={ "key_" + option } value={ option }>{ option }</option>
+                                                                ) }
+                                                            </select>
+                                                        </span>
+                                                    </>
+                                                    : null }
+                                            </div>
+                                            { col2.map((field) =>
+                                                <Fields
+                                                    key={ "field_" + field.fieldName }
+                                                    field={ field.field }
+                                                    fieldLabel={ field.fieldLabel }
+                                                    fieldName={ field.fieldName }
+                                                    fieldValue={ field.fieldValue }
+                                                    fieldAction={ field.fieldAction }
+                                                    fieldValidation={ field.fieldValidation }
+                                                />
+                                            ) }
                                         </div>
                                     </div>
 
@@ -671,12 +682,12 @@ export const tradespeople = (props) => {
 }
 
 const mapStateToProps = (businessReducer) => {
-    const { loading , error , tradespeople} = businessReducer
-    return { loading , error , tradespeople};
+    const { loading, error, tradespeople } = businessReducer
+    return { loading, error, tradespeople };
 }
 
 const mapDispatchToProps = {
-    tradesPeopleRegister : tradesPeopleRegister
+    tradesPeopleRegister: tradesPeopleRegister
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(tradespeople)
