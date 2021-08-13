@@ -15,7 +15,7 @@ module.exports = {
         // SMTP Configurations
         SMTP: {
                 SMTP_EMAIL: "harshrdtl@gmail.com",
-                SMTP_PASSWORD: "harshrdtl@123",
+                SMTP_PASSWORD: "harshdalsaniya@4277",
                 SMTP_HOST: "",
                 SMTP_PORT: "465",
                 SMTP_FROM: "harshrdtl@gmail.com"

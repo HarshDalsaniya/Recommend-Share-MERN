@@ -64,6 +64,12 @@ const userBusiness = (id)=>{
         .then((result) => result)
         .catch((error) => console.log(error))
 }
+const contactUs=(emaildata) => {
+    return axios.post('http://localhost:4000/api/general/contactUs', emaildata)
+    .then((result) => result)
+    .catch((error) => console.log(error))
+
+}
 
 const updateProfilePhoto = (profilePhoto) => {
     profilePhoto.append("email",JSON.parse(localStorage.getItem('Recommend_Share_current_user')).email)
@@ -97,5 +103,6 @@ export {
     updateProfilePhoto,
     userBusiness,
     tradList,
-    businessSearch
+    businessSearch,
+    contactUs,
 }

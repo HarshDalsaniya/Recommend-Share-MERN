@@ -5,13 +5,17 @@ import {
     USER_BUSSINESS,
     USER_BUSSINESS_SUCCESS,
     USER_BUSSINESS_ERROR,
+    USER_CONTACT_US,
+    USER_CONTACT_US_SUCCESS,
+    USER_CONTACT_US_ERROR,
 } from "../action-type"
 
 import Router from "next/router"
 import { currentUser } from "../../constants/defaultValues";
 import {
     tradesPeople,
-    userBusiness
+    userBusiness,
+    contactUs
 } from "../../helper/api"
 
 import { setCurrentUser } from "../../helper/Utils";
@@ -66,6 +70,33 @@ export const userTradeBussines = (id)=>{
             }else{
                 dispatch({
                     type:USER_BUSSINESS_ERROR,
+                    payload:result.data.message
+                })
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+}
+
+export const contactUsData  = (emaildata)=>{
+    return dispatch => {
+        dispatch({
+            type:USER_CONTACT_US,
+            payload:emaildata
+        })
+        contactUs(emaildata)
+        .then((result)=> {
+            console.log(result)
+            if(result.data.status == true){
+                dispatch({
+                    type:USER_CONTACT_US_SUCCESS,
+                    payload:result.data.data
+                })
+            }else{
+                dispatch({
+                    type:USER_CONTACT_US_ERROR,
                     payload:result.data.message
                 })
             }
