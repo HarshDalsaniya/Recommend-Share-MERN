@@ -49,6 +49,12 @@ app.use('/api/profile', require('./routes/api/user/profile'),function (err, req,
   res.json({status: 0,message: "Oops! Something went wrong"});
 });
 
+//conatact us
+app.use('/api/general', require('./routes/api/general/contactUs'),function(err,req,res,next){
+  console.log(err);
+  res.json({status:0,message:"Oops! Somethint went wrong"});
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

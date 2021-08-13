@@ -60,10 +60,15 @@ const updateProfile = (profileData) => {
         .catch((error) => console.log(error))
 }
 const userBusiness = (id)=>{
-    console.log(id)
     return axios.post('http://localhost:4000/api/business/getuserbussiness',{id:id})
         .then((result) => result)
         .catch((error) => console.log(error))
+}
+const contactUs=(emaildata) => {
+    return axios.post('http://localhost:4000/api/general/contactUs', emaildata)
+    .then((result) => result)
+    .catch((error) => console.log(error))
+
 }
 
 export {
@@ -77,5 +82,6 @@ export {
     VerifyKey,
     userData,
     updateProfile,
-    userBusiness
+    userBusiness,
+    contactUs,
 }

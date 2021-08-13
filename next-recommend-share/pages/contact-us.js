@@ -1,21 +1,32 @@
 import React,{useState} from 'react'
-import { connect, useSelector } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import Fields from '../components/Form-Fields/Fields';
 import { Container,Row,Col} from "react-bootstrap"
 import { formFieldValidation } from "../services/formValidation"
+import {contactUsData} from "../redux/bussiness/action"
 
 export const contact_us = (props) => {
     const reState = useSelector(state => state);
-    const { error } = reState.authUser;
+    const { error } = reState.businessReducer;
+    const dispatch = useDispatch();
     const [name, setName]  =useState('');
     const [email, setEmail] =useState('');
     const [telephone, setTelephone] =useState('');
     const [company, setCompany] =useState('');
     const [message, setMessage] =useState('');
     const [submitted, setSubmitted] =useState(false);
+
     const onSubmit = (e) =>{
         e.preventDefault()
         setSubmitted(true);
+        const data = {
+            name:name,
+            email:email,
+            telephone:telephone,
+            comapany_bussiness:company,
+            message:message
+        }
+        dispatch(contactUsData(data))
     }
     const formField = [
         {
@@ -111,12 +122,13 @@ export const contact_us = (props) => {
     )
 }
 
-const mapStateToProps = (state) => ({
-    
-})
+const mapStateToProps = (businessReducer) => {
+    const { loding,contactus_data, error } = businessReducer
+    return { loding,contactus_data, error };
+}
 
 const mapDispatchToProps = {
-    
+    contactUsData: contactUsData
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(contact_us)

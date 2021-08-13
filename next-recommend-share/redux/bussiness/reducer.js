@@ -5,6 +5,9 @@ import {
     USER_BUSSINESS,
     USER_BUSSINESS_SUCCESS,
     USER_BUSSINESS_ERROR,
+    USER_CONTACT_US,
+    USER_CONTACT_US_SUCCESS,
+    USER_CONTACT_US_ERROR,
    
 } from "../action-type"
 
@@ -16,6 +19,7 @@ const INIT_STATE = {
     message: '',
     tradespeople: '',
     userbussines:'',
+    contactus_data : ''
 };
 
 
@@ -60,6 +64,25 @@ const businessReducer = (state = INIT_STATE, action) => {
                 error: action.payload
             }
 
+        case USER_CONTACT_US:
+            return {
+                ...state,
+                loading: true,
+                contactus_data: action.payload
+            }
+        case USER_CONTACT_US_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                contactus_data: action.payload
+            }
+        case USER_CONTACT_US_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+    
         default:
             return { ...state }
     }

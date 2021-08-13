@@ -1,6 +1,7 @@
 import "../assets/css/style.css"
 import "../assets/css/layout.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../assets/css/login.css"
 import "../assets/css/forms.css"
 import "../assets/css/editor-css.css"

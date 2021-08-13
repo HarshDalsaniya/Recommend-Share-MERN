@@ -116,11 +116,12 @@ export const NavBar = (props) => {
                                                         <span className="ms-2">{localstorageItem.name}</span>
                                                     </Dropdown.Toggle>
                                                     <Dropdown.Menu>
-                                                        <Dropdown.Item>My Dashboard</Dropdown.Item>                                                  
+                                                        <Dropdown.Item>My Dashboard</Dropdown.Item> 
+{/* 
                                                         {userbussines.map((bussines)=>
                                                         <Dropdown.Item><Link href=" ">{bussines.name}</Link></Dropdown.Item>
-                                                        )}   
-                                                        {/* {console.log(userbussines)}                                                      */}
+                                                        )}    */}
+                                                                                                        
                                                         <Dropdown.Item><Link href="/tradespeople">Add a Business</Link></Dropdown.Item>
                                                         <Dropdown.Item><Link href="/profile">Edit My Account</Link></Dropdown.Item>
                                                         <Dropdown.Item><Link href="/password">My Password</Link></Dropdown.Item>

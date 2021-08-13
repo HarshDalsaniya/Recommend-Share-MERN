@@ -80,7 +80,7 @@ router.post('/forgotpassword', cors(), function (req, res) {
                                 response = general.response_format(true, "User Data", result);
                                 //  console.log(funcEmail());
                                 emailBody = [{ name: result[0].name }, { url: "http://localhost:3000/reset-password?uniqueKey=" + uniqueKey }];
-                                funcEmail(result[0].email, "forget password", emailBody);
+                                funcEmail(result[0].email, "forget password", emailBody , 'harshrdtl@gmail.com', 'forgotPassword');
                                 res.send(response);
                             });
                         } else {
@@ -92,7 +92,7 @@ router.post('/forgotpassword', cors(), function (req, res) {
 
 
                                 emailBody = [{ name: result[0].name }, { url: "http://localhost:3000/reset-password?uniqueKey=" + uniqueKey }]
-                                funcEmail(result[0].email, "forget password", emailBody);
+                                funcEmail(result[0].email, "forget password", emailBody , 'harshrdtl@gmail.com' , 'forgotPassword');
                                 // console.log(funcEmail());
                                 res.send(response);
                             });
