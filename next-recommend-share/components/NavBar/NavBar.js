@@ -121,7 +121,7 @@ export const NavBar = (props) => {
                                                         <Dropdown.Item><Link href=" ">{bussines.name}</Link></Dropdown.Item>
                                                         )}   
                                                         {/* {console.log(userbussines)}                                                      */}
-                                                        <Dropdown.Item><Link href="/tradespeople">Add a Business</Link></Dropdown.Item>
+                                                        <Dropdown.Item><Link href="/secure/tradespeople/create">Add a Business</Link></Dropdown.Item>
                                                         <Dropdown.Item><Link href="/profile">Edit My Account</Link></Dropdown.Item>
                                                         <Dropdown.Item><Link href="/password">My Password</Link></Dropdown.Item>
                                                         <Dropdown.Divider />

@@ -8,10 +8,10 @@ import {
     Button,
     Form
 } from "react-bootstrap"
-import Fields from '../components/Form-Fields/Fields';
+import Fields from '../../../components/Form-Fields/Fields';
 import axios from 'axios'
-import { formFieldValidation } from "../services/formValidation"
-import { tradesPeopleRegister } from "../redux/bussiness/action"
+import { formFieldValidation } from "../../../services/formValidation"
+import { tradesPeopleRegister } from "../../../redux/bussiness/action"
 
 export const tradespeople = (props) => {
 

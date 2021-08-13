@@ -60,7 +60,6 @@ const updateProfile = (profileData) => {
         .catch((error) => console.log(error))
 }
 const userBusiness = (id)=>{
-    console.log(id)
     return axios.post('http://localhost:4000/api/business/getuserbussiness',{id:id})
         .then((result) => result)
         .catch((error) => console.log(error))
@@ -72,6 +71,17 @@ const updateProfilePhoto = (profilePhoto) => {
         .then((result) => result)
         .catch((error) => console.log(error))
 }
+
+const tradList = () =>{
+   return axios.get(`http://localhost:4000/api/business/trade_options`)
+            .then((res) => res)
+}
+
+const businessSearch = (query) =>{
+    console.log(query)
+    // return axios.get(`http://localhost:4000/api/tradespeople/list`)
+    //          .then((res) => res)
+ }
 
 export {
     login,
@@ -85,5 +95,7 @@ export {
     userData,
     updateProfile,
     updateProfilePhoto,
-    userBusiness
+    userBusiness,
+    tradList,
+    businessSearch
 }
