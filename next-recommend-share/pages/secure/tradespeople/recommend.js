@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { UserCard } from '../../../components/TradePeople/TradepeopleView'
 
 
-export const recommend = (props) => {
+export const recommend = (props) => { 
 
     return (
         <section className="content login-body" style={ { marginTop: "5rem" } }>

@@ -1,7 +1,7 @@
 import React from 'react'
-import { Container } from 'react-bootstrap'
+import { Container , Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { UserCard } from '../../components/TradePeople/TradepeopleView'
+import { ColorBox, UserCard } from '../../components/TradePeople/TradepeopleView'
 
 export const tradespeopleDetails = (props) => {
     return (
@@ -170,8 +170,74 @@ export const tradespeopleDetails = (props) => {
 
                         </div>
                     </div>
+                    <div className="contained shallow mob-not-shallow">
+                        <h2>Activity Overview</h2>
+                        <div className="box white">
+                            <div className="contained semi-shallow">
+                                <Row>
+                                    <div className="six columns alpha">
+                                         <h2>Received</h2>
+                                    </div>
+                                    <div className="six columns not-mobile">
+                                        <h2>Given</h2>
+                                    </div>                                    
+                                </Row>
+                                <Row>
+                                    <div className="three columns alpha">
+                                        <ColorBox 
+                                            color = 'green'
+                                            value = '0'
+                                            caption = 'Positive Recommendations'
+                                        />
+                                    </div>
+                                    <div className="three columns">
+                                        <ColorBox 
+                                                color = 'red'
+                                                value = '0'
+                                                caption = 'Nagative Recommendations'
+                                            />
 
+                                    </div>
+                                    <div className="three columns not-desktop mobile-tall-top">
+                                        <h2>Given</h2>
+                                    </div>
+                                    <div className="three columns">
+                                        <ColorBox 
+                                                color = 'green'
+                                                value = '0'
+                                                caption = 'Positive Recommendations'
+                                            />
+                                    </div>
+                                    <div className="three columns">
+                                        <ColorBox 
+                                                color = 'red'
+                                                value = '0'
+                                                caption = 'Nagative Recommendations'
+                                            />
+                                    </div>
+                                </Row>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="contained shallow mob-not-shallow">
+                        <div className="box white">
+                            <div className="contained shallow tcenter">
+                                <p className="semi-shallow">
+                                    Want to recommend this tradesperson, or warn others? Share your opinion with
+                                    the community.
+                                    </p>
 
+                                 <p className="shallow">
+                                    <a href="/secure/tradespeople/1st-cs/recommend" className="button">
+                                        Leave a Recommendation
+                                    </a>
+                                </p>  
+
+                            </div>
+
+                        </div>
+
+                    </div>
            </Container>
        </section>
     )

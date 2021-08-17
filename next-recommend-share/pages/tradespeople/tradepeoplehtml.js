@@ -66,7 +66,6 @@ export const tradepeoplehtml = (props) => {
                 image16='/dashboard/slider_img_16.png'
 
             />
-
         </div>
     )
 }

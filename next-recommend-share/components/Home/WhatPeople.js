@@ -1,14 +1,9 @@
 import React from 'react'
-import {
-    Carousel,
-    Row,
-    Col,
-    Container,
-    Img,
-    Image,
-} from "react-bootstrap"
+import { Col, Container, Row} from "react-bootstrap"
+import Link from "next/link"
 import { connect } from 'react-redux'
 import SimpleImageSlider from "react-simple-image-slider";
+import { Carousel } from 'react-responsive-carousel';
 
 export const WhatPeople = (props) => {
     const images = [
@@ -36,18 +31,23 @@ export const WhatPeople = (props) => {
             <Container>
                 <div className="see-what-people-slider mb-3">
                     <div className="owl-carousel owl-theme people-slider owl-loaded owl-drag">
-                        <SimpleImageSlider
-                          
-                            width={ 452 }
-                            height={ 80 }
-                            images={ images }
-                            showNavs
-                            slideDuration
-                            navSize={ 25 }
-                            navStyle={ 3 }
-                            bgColor={ `backgroundColor:#000000` }
-                        />
-
+                        <div className="owl-stage-outer">
+                            <div className="owl-stage">
+                                <Carousel>
+                                    {images.map((image)=>                         
+                                    <div className="owl-item">
+                                        <Row>
+                                            <Col md={4}>                                             
+                                                <Link href="">
+                                                    <img src={`${image.url}`} />                
+                                                </Link>                                            
+                                            </Col>
+                                        </Row>                                                    
+                                    </div>     
+                                    )}
+                                </Carousel>
+                            </div>
+                        </div>                   
                     </div>
                 </div>
 
