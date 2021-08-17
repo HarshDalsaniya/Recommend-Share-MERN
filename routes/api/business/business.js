@@ -74,6 +74,7 @@ router.get('/faq_question' , cors(),(req,res)=> {
         });
     });    
 })
+
 router.get('/federation',cors(),(req,res) => {
     req.getConnection((err,connection)=>{
         if(err){

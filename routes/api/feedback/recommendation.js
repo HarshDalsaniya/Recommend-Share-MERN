@@ -38,7 +38,7 @@ router.use(cors())
 
 var general = gnl.func();
 
-router.get('/list', (req, res) => {
+router.post('/list', (req, res) => {
     response = {};
     req.getConnection(function (err, connection) {
         if (err) {
@@ -46,7 +46,7 @@ router.get('/list', (req, res) => {
             response = general.response_format(false, messages.DATABASE_CONNECTION_ERROR, {});
             res.send(response);
         } else {
-            var sql= `SELECT (select name,image,(select name from trade where id=trade_id) as trade_name, slug) from tradesperson), tradesperson_id FROM feedback`;
+            var sql= `SELECT image,name,(SELECT name FROM trade WHERE id=trade_id) as trade_name, slug, (SELECT recommendation FROM feedback WHERE tradesperson_id=id) as recomendation FROM tradesperson`;
             var start = 0;
             var defaultOrderType = "asc";
             var keyword="";

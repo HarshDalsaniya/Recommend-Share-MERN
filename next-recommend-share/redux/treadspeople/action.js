@@ -7,6 +7,7 @@ import {
     BUSINESS_SEARCH_ERROR
 } from '../action-type'
 import { tradList, businessSearch } from "../../helper/api"
+import Router from 'next/router'
 
 export const tradOption = () => {
     return dispatch => {
@@ -45,10 +46,10 @@ export const searchBusiness = (name,query) => {
             type: BUSINESS_SEARCH,
             payload: "Search Trade People"
         })
-        console.log(name)
         businessSearch(name,query)
             .then((result) => {
                 if (result.data.status == true) {
+                    Router.push(`/tradespeople${name!=""?`?name=`+name:``}`)
                     dispatch({
                         type: BUSINESS_SEARCH_SUCCESS,
                         payload: result.data.data

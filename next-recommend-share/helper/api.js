@@ -83,10 +83,9 @@ const tradList = () =>{
             .then((res) => res)
 }
 
-const businessSearch = (query) =>{
-    console.log(query)
-    // return axios.get(`http://localhost:4000/api/tradespeople/list`)
-    //          .then((res) => res)
+const businessSearch = (name,query) =>{
+    return axios.post(`http://localhost:4000/api/feedback/list`)
+             .then((res) => res)
  }
 
 export {

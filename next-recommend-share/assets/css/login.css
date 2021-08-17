@@ -132,3 +132,18 @@
     border: 0;
     padding: 0;
 }
+
+.bt_table_th{
+    padding: 22px 25px !important;
+    color: #fff;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.bt_table_td{
+    padding: 20px 25px !important;
+    white-space: normal;
+    border-bottom: 1px solid #d9dee8;
+    line-height: 1.4em;
+    vertical-align: middle;
+}

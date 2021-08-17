@@ -37,6 +37,12 @@ app.use('/api/tradespeople', require('./routes/api/tradespeople'),function (err,
   console.log(err);
   res.json({status: 0,message: "Oops! Something went wrong"});
 });
+
+// feedback
+app.use('/api/feedback', require('./routes/api/feedback/recommendation'),function (err, req, res, next) {
+  console.log(err);
+  res.json({status: 0,message: "Oops! Something went wrong"});
+});
 // business 
 app.use('/api/business', require('./routes/api/business/business'),function (err, req, res, next) {
   console.log(err);

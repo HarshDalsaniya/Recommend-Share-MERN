@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Table } from "react-bootstrap"
 
 export const index = (props) => {
-    console.log(props.th_td[0].td)
     return (
         <table className="wrapped">
             <thead>
@@ -14,14 +13,15 @@ export const index = (props) => {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    {props.th_td[0].td.map((td)=>
-                        <td className={td.className}>
-                            {td.value}
-                        </td>
-                    )}
-                </tr>
-
+                {props.th_td[0].td.map((td)=>
+                    <tr>
+                        {td.map((row)=>
+                            <td className={row.className}>
+                                {row.value}
+                            </td>
+                        )}
+                    </tr>
+                )}
             </tbody>
         </table>
     )
