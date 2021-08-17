@@ -40,41 +40,7 @@ export const index = (props) => {
         ],
         td: []
     }]
-    const data = [
-        {
-            image: "generic-avatar.png",
-            name: 1,
-            trade_name: "a",
-            distance: "-",
-            recomendation: [0, 0],
-            action: "View",
-        },
-        {
-            image: "generic-avatar.png",
-            name: 2,
-            trade_name: "b",
-            distance: "-",
-            recomendation: [0, 0],
-            action: "View",
-        },
-        {
-            image: "generic-avatar.png",
-            name: 3,
-            trade_name: "c",
-            distance: "-",
-            recomendation: [0, 0],
-            action: "View",
-        },
-        {
-            image: "generic-avatar.png",
-            name: 4,
-            trade_name: "d",
-            distance: "-",
-            recomendation: [0, 0],
-            action: "View",
-        }
-
-    ]
+    const data = []
     const columns = [
         {
             dataField: "image",
@@ -151,41 +117,14 @@ export const index = (props) => {
     }, [])
     if (typeof searchResult != "undefined") {
         searchResult.map((value) => {
-            table[0].td.push([
-                {
-                    value: <img src={value.image != null ? value.image : "https://recommendandshare.com/media/cache/avatar_small/assets/images/generic-avatar.png"} alt="1ST CS" className="avatar" />,
-                    className: "avatar"
-                },
-                {
-                    value: <a href={value.slug}><strong>{value.name}</strong></a>,
-                    className: ""
-                },
-                {
-                    value: <strong>{value.trade_name}</strong>,
-                    className: ""
-                },
-                {
-                    value: "-",
-                    className: "tcenter"
-                },
-                {
-                    value: <strong>
-                        <span className="received good empty">
-                            <i className="fa fa-check-circle-o fa-lg" aria-hidden="true" /> 0
-                        </span>
-                        <span className="received bad empty">
-                            <i className="fa fa-times-circle-o fa-lg" aria-hidden="true" /> 0
-                        </span>
-                    </strong>,
-                    className: "tcenter"
-                },
-                {
-                    value: <a href={value.slug} className="button small">
-                        View
-                    </a>,
-                    className: "actions tright"
-                }
-            ])
+            data.push({
+                image: value.image,
+                name: value.name,
+                trade_name: value.trade_name,
+                distance: "-",
+                recomendation: [0, 0],
+                action: "View",
+            })
         })
     }
     const pageButtonRenderer = ({
@@ -211,7 +150,7 @@ export const index = (props) => {
                     </ul>
         );
     };
-
+    // console.log(searchResult)
     const options = {
         pageButtonRenderer,
         hideSizePerPage: true,
@@ -227,19 +166,18 @@ export const index = (props) => {
     const paginationOption = {
         custom: true,
         totalSize: data.length,
-        sizePerPage:1
+        sizePerPage:2,
+        paginationSize:7
       };
     const handleNextPage = ({
-        page,
         onPageChange
-    }) => () => {
+    },page) => () => {
         onPageChange(page + 1);
     }
 
-    const handlePrevPage = ({
-        page,
-        onPageChange
-    }) => () => {
+    const handlePrevPage =  ({ 
+        onPageChange 
+    },page) => () => {
         onPageChange(page - 1);
     }
 
@@ -276,17 +214,28 @@ export const index = (props) => {
                                                 columns={columns}
                                                 {...paginationTableProps}
                                             />
-                                                {console.log(paginationProps)}
+                                                {/* {console.log(paginationProps.paginationSize)} */}
                                                 <div className="contained pagination">
-                                                    {/* <ul>
+                                                    <ul>
                                                         <li>
-                                                            <a href="/tradespeople?page=1" className="active">
-                                                                1
+                                                            <a onClick={handlePrevPage(paginationProps, paginationProps.page)}>
+                                                                <i className="fa fa-arrow-left" aria-hidden="true" /> <span>Previous</span>
                                                             </a>
                                                         </li>
-                                                    </ul> */}
-                                                    <button className="btn btn-primary" onClick={handleNextPage(paginationProps)}>Next Page</button>
-                                                    <button className="btn btn-success" onClick={handlePrevPage(paginationProps)}>Prev Page</button>
+                                                        {Array.from(Array(paginationProps.paginationSize), (e, i) => {
+                                                            return ( 
+                                                                <li key={i}>
+                                                                    {console.log(paginationProps.page>4)}
+                                                                    <a className={paginationProps.page==i+1?"active":""} onClick={handleNextPage(paginationProps,i)}>{i+1}</a>
+                                                                </li>
+                                                            );
+                                                        })}
+                                                        <li>
+                                                            <a onClick={handleNextPage(paginationProps, paginationProps.page)}>
+                                                                <i className="fa fa-arrow-right" aria-hidden="true" /> <span>Next</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                         </div>
                                 ) 
