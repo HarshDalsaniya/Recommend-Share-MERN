@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Link from 'next/link'
 
 export const index = (props) => {
     return (
@@ -193,10 +194,11 @@ export const index = (props) => {
                                                 </span>
                                             </strong>
                                         </td>
-                                        <td className="actions tright">
-                                            <a href="/tradespeople/1st-cs" className="button small">
+                                        <td className="actions tright">                                            
+                                                <Link href="/secure/tradespeople/recommend" className="button small">
                                                 View
-                                            </a>
+                                                </Link>
+                                                                                       
                                         </td>
                                     </tr>
                                 </tbody>

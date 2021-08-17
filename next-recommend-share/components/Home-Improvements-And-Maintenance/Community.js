@@ -45,7 +45,7 @@ export const Community = (props) => {
                                     <div className="community-color-link-box">
                                         <div className="color-box-labour">Tradespeople</div>
                                         <div className="color-box-link">
-                                            <Link href="/tradespeople"><a>Read more</a></Link>
+                                            <Link href="/tradespeople/tradepeoplehtml"><a>Read more</a></Link>
                                         </div>
                                     </div>
                                     <ul>

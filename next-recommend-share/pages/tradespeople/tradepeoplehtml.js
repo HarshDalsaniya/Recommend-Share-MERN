@@ -1,28 +1,25 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import {
-    BannerSection,
-    Founder_Banner,
-    Content, VimeoVideo,
-    TheSolution,
-    GrateNews,
-    WhatPeopleSlider
-} from '../components/Consumer/BannerSection'
+import { BannerSection, Content, Founder_Banner, VimeoVideo, TheSolution, GrateNews, WhatPeopleSlider } from '../../components/Consumer/BannerSection'
+import { Tradepeoplecontent, IconsDetails, CustomersContractors, IconDetails2 } from '../../components/TradePeople/TradepeopleView'
 
-export const consumers = (props) => {
+export const tradepeoplehtml = (props) => {
     return (
-        <div className="the-new-community">
+        <div>
             <BannerSection />
             <Founder_Banner />
+            <Tradepeoplecontent />
+            <IconsDetails />
+            <CustomersContractors />
+            <IconDetails2 />
             <Content />
-            <section>
                 <Container>
                     <div className="consumers-youtube-videos">
-                        <div className="videos-box" className="problemvideo">
+                        <div className="videos-box">
                             <VimeoVideo
-                                height='680px'
-                                width='100%'
+                                height='auto'
+                                width='auto'
                                 //the propblem
                                 url='https://player.vimeo.com/video/568464147?app_id='
                                 appId='122963'
@@ -30,16 +27,15 @@ export const consumers = (props) => {
                         </div>
                     </div>
                 </Container>
-            </section>
             <TheSolution />
             <section>
-                <Container>
+                <Container className="mb-3 mb-md-5">
                     <div className="consumers-youtube-videos">
                         <div className="videos-box">
                             <VimeoVideo
-                                height='680px'
-                                width='100%'
-                                    //the solution
+                                height='auto'
+                                width='auto'
+                                //the solution
                                 url='https://player.vimeo.com/video/568469269?app_id='
                                 appId='122963'
                             />
@@ -70,6 +66,7 @@ export const consumers = (props) => {
                 image16='/dashboard/slider_img_16.png'
 
             />
+
         </div>
     )
 }
@@ -82,4 +79,4 @@ const mapDispatchToProps = {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(consumers)
+export default connect(mapStateToProps, mapDispatchToProps)(tradepeoplehtml)

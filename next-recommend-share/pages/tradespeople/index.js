@@ -2,6 +2,7 @@ import React,{useState, useEffect} from 'react'
 import { connect, useSelector } from 'react-redux'
 import Table from '../../components/Table'
 import { FilterForm } from '../../components/Tradepeople/FilterForm'
+import Link from 'next/link'
 
 export const index = (props) => {
     const table = [{
@@ -60,9 +61,10 @@ export const index = (props) => {
                 className:"tcenter"
             },
             {
-                value:<a href="/tradespeople/1st-cs" className="button small">
+                value:<Link href="" className="button small">
                             View
-                        </a>,
+                            </Link>,
+                        
                 className:"actions tright"
             },
         ]
