@@ -216,7 +216,7 @@ export const WhatPeopleSlider = (props) => {
                                     showStatus={ false }
                                     showThumbs={ false }
                                     showStatus={ false }
-                                >
+                                >   
                                     <Row className="item">
                                         <Col md={ 6 } className="images">
                                             <img src={ `${props.image1}` } />

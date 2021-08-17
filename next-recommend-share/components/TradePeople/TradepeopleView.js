@@ -221,5 +221,17 @@ export const UserCard = (props) => {
     )
 }
 
+export const ColorBox = (props)=> {
+    return (
+        <a
+            href="/tradespeople/1st-cs/activity?type=recommendations"
+            className={`box ${props.color} rounded less semi-shallow`}
+        >
+             <span className="huge shallow">{props.value}</span>
+        <br />
+            <span className="tiny shallow">{props.caption}</span>
+        </a>
+    )
+}
 
-export default connect(null, null)(Tradepeoplecontent, IconsDetails, CustomersContractors, IconDetails2, UserCard)
+export default connect(null, null)(Tradepeoplecontent, IconsDetails, CustomersContractors, IconDetails2, UserCard ,ColorBox)

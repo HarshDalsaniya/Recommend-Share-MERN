@@ -9,7 +9,30 @@ import {
 } from "react-bootstrap"
 
 export const TheNewWay = (props) => {
-    return (
+    const Content = [
+        {
+            heading : "Transparency",
+            description : " Both parties are showing one another their intentions are genuine and honourable from the outset."
+        },
+        {
+            heading : "Commitment",
+            description : "Both parties agree from the outset to seek and provide each other with recommendations."
+        },        
+        {
+            heading : "Recognition",
+            description : "Upon having had a great experience, leave a positive recommendation."
+        },
+        {
+            heading : "Accountability",
+            description : "Upon having had a bad experience, leave a negative recommendation."
+        },
+        {
+            heading : "Reassurance",
+            description : " Both parties will be able to check each other’s profile to see their recommendation history before making a commitment."
+        }       
+
+    ]
+    return (    
         <Container>
             <div className="the-new-way">
                 <Row className="gx-5">
@@ -25,29 +48,13 @@ export const TheNewWay = (props) => {
                     </Col>
                     <Col lg={6}>
                         <div className="transparency-box">
-                            <h4 className="transparency-heading mt-4 mt-lg-3">Transparency</h4>
-                            <p className="transparency-text">
-                                Both parties are showing one another their intentions are genuine and
-                                honourable from the outset.
-                            </p>
-                            <h4 className="transparency-heading">Commitment</h4>
-                            <p className="transparency-text">
-                                Both parties agree from the outset to seek and provide each other with
-                                recommendations.
-                            </p>
-                            <h4 className="transparency-heading">Recognition</h4>
-                            <p className="transparency-text">
-                                Upon having had a great experience, leave a positive recommendation.
-                            </p>
-                            <h4 className="transparency-heading">Accountability</h4>
-                            <p className="transparency-text">
-                                Upon having had a bad experience, leave a negative recommendation.
-                            </p>
-                            <h4 className="transparency-heading">Reassurance</h4>
-                            <p className="transparency-text">
-                                Both parties will be able to check each other’s profile to see their
-                                recommendation history before making a commitment.
-                            </p>
+                            {Content.map((values)=>
+                                <>
+                                <h4 className="transparency-heading mt-4 mt-lg-3">{values.heading}</h4>
+                                <p className="transparency-text">{values.description}</p>                
+                                </>
+                            )}
+                           
                         </div>
                     </Col>
                 </Row>
@@ -55,6 +62,7 @@ export const TheNewWay = (props) => {
 
 
         </Container>
+       
     )
 }
 

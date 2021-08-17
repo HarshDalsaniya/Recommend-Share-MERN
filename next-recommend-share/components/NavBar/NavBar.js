@@ -13,10 +13,10 @@ export const NavBar = (props) => {
     // console.log(userbussines);
     const dispatch = useDispatch();
     const [localstorageItem, setLocalStorageItem] = useState(null)
-   
+    
     
     useEffect(() => {
-        dispatch(userTradeBussines(JSON.parse(localStorage.getItem("Recommend_Share_current_user")).id))
+        dispatch(userTradeBussines(localStorage.getItem("Recommend_Share_current_user") == null ? '': JSON.parse(localStorage.getItem("Recommend_Share_current_user")).id ))
       
         const interval = setInterval(() => {
             setLocalStorageItem(JSON.parse(localStorage.getItem('Recommend_Share_current_user')));
