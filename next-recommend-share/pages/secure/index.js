@@ -1,8 +1,19 @@
-import React from 'react'
+import React , { useEffect,useState }  from 'react'
 import { connect } from 'react-redux'
 import { NegativeRecommendation, PositiveRecommendation, RecommendedTradesperson } from '../../components/Secure/SearchBox'
 
 export const secure = (props) => {
+
+    const [localstorageItem, setLocalStorageItem] = useState()
+   
+    useEffect(() => {
+        
+        const interval = setInterval(() => {
+            setLocalStorageItem(JSON.parse(localStorage.getItem('Recommend_Share_current_user')));
+        }, 1000);
+        return () => clearInterval(interval);
+    }, [setLocalStorageItem])   
+
     return (
         <section className="content">
             <div className="container">
@@ -74,7 +85,8 @@ export const secure = (props) => {
                                                 <i className="fas fa-user-circle" aria-hidden="true" />
                                             </div>
                                             <div className="user-name">
-                                                <div>Name: sam</div>
+                                                {/* {localstorageItem!="undefined" ? localstorageItem:""} */}
+                                                <div>Name: {typeof localstorageItem!="undefined" ? localstorageItem.name:""}</div>
                                             </div>
                                         </div>
                                     </div>
