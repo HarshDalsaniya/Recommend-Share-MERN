@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from "next/link"
 import { connect } from 'react-redux'
 import { Container,
          Row,
@@ -245,7 +246,7 @@ export const champions = (props) => {
                         <div className="contained" id="html">
                             <p className="tcenter">
                                 Are you a R&amp;S Tradesperson? If so{" "}
-                                <a href="/login?url=/champions.html%23embed">log in</a> to get your
+                                <Link href="/login?url=/champions.html%23embed"><a>log in</a></Link> to get your
                                 personalised code.
                             </p>
                             <p className="code-block-title">Copy this HTML code:</p>
@@ -265,7 +266,8 @@ export const champions = (props) => {
                                 </a>
                             </p>
                             <p className="tcenter shallow">
-                                <a href="https://recommendandshare.com/">
+                                <Link href="https://recommendandshare.com/">
+                                <a>
                                     <img
                                         src="https://recommendandshare.com/ras-logo.png"
                                         width={150}
@@ -274,6 +276,7 @@ export const champions = (props) => {
                                         alt="Recommend & Share"
                                     />
                                 </a>
+                                </Link>
                                 <br />
                                 Find a Tradesperson
                             </p>

@@ -1,5 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Link from "next/link"
+
 
 export const Gdpr = (props) => {
     return (
@@ -192,9 +194,11 @@ export const Gdpr = (props) => {
                     <p>
                         If you would like to exercise any of those rights, please contact us
                         at&nbsp;
-                        <a href="mailto:contact@recommendandshare.com">
+                        <Link href="mailto:contact@recommendandshare.com">
+                        <a>
                             contact@recommendandshare.com
                         </a>
+                        </Link>
                     </p>
                     <h1>8. Your right of complaint</h1>
                     <p>

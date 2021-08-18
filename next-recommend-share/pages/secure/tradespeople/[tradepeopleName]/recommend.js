@@ -16,10 +16,12 @@ export const recommend = (props) => {
         <section className="content login-body" style={ { marginTop: "5rem" } }>
             <Container>
                 <p className="h2">
-                    <a href={'/tradespeople/'+Name}className="back black">
+                    <Link href={'/tradespeople/'+Name}>
+                    <a className="back black">
                         <i className="fa fa-chevron-circle-left" aria-hidden="true" /> Back to
                         Profile
                     </a>
+                    </Link>
                 </p>
                 <div className="contained shallow">
                     <div className="box white">

@@ -1,4 +1,5 @@
 import React,{ useState, useEffect } from 'react'
+import Link from "next/link"
 import { connect, useSelector, useDispatch } from 'react-redux'
 import { Row, Col, Button} from "react-bootstrap"
 import { formFieldValidation } from "../../services/formValidation"
@@ -330,9 +331,11 @@ export const ProfileImage = (props) => {
                         <div className="form_row  file">
                             <div className="field_container">
                                 <div className="fileinput single">
-                                    <a href="#" className="button white ">
+                                    <Link href="#">
+                                    <a className="button white ">
                                         Browse
                                     </a>
+                                    </Link>
                                     <input type="file" name="profile_image" onChange={(e)=>{setProfile_image(e.target.files[0]),getBase64(e)}}/>
                                     <span className="helptext psuedoinput" >{typeof profile_image!="undefined"?profile_image.name:null}</span>
                                 </div>
@@ -341,9 +344,11 @@ export const ProfileImage = (props) => {
                         <input type="hidden" id="profile_image__token" name="profile_image[_token]" defaultValue="QPqj_Bp32ryxO6cNwMUlgW0g3AU_Ub636y9iUuHGHKg" />
                     </div>
                     <div className="buttons ">
-                        <a href="/profile/image/clear" className="confirm button small light fleft">
+                        <Link href="/profile/image/clear">
+                        <a  className="confirm button small light fleft">
                             Clear
                         </a>
+                        </Link>
                         <button type="submit">
                             Upload
                         </button>
@@ -391,9 +396,11 @@ export const RemoveAC = (props) => {
                 <div className="contained shallow">
                     <p>If you wish, you can remove your account. This will completely remove your details from our database.</p>
                     <p className="tcenter">
-                        <a href="/delete-account" className="button danger">
+                        <Link href="/delete-account">
+                        <a className="button danger">
                             Delete my account
                         </a>
+                        </Link>
                     </p>
                     <p className="shallow tcenter">Please note: This cannot be undone.</p>
                 </div>

@@ -1,4 +1,5 @@
 import React,{ useState, useEffect } from 'react'
+import Link from "next/link"
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { Row } from 'react-bootstrap'
@@ -114,9 +115,11 @@ export const FilterForm = (props) => {
                 </div>
             </Row>
             <div className="buttons tright shallow">
-                <a href="/tradespeople" className="button clear">
+                <Link href="/tradespeople">
+                <a className="button clear">
                     <i className="fa fa-undo" aria-hidden="true" /> Reset
-                </a>{" "}
+                </a>
+                </Link>{" "}
                 &nbsp;
                 <button type="submit" className>
                     Search

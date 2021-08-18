@@ -11,12 +11,14 @@ export const Footer = (props) => {
             <div className="row">
               <div className="col-md-4">
                 <div className="footer-logo">
-                  <a href="/">
+                  <Link href="/">
+                  <a>
                     <img
                       src="/logo/logo-on-light.svg"
                       alt="Recommend and Share"
                     />
                   </a>
+                  </Link>
                 </div>
                 <div className="footer-address">
                   Bringing together genuine consumers and
@@ -78,14 +80,18 @@ export const Footer = (props) => {
               <div className="col-md-2">
                 <div className="media-link">
                   <div>
-                    <a href="http://www.facebook.com/RecommendShare">
+                    <Link href="http://www.facebook.com/RecommendShare">
+                    <a >
                       <i className="fab fa-facebook-square" aria-hidden="true" />
                     </a>
+                    </Link>
                   </div>
                   <div>
-                    <a href="https://www.instagram.com/recommendandshare/">
+                    <Link href="https://www.instagram.com/recommendandshare/">
+                    <a >
                       <i className="fab fa-instagram-square" aria-hidden="true" />
                     </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -96,7 +102,7 @@ export const Footer = (props) => {
           <div className="container">
             <div>
               Copyright © 2021 Recommend &amp; Share.
-              <a href="">All Right Reserved</a>
+              <Link href=""><a >All Right Reserved</a></Link>
             </div>
           </div>
         </div>

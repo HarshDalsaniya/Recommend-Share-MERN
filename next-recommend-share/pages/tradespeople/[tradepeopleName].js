@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from "next/link"
 import { useRouter } from 'next/router';
 import { Container , Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
@@ -231,9 +232,11 @@ export const tradespeopleDetails = (props) => {
                                     </p>
 
                                  <p className="shallow">
-                                    <a href="/secure/tradespeople/1st-cs/recommend" className="button">
+                                    <Link href="/secure/tradespeople/1st-cs/recommend">
+                                    <a className="button">
                                         Leave a Recommendation
                                     </a>
+                                    </Link>
                                 </p>  
 
                             </div>

@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from "next/link"
 import { connect } from 'react-redux'
 
 export const BusinessInfo = (props) => {
@@ -6,18 +7,22 @@ export const BusinessInfo = (props) => {
         <section className="content">
             <div className="container">
                 <p className="h2">
-                    <a href="/tradespeople/handyplus" className="back black">
+                    <Link href="/tradespeople/handyplus">
+                    <a  className="back black">
                         <i className="fa fa-chevron-circle-left" aria-hidden="true" /> Back to Profile
                     </a>
+                    </Link>
                 </p>
                 <div className="contained shallow">
                     <div className="box white">
                         <div className="row">
                             <div className="onepointfive columns alpha tcenter">
                                 <p className="mob-not-shallow shallow">
-                                    <a href="https://recommendandshare.com/media/cache/avatar_large/assets/images/generic-avatar.png" data-featherlight="image" className="avatar-link">
+                                    <Link href="https://recommendandshare.com/media/cache/avatar_large/assets/images/generic-avatar.png">
+                                    <a data-featherlight="image" className="avatar-link">
                                         <img src="https://recommendandshare.com/media/cache/avatar/assets/images/generic-avatar.png" className="full-width mob-max-width-50 avatar" />
                                     </a>
+                                    </Link>
                                 </p>
                             </div>
                             <div className="tenpointfive columns">
@@ -25,9 +30,11 @@ export const BusinessInfo = (props) => {
                                     <div className="row">
                                         <div className="six columns alpha mob-tcenter">
                                             <p className="h3 shallow">
-                                                <a href="/tradespeople/handyplus" className="black">
+                                                <Link href="/tradespeople/handyplus">
+                                                <a  className="black">
                                                     Handyplus
                                                 </a>
+                                                </Link>
                                             </p>
                                         </div>
                                     </div>

@@ -626,9 +626,11 @@ export const tradespeople = (props) => {
                                                         className="fileinput single"
                                                         id="acdo_systembundle_tradesperson_temp_image_fi_parent"
                                                     >
-                                                        <a href="#" className="button white ">
+                                                        <Link href="#">
+                                                        <a className="button white ">
                                                             Browse
                                                         </a>
+                                                        </Link>
                                                         <input
                                                             type="file"
                                                             id="acdo_systembundle_tradesperson_temp_image"
@@ -656,9 +658,11 @@ export const tradespeople = (props) => {
                                             </button>
                                             <p className="smaller tall-top shallow">
                                                 By creating a tradesperson's profile you agree to be bound by our{ " " }
-                                                <a href="/terms-of-use.html" className="blank-link" target="_blank">
+                                                <Link href="/terms-of-use">
+                                                <a className="blank-link" target="_blank">
                                                     terms and conditions
                                                 </a>
+                                                </Link>
                                             </p>
                                         </div>
                                     </div>

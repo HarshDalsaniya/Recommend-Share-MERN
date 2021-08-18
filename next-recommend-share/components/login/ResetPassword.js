@@ -7,7 +7,7 @@ import {
     Button,
     Form
 } from "react-bootstrap"
-
+import Link from "next/link"
 import Fields from '../Form-Fields/Fields';
 import { forgotPasswordUser } from '../../redux/auth/action';
 import { ToastContainer, toast } from 'react-toastify';
@@ -64,9 +64,11 @@ export const ResetPassword = (props) => {
                                             />
                                         </div>
                                         <div className="buttons">
-                                            <a href="/login" className="button clear fleft">
+                                            <Link href="/login">
+                                            <a  className="button clear fleft">
                                                 ‹ Login
                                             </a>
+                                            </Link>
                                             <button type="submit"  onClick={()=>{setFlesh(toast("Check your Email!"))}}>
                                                 Submit
                                             </button>

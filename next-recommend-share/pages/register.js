@@ -342,9 +342,11 @@ export const register = (props) => {
                                                             htmlFor="register_tradesperson_terms_and_conditions"
                                                         >
                                                             Please confirm you have read and accept our{" "}
-                                                            <a href="/terms-of-use.html" className="blank-link" target="_blank">
+                                                            <Link href="/terms-of-use">
+                                                            <a className="blank-link" target="_blank">
                                                                 Terms and Conditions
                                                             </a>
+                                                            </Link>
                                                             .
                                                         </label>
                                                     </div>
@@ -377,9 +379,11 @@ export const register = (props) => {
                                                             htmlFor="register_tradesperson_gdpr_policy"
                                                         >
                                                             Please confirm you have read and agree to our{" "}
-                                                            <a href="/gdpr.html" className="blank-link" target="_blank">
+                                                            <Link href="/gdpr">
+                                                            <a className="blank-link" target="_blank">
                                                                 GDPR policy
                                                             </a>
+                                                            </Link>
                                                             .
                                                         </label>
                                                     </div>

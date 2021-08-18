@@ -130,9 +130,11 @@ export const index = (props) => {
                                     </div>
                                 </div>
                                 <div className="buttons tright shallow">
+                                    <Link>
                                     <a href="/tradespeople" className="button clear">
                                         <i className="fa fa-undo" aria-hidden="true" /> Reset
-                                    </a>{" "}
+                                    </a>
+                                    </Link>{" "}
                                     &nbsp;
                                     <button type="submit" className>
                                         Search
@@ -148,24 +150,32 @@ export const index = (props) => {
                                     <tr>
                                         <th className="avatar">&nbsp;</th>
                                         <th>
-                                            <a href="?s=name&d=desc" className="sortable  asc">
+                                            <Link href="?s=name&d=desc">
+                                            <a  className="sortable  asc">
                                                 Name
                                             </a>
+                                            </Link>
                                         </th>
                                         <th>
-                                            <a href="?s=trade&d=desc" className="sortable  asc">
+                                            <Link  href="?s=trade&d=desc">
+                                            <a className="sortable  asc">
                                                 Trade
                                             </a>
+                                            </Link>
                                         </th>
                                         <th className="tcenter">
-                                            <a href="?s=distance&d=desc" className="sortable sort asc">
+                                            <Link  href="?s=distance&d=desc">
+                                            <a className="sortable sort asc">
                                                 Distance
                                             </a>
+                                            </Link>
                                         </th>
                                         <th className="tcenter">
-                                            <a href="?s=recommendation&d=desc" className="sortable  asc">
+                                            <Link href="?s=recommendation&d=desc">
+                                            <a className="sortable  asc">
                                                 Recommendations
                                             </a>
+                                            </Link>
                                         </th>
                                         <th className="actions">&nbsp;</th>
                                     </tr>
@@ -176,9 +186,11 @@ export const index = (props) => {
                                             <img src="https://recommendandshare.com/media/cache/avatar_small/assets/images/generic-avatar.png" alt="1ST CS" className="avatar" />
                                         </td>
                                         <td>
-                                            <a href="/tradespeople/1st-cs">
+                                            <Link href="/tradespeople/1st-cs">
+                                            <a >
                                                 <strong>1ST CS</strong>
                                             </a>
+                                            </Link>
                                         </td>
                                         <td>
                                             <strong>Traditional Craftsman</strong>
@@ -208,49 +220,67 @@ export const index = (props) => {
                     <div className="contained pagination">
                         <ul>
                             <li>
-                                <a href="#" className="disabled">
+                                <Link  href="#">
+                                <a className="disabled">
                                     <i className="fa fa-arrow-left" aria-hidden="true" /> <span>Previous</span>
                                 </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="/tradespeople?page=1" className="active">
+                                <Link href="/tradespeople?page=1">
+                                <a className="active">
                                     1
                                 </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="/tradespeople?page=2" className>
+                                <Link  href="/tradespeople?page=2">
+                                <a className>
                                     2
                                 </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="/tradespeople?page=3" className>
+                                <Link  href="/tradespeople?page=3">
+                                <a className>
                                     3
                                 </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="/tradespeople?page=4" className>
+                                <Link href="/tradespeople?page=4">
+                                <a className>
                                     4
                                 </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="/tradespeople?page=5" className>
+                                <Link href="/tradespeople?page=5">
+                                <a className>
                                     5
                                 </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="/tradespeople?page=6" className>
+                                <Link  href="/tradespeople?page=6">
+                                <a className>
                                     6
                                 </a>
+                                </Link>
                             </li>
                             <li>
+                                <Link>
                                 <a href="/tradespeople?page=7" className>
                                     7
                                 </a>
+                                </Link>
                             </li>
                             <li>
+                                <Link>
                                 <a href="/tradespeople?page=2" className>
                                     <i className="fa fa-arrow-right" aria-hidden="true" /> <span>Next</span>
                                 </a>
+                                </Link>
                             </li>
                         </ul>
                     </div>
@@ -258,21 +288,27 @@ export const index = (props) => {
                 <p className="tcenter semi-shallow">
                     Can't find a tradesperson to recommend? You can{" "}
                     <strong>
+                        <Link>
                         <a href="/secure/tradespeople/invite?action=">invite one</a>
+                        </Link>
                     </strong>{" "}
                     now.
                 </p>
                 <p className="tcenter ">
                     Are you a tradesperson? You can{" "}
                     <strong>
+                        <Link>
                         <a href="/secure/tradespeople/create">add a business</a>
+                        </Link>
                     </strong>{" "}
                     now for free.
                 </p>
                 <p className="tcenter">
+                    <Link>
                     <a href="/secure/tradespeople/invite?action=" className="button light">
                         Invite Tradesperson
                     </a>
+                    </Link>
                 </p>
             </div>
         </section>

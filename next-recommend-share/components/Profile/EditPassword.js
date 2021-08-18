@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Link from "next/link"
 import { connect, useDispatch, useSelector } from 'react-redux'
 import {
     Container,
@@ -81,9 +82,11 @@ export const EditPassword = (props) => {
                                 </div>
 
                                 <div className="buttons">
-                                    <a href="/" className="button clear small">
+                                    <Link href="/">
+                                    <a  className="button clear small">
                                         Cancel
                                     </a>
+                                    </Link>
                                     <button type="submit" className="button">
                                         Save
                                     </button>

@@ -191,7 +191,7 @@ export const GrateNews = (props) => {
                     </div>
                 </div>
                 <div className="blue-bg-btn text-center my-3 my-md-5">
-                    <a href="/">Create your free community profile today!</a>
+                    <Link href="/"><a>Create your free community profile today!</a></Link>
                 </div>
                 <p className="all-gray-text">
                     <em>Together we can and will make a difference.</em>

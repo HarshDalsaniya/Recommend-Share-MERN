@@ -1,4 +1,5 @@
 import React , { useEffect,useState }  from 'react'
+import Link from "next/link"
 import { connect } from 'react-redux'
 import { NegativeRecommendation, PositiveRecommendation, RecommendedTradesperson } from '../../components/Secure/SearchBox'
 
@@ -30,16 +31,20 @@ export const secure = (props) => {
                                             <h3 className="recieved-heading">Recieved</h3>
                                             <div className="row">
                                                 <div className="col-md-6 text-center mb-3 mb-md-0 text-md-start">
-                                                    <a href="/secure/customers/608-45de82f7502c3a8657e3b9923e26e8f8/activity?type=recommendations" className>
+                                                    <Link href="/secure/customers/608-45de82f7502c3a8657e3b9923e26e8f8/activity?type=recommendations">
+                                                    <a>
                                                         <div className="recieved-number-1">0</div>
                                                         <div className="recieved-text">Positive Recommendation</div>
                                                     </a>
+                                                    </Link>
                                                 </div>
                                                 <div className="col-md-6 text-center text-md-start">
-                                                    <a href="/secure/customers/608-45de82f7502c3a8657e3b9923e26e8f8/activity?type=warnings" className>
+                                                    <Link href="/secure/customers/608-45de82f7502c3a8657e3b9923e26e8f8/activity?type=warnings">
+                                                    <a>
                                                         <div className="recieved-number-2">0</div>
                                                         <div className="recieved-text">Negative Recommendation</div>
                                                     </a>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </div>
@@ -47,16 +52,20 @@ export const secure = (props) => {
                                             <h3 className="recieved-heading">Given</h3>
                                             <div className="row">
                                                 <div className="col-md-6 text-center mb-3 mb-md-0 text-md-start">
-                                                    <a href="/secure/customers/608-45de82f7502c3a8657e3b9923e26e8f8/activity/given?type=recommendations" className>
+                                                    <Link href="/secure/customers/608-45de82f7502c3a8657e3b9923e26e8f8/activity/given?type=recommendations">
+                                                    <a>
                                                         <div className="recieved-number-1">0</div>
                                                         <div className="recieved-text">Positive Recommendation</div>
                                                     </a>
+                                                    </Link>
                                                 </div>
                                                 <div className="col-md-6 text-center text-md-start">
-                                                    <a href="/secure/customers/608-45de82f7502c3a8657e3b9923e26e8f8/activity/given?type=warnings" className>
+                                                    <Link href="/secure/customers/608-45de82f7502c3a8657e3b9923e26e8f8/activity/given?type=warnings">
+                                                    <a>
                                                         <div className="recieved-number-2">0</div>
                                                         <div className="recieved-text">Negative Recommendation</div>
                                                     </a>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </div>

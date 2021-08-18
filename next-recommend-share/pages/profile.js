@@ -1,4 +1,5 @@
 import React,{useEffect,useState} from 'react'
+import Link from "next/link"
 import { connect, useDispatch, useSelector } from 'react-redux'
 import {
     Container,
@@ -48,7 +49,7 @@ export const profile = (props) => {
                     <ConnectFacebook />
                     <RemoveAC />
                     <p className="tcenter">
-                        Need help with your account? <a href="/contact-us.html">Contact us</a> for help.
+                        Need help with your account? <Link href="/contact-us"><a>Contact us</a></Link> for help.
                     </p>
                 </div>
             </section>

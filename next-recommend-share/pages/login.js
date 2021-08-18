@@ -75,7 +75,7 @@ export const login = (props) => {
                             <p>You can use your facebook account to login.</p>
                             </div>
                         </div>
-                        <p className="tcenter small m-5">Having trouble logging in? <a href="/contact-us.html">Contact us</a> for help.</p>
+                        <p className="tcenter small m-5">Having trouble logging in? <Link href="/contact-us"><a>Contact us</a></Link> for help.</p>
                     </Col>
                     <Col md="4">
                     </Col>

@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from "next/link"
 import { connect } from 'react-redux'
 import { Container, Row, Col } from "react-bootstrap"
 
@@ -30,20 +31,24 @@ export const JoinCommunity = (props) => {
                                 TO JOIN THIS NEW COMMUNITY SIMPLY FOLLOW US ON FACEBOOK
                             </div>
                             <div className="join-icon-box">
-                                <a href="https://www.facebook.com/recommendedtradespeople/">
-                                    <i className="fab fa-facebook-square" aria-hidden="true" />
-                                </a>
+                                <Link href="https://www.facebook.com/recommendedtradespeople/">
+                                    <a>
+                                        <i className="fab fa-facebook-square" aria-hidden="true" />
+                                    </a>
+                                </Link>
                                 <span>
                                     <i className="fas fa-thumbs-up" aria-hidden="true" />
                                     Like 10K
                                 </span>
                             </div>
+                            <Link href="https://www.facebook.com/recommendedtradespeople/">
                             <a
-                                href="https://www.facebook.com/recommendedtradespeople/"
+                                
                                 className="join-community-btn"
                             >
                                 JOIN US ON FACEBOOK
                             </a>
+                            </Link>
                         </div>
                     </Col>
                 </Row>

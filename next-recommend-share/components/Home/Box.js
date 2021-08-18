@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from "next/link"
 import { connect } from 'react-redux'
 import {
     Carousel,
@@ -35,11 +36,11 @@ export const Box = (props) => {
                             <Row>
                                 <Col>
                                     <div className="for-btn">
-                                        <a href="/register">
+                                        <Link href="/register"><a>
                                             CONSUMERS
                                             <br />
                                             Click here to Join the community
-                                        </a>
+                                        </a></Link>
                                     </div>
                                 </Col>
                             </Row>
@@ -67,11 +68,11 @@ export const Box = (props) => {
                             <Row>
                                 <Col>
                                     <div className="for-btn">
-                                        <a href="/register?type=tradesperson">
+                                        <Link href="/register?type=tradesperson"><a>
                                             BUSINESSES
                                             <br />
                                             Click here to Join the community
-                                        </a>
+                                        </a></Link>
                                     </div>
                                 </Col>
                             </Row>

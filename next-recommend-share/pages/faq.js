@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
+import Link from "next/link"
 import { connect, useDispatch, useSelector } from 'react-redux'
 import { Faq } from '../components/FAQ/Faq'
 
@@ -41,7 +42,7 @@ export const faq = (props) => {
                             ))}
                         </div>
                         <p className="tcenter small">
-                            Have a question? <a href="/contact-us.html">Contact us</a> for help.
+                            Have a question? <Link href="/contact-us"><a>Contact us</a></Link> for help.
                         </p>
                     </div>
                 </div>

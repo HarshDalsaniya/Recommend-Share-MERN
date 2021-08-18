@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from "next/link"
 import { connect } from 'react-redux'
 import {
     Row,
@@ -36,16 +37,16 @@ export const HowDoes = (props) => {
                                         <div className="howitworks-slider-btn">
                                             <div className="for-consumers">
                                                 <div className="for-btn">
-                                                    <a href="/register" style={ { fontSize: 14 } }>
+                                                    <Link href="/register"><a style={ { fontSize: 14 } }>
                                                         Consumers Click here to join the community
-                                                    </a>
+                                                    </a></Link>
                                                 </div>
                                             </div>
                                             <div className="for-businesses">
                                                 <div className="for-btn">
-                                                    <a href="/register?type=tradesperson" style={ { fontSize: 14 } }>
+                                                    <Link  href="/register?type=tradesperson"><a style={ { fontSize: 14 } }>
                                                         Businesses Click here to join the community
-                                                    </a>
+                                                    </a></Link>
                                                 </div>
                                             </div>
                                         </div>
