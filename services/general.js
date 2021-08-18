@@ -49,8 +49,8 @@ exports.func = function () {
             return img_path;
         },
 
-         generateAccessToken: function (_id) {
-            return jwt.sign(_id, process.env.SECRET_KEY);
+         generateAccessToken: function (id) {
+            return jwt.sign(id, process.env.SECRET_KEY);
           }
 }
 }

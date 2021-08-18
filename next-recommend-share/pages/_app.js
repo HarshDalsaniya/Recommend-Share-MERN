@@ -1,3 +1,4 @@
+import "../assets/css/navbar.css"
 import "../assets/css/style.css"
 import "../assets/css/layout.css"
 import 'bootstrap/dist/css/bootstrap.min.css';

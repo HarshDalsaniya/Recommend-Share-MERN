@@ -67,12 +67,13 @@ export const NegativeRecommendation = (props) => {
         </div>
 
     )
-}
+}  
 
 export const RecommendedTradesperson = (props) => {
     const reState = useSelector(state => state);
     const { error, tradeOptions } = reState.tradePeople;
     const dispatch = useDispatch()
+    const [submitted, setSubmitted] = useState(false);
 
     useEffect(() => {
         dispatch(tradOption());
