@@ -50,6 +50,7 @@ export const index = (props) => {
                             {...paginationTableProps}
                         />
                         {/* {console.log(paginationProps.paginationSize)} */}
+                        {}
                         <div className="contained pagination">
                             <ul>
                                 <li>
