@@ -6,11 +6,16 @@ import { FilterForm } from '../../components/Tradepeople/FilterForm'
 import { searchBusiness } from '../../redux/treadspeople/action';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory, { PaginationProvider } from 'react-bootstrap-table2-paginator';
+import Link from 'next/link'
+// import tradespeopleDetails from './[tradepeopleName]'
+import recommend from '../secure/tradespeople/[tradepeopleName]/recommend'
+
 
 export const index = (props) => {
     const reState = useSelector(state => state);
     const { error, searchResult } = reState.tradePeople;
     const dispatch = useDispatch()
+  
     const table = [{
         th: [
             {
@@ -108,7 +113,7 @@ export const index = (props) => {
             align: 'center',
             headerAlign: 'center',
             formatter: (cell) => {
-                return <>{<a href="/tradespeople/1st-cs" className="button small">{cell}</a>}</>
+                return <>{<a href="" className="button small">{cell}</a>}</>
             }
         }
     ]
@@ -123,7 +128,7 @@ export const index = (props) => {
                 trade_name: value.trade_name,
                 distance: "-",
                 recomendation: [0, 0],
-                action: "View",
+                action:<Link href={'/secure/tradespeople/'+value.name.replace(/\s/g, "-")+'/recommend'}>Recommend</Link>
             })
         })
     }
