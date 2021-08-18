@@ -1,9 +1,12 @@
 import React from 'react'
+import { useRouter } from 'next/router';
 import { Container , Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { ColorBox, UserCard } from '../../components/TradePeople/TradepeopleView'
 
 export const tradespeopleDetails = (props) => {
+    const { query } = useRouter();
+
     return (
        <section className="login-body" style={ { marginTop: "5rem" } }>
            <Container>
