@@ -32,7 +32,7 @@ export const PositiveRecommendation = (props) => {
                         <input type="text" name="name" value={name} onChange={(e)=>setName(e.target.value)} placeholder="Business Name" />
                     </div>
                     <div className="start-btn">
-                        <button type="submit">Start</button>
+                        <button type="submit">{submitted==true?<i class="fa fa-refresh fa-spin fa-3x fa-fw" aria-hidden="true"></i>:"Start"}</button>
                     </div>
                 </form>
             </div>

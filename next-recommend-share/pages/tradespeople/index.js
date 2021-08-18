@@ -181,11 +181,16 @@ export const index = (props) => {
         onPageChange(page - 1);
     }
 
-    const handleSizePerPage = ({
-        page,
-        onSizePerPageChange
-    }, newSizePerPage) => {
-        onSizePerPageChange(newSizePerPage, page);
+    const paginationFilter = ({page, totalSize, paginationSize}) =>{
+        const pageBar=[];
+        const start=page>4||page>totalSize/2-4?page>totalSize/2-4?totalSize/2-7:page-3:1;
+        const end=page>4||page>totalSize/2-4?page>totalSize/2-4?totalSize/2:page+3:paginationSize
+        console.log(totalSize/2-4)
+        for(var i=start;i<=end;i++){
+            pageBar.push(i)
+        }
+        
+        return pageBar;
     }
     return (
         <section className="login-body content" style={{ marginTop: "5rem" }}>
@@ -222,13 +227,12 @@ export const index = (props) => {
                                                                 <i className="fa fa-arrow-left" aria-hidden="true" /> <span>Previous</span>
                                                             </a>
                                                         </li>
-                                                        {Array.from(Array(paginationProps.paginationSize), (e, i) => {
-                                                            return ( 
-                                                                <li key={i}>
-                                                                    {console.log(paginationProps.page>4)}
-                                                                    <a className={paginationProps.page==i+1?"active":""} onClick={handleNextPage(paginationProps,i)}>{i+1}</a>
-                                                                </li>
-                                                            );
+                                                        {console.log(paginationFilter(paginationProps))}
+                                                        {paginationFilter(paginationProps).map((i) => {
+                                                            return(
+                                                            <li key={i}>
+                                                                <a className={paginationProps.page==i?"active":""} onClick={handleNextPage(paginationProps,i-1)}>{i}</a>
+                                                            </li>)
                                                         })}
                                                         <li>
                                                             <a onClick={handleNextPage(paginationProps, paginationProps.page)}>
