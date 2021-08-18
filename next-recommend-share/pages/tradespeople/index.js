@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router';
 import { connect, useSelector, useDispatch } from 'react-redux'
 import Router from 'next/router'
 import Table from '../../components/Table'
@@ -12,6 +13,7 @@ import recommend from '../secure/tradespeople/[tradepeopleName]/recommend'
 
 
 export const index = (props) => {
+    const { query } = useRouter();
     const reState = useSelector(state => state);
     const { error, searchResult } = reState.tradePeople;
     const dispatch = useDispatch()
@@ -128,7 +130,12 @@ export const index = (props) => {
                 trade_name: value.trade_name,
                 distance: "-",
                 recomendation: [0, 0],
-                action:<Link href={'/secure/tradespeople/'+value.name.replace(/\s/g, "-")+'/recommend'}>Recommend</Link>
+                action:<Link href={'/secure/tradespeople/'+value.name.replace(/\s/g, "-")+'/recommend?action=recommend'}>
+                           <>
+                                { query.action ==("recommend"||'warn') ? query.action : "View" }  
+                                {/* {action == "View"} */}
+                               </>          
+                       </Link>
             })
         })
     }

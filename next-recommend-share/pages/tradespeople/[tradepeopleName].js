@@ -167,7 +167,6 @@ export const tradespeopleDetails = (props) => {
                                 },
                             ]
                             }
-
                             
                             />
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { useRouter } from 'next/router';
 import Link from "next/link"
 import {
     Container,
@@ -148,8 +149,11 @@ export const IconDetails2 = (props) => {
 
 export const UserCard = (props) => {
 
-   var Options = props.details  
-   var IconsView = props.IconOption
+    const { query } = useRouter();
+    const Name = query.tradepeopleName
+    var Options = props.details  
+    var IconsView = props.IconOption
+
 
     return (
         <>
@@ -173,7 +177,7 @@ export const UserCard = (props) => {
                     <Row>
                         <div className="six columns alpha mob-tcenter ">
                             <p className="h3 shallow">
-                                <Link href="/tradespeople/a-j-services" className="black">
+                                <Link href={'/tradespeople/'+Name} className="black">
                                     {props.title}
                                 </Link>
                             </p>
