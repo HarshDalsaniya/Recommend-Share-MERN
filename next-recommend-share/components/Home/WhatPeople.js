@@ -35,7 +35,7 @@ export const WhatPeople = (props) => {
                             <div className="owl-stage">
                                 <Carousel>
                                     {images.map((image)=>                         
-                                    <div className="owl-item">
+                                    <div className="owl-item" key={"img"+image.url}>
                                         <Row>
                                             <Col md={4}>                                             
                                                 <Link href="">

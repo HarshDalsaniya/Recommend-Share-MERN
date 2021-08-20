@@ -38,7 +38,7 @@ router.use(cors())
 
 var general = gnl.func();
 
-router.post('/list', (req, res) => {
+router.get('/list', (req, res) => {
     response = {};
     req.getConnection(function (err, connection) {
         if (err) {
@@ -46,32 +46,37 @@ router.post('/list', (req, res) => {
             response = general.response_format(false, messages.DATABASE_CONNECTION_ERROR, {});
             res.send(response);
         } else {
-            var sql= `SELECT image,name,(SELECT name FROM trade WHERE id=trade_id) as trade_name, slug, (SELECT recommendation FROM feedback WHERE tradesperson_id=id) as recomendation FROM tradesperson`;
-            var start = 0;
-            var defaultOrderType = "asc";
-            var keyword="";
+            var post = req.body.searchFilter
+            console.log(post)
+            var sql= `SELECT 
+                        image,
+                        name,
+                        (SELECT name FROM trade WHERE id=trade_id) as trade_name, 
+                        slug, 
+                        (SELECT recommendation FROM feedback WHERE tradesperson_id=id) as recomendation 
+                        FROM 
+                        tradesperson`;
 
-            if(req.query.id){
-                sql ="SELECT image, name,(select name from trade WHERE id=trade_id),slug FROM `tradesperson`"; 
-            }
-            if(req.query.start){
-                start = req.query.start;
-            }
-            if(req.query.ordertype){
-                defaultOrderType=req.query.ordertype;
-            }
-            if(req.query.orderby){
-                sql= sql + " ORDER BY "+req.query.orderby+" "+defaultOrderType;
-            }
-            if(req.query.limit){
-                limit=req.query.limit;
-            }
+            req.query.name || req.query.email || req.query.telephone || req.query.trade || req.query.postcode ? sql=sql+" where ":null
 
-            if(req.query.keyword){
-                keyword = ' where CONCAT(firstName,lastName,email) LIKE "%'+req.query.keyword+'%"'
-            }
+            req.query.name ? req.query.email || req.query.telephone || req.query.trade || req.query.postcode ? sql = sql + "name='" + req.query.name + "'" : sql = sql + "name='" + req.query.name + "'" : null
 
-            sql +=keyword+" limit "+start+", "+20; 
+            req.query.email ? req.query.name || req.query.telephone || req.query.trade || req.query.postcode ? sql = sql + " AND email='" + req.query.email + "'" : sql = sql + "email='" + req.query.email + "'" : null
+
+            req.query.telephone ? req.query.name || req.query.trade || req.query.postcode || req.query.email ? sql = sql + " AND telephone=" + req.query.telephone : sql = sql + "telephone=" + req.query.telephone : null
+
+            req.query.trade ? req.query.name || req.query.email || req.query.telephone || req.query.postcode ? sql = sql + " AND trade_id=" + req.query.trade : sql = sql + "trade_id=" + req.query.trade : null
+
+            req.query.postcode ? req.query.name || req.query.email || req.query.telephone || req.query.trade ? sql = sql + " AND address_postcode='" + req.query.postcode + "'" : sql = sql + "address_postcode='" + req.query.postcode + "'" : null
+            
+            req.query.keyword ? keyword = ' where CONCAT(firstName,lastName,email) LIKE "%'+req.query.keyword+'%"':null
+
+            req.query.orderby ? sql = sql + " ORDER BY "+req.query.orderby+" "+OrderType : sql = sql + ` ORDER BY name ASC`
+                
+            req.query.start ? sql = sql+ ` LIMIT ${req.query.start},20`:null
+
+            // sql +=keyword+" limit "+start+", "+20; 
+            console.log(sql)
             connection.query(sql, function (err, data) {
                 console.log("this.sql======================>",this.sql);
                 if (err) {

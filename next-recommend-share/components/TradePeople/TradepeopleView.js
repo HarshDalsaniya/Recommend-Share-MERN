@@ -17,9 +17,9 @@ export const Tradepeoplecontent = (props) => {
             <Container>
                 <div className="rogue-traders-box">
                     <Row>
-                        <Col md={ 12 }>
+                        <Col md={12}>
                             <h3 className="all-blue-heading">
-                                tradespeople need more help &amp; support{ " " }
+                                tradespeople need more help &amp; support{" "}
                             </h3>
                             <p className="all-gray-text">
                                 Being a tradesperson and running a business is more than a full time
@@ -44,7 +44,7 @@ export const IconsDetails = (props) => {
         <section>
             <Container className="tradespeople-uk-faces">
                 <Row className="my-3 my-md-5 border-bottom border-top border-2 py-4">
-                    <Col md={ 6 }>
+                    <Col md={6}>
                         <p className="all-gray-text all-icons-color">
                             <i className="fas fa-sort-amount-down-alt" aria-hidden="true" />
                         </p>
@@ -53,7 +53,7 @@ export const IconsDetails = (props) => {
                             choosing other professions.
                         </p>
                     </Col>
-                    <Col md={ 6 }>
+                    <Col md={6}>
                         <p className="all-gray-text all-icons-color">
                             <i className="fas fa-pound-sign" aria-hidden="true" />
                         </p>
@@ -64,7 +64,7 @@ export const IconsDetails = (props) => {
                     </Col>
                 </Row>
                 <Row className="my-3 my-md-5 border-bottom border-top border-2 py-4">
-                    <Col md={ 6 }>
+                    <Col md={6}>
                         <p className="all-gray-text all-icons-color">
                             <i className="fas fa-heartbeat" aria-hidden="true" />
                         </p>
@@ -73,7 +73,7 @@ export const IconsDetails = (props) => {
                             other profession.
                         </p>
                     </Col>
-                    <Col md={ 6 }>
+                    <Col md={6}>
                         <p className="all-gray-text all-icons-color">
                             <i className="fas fa-chart-line" aria-hidden="true" />
                         </p>
@@ -124,7 +124,7 @@ export const IconDetails2 = (props) => {
         <section>
             <Container className="tradespeople-uk-faces">
                 <Row className="my-3 my-md-5 border-bottom border-top border-2 py-4">
-                    <Col md={ 6 }>
+                    <Col md={6}>
                         <p className="all-gray-text all-icons-color">
                             <i className="fas fa-coins" aria-hidden="true" />
                         </p>
@@ -132,7 +132,7 @@ export const IconDetails2 = (props) => {
                             Rogue traders cost UK homeowners £1.9 billion a year in botched jobs.
                         </p>
                     </Col>
-                    <Col md={ 6 }>
+                    <Col md={6}>
                         <p className="all-gray-text all-icons-color">
                             <i className="fas fa-hat-cowboy" aria-hidden="true" />
                         </p>
@@ -151,91 +151,87 @@ export const UserCard = (props) => {
 
     const { query } = useRouter();
     const Name = query.tradepeopleName
-    var Options = props.details  
+    var Options = props.details
     var IconsView = props.IconOption
 
 
     return (
         <>
-        <Row>
-            <div className="onepointfive columns alpha tcenter">
-                <p className="mob-not-shallow shallow">
-                    <Link
-                        href="https://recommendandshare.com/media/cache/avatar_large/assets/images/generic-avatar.png"
-                        data-featherlight="image"
-                        className="avatar-link"
-                    >
-                        <img
-                            src="https://recommendandshare.com/media/cache/avatar/assets/images/generic-avatar.png"
-                            className="full-width mob-max-width-50 avatar"
-                        />
-                    </Link>
-                </p>
-            </div>
-            <div className="tenpointfive columns">
-                <div className="contained semi-shallow">
-                    <Row>
-                        <div className="six columns alpha mob-tcenter ">
-                            <p className="h3 shallow">
-                                <Link href={'/tradespeople/'+Name} className="black">
-                                    {props.title}
-                                </Link>
-                            </p>
-                        </div>
-                    </Row>
+            <Row>
+                <div className="onepointfive columns alpha tcenter">
+                    <p className="mob-not-shallow shallow">
+                        <Link
+                            href="https://recommendandshare.com/media/cache/avatar_large/assets/images/generic-avatar.png"
+                            data-featherlight="image"
+                            className="avatar-link"
+                        >
+                            <img
+                                src="https://recommendandshare.com/media/cache/avatar/assets/images/generic-avatar.png"
+                                className="full-width mob-max-width-50 avatar"
+                            />
+                        </Link>
+                    </p>
                 </div>
-                <div className="contained shallow">
-                    <Row>
-                        <div className="eight columns alpha bdr-right">
-                            <ul className="simple-data small shallow">
-                                {/* {console.log(Options)}  */}
-                            {Options.map((values)=>                    
-                                <li>
-                                     <span className="title" key ={"_key"+values.option} >{values.option}</span>{values.value}
-                                </li>
-                                )}                               
-                            </ul>
-                        </div>
-                        <div className="four columns">
-                            <ul className="simple-data wider small shallow ">
-                                {IconsView.map((values)=> 
-                                values.title == 'Date Joined:' ? 
-                                <li>
-                                    <span className="title">{values.title}</span>{values.value}
-                                </li>
-                            :  
-                                <li
-                                data-tip="
-                                        Managed accounts are those maintained by a registered user. Unmanaged accounts are unclaimed by any user."
-                                className="tipr"
-                            >
-                                <span className="title">{values.title}</span>{ " " }
-                                <span className={values.value == 'yes'? "highlighted on" : "highlighted off"}>{values.value}</span>
-                            </li>                      
-                                                              
-                                )}                              
-                                
-                            </ul>
-                        </div>
-                    </Row>
+                <div className="tenpointfive columns">
+                    <div className="contained semi-shallow">
+                        <Row>
+                            <div className="six columns alpha mob-tcenter ">
+                                <p className="h3 shallow">
+                                    <Link href={'/tradespeople/' + Name} className="black">
+                                        {props.title}
+                                    </Link>
+                                </p>
+                            </div>
+                        </Row>
+                    </div>
+                    <div className="contained shallow">
+                        <Row>
+                            <div className="eight columns alpha bdr-right">
+                                <ul className="simple-data small shallow">
+                                    {/* {console.log(Options)}  */}
+                                    {Options.map((values) =>
+                                        <li>
+                                            <span className="title" key={"_key" + values.option} >{values.option}</span>{values.value}
+                                        </li>
+                                    )}
+                                </ul>
+                            </div>
+                            <div className="four columns">
+                                <ul className="simple-data wider small shallow ">
+                                    {IconsView.map((values) =>
+                                        values.title == 'Date Joined:' ?
+                                            <li>
+                                                <span className="title">{values.title}</span>{values.value}
+                                            </li>
+                                            :
+                                            <li className="tipr">
+                                                <span className="title">{values.title}</span>{" "}
+                                                <span className={values.value == 'yes' ? "highlighted on" : "highlighted off"}>{values.value}</span>
+                                            </li>
+
+                                    )}
+
+                                </ul>
+                            </div>
+                        </Row>
+                    </div>
                 </div>
-            </div>
-        </Row>
+            </Row>
         </>
     )
 }
 
-export const ColorBox = (props)=> {
+export const ColorBox = (props) => {
     return (
         <a
             href="/tradespeople/1st-cs/activity?type=recommendations"
             className={`box ${props.color} rounded less semi-shallow`}
         >
-             <span className="huge shallow">{props.value}</span>
-        <br />
+            <span className="huge shallow">{props.value}</span>
+            <br />
             <span className="tiny shallow">{props.caption}</span>
         </a>
     )
 }
 
-export default connect(null, null)(Tradepeoplecontent, IconsDetails, CustomersContractors, IconDetails2, UserCard ,ColorBox)
+export default connect(null, null)(Tradepeoplecontent, IconsDetails, CustomersContractors, IconDetails2, UserCard, ColorBox)

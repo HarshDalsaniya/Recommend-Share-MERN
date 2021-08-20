@@ -18,7 +18,7 @@ export const tradespeopleDetails = (props) => {
                    <div className="six columns tright">
                        <div className="contained semi-shallow">
                            <div className="share-box-new right">
-                                <span class="sharethis-inline-share-title">Share this:</span>
+                                <span className="sharethis-inline-share-title">Share this:</span>
                                 <div
                                     className="sharethis-inline-share-buttons st-right  st-inline-share-buttons st-animated"
                                     id="st-1"

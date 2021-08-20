@@ -40,16 +40,15 @@ export const tradOption = () => {
 
 }
 
-export const searchBusiness = (name,query) => {
+export const searchBusiness = (searchFilter) => {
     return dispatch => {
         dispatch({
             type: BUSINESS_SEARCH,
             payload: "Search Trade People"
         })
-        businessSearch(name,query)
+        businessSearch(searchFilter)
             .then((result) => {
                 if (result.data.status == true) {
-                    Router.push(`/tradespeople${name!=""?`?name=`+name:``}`)
                     dispatch({
                         type: BUSINESS_SEARCH_SUCCESS,
                         payload: result.data.data

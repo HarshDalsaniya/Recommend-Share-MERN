@@ -83,8 +83,23 @@ const tradList = () =>{
             .then((res) => res)
 }
 
-const businessSearch = (name,query) =>{
-    return axios.post(`http://localhost:4000/api/feedback/list`)
+const businessSearch = (searchFilter) =>{
+    console.log(searchFilter.email)
+    var path=`http://localhost:4000/api/feedback/list?`
+
+        searchFilter.name != null ? path = path + "name=" + searchFilter.name : ""
+
+        searchFilter.email != null ? searchFilter.name != null ? path = path + "&email=" + searchFilter.email : path = path + "email=" + searchFilter.email : ""
+
+        searchFilter.telephone != null ? (searchFilter.name || searchFilter.email) != null ? path = path + "&telephone=" + searchFilter.telephone : path = path + "telephone=" + searchFilter.telephone : ""
+
+        searchFilter.trade != null ? (searchFilter.name || searchFilter.email || searchFilter.telephone) != null ? path = path + "&trade=" + searchFilter.trade : path = path + "trade=" + searchFilter.trade : ""
+
+        searchFilter.postcode != null ? (searchFilter.name || searchFilter.email || searchFilter.telephone || searchFilter.trade) != null ? path = path + "&postcode=" + searchFilter.postcode : path = path + "postcode=" + searchFilter.postcode : ""
+
+        searchFilter.action != "undefined" && searchFilter.action != "" && (searchFilter.action == "recommend" || searchFilter.action == "warn") ? (searchFilter.name || searchFilter.email || searchFilter.telephone || searchFilter.tradespeopleTrade || searchFilter.address_postcode) != null? path = path + "&action=" + searchFilter.action : path = path + "action=" + searchFilter.action  : ""
+
+    return axios.get(path)
              .then((res) => res)
  }
 

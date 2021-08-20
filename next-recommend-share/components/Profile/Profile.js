@@ -285,7 +285,7 @@ export const ProfileForm = (props) => {
             </div>
             <input type="hidden" id="profile__token" name="profile[_token]" defaultValue="04H6KISBzHWAWL7N2czvzTnBPLbRVnV3c6TxDEBnRY0" />
             <div className="buttons ">
-                <Button type="submit" className>
+                <Button type="submit">
                     Save Details
                 </Button>
             </div>

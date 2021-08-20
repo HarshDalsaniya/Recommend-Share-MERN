@@ -22,7 +22,7 @@ export const Fields = (props) => {
             <div className="form-field">
                 <Form.Label className="form-lable">{props.fieldLabel}</Form.Label>
                 <div className="_select">
-                    <Form.Select name={props.fieldName} defaultValue="" className="_select_input ready" style={{opacity: 1, cursor: "pointer", position: "absolute", width: "99.9%", border: "none", outline: "none", height: "100%", top: "0px", right: "0px"}}  onChange={(e) => { props.fieldAction(e.target.value) }}>
+                    <Form.Select name={props.fieldName} defaultValue={typeof props.fieldValidation[1]!="undefined" && props.fieldValidation[1]!=""?props.fieldValidation[1]:""} className="_select_input ready" style={{opacity: 1, cursor: "pointer", position: "absolute", width: "99.9%", border: "none", outline: "none", height: "100%", top: "0px", right: "0px"}}  onChange={(e) => { props.fieldAction(e.target.value) }}>
                         <option value="" disabled>{props.fieldLabel}</option>
                         {props.fieldOption.map((opt)=>{
                             return <option key={"opt_"+opt.value} value={opt.value}>{opt.title}</option>

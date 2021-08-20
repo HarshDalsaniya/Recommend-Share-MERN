@@ -207,7 +207,7 @@ export const WhatPeopleSlider = (props) => {
         <>
             <section className="see-what-people py-3 py-5">
                 <Container>
-                    <h3 class="community-heading text-center">&nbsp;See what people are saying!</h3>
+                    <h3 className="community-heading text-center">&nbsp;See what people are saying!</h3>
                     <div className="see-what-people-slider mb-3">
                         <div className="owl-carousel owl-theme people-slider owl-loaded owl-drag">
                             <div className="owl-stage-outer">

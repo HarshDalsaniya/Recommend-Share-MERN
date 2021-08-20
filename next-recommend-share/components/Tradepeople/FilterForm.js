@@ -1,19 +1,24 @@
 import React,{ useState, useEffect } from 'react'
+import Router from "next/router"
 import Link from "next/link"
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
 import { Row } from 'react-bootstrap'
 import Fields from '../../components/Form-Fields/Fields';
 import { formFieldValidation } from "../../services/formValidation"
+import { useRouter } from 'next/router';
+import { searchBusiness } from '../../redux/treadspeople/action';
 
 export const FilterForm = (props) => {
+    const { query } = useRouter();
     const reState = useSelector(state => state);
+    const dispatch =new useDispatch()
     const { error } = reState.authUser;
-    const [name, setName] = useState('');
-    const [address_postcode, setAddress_postcode] = useState('');
-    const [tradespeopleTrade, setTradespeopleTrade] = useState('');
-    const [email, setEmail] = useState('');
-    const [telephone, setTelephone] = useState('');
+    const [name, setName] = useState(query.name);
+    const [address_postcode, setAddress_postcode] = useState(query.postcode);
+    const [tradespeopleTrade, setTradespeopleTrade] = useState(query.trade);
+    const [email, setEmail] = useState(query.email);
+    const [telephone, setTelephone] = useState(query.telephone);
     const [submitted, setSubmitted] = useState(false);
     const [selectTreadOption, setSelectTreadOption] = useState([])
 
@@ -37,10 +42,45 @@ export const FilterForm = (props) => {
                 )
             })
     }, [setSelectTreadOption])
+    const allClear = () =>{
+        setName("")
+        setAddress_postcode("")
+        setTradespeopleTrade("")
+        setEmail("")
+        setTelephone("")
+    }
+    console.log(typeof tradespeopleTrade)
+    const onSubmit = (e) => {
+        e.preventDefault();
+        const search={
+            name: name != ""?name:null, 
+            email: email != ""?email:null, 
+            telephone: telephone != ""?telephone:null, 
+            trade: tradespeopleTrade != ""?tradespeopleTrade:null, 
+            postcode: address_postcode != ""?address_postcode:null, 
+            action: query.action && query.action != "undefined" && query.action !="" && (query.action =="recommend" || query.action =="warn") ? query.action : null
+        }
+        dispatch(searchBusiness(search))
+        var path=`/tradespeople?`
 
+        search.name != null ? path = path + "name=" + name : ""
+
+        search.email != null ? search.name != null ? path = path + "&email=" + email : path = path + "email=" + email : ""
+
+        search.telephone != null ? (search.name || search.email) != null ? path = path + "&telephone=" + search.telephone : path = path + "telephone=" + search.telephone : ""
+
+        search.trade != null ? (search.name || search.email || search.telephone) != null ? path = path + "&trade=" + search.trade : path = path + "trade=" + search.trade : ""
+
+        search.postcode != null ? (search.name || search.email || search.telephone || search.trade) != null ? path = path + "&postcode=" + search.postcode : path = path + "postcode=" + search.postcode : ""
+
+        query.action != "undefined" && query.action != "" && (query.action == "recommend" || query.action == "warn") ? (search.name || search.email || search.telephone || search.tradespeopleTrade || search.address_postcode) != null? path = path + "&action=" + query.action : path = path + "action=" + query.action  : ""
+
+        Router.push(path)
+    }
     return (
-        <form>
-            <Row>
+        <form onSubmit={onSubmit}>
+            {query.action!="recommend"&&query.action!="warn"?
+            <Row className="px-2">
                 <div className="four columns alpha">
                     <div className="form_row  choice">
                         <Fields
@@ -72,12 +112,13 @@ export const FilterForm = (props) => {
                     </div>
                 </div>
             </Row>
-            <Row>
+            :null}
+            <Row className="px-2">
                 <div className="four columns alpha">
                     <div className="form_row  text">
                         <Fields
                             field="text"
-                            fieldLabel="radesperson / Business Name"
+                            fieldLabel="Tradesperson / Business Name"
                             fieldName="name"
                             fieldValue={name}
                             fieldAction={setName}
@@ -98,13 +139,9 @@ export const FilterForm = (props) => {
                     </div>
                 </div>
                 <div className="four columns">
-                    <div className="form_row  text">
-                        <label htmlFor="search_filter_telephone">Phone Number</label>
-                        <div className="field_container">
-                            <input type="text" id="search_filter_telephone" name="search_filter[telephone]" />
-                        </div>
+                    <div className="form_row text">
                         <Fields
-                            field="number"
+                            field="numeric"
                             fieldLabel="Phone Number"
                             fieldName="telephone"
                             fieldValue={telephone}
@@ -115,13 +152,11 @@ export const FilterForm = (props) => {
                 </div>
             </Row>
             <div className="buttons tright shallow">
-                <Link href="/tradespeople">
-                <a className="button clear">
+                <a className="button clear" onClick={()=>allClear()}>
                     <i className="fa fa-undo" aria-hidden="true" /> Reset
                 </a>
-                </Link>{" "}
                 &nbsp;
-                <button type="submit" className>
+                <button type="submit">
                     Search
                 </button>
             </div>

@@ -118,7 +118,7 @@ export const BusinessInfo = (props) => {
                                         <input type="hidden" id="feedback__token" name="feedback[_token]" defaultValue="My302e3CXN7lP_64QL1zTIc4dis9ov05IQAjlGwfkZU" />
                                     </div>
                                     <div className="buttons tcenter">
-                                        <button type="submit" className>
+                                        <button type="submit">
                                             Share
                                         </button>
                                     </div>

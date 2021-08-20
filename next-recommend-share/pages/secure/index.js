@@ -88,7 +88,7 @@ export const secure = (props) => {
                                         </div>
                                     </div>
                                     <div className="col-md-4 user-name-box">
-                                        <div className>
+                                        <div>
                                             <div className="user-icons">
                                                 <img src="https://recommendandshare.com/media/cache/avatar/uploads/customers/sam-avatar-1626495954.png" alt="sam" />
                                                 <i className="fas fa-user-circle" aria-hidden="true" />

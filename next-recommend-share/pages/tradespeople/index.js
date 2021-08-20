@@ -9,7 +9,7 @@ import Table from '../../components/Table';
 
 
 export const index = (props) => {
-    const { query } = useRouter();
+    const { query,pathname } = useRouter();
     const reState = useSelector(state => state);
     const { error, searchResult } = reState.tradePeople;
     const dispatch = useDispatch()
@@ -21,7 +21,7 @@ export const index = (props) => {
             headerClasses: "bt_table_th",
             classes: "bt_table_td",
             formatter: (cell) => {
-                return <>{<img src={`https://recommendandshare.com/media/cache/avatar_small/assets/images/${cell}`} alt="1ST CS" className="avatar" />}</>
+                return <>{<img src={`https://recommendandshare.com/media/cache/avatar_small/assets/images/${cell}`} className="avatar" />}</>
             }
         },
         {
@@ -81,12 +81,20 @@ export const index = (props) => {
             align: 'center',
             headerAlign: 'center',
             formatter: (cell) => {
-                return <>{<Link href=""><a className="button small">{cell}</a></Link>}</>
+                return <>{<Link href={`/secure/tradespeople/${cell}/recommend?action=${query.action}`}><a className="button small">{query.action?query.action:"View"}</a></Link>}</>
             }
         }
     ]
     useEffect(() => {
-        dispatch(searchBusiness(Router.query.name, "Positive"))
+        const search={
+            name: query.name && query.name != "undefined" && query.name != "" ? query.name : null,
+            email: query.email && query.email != "undefined" && query.email != "" ? query.email : null,
+            telephone: query.telephone && query.telephone != "undefined" && query.telephone != "" ? query.telephone : null,
+            trade: query.trade && query.trade != "undefined" && query.trade != "" ? query.trade : null,
+            postcode: query.postcode && query.postcode != "undefined" && query.postcode != "" ? query.postcode : null,
+            action: query.action && query.action != "undefined" && query.action !="" && (query.action =="recommend" || query.action =="warn") ? query.action : null
+        }
+        dispatch(searchBusiness(search))
     }, [])
     if (typeof searchResult != "undefined") {
         searchResult.map((value) => {
@@ -96,24 +104,35 @@ export const index = (props) => {
                 trade_name: value.trade_name,
                 distance: "-",
                 recomendation: [0, 0],
-                action:<Link href={'/secure/tradespeople/'+value.name.replace(/\s/g, "-")+'/recommend?action=recommend'}>
-                           <>
-                                { query.action ==("recommend"||'warn') ? query.action : "View" }  
-                                {/* {action == "View"} */}
-                               </>          
-                       </Link>
+                action:value.slug
             })
         })
     }
+    // <Link key={value.name} href={'/secure/tradespeople/'+value.name.replace(/\s/g, "-")+'/recommend?action=recommend'}>
+    //                         { query.action ==("recommend"||'warn') ? query.action : "View" }
+    //                     </Link>
     return (
         <section className="login-body content" style={{ marginTop: "5rem" }}>
             <div className="container">
                 <div className="twelve columns alpha">
                     <div className="contained">
-                        <h1> Search Recommended Tradespeople</h1>
+                        <h1> 
+                            {query.action!="recommend"&& query.action!="warn"?"Search Recommended Tradespeople":null}
+                            {query.action=="warn"?<span className="text-red">Leave a Negative Recommendation</span>:null}
+                            {query.action=="recommend"?<span className="text-green">Leave a Positive Recommendation</span>:null}
+                        </h1>
                         <div className="box white">
                             <FilterForm />
                         </div>
+                    </div>
+                    <div className="tcenter">
+                        <p className="h1 shallow">No results found.</p>
+                        <p>
+                            We couldn't find any matches for your search. Try widening your search to
+                            see some results.
+                            <br />
+                        </p>
+                        <p>You may be interested in the Tradespeople listed below.</p>
                     </div>
                     <div className="contained">
                         <div className="table-container ">
