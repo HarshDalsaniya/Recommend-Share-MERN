@@ -2,7 +2,7 @@ export const currentUser = {
     id:'',
     name:'',
     email:'',
-    token:''
-      
+    token:'',
+    profile_Picture:'',      
     
   };

@@ -3,7 +3,7 @@ var router = express.Router();
 // var hash = require('../../pass').hash;
 var path = require('path');
 var multer = require('multer');
-var bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 var msg = require('../../../config/messages');
 var func = require('../../../config/functions');
 var functions = func.func();
@@ -30,7 +30,8 @@ const { sanitizeBody, matchedData } = require('express-validator/filter');
 var cors = require("cors");
 var address = require('address');
 var { machineId, machineIdSync } = require('node-machine-id');
-const { json } = require('body-parser');
+
+
 
 
 
@@ -60,22 +61,34 @@ router.post('/login', cors(), function (req, res, callBack) {
     // console.log(typeof errors.invalidValue)
     if (valid) {
         req.getConnection(function (err, connection) {
+           
             var data = {
                 email: post.email,
-                password: md5(post.password)
+                password: post.password
             };
             // c62ac98937679cd7fa090c411b5bba9c             
-            var sql = `select * from user where email="${data.email}" and password="${data.password}"`;
+            var sql = `select * from user where email="${data.email}"`;
             // const token = general.generateAccessToken({ email: req.body.email });
-            connection.query(sql, function (err, result) {
+            connection.query(sql,  function  (err, result) {              
+
+                if((result.length == 0) || (result[0].password == 'undefined') ) {
+                    errors.verifyError.userNotFound="Invalid Username and Password"
+                    response = general.response_format(false, errors);
+                    res.send(response);
+                }else if (result[0].password != 'undefined'){         
+                                // comapare the hasing password     
+                const pass=[data.password, result[0].password]
+
+                const passVerify =  general.validateHashedPassword(pass)                                     
+
                 console.log("this.sql======================>", this.sql);
                 if (err) {
-                    console.log(err);
+                    console.log(err);   
                     response = general.response_format(false, messages.ERROR_PROCESSING, {});
                     res.send(response);
                 }
 
-                if (result.length > 0) {
+                if (passVerify) {
                     var sql2 = `select * from user_token where userId="${result[0].id}"`
                     connection.query(sql2, function (err, result_2) {
                         if (err) {
@@ -105,12 +118,10 @@ router.post('/login', cors(), function (req, res, callBack) {
                                 }
                                 result.push(newData);
                                 response = general.response_format(true, "Login Successfully", result);
-
                                 res.send(response);
                             });
 
                         } else {
-
                             let ID = machineIdSync()
                             const Device_Ip_Address = address.ip()
 
@@ -133,13 +144,11 @@ router.post('/login', cors(), function (req, res, callBack) {
                             })
                         }
                     })
-                } else {
-                    errors.verifyError.userNotFound="Invalid Username and Password"
-                    response = general.response_format(false, errors);
-                    res.send(response);
                 }
-            });
-        });
+            }
+        });           
+    });
+    
     } else {
         var str = functions.loadErrorTemplate(elem);
         async.forEachOf(str.split("\n ")[1].replace(" should not be blank",'').split(","),(value,key,callback)=>{
@@ -203,9 +212,12 @@ router.post('/register', cors(), function (req, res, next) {
                     res.send(response);
                 }
                 else {
-                    if (result.length == 0) {
+                    if (result.length == 0) { 
+                        var userPassword = post.password
+                        const bcryptPass =  general.hashPassword(userPassword)                                              
+
                         var data = {
-                            password: md5(post.password),
+                            password:bcryptPass,
                             email: post.email,
                             telephone: post.telephone,
                             name: post.name,
@@ -223,7 +235,8 @@ router.post('/register', cors(), function (req, res, next) {
                             notification_received_sms: 1,
                             notification_received_email: 1,
                             notification_marketing_email: 1
-                        }
+                        }; 
+
                         var insertSql = `insert into user set terms_agreed_date=NOW(), gdpr_agreed_date=NOW(), ?`;
                         connection.query(insertSql, data, function (err, insertResult) {
                             // console.log("this.sql======================>",this.sql);
@@ -303,6 +316,7 @@ router.post('/register', cors(), function (req, res, next) {
                                 }
                             }
                         })
+                   
                     } else {
                         errors.verifyError.registerError="User Allready Exist"
                         response = general.response_format(false, errors, {});

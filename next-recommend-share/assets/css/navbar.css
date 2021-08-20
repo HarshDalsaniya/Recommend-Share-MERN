@@ -54,6 +54,7 @@
     max-width: 200px;
     width: 100%;
     display: inline-block;
+    
 }
 
 .nav-logo a img:hover {
@@ -119,8 +120,6 @@
     
 }
 
-
-
 .navbar-toggler:focus {
     text-decoration: none;
     outline: 0;
@@ -131,7 +130,7 @@
 } */
 
 @media only screen and (max-width: 992px) {
-    .login {
+       .login {
         margin-left: 0;
     }
     #nav-icon3 span:nth-child(2) {

@@ -15,24 +15,24 @@ export const NavBar = (props) => {
     // console.log(userbussines);
     const dispatch = useDispatch();
     const [localstorageItem, setLocalStorageItem] = useState(null)
-   
-    console.log(route)
-    
-
-
+    const [profile, setProfile] = useState('')
+       
     useEffect(() => {
         dispatch(userTradeBussines(localStorage.getItem("Recommend_Share_current_user") == null ? '' : JSON.parse(localStorage.getItem("Recommend_Share_current_user")).id))
 
         const interval = setInterval(() => {
             setLocalStorageItem(JSON.parse(localStorage.getItem('Recommend_Share_current_user')));
-        }, 1000);
-        return () => clearInterval(interval);
-    }, [setLocalStorageItem])
+            setProfile(JSON.parse(localStorage.getItem('Recommend_Share_current_user')).profile_Picture)
 
+        }, 1000);
+               
+        return () => clearInterval(interval);
+    }, [setLocalStorageItem ,setProfile])
 
     const handleLogout = () => {
         dispatch(logoutUser())
     };
+
     return (
         <>
             <div className="navbar-header">
@@ -101,15 +101,19 @@ export const NavBar = (props) => {
                                                 <Dropdown className="">
                                                     <Dropdown.Toggle variant="success" id="dropdown-basic">
                                                         <img
-                                                            src="https://recommendandshare.com/media/cache/avatar_small/uploads/customers/sam-avatar-1626495954.png"
+                                                            src={"http://localhost:3000/images/"+profile } 
                                                             className="avatar"
+                                                            style={{
+                                                                width: '40px',
+                                                                height: '40px'
+                                                            }}
                                                         />
                                                         <span className="ms-2">{ localstorageItem.name }</span>
                                                     </Dropdown.Toggle>
                                                     <Dropdown.Menu>
                                                         <Dropdown.Item>My Dashboard</Dropdown.Item> 
                                                         <Dropdown.Divider />                                                       
-                                                        {userbussines != (null || 'undefined') ? userbussines.map((bussines)=>
+                                                        {userbussines != null ? userbussines.map((bussines)=>
                                                         <Dropdown.Item><Link href="">{bussines.name}</Link></Dropdown.Item>
                                                         ) : ""}                                                                                                           
                                                         <Dropdown.Item ><Link href="/secure/tradespeople/create">Add a Business</Link></Dropdown.Item>

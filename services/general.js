@@ -1,5 +1,7 @@
 var fs = require('fs');
 var jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 require("dotenv").config();
 exports.func = function () {
     return {
@@ -49,8 +51,27 @@ exports.func = function () {
             return img_path;
         },
 
-         generateAccessToken: function (id) {
+        generateAccessToken: function (id) {
             return jwt.sign(id, process.env.SECRET_KEY);
-          }
+        },
+
+        hashPassword : function (userPassword){
+            return bcrypt.hashSync(userPassword, saltRounds)
+                
+            // bcrypt.hash(userPassword, saltRounds) 
+            //     .then((res)=>{hashedpassword=res})
+            //     .catch((err)=>err) 
+            // console.log(hashedpassword)
+            // return hashedpassword
+        },  
+
+       validateHashedPassword : function (password)
+       {
+         return bcrypt.compare(password[0], password[1])
+            .then((res)=>{console.log(res),res})
+            .catch((err)=>err)
+
+       }
+       
 }
 }

@@ -1,4 +1,5 @@
 import React , { useEffect,useState }  from 'react'
+import { Container } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { NegativeRecommendation, PositiveRecommendation, RecommendedTradesperson } from '../../components/Secure/SearchBox'
 
@@ -11,13 +12,17 @@ export const secure = (props) => {
         const interval = setInterval(() => {
             setLocalStorageItem(JSON.parse(localStorage.getItem('Recommend_Share_current_user')));
         }, 1000);
-        return () => clearInterval(interval);
+        return () => clearInterval(interval);   
     }, [setLocalStorageItem])   
 
     return (
-        <section className="content">
-            <div className="container">
-                <div className="profile-page">
+        <section className="content login-body">
+            <Container>
+                <div className="flashMessageofuser success" role="alert" style={{marginTop:"7rem"}}>
+                    You are now logged in as {JSON.parse(localStorage.getItem('Recommend_Share_current_user')) == null ? '' :JSON.parse(localStorage.getItem('Recommend_Share_current_user')).name}.
+                    </div>
+                    {/* typeof localstorageItem != ('undefined' || null)? localstorageItem.name : '' */}
+                <div className="profile-page" style={{marginTop:"1rem"}}>
                     <section className="profile-page-image">
                         <img src="/images/consumer_login.jpg" />
                     </section>
@@ -102,7 +107,7 @@ export const secure = (props) => {
                         </div>
                     </section>
                 </div>
-            </div>
+            </Container>
         </section>
     )
 }
