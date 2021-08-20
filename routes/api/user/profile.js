@@ -164,7 +164,7 @@ router.post('/userProfilePic', cors(), upload.fields([{name:"profile_image"}]), 
                 else {
                     if (result.length > 0) {
                         fs.readFile('./public/images/' + req.files.profile_image[0].filename, "utf8", function (err, data) {
-                            if (err) throw(err); 
+                            if (err) throw(err);   
                             try{
                                 var sql = `update user set image='${req.files.profile_image[0].filename}' where email='${req.body.email}'`;
                                 connection.query(sql, function (err, updateResult) {
@@ -174,7 +174,8 @@ router.post('/userProfilePic', cors(), upload.fields([{name:"profile_image"}]), 
                                         response = general.response_format(false, messages.ERROR_PROCESSING, {});
                                         res.send(response);
                                     } else {
-                                        response = general.response_format(true, "User Profile Photo Update SuccessFull");
+                                        var pictureName =  req.files.profile_image[0].filename                               
+                                        response = general.response_format(true, "User Profile Photo Update SuccessFull" , pictureName );
                                         res.send(response);
                                     }
                                 })

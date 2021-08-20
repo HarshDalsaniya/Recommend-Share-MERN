@@ -20,7 +20,7 @@ export const reset_password = (props) => {
     }, [])
     // console.log(birds)
     return (
-        <div>
+        <div style={{marginTop : "5rem"}}>
             {
                 typeof params.uniqueKey != 'undefined' ?
                     userKeyverify.authUser.key == true ?

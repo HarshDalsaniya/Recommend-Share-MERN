@@ -14,8 +14,8 @@ import { formFieldValidation } from "../services/formValidation"
 export const login = (props) => {
     const reState = useSelector(state => state);
     const { error } = reState.authUser;
-    const [_username, setUsername] = useState("maulikm@droptechnolab.com");
-    const [_password, setPassword] = useState("Maulik@123");
+    const [_username, setUsername] = useState("");
+    const [_password, setPassword] = useState("123456");
     const [submitted, setSubmitted] = useState(false)
     const onSubmit = (e) => {
         e.preventDefault();

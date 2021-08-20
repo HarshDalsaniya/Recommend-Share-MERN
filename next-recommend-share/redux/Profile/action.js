@@ -1,6 +1,6 @@
 import {
-    USER_DATA, 
-    USER_DATA_SUCCESS, 
+    USER_DATA,
+    USER_DATA_SUCCESS,
     USER_DATA_ERROR,
     USER_UPDATE,
     USER_UPDATE_SUCCESS,
@@ -9,16 +9,18 @@ import {
     USER_UPDATE_PROFILE_PHOTO_SUCCESS,
     USER_UPDATE_PROFILE_PHOTO_ERROR,
 } from "../action-type"
+import { currentUser } from "../../constants/defaultValues";
 import { userData, updateProfile, updateProfilePhoto } from "../../helper/api"
+import { setCurrentUser } from "../../helper/Utils";
 
-export const userProfile = (userId) =>{
+export const userProfile = (userId) => {
     return dispatch => {
         dispatch({
-            type:USER_DATA,
-            paload:userId
+            type: USER_DATA,
+            paload: userId
         })
         userData(userId)
-            .then((result)=>{
+            .then((result) => {
                 if (result.data.status == true) {
                     dispatch({
                         type: USER_DATA_SUCCESS,
@@ -37,16 +39,17 @@ export const userProfile = (userId) =>{
     }
 }
 
-export const profileUpadate = (profileData) =>{
+export const profileUpadate = (profileData) => {
     return dispatch => {
         dispatch({
-            type:USER_UPDATE,
-            paload:profileData.email
+            type: USER_UPDATE,
+            paload: profileData.email
         })
         updateProfile(profileData)
-            .then((result)=>{
+            .then((result) => {
                 console.log(result)
                 if (result.data.status == true) {
+
                     dispatch({
                         type: USER_UPDATE_SUCCESS,
                         payload: result.data.data
@@ -64,16 +67,25 @@ export const profileUpadate = (profileData) =>{
     }
 }
 
-export const profilePhotoUpdate = (profilPhoto) =>{
+export const profilePhotoUpdate = (profilPhoto) => {
     return dispatch => {
         dispatch({
-            type:USER_UPDATE_PROFILE_PHOTO,
-            paload:profilPhoto
+            type: USER_UPDATE_PROFILE_PHOTO,
+            paload: profilPhoto
         })
         updateProfilePhoto(profilPhoto)
-            .then((result)=>{
+            .then((result) => {
                 console.log(result)
                 if (result.data.status == true) {
+                    const item = {
+                        profile_Picture: result.data.data
+                    } 
+                              
+                    var existing = localStorage.getItem('Recommend_Share_current_user');
+                    existing = existing ? JSON.parse(existing) : {};               
+                    existing['profile_Picture'] = item.profile_Picture;            
+                 
+                    setCurrentUser(existing);
                     dispatch({
                         type: USER_UPDATE_PROFILE_PHOTO_SUCCESS,
                         payload: result.data.data

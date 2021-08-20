@@ -120,7 +120,7 @@ router.post('/reset-password', cors(), function (req, res) {
     // var id = req.query.id;
     // var uniqueKey = req.query.uniqueKey;
     response = {};
-    console.log(req.query.uniqueKey)
+    // console.log(req.query.uniqueKey)
     var required_params = ['New_password', 'confirm_New_password'];
 
     var elem = functions.validateReqParam(post, required_params);
@@ -137,14 +137,19 @@ router.post('/reset-password', cors(), function (req, res) {
                 if (uniqueKeyschema.length == 0) {
                     response = general.response_format(true, "invalid User", uniqueKeyschema);
                     res.send(response);
-                } else {
-                    var data = {
-                        New_password: post.New_password,
-                        confirm_New_password: post.confirm_New_password,
-                    };
+                } else {                  
 
-                    if (data.New_password == data.confirm_New_password) {
-                        var sql = `update user,user_forgotpassword set password="${md5(data.New_password)}" where user.email=user_forgotpassword.email and user_forgotpassword.uniqueKey="${uniqueKeyschema[0].uniqueKey}"`;
+                    if (post.New_password == post.confirm_New_password) {
+                        
+                        var userPassword = post.New_password
+                        const bcryptPass = general.hashPassword(userPassword)
+                        console.log("newpassword" , bcryptPass )
+                        
+                        var data = {
+                            New_password:bcryptPass                           
+                        };                   
+
+                        var sql = `update user,user_forgotpassword set password="${data.New_password}" where user.email=user_forgotpassword.email and user_forgotpassword.uniqueKey="${uniqueKeyschema[0].uniqueKey}"`;
                         connection.query(sql, function (err, result) {
                             if (err) throw err;
                             var sql = ` delete from user_forgotpassword where uniqueKey="${uniqueKeyschema[0].uniqueKey}"`;

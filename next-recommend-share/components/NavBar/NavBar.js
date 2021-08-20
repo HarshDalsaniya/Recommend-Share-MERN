@@ -1,131 +1,125 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect, useDispatch, useSelector } from 'react-redux'
-import { Container, Navbar, Dropdown } from 'react-bootstrap';
+import { Container, Navbar, Nav, Dropdown } from 'react-bootstrap';
+import { useRouter } from 'next/router';
 import Link from 'next/link'
-import { logoutUser} from '../../redux/auth/action';
-import {userTradeBussines} from '../../redux/bussiness/action'
+import { logoutUser } from '../../redux/auth/action';
+import { userTradeBussines } from '../../redux/bussiness/action'
 
 
 
 export const NavBar = (props) => {
+    const { route } = useRouter();
     const businessState = useSelector(state => state);
-    const {userbussines} = businessState.businessReducer;
+    const { userbussines } = businessState.businessReducer;
     // console.log(userbussines);
     const dispatch = useDispatch();
     const [localstorageItem, setLocalStorageItem] = useState(null)
-    
-    
+    const [profile, setProfile] = useState('')
+       
     useEffect(() => {
-        dispatch(userTradeBussines(localStorage.getItem("Recommend_Share_current_user") == null ? '': JSON.parse(localStorage.getItem("Recommend_Share_current_user")).id ))
-      
+        dispatch(userTradeBussines(localStorage.getItem("Recommend_Share_current_user") == null ? '' : JSON.parse(localStorage.getItem("Recommend_Share_current_user")).id))
+
         const interval = setInterval(() => {
             setLocalStorageItem(JSON.parse(localStorage.getItem('Recommend_Share_current_user')));
-        }, 1000);
-        return () => clearInterval(interval);
-    }, [setLocalStorageItem])
+            setProfile(JSON.parse(localStorage.getItem('Recommend_Share_current_user')).profile_Picture)
 
-    
+        }, 1000);
+               
+        return () => clearInterval(interval);
+    }, [setLocalStorageItem ,setProfile])
+
     const handleLogout = () => {
-            dispatch(logoutUser())
+        dispatch(logoutUser())
     };
+
     return (
         <>
             <div className="navbar-header">
                 <Container>
-                    <div className="navbar navbar-expand-lg">
-                        <div className="container-fluid navbar-items">
-                            <div className="nav-logo">
-                                <Link className="navbar-brand" href="/">
-                                    <a>
-                                        <img
-                                            src="/logo/logo-on-dark.svg"
-                                            alt="Recommend and Share"
-                                        />
-                                    </a>
-                                </Link>
+                    <Navbar
+                        collapseOnSelect
+                        expand="lg"
+                        className="navbar navbar-expand-lg"
+                    >
+                        <Link className="navbar-brand" href="/">
+                            <img src='/logo/logo-on-dark.svg' height={ 65 } width={ 200 } alt="" />
+                        </Link>
+                        <Navbar.Toggle aria-controls="responsive-navbar-nav">
+                            <div id="nav-icon3">
+                                <span></span>
+                                <span></span>
+                                <span></span>
                             </div>
-                            <div className="login-uesr">
-                                <ul className="navbar-nav me-auto"></ul>
-                            </div>
-                            <button
-                                className="navbar-toggler hamburger-menu"
-                                type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#navbarSupportedContent"
-                                aria-controls="navbarSupportedContent"
-                                aria-expanded="false"
-                                aria-label="Toggle navigation"
-                            >
-                                <div>
-                                    <span />
-                                    <span />
-                                    <span />
-                                    <span />
-                                </div>
-                            </button>
-                            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                                <ul className="navbar-nav ms-auto mb-2 mb-lg-0 navbar-item-bg">
-                                    <li className="nav-item">
-                                        <Link href="/home-improvements-and-maintenance" className="nav-link">
-                                            <a>
-                                                Home Improvements &amp; Maintenance
-                                            </a>
-                                        </Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link href="/champions">
-                                            <a className="nav-link" >
-                                                Champions
-                                            </a>
-                                        </Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link href="/about-us">
-
-                                            <a className="nav-link" tabIndex={ -1 } aria-disabled="true">
-                                                About
-                                            </a>
-                                        </Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link href="/faq">
-                                            <a className="nav-link" tabIndex={ -1 } aria-disabled="true">
-                                                FAQs
-                                            </a>
-                                        </Link>
-                                    </li>
-                                </ul>
+                        </Navbar.Toggle>
+                        <Navbar.Collapse id="responsive-navbar-nav">
+                            <Nav className="navbar-nav ms-auto mb-2 mb-lg-0 navbar-item-bg">
+                                <li className="nav-item">
+                                    <Link href="/home-improvements-and-maintenance" >
+                                        <a className= {route == '/home-improvements-and-maintenance' ? "active" : "navlink"} >
+                                                Home Improvements &amp; Maintenance 
+                                        </a>
+                                       
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link href="/champions" >
+                                        <a className= {route == '/champions' ? "active" : "navlink"} >
+                                             Champions
+                                        </a>
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link   href="/about-us" >
+                                         <a className= {route == '/about-us' ? "active" : "navlink"} >
+                                            About
+                                        </a>                                       
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link href="/faq" >
+                                        <a className= {route == '/faq' ? "active" : "navlink"} >
+                                            FAQs
+                                        </a>                                        
+                                    </Link>
+                                </li>
+                            </Nav>
+                            <Nav>
                                 { localstorageItem == null ?
                                     <div className="login">
-                                        <Link href="/login">
-                                            <a className="nav-link"> Login </a>
-                                        </Link>
+                                        <li className="nav-item">
+                                            <Link className="nav-link btn-login" href="/login">
+                                                Login
+                                            </Link>
+                                        </li>
                                     </div>
                                     :
-                                    <div className="login-uesr" id="login-uesr-block-2">
+                                    <div className="login-uesr">
                                         <ul className="navbar-nav me-auto">
-
 
                                             <li className="nav-item dropdown d-block d-lg-flex align-items-center">
                                                 <Dropdown className="">
                                                     <Dropdown.Toggle variant="success" id="dropdown-basic">
                                                         <img
-                                                            src="https://recommendandshare.com/media/cache/avatar_small/uploads/customers/sam-avatar-1626495954.png"
+                                                            src={"http://localhost:3000/images/"+profile } 
                                                             className="avatar"
+                                                            style={{
+                                                                width: '40px',
+                                                                height: '40px'
+                                                            }}
                                                         />
-                                                        <span className="ms-2">{localstorageItem.name}</span>
+                                                        <span className="ms-2">{ localstorageItem.name }</span>
                                                     </Dropdown.Toggle>
                                                     <Dropdown.Menu>
                                                         <Dropdown.Item>My Dashboard</Dropdown.Item> 
-{/* 
-                                                        {userbussines.map((bussines)=>
-                                                        <Dropdown.Item><Link href=" ">{bussines.name}</Link></Dropdown.Item>
-                                                        )}   
-                                                        {/* {console.log(userbussines)}                                                      */}
-                                                        <Dropdown.Item><Link href="/secure/tradespeople/create">Add a Business</Link></Dropdown.Item>
-                                                        <Dropdown.Item><Link href="/profile">Edit My Account</Link></Dropdown.Item>
-                                                        <Dropdown.Item><Link href="/password">My Password</Link></Dropdown.Item>
+                                                        <Dropdown.Divider />                                                       
+                                                        {userbussines != null ? userbussines.map((bussines)=>
+                                                        <Dropdown.Item><Link href="">{bussines.name}</Link></Dropdown.Item>
+                                                        ) : ""}                                                                                                           
+                                                        <Dropdown.Item ><Link href="/secure/tradespeople/create">Add a Business</Link></Dropdown.Item>
                                                         <Dropdown.Divider />
+                                                        <Dropdown.Item><Link href="/profile">Edit My Account</Link></Dropdown.Item>
+                                                        <Dropdown.Item><Link href="/password">My Password</Link></Dropdown.Item>                                                        
                                                         <Dropdown.Item onClick={ () => handleLogout() }>Logout</Dropdown.Item>
                                                     </Dropdown.Menu>
                                                 </Dropdown>
@@ -134,18 +128,17 @@ export const NavBar = (props) => {
                                     </div>
                                 }
 
-
-
-
-                                <div className="login-uesr" id="login-uesr-block-2">
-                                    <ul className="navbar-nav me-auto"></ul>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+                            </Nav>
+                        </Navbar.Collapse>
+                    </Navbar>
                 </Container>
-            </div >
+            </div>
+
+
+
+
+
+
         </>
     )
 }
