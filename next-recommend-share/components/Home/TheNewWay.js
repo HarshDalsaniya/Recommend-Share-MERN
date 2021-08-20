@@ -49,10 +49,10 @@ export const TheNewWay = (props) => {
                     <Col lg={6}>
                         <div className="transparency-box">
                             {Content.map((values)=>
-                                <>
-                                <h4 key={"transparency"+values.heading} className="transparency-heading mt-4 mt-lg-3">{values.heading}</h4>
-                                <p key={"transparency"+values.description} className="transparency-text">{values.description}</p>                
-                                </>
+                                <div key={"tr_"+values.heading}>
+                                    <h4 className="transparency-heading mt-4 mt-lg-3">{values.heading}</h4>
+                                    <p className="transparency-text">{values.description}</p>                
+                                </div>
                             )}
                            
                         </div>

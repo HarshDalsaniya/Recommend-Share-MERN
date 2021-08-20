@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 export const Faq = (props) => {
-    console.log(props)
     return (
         <div className="box grey">
             <h3>Q. { props.question }</h3>

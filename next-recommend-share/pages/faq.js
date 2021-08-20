@@ -20,7 +20,6 @@ export const faq = (props) => {
             result.push({ id:value.id, question:value.question, answer:value.answer})
         })
         setFaq_Questions(result)
-        console.log(result)
       })  
         
     }, [setFaq_Questions])
@@ -32,7 +31,6 @@ export const faq = (props) => {
                     <div className="twelve columns alpha">
                         <div className="contained">
                             <h1>Consumers &amp; Tradespeople</h1>
-                            {console.log(typeof faq_questions)}
                             { faq_questions.map((faq_question) => (
                                 <Faq
                                     key={"id_"+faq_question.id}

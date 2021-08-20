@@ -19,20 +19,18 @@ export const NavBar = (props) => {
        
     useEffect(() => {
         dispatch(userTradeBussines(localStorage.getItem("Recommend_Share_current_user") == null ? '' : JSON.parse(localStorage.getItem("Recommend_Share_current_user")).id))
-
         const interval = setInterval(() => {
             setLocalStorageItem(JSON.parse(localStorage.getItem('Recommend_Share_current_user')));
-            setProfile(JSON.parse(localStorage.getItem('Recommend_Share_current_user')).profile_Picture)
+            setProfile(localStorage.getItem("Recommend_Share_current_user") == null ? '' : JSON.parse(localStorage.getItem("Recommend_Share_current_user")).profile_Picture)
 
         }, 1000);
                
         return () => clearInterval(interval);
-    }, [setLocalStorageItem ,setProfile])
+    }, [setLocalStorageItem ,setProfile, localStorage])
 
     const handleLogout = () => {
         dispatch(logoutUser())
     };
-
     return (
         <>
             <div className="navbar-header">
@@ -70,7 +68,7 @@ export const NavBar = (props) => {
                                     </Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link   href="/about-us" >
+                                    <Link href="/about-us" >
                                          <a className= {route == '/about-us' ? "active" : "navlink"} >
                                             About
                                         </a>                                       
@@ -88,8 +86,8 @@ export const NavBar = (props) => {
                                 { localstorageItem == null ?
                                     <div className="login">
                                         <li className="nav-item">
-                                            <Link className="nav-link btn-login" href="/login">
-                                                Login
+                                            <Link href="/login">
+                                                <a className="nav-link btn-login">Login</a>
                                             </Link>
                                         </li>
                                     </div>
@@ -113,8 +111,8 @@ export const NavBar = (props) => {
                                                     <Dropdown.Menu>
                                                         <Dropdown.Item>My Dashboard</Dropdown.Item> 
                                                         <Dropdown.Divider />                                                       
-                                                        {userbussines != null ? userbussines.map((bussines)=>
-                                                        <Dropdown.Item><Link href="">{bussines.name}</Link></Dropdown.Item>
+                                                        {userbussines.length>0 ? userbussines.map((bussines)=>
+                                                        <Dropdown.Item key={"buss_"+bussines.name}><Link href="">{typeof bussiness!=null?bussines.name:""}</Link></Dropdown.Item>
                                                         ) : ""}                                                                                                           
                                                         <Dropdown.Item ><Link href="/secure/tradespeople/create">Add a Business</Link></Dropdown.Item>
                                                         <Dropdown.Divider />

@@ -48,7 +48,9 @@ export const loginUser = (user) => {
                         email: result.data.data[0].email,
                         name: result.data.data[0].name,
                         token: result.data.data[1].token,
+                        profile_Picture:result.data.data[0].image
                     }
+
                     setCurrentUser(item)
                     Router.push("/")
                     dispatch({

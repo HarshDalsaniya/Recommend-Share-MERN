@@ -6,7 +6,6 @@ import {
 import { AboutBlog } from './AboutBlog';
 
 export const About = (props) => {
-    console.log(props);
     return (
         <div className="login-body">
             <section className="swipe garry-brick" style={{background:`url(${props.bannerbackgoudimg}) left bottom repeat-x`}} >           

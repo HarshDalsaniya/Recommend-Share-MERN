@@ -67,7 +67,7 @@ router.post('/login', cors(), function (req, res, callBack) {
                 password: post.password
             };
             // c62ac98937679cd7fa090c411b5bba9c             
-            var sql = `select * from user where email="${data.email}"`;
+            var sql = `select id,name,email,image from user where email="${data.email}"`;
             // const token = general.generateAccessToken({ email: req.body.email });
             connection.query(sql,  function  (err, result) {              
 
