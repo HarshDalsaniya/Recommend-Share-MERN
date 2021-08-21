@@ -26,7 +26,7 @@ export const EditPassword = (props) => {
 
        const onChnagePassword =(e)=>{
         e.preventDefault()
-        console.log("change password") 
+        // console.log("change password") 
         if(_userCurrentPassword !== ''|| _userNewPassword !== ''){
             const user = {
                 currentPassword:_userCurrentPassword,
@@ -38,7 +38,7 @@ export const EditPassword = (props) => {
     }
 
     return (
-        <selection className="content login-body">
+        <section className="content login-body">
             <Container>
                 <div className="contained">
                     <div className=" six columns alpha offset-by-three password-heading ">
@@ -51,7 +51,7 @@ export const EditPassword = (props) => {
                                         field="password"
                                         fieldLabel="Current password"
                                         fieldName="_userCurrentPassword"
-                                        fieldValue={ null }
+                                        fieldValue={ _userCurrentPassword }
                                         fieldAction={ setUserCurrentPassword }
                                         fieldValidation={ submitted, _userCurrentPassword, { message: "Please Enter your UserName" } }
                                     />
@@ -63,7 +63,7 @@ export const EditPassword = (props) => {
                                         field="password"
                                         fieldLabel="New password"
                                         fieldName="_userNewPassword"
-                                        fieldValue={ null }
+                                        fieldValue={ _userNewPassword }
                                         fieldAction={ setUserNewPassword }
                                         fieldValidation={ submitted, _userNewPassword, { message: "Please Enter your UserName" } }
                                     />
@@ -75,7 +75,7 @@ export const EditPassword = (props) => {
                                         field="password"
                                         fieldLabel="Repeat Password"
                                         fieldName="_userReapeatPassword"
-                                        fieldValue={ null }
+                                        fieldValue={ _userReapeatPassword }
                                         fieldAction={ setUsrRepeatPassword }
                                         fieldValidation={ submitted, _userReapeatPassword, { message: "Please Enter your UserName" } }
                                     />
@@ -97,7 +97,7 @@ export const EditPassword = (props) => {
                 </div>
 
             </Container>
-        </selection>
+        </section>
     )
 }
 

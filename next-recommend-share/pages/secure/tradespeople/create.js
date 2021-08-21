@@ -394,7 +394,7 @@ export const tradespeople = (props) => {
                                                             Federation Memberships
                                                         </label>
                                                         <div className="field_container">
-                                                            { console.log(federationValue) }
+                                                            {/* { console.log(federationValue) } */}
                                                             <select
                                                                 id="acdo_systembundle_tradesperson_federations"
                                                                 name="acdo_systembundle_tradesperson[federations][]"
@@ -673,7 +673,7 @@ export const tradespeople = (props) => {
                         </div>
                     </div>
                     <p className="tcenter">
-                        Need help with your account? <a><Link href="/contact-us">Contact us</Link></a> for
+                        Need help with your account? <Link href="/contact-us"><a>Contact us</a></Link> for
                         help.
                     </p>
 

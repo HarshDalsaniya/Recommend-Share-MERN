@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect, useDispatch, useSelector } from 'react-redux'
-import { Container, Navbar, Nav, Dropdown } from 'react-bootstrap';
+import { Container, Navbar, Nav, Dropdown,NavLink } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import Link from 'next/link'
 import { logoutUser } from '../../redux/auth/action';
@@ -96,7 +96,7 @@ export const NavBar = (props) => {
                                         <ul className="navbar-nav me-auto">
 
                                             <li className="nav-item dropdown d-block d-lg-flex align-items-center">
-                                                <Dropdown className="">
+                                                <Dropdown >
                                                     <Dropdown.Toggle variant="success" id="dropdown-basic">
                                                         <img
                                                             src={"http://localhost:3000/images/"+profile } 
@@ -112,12 +112,12 @@ export const NavBar = (props) => {
                                                         <Dropdown.Item>My Dashboard</Dropdown.Item> 
                                                         <Dropdown.Divider />                                                       
                                                         {userbussines.length>0 ? userbussines.map((bussines)=>
-                                                        <Dropdown.Item key={"buss_"+bussines.name}><Link href="">{typeof bussiness!=null?bussines.name:""}</Link></Dropdown.Item>
+                                                        <Dropdown.Item key={"buss_"+bussines.name}><a href="/">{typeof bussiness!=null?bussines.name:""}</a></Dropdown.Item>
                                                         ) : ""}                                                                                                           
-                                                        <Dropdown.Item ><Link href="/secure/tradespeople/create">Add a Business</Link></Dropdown.Item>
+                                                        <Dropdown.Item ><Link href="/secure/tradespeople/create"><a>Add a Business</a></Link></Dropdown.Item>
                                                         <Dropdown.Divider />
-                                                        <Dropdown.Item><Link href="/profile">Edit My Account</Link></Dropdown.Item>
-                                                        <Dropdown.Item><Link href="/password">My Password</Link></Dropdown.Item>                                                        
+                                                        <Dropdown.Item><Link href="/profile"><a>Edit My Account</a></Link></Dropdown.Item>
+                                                        <Dropdown.Item><Link href="/password"><a>My Password</a></Link></Dropdown.Item>                                                        
                                                         <Dropdown.Item onClick={ () => handleLogout() }>Logout</Dropdown.Item>
                                                     </Dropdown.Menu>
                                                 </Dropdown>

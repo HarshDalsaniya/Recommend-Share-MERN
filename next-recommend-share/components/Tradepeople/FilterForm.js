@@ -63,7 +63,7 @@ export const FilterForm = (props) => {
         dispatch(searchBusiness(search))
         var path=`/tradespeople?`
 
-        search.name != null ? path = path + "name=" + name : ""
+        search.name != null ? path = path + "name=" + search.name : ""
 
         search.email != null ? search.name != null ? path = path + "&email=" + email : path = path + "email=" + email : ""
 

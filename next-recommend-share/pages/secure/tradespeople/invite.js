@@ -124,10 +124,8 @@ export const invite = (props) => {
                                             <div className="field_container">
                                                 <input
                                                 type="text"
-                                                id="invite_tradesperson_title"
                                                 name="invite_tradesperson[title]"
                                                 placeholder="Recommendation title"
-                                                className
                                                 />
                                             </div>
                                         </div>

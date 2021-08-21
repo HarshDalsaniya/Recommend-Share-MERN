@@ -54,7 +54,7 @@ export const index = (props) => {
                 }) => (
                     <div>
                         <BootstrapTable
-                            keyField="id"
+                            keyField="name"
                             data={props.data}
                             columns={props.columns}
                             {...paginationTableProps}

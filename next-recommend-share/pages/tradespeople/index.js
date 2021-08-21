@@ -99,6 +99,7 @@ export const index = (props) => {
     if (typeof searchResult != "undefined") {
         searchResult.map((value) => {
             data.push({
+                key:"row_"+value.name,
                 image: value.image,
                 name: value.name,
                 trade_name: value.trade_name,

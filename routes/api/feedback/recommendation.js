@@ -47,7 +47,7 @@ router.get('/list', (req, res) => {
             res.send(response);
         } else {
             var post = req.body.searchFilter
-            console.log(post)
+            var searchFields=[]
             var sql= `SELECT 
                         image,
                         name,
@@ -59,17 +59,15 @@ router.get('/list', (req, res) => {
 
             req.query.name || req.query.email || req.query.telephone || req.query.trade || req.query.postcode ? sql=sql+" where ":null
 
-            req.query.name ? req.query.email || req.query.telephone || req.query.trade || req.query.postcode ? sql = sql + "name='" + req.query.name + "'" : sql = sql + "name='" + req.query.name + "'" : null
+            req.query.name ? req.query.email || req.query.telephone || req.query.trade || req.query.postcode ? sql = sql + " (name LIKE '%" + req.query.name + "%')" : sql = sql + "(name LIKE '%" + req.query.name + "%')" : null
 
-            req.query.email ? req.query.name || req.query.telephone || req.query.trade || req.query.postcode ? sql = sql + " AND email='" + req.query.email + "'" : sql = sql + "email='" + req.query.email + "'" : null
+            req.query.email ? req.query.name || req.query.telephone || req.query.trade || req.query.postcode ? sql = sql + " AND (email LIKE '%" + req.query.email + "%')" : sql = sql + "(email LIKE '%" + req.query.email +"%')" : null
 
-            req.query.telephone ? req.query.name || req.query.trade || req.query.postcode || req.query.email ? sql = sql + " AND telephone=" + req.query.telephone : sql = sql + "telephone=" + req.query.telephone : null
+            req.query.telephone ? req.query.name || req.query.trade || req.query.postcode || req.query.email ? sql = sql + " AND (telephone LIKE '%" + req.query.telephone +"%')" : sql = sql + "(telephone LIKE '%" + req.query.telephone +"%')": null
 
-            req.query.trade ? req.query.name || req.query.email || req.query.telephone || req.query.postcode ? sql = sql + " AND trade_id=" + req.query.trade : sql = sql + "trade_id=" + req.query.trade : null
+            req.query.trade ? req.query.name || req.query.email || req.query.telephone || req.query.postcode ? sql = sql + " AND (trade_id LIKE '%" + req.query.trade +"%')" : sql = sql + "(trade_id LIKE '%" + req.query.trade +"%')": null
 
-            req.query.postcode ? req.query.name || req.query.email || req.query.telephone || req.query.trade ? sql = sql + " AND address_postcode='" + req.query.postcode + "'" : sql = sql + "address_postcode='" + req.query.postcode + "'" : null
-            
-            req.query.keyword ? keyword = ' where CONCAT(firstName,lastName,email) LIKE "%'+req.query.keyword+'%"':null
+            req.query.postcode ? req.query.name || req.query.email || req.query.telephone || req.query.trade ? sql = sql + " AND (address_postcode LIKE '%" + req.query.postcode +"%')" : sql = sql + "(address_postcode LIKE '%'" + req.query.postcode + "'" +"%')": null
 
             req.query.orderby ? sql = sql + " ORDER BY "+req.query.orderby+" "+OrderType : sql = sql + ` ORDER BY name ASC`
                 
