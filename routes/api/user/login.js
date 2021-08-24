@@ -267,7 +267,7 @@ router.post('/register', cors(), function (req, res, next) {
                                             if (typeof tokenResult.insertId != 'undefined' && typeof insertResult.insertId != 'undefined' && typeof post.tradespeopleTrade != "undefined" && post.tradespeopleTrade != null && post.tradespeopleTrade != "" ) {
                                                 data.user_id = insertResult.insertId;
                                                 data.trade_id = post.tradespeopleTrade;
-                                                data.slug = post.name.toLowerCase().replace(' ', '-');
+                                                data.slug = post.name.toLowerCase().replace(/\s/g, '-');
                                                 delete data["enabled"];
                                                 delete data["system"];
                                                 delete data["password"];

@@ -177,7 +177,7 @@ export const UserCard = (props) => {
                         <Row>
                             <div className="six columns alpha mob-tcenter ">
                                 <p className="h3 shallow">
-                                    <Link href={'/tradespeople/' + Name} className="black">
+                                    <Link href={props.title_href} className="black">
                                         {props.title}
                                     </Link>
                                 </p>
@@ -202,13 +202,19 @@ export const UserCard = (props) => {
                                         values.title == 'Date Joined:' ?
                                             <li>
                                                 <span className="title">{values.title}</span>{values.value}
-                                            </li>
-                                            :
+                                              </li>
+                                            : values.title == 'Federation members:' ?
                                             <li className="tipr">
                                                 <span className="title">{values.title}</span>{" "}
-                                                <span className={values.value == 'yes' ? "highlighted on" : "highlighted off"}>{values.value}</span>
+                                                <span className={values.value > 0 ? "highlighted on" : "highlighted off"}>{values.value > 0 ?  'yes' : 'no'}</span>
                                             </li>
-
+                                            :                                        
+                                            <li className="tipr">
+                                                <span className="title">{values.title}</span>{" "}
+                                                <span className={values.value == '1' ? "highlighted on" : "highlighted off"}>{values.value == 1 ?  'yes' : 'no'}</span>
+                                            </li>
+                                            
+                                            
                                     )}
 
                                 </ul>

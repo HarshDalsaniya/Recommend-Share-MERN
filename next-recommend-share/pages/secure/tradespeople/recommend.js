@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router';
 import Link from 'next/link'
 import { Container, Row } from 'react-bootstrap'
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import { UserCard } from '../../../components/TradePeople/TradepeopleView'
 
 
-export const recommend = (props) => { 
-
+export const recommend = (props) => {
+  
     return (
         <section className="content login-body" style={ { marginTop: "5rem" } }>
             <Container>
@@ -117,16 +118,11 @@ export const recommend = (props) => {
 
                                 </form>
 
-
                             </div>
-
                         </div>
                     </div>
                 </div>
-
-
             </Container>
-
         </section>
     )
 }

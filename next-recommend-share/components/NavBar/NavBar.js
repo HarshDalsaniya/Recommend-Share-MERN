@@ -10,6 +10,7 @@ import { userTradeBussines } from '../../redux/bussiness/action'
 
 export const NavBar = (props) => {
     const { route } = useRouter();
+
     const businessState = useSelector(state => state);
     const { userbussines } = businessState.businessReducer;
     // console.log(userbussines);
@@ -31,6 +32,9 @@ export const NavBar = (props) => {
     const handleLogout = () => {
         dispatch(logoutUser())
     };
+     
+    // console.log()   
+
     return (
         <>
             <div className="navbar-header">
@@ -112,7 +116,7 @@ export const NavBar = (props) => {
                                                         <Dropdown.Item>My Dashboard</Dropdown.Item> 
                                                         <Dropdown.Divider />                                                       
                                                         {userbussines.length>0 ? userbussines.map((bussines)=>
-                                                        <Dropdown.Item key={"buss_"+bussines.name}><Link href="">{typeof bussiness!=null?bussines.name:""}</Link></Dropdown.Item>
+                                                        <Dropdown.Item key={"buss_"+bussines.name}><Link href={"/secure/"+ bussines.name}>{typeof bussiness!=null?bussines.name:""}</Link></Dropdown.Item>
                                                         ) : ""}                                                                                                           
                                                         <Dropdown.Item ><Link href="/secure/tradespeople/create">Add a Business</Link></Dropdown.Item>
                                                         <Dropdown.Divider />

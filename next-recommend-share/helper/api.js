@@ -84,7 +84,7 @@ const tradList = () =>{
 }
 
 const businessSearch = (searchFilter) =>{
-    console.log(searchFilter.email)
+    // console.log(searchFilter.email)
     var path=`http://localhost:4000/api/feedback/list?`
 
         searchFilter.name != null ? path = path + "name=" + searchFilter.name : ""
@@ -103,6 +103,12 @@ const businessSearch = (searchFilter) =>{
              .then((res) => res)
  }
 
+const tradesPeopleDetails = (slug) =>{
+    return axios.get(`http://localhost:4000/api/tradespeople/tradespeopleDetails/${slug}`)
+        .then((result) => result)
+        .catch((error) => console.log(error))
+
+}
 export {
     login,
     register,
@@ -119,4 +125,5 @@ export {
     tradList,
     businessSearch,
     contactUs,
+    tradesPeopleDetails
 }

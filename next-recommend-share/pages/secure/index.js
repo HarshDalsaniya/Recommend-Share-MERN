@@ -100,7 +100,7 @@ export const secure = (props) => {
                                             </div>
                                             <div className="user-name">
                                                 {/* {localstorageItem!="undefined" ? localstorageItem:""} */}
-                                                {console.log(typeof localstorageItem)}
+                                                {/* {console.log(typeof localstorageItem)} */}
                                                 {/* <div>Name: {typeof localstorageItem!="undefined" ? localstorageItem.name:""}</div> */}
                                             </div>
                                         </div>

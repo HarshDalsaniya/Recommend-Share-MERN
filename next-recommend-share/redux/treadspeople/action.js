@@ -4,9 +4,14 @@ import {
     TRADE_OPTIONS_ERROR,
     BUSINESS_SEARCH,
     BUSINESS_SEARCH_SUCCESS,
-    BUSINESS_SEARCH_ERROR
+    BUSINESS_SEARCH_ERROR,
+    TRADESPEOPLE_DETAILS,
+    TRADESPEOPLE_DETAILS_SUCCESS,
+    TRADESPEOPLE_DETAILS_ERROR
 } from '../action-type'
-import { tradList, businessSearch } from "../../helper/api"
+import { tradList, 
+        businessSearch,
+        tradesPeopleDetails } from "../../helper/api"
 import Router from 'next/router'
 
 export const tradOption = () => {
@@ -63,6 +68,34 @@ export const searchBusiness = (searchFilter) => {
             .catch((err) => (
                 console.log(err)
             ))
+    }
+
+}
+
+export const TradesPeople_Profile_Details = (slug) =>{
+    return dispatch => {
+        dispatch({
+            type: TRADESPEOPLE_DETAILS,
+            payload : slug
+        })
+        tradesPeopleDetails(slug)
+        .then((result)=> {
+            console.log(result)
+            if(result.data.status == true){
+                 dispatch({
+                     type:  TRADESPEOPLE_DETAILS_SUCCESS,
+                     payload : result.data.data[0]
+                 })
+            }else{
+                dispatch({
+                    type:TRADE_OPTIONS_ERROR,
+                    payload : result.data.message
+                })
+            }
+        })
+        .catch((err) =>(
+            console.log(err)
+        ))
     }
 
 }

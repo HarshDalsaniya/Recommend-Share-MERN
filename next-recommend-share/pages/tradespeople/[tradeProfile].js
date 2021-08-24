@@ -1,12 +1,27 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from "next/link"
 import { useRouter } from 'next/router';
 import { Container , Row } from 'react-bootstrap'
-import { connect } from 'react-redux'
+import { connect, useSelector,useDispatch } from 'react-redux'
 import { ColorBox, UserCard } from '../../components/TradePeople/TradepeopleView'
+import {TradesPeople_Profile_Details} from '../../redux/treadspeople/action'
 
 export const tradespeopleDetails = (props) => {
     const { query } = useRouter();
+    const slug = query.tradeProfile 
+    const dispatch = useDispatch();
+    const reState = useSelector(state => state);
+    const { error,tradespeopleData } = reState.tradePeople;   
+    const [tradeData , setTradeData] = useState([]);  
+    console.log(tradeData   )
+    
+    useEffect(() => {
+        dispatch(TradesPeople_Profile_Details(slug))
+        
+         setTradeData(typeof tradespeopleData != 'undefined' ? tradespeopleData : null )
+     
+    }, [setTradeData,tradespeopleData.length!=0])
+
 
     return (
        <section className="login-body" style={ { marginTop: "5rem" } }>
@@ -122,21 +137,21 @@ export const tradespeopleDetails = (props) => {
                <div className="contained shallow">
                         <div className="box white">
                          <UserCard 
-                            
-                            title='A J Service'
+                            title_href={'/tradespeople/' + slug}
+                            title={`${tradeData.name}`}
                             details={ [
                                 {
                                     option : 'Trade :',
-                                    value : 'Traditional Craftsman',
+                                    value : tradeData.tradename,
                                 }, {
                                      option :'Post Code : ',
-                                     value : 'CR0 4LP',
+                                     value : tradeData.address_postcode,
                                 }, {
                                     option : 'Telephone : ',
-                                    value :  '020 8686 3643',
+                                    value :  tradeData.telephone,
                                 }, {
                                     option : 'Email Address : ',
-                                    value :  'richardsmail@artworkcs.plus.com',
+                                    value : tradeData.email ,
                                 }
 
                             ] }
@@ -144,7 +159,7 @@ export const tradespeopleDetails = (props) => {
                             IconOption = {[
                                 {
                                     title:'Date Joined:',
-                                    value:'2020'
+                                    value: typeof tradeData.established != 'undefined' ? tradeData.established.slice(0,4) : ''
                                 },
                                 {
                                     title:'Managed account:',
@@ -152,19 +167,19 @@ export const tradespeopleDetails = (props) => {
                                 },
                                 {
                                     title:'Identify confirmed:',
-                                    value:'yes'
+                                    value: tradeData.verified
                                 },
                                 {
                                     title:'Federation members:',
-                                    value:'no'
+                                    value: tradeData.federationvalue
                                 },
                                 {
                                     title:'VAT registered:',
-                                    value:'no'
+                                    value : tradeData.vat_registered
                                 },
                                 {
                                     title:'Public liability insurance:',
-                                    value:'no'
+                                    value: tradeData.insured
                                 },
                             ]
                             }
