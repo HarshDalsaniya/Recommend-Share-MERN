@@ -153,8 +153,6 @@ export const UserCard = (props) => {
     const Name = query.tradepeopleName
     var Options = props.details
     var IconsView = props.IconOption
-
-
     return (
         <>
             <Row>
@@ -212,8 +210,7 @@ export const UserCard = (props) => {
                                             <li className="tipr">
                                                 <span className="title">{values.title}</span>{" "}
                                                 <span className={values.value == '1' ? "highlighted on" : "highlighted off"}>{values.value == 1 ?  'yes' : 'no'}</span>
-                                            </li>
-                                            
+                                            </li>                                           
                                             
                                     )}
 

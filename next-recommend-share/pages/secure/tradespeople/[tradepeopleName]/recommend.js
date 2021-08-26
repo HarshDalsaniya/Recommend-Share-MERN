@@ -16,7 +16,7 @@ export const recommend = (props) => {
     const [tradeData , setTradeData] = useState([])  
     const [recommendCheckBox, setRecommendCheckBox] = useState(true) 
    
-  
+  console.log(slug)
     useEffect(() => {
         dispatch(TradesPeople_Profile_Details(slug))
         
@@ -29,7 +29,7 @@ export const recommend = (props) => {
         <section className="content login-body" style={ { marginTop: "5rem" } }>
             <Container>
                 <p className="h2">
-                    <Link href={'/tradespeople/'+ tradeData.slug }>
+                    <Link href={'/tradespeople/'+ slug }>
                     <a className="back black">
                         <i className="fa fa-chevron-circle-left" aria-hidden="true" /> Back to
                         Profile
@@ -54,33 +54,32 @@ export const recommend = (props) => {
                                 }
 
                             ] }
-                            IconOption={ [
+                            IconOption = {[
                                 {
-                                    title: 'Date Joined:',
-                                    value: '2020'
+                                    title:'Date Joined:',
+                                    value: typeof tradeData.established != 'undefined' ? tradeData.established.slice(0,4) : ''
                                 },
                                 {
-                                    title: 'Managed account:',
-                                    value: 'yes'
+                                    title:'Managed account:',
+                                    value:'yes'
                                 },
                                 {
-                                    title: 'Identify confirmed:',
-                                    value: 'yes'
+                                    title:'Identify confirmed:',
+                                    value: tradeData.verified
                                 },
                                 {
-                                    title: 'Federation members:',
-                                    value: 'no'
+                                    title:'Federation members:',
+                                    value: tradeData.federationvalue
                                 },
                                 {
-                                    title: 'VAT registered:',
-                                    value: 'yes'
+                                    title:'VAT registered:',
+                                    value : tradeData.vat_registered
                                 },
                                 {
-                                    title: 'Public liability insurance:',
-                                    value: 'yes'
+                                    title:'Public liability insurance:',
+                                    value: tradeData.insured
                                 },
-                            ]
-                            }
+                            ]} 
 
 
                         />

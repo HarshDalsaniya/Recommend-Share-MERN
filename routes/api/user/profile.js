@@ -150,11 +150,12 @@ router.post('/userProfilePic', upload.fields([{name:"profile_image"}]), (req,res
             var sql = `SELECT * FROM user where email='${req.body.email}';`;
             connection.query(sql, function (err, result) {
                 // console.log("this.sql======================>", this.sql);
+                console.log(result);
                 if (err) {
                     console.log(err);
                     response = general.response_format(false, messages.ERROR_PROCESSING, {});
                     res.send(response);
-                }
+                }              
                 else {
                     if (result.length > 0) {
                         fs.readFile('./public/images/' + req.files.profile_image[0].filename, "utf8", function (err, data) {
