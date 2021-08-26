@@ -211,4 +211,62 @@ router.post('/tradespeople', function (req,res, callback){
 
 });
 
+router.get('/tradespeopleDetails/:slug', cors(), function(req ,res) {
+    var slug = req.params.slug
+    console.log(slug)
+    req.getConnection(function(err, connection){
+        if(err) {   
+            console.log(err);
+            response = general.response_format(false, messages.ERROR_PROCESSING, {});
+            res.send(response);
+        }
+        sql = `SELECT id, 
+                      user_id,                 
+                      (SELECT name from trade WHERE id= trade_id)as tradename, 
+                      (SELECT COUNT(federation_id) FROM tradespeople_federations WHERE id = tradesperson_id)as federationvalue,
+                      created,
+                      updated,
+                      name , 
+                      email ,
+                      telephone, 
+                      mobile,
+                      address_line_1,
+                      address_line_2,
+                      address_town,
+                      address_county,
+                      address_postcode,
+                      established,
+                      company_number,
+                      website,
+                      vat_registered,
+                      insured,
+                      verify_date,
+                      verify_code,
+                      verified,
+                      image,
+                      latitude,
+                      longitude,
+                      slug,
+                      notification_received_sms,
+                      notification_received_email,
+                      confirm_date,
+                      confirm_code,
+                      owner_name,
+                      notification_marketing_email                     
+                      slug FROM tradesperson where slug="${slug}"`
+        connection.query(sql , function(err,result){
+            console.log("------------->",sql);
+            if (err){
+                console.log(err);
+                response = general.response_format(false, messages.ERROR_PROCESSING, {});
+                res.send(response);
+            }
+            response = general.response_format(true, "TradesPeople details", result);
+            res.send(response);
+        });
+    });
+
+});
+
+
 module.exports = router

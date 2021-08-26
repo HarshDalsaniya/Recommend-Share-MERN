@@ -2,23 +2,34 @@ import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Container, Row } from 'react-bootstrap'
-import { connect } from 'react-redux'
+import { connect, useSelector,useDispatch } from 'react-redux'
+import {TradesPeople_Profile_Details} from '../../../../redux/treadspeople/action'
 import { UserCard } from '../../../../components/TradePeople/TradepeopleView'
 
 
 export const recommend = (props) => {
     const { query } = useRouter();
-
-    const Name = query.tradepeopleName   
-    const [recommendCheckBox, setRecommendCheckBox] = useState(true)
-
-
+    const slug = query.tradepeopleName 
+    const dispatch = useDispatch();
+    const reState = useSelector(state => state);
+    const { error,tradespeopleData } = reState.tradePeople;   
+    const [tradeData , setTradeData] = useState([])  
+    const [recommendCheckBox, setRecommendCheckBox] = useState(true) 
+   
+  
+    useEffect(() => {
+        dispatch(TradesPeople_Profile_Details(slug))
+        
+         setTradeData(typeof tradespeopleData != 'undefined' ? tradespeopleData : null )
+     
+    }, [setTradeData,tradespeopleData.length!=0])
 
     return (
+        <>
         <section className="content login-body" style={ { marginTop: "5rem" } }>
             <Container>
                 <p className="h2">
-                    <Link href={'/tradespeople/'+Name}>
+                    <Link href={'/tradespeople/'+ tradeData.slug }>
                     <a className="back black">
                         <i className="fa fa-chevron-circle-left" aria-hidden="true" /> Back to
                         Profile
@@ -27,22 +38,22 @@ export const recommend = (props) => {
                 </p>
                 <div className="contained shallow">
                     <div className="box white">
-                        <UserCard
-                            title={ query['tradepeopleName'] }
+                        <UserCard  
+                            title_href={'/tradespeople/' + slug}                      
+                            title={`${tradeData.name}`}
                             details={ [
                                 {
                                     option: 'Trade',
-                                    value: 'otherTrades',
+                                    value: tradeData.tradename,
                                 }, {
                                     option: 'Post Code',
-                                    value: 'CM0 8UA',
+                                    value: tradeData.address_postcode,
                                 }, {
                                     option: 'Email Address : ',
-                                    value: 'andrew.snowdon1@btopenworld.com',
+                                    value: tradeData.email,
                                 }
 
                             ] }
-
                             IconOption={ [
                                 {
                                     title: 'Date Joined:',
@@ -229,6 +240,7 @@ export const recommend = (props) => {
             </Container>
 
         </section>
+        </>
     )
 }
 
