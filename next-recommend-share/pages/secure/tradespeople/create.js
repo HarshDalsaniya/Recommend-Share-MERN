@@ -13,20 +13,19 @@ import axios from 'axios'
 import { formFieldValidation } from "../../../services/formValidation"
 import { tradesPeopleRegister } from "../../../redux/bussiness/action"
 import { userTradeBussines } from '../../../redux/bussiness/action'
+import { tradOption } from '../../../redux/treadspeople/action';
 export const tradespeople = (props) => {
 
 
 
     const reState = useSelector(state => state);
     const { error, tradespeople } = reState.businessReducer;
+    const { tradeOptions } = reState.tradePeople;
     const dispatch = useDispatch();
     const [businessName, setBusinessName] = useState('Makadiya LTD');
-    // const [day, setDay] = useState('');
-    // const [month, setMonth] = useState('');
-    // const [year, setYear] = useState('');
     const [established, setEstablished] = useState([]);
     const [companyNo, setcompanyName] = useState('004654563');
-    const [trade, setTrade] = useState('5');
+    const [trade, setTrade] = useState('');
     const [ownerName, setOwnerName] = useState('Maulik');
     const [email, setEmailAddress] = useState(typeof tradesPeople!='undefined' ?tradepeople.email:(JSON.parse(localStorage.getItem("Recommend_Share_current_user")).email));
     const [webSite, setWebSite] = useState('droptechnolab.com');
@@ -39,7 +38,6 @@ export const tradespeople = (props) => {
     const [address_town, setAddress_town] = useState('Peterlee');
     const [address_county, setAddress_country] = useState('uk');
     const [federationValue, setFederationValue] = useState([]);
-    const [selectTreadOption, setSelectTreadOption] = useState([]);
     const [federation, setFederationOption] = useState([]);
     const [vat_registered, setVat_Register] = useState(typeof tradespeople != "undefined" ? tradespeople.vat_registered : false);
     const [liability_insurance, setLiability_Insurance] = useState(typeof tradespeople != "undefined" ? tradespeople.liability_insurance : false);
@@ -50,25 +48,7 @@ export const tradespeople = (props) => {
 
 
     useEffect(() => {
-
-        axios.get(`http://localhost:4000/api/business/trade_options`)
-            .then((res) => {
-                const result = [];
-                res.data.data.map((value) => {
-                    result.push({ value: value.id, title: value.name })
-                })
-                setSelectTreadOption(
-                    result.sort(function (a, b) {
-                        if (a.title.toUpperCase() < b.title.toUpperCase()) {
-                            return -1;
-                        }
-                        if (a.title.toUpperCase() > b.title.toUpperCase()) {
-                            return 1;
-                        }
-                        return 0;
-                    })
-                )
-            })
+        dispatch(tradOption());
         axios.get(`http://localhost:4000/api/business/federation`)
             .then((res) => {
                 const Federation = [];
@@ -77,16 +57,28 @@ export const tradespeople = (props) => {
                 })
                 setFederationOption(Federation)
             })
-    }, [setSelectTreadOption, setFederationOption])
-
-    const getAddress = () => {
+    }, [setFederationOption, tradeOptions == null])
+    tradeOptions.sort(function (a, b) {
+        if (a.title.toUpperCase() < b.title.toUpperCase()) {
+            return -1;
+        }
+        if (a.title.toUpperCase() > b.title.toUpperCase()) {
+            return 1;
+        }
+        return 0;
+    })
+    let postCodeError="";
+    const getAddress = async () => {
         if (address_postcode != '') {
-            axios.get(`https://api.getaddress.io/find/${address_postcode}?api-key=xR5ryKXzb0SevSwn3OX7VQ31904`)
+            try{
+                await axios.get(`https://api.getaddress.io/find/${address_postcode}?api-key=xR5ryKXzb0SevSwn3OX7VQ31904`)
                 .then((res) => {
                     // console.log(res)
                     setSelectPostcode(res.data.addresses)
                 })
-
+            }catch(err){
+                postCodeError="Please Valid Post Code Enter"
+            }
         }
     }
     // console.log(federation)
@@ -96,24 +88,12 @@ export const tradespeople = (props) => {
         setAddress_town(value.split(',')[5])
         setSelectPostcode('')
     }
-
-    // const dateArray = established;
-    // const formate = dateArray.reverse();
-    // const formatedDate = formate.join("-")
-    // const finaldate = formatedDate
-    // console.log(established);
     const onSubmit = (e) => {
         e.preventDefault();
         setSubmitted(true)
         // console.log(federation)
-        if (ownerName != "" && email != "" && mobileNumber != "") {
-            // if(established.length == 3 ){
-            //     const dateArray = established;
-            //     const formate = dateArray.reverse();
-            //     const formatedDate = formate.join("-")
-            //     const finaldate = formatedDate
-
-            // }
+        const date=established.year!=(true||"undefined") && established.month!=(true||"undefined") && established.day!=(true||"undefined")? (established.year + "-" + established.month + "-" + established.day).match(/^(\d{4})(\/|-)(\d{1,2})(\/|-)(\d{1,2})$/)!=null?(established.year + "-" + established.month + "-" + established.day):null:null;
+        if (businessName != "" && ownerName != "" && email != "" && mobileNumber != "" && trade != "" && notification_received_sms!=false && notification_received_email != false && notification_marketing_email != false) {
             const tradepersonData = {
                 trade_id: trade,
                 created: null,
@@ -127,7 +107,7 @@ export const tradespeople = (props) => {
                 address_town: address_town,
                 address_county: address_county,
                 address_postcode: address_postcode,
-                established: (established.year + "-" + established.month + "-" + established.day),
+                established: date,
                 company_number: companyNo,
                 website: webSite,
                 vat_registered: vat_registered,
@@ -219,6 +199,9 @@ export const tradespeople = (props) => {
                                 <div className="eight columns alpha tradeperson-heading">
                                     <h2>Business Details</h2>
                                     <div className="box white">
+                                    {/* {typeof error.verifyError != 'undefined' && error.verifyError != '' ?
+                                        <div className="help-block mb-2" style={{ color: 'red' }}>{error.verifyError.userError}</div>
+                                    : null} */}
                                         <div className="contained shallow">
                                             <Row>
                                                 <div className="six columns alpha">
@@ -241,6 +224,7 @@ export const tradespeople = (props) => {
                                                                         className="_select_input ready"
                                                                         value={ established[0] }
                                                                         onChange={ (e) => setEstablished({ ...established, day: e.target.value }) }
+                                                                        defaultValue=""
                                                                         style={ {
                                                                             opacity: 1,
                                                                             cursor: "pointer",
@@ -251,7 +235,7 @@ export const tradespeople = (props) => {
                                                                             right: 0
                                                                         } }
                                                                     >
-                                                                        <option value>Day</option>
+                                                                        <option value="">Day</option>
                                                                         { daysOfMonth.map((day) =>
                                                                             <option key={ "day_" + day } value={ day }>{ day }</option>
                                                                         ) }
@@ -266,6 +250,7 @@ export const tradespeople = (props) => {
                                                                         className="_select_input ready"
                                                                         value={ established[1] }
                                                                         onChange={ (e) => { setEstablished({ ...established, month: e.target.value }) } }
+                                                                        defaultValue=""
                                                                         style={ {
                                                                             opacity: 1,
                                                                             cursor: "pointer",
@@ -276,7 +261,7 @@ export const tradespeople = (props) => {
                                                                             right: 0
                                                                         } }
                                                                     >
-                                                                        <option value>Month</option>
+                                                                        <option value="">Month</option>
                                                                         { monthOfYear.map((month) =>
                                                                             <option key={ "month_" + month } value={ month }>{ month }</option>
                                                                         ) }
@@ -290,6 +275,7 @@ export const tradespeople = (props) => {
                                                                         className="_select_input ready"
                                                                         value={ established[2] }
                                                                         onChange={ (e) => { setEstablished({ ...established, year: e.target.value }) } }
+                                                                        defaultValue=""
                                                                         style={ {
                                                                             opacity: 1,
                                                                             cursor: "pointer",
@@ -300,7 +286,7 @@ export const tradespeople = (props) => {
                                                                             right: 0
                                                                         } }
                                                                     >
-                                                                        <option value>Year</option>
+                                                                        <option value="">Year</option>
                                                                         { Years.map((year) =>
                                                                             <option key={ "month_" + year } value={ year } >{ year }</option>
                                                                         ) }
@@ -309,7 +295,9 @@ export const tradespeople = (props) => {
                                                                 </div>
                                                             </div>
                                                         </div>
-
+                                                        {submitted && typeof (established.year || established.month || established.day) !="undefined" && !(established.year + "-" + established.month + "-" + established.day).match(/^(\d{4})(\/|-)(\d{1,2})(\/|-)(\d{1,2})$/) &&
+                                                            <div className="help-block" style={{ color: 'red' }}>Please Select Validate Date</div>
+                                                        }
                                                     </div>
                                                     <Fields
                                                         key="field_companyNo"
@@ -318,14 +306,14 @@ export const tradespeople = (props) => {
                                                         fieldName="companyNo"
                                                         fieldValue={ companyNo }
                                                         fieldAction={ setcompanyName }
-                                                        fieldValidation={ [submitted, companyNo, formFieldValidation(error, "companyNo", companyNo)] }
+                                                        fieldValidation={ [submitted] }
                                                     />
                                                     <Fields
                                                         key="field_Trade"
                                                         field="select"
                                                         fieldLabel="Trade"
                                                         fieldName="trade"
-                                                        fieldOption={ selectTreadOption }
+                                                        fieldOption={ tradeOptions }
                                                         fieldValue={ trade }
                                                         fieldAction={ setTrade }
                                                         fieldValidation={ [submitted, trade, formFieldValidation(error, "trade", trade)] }
@@ -393,8 +381,7 @@ export const tradespeople = (props) => {
                                                         <div className="field_container">
                                                             {/* { console.log(federationValue) } */}
                                                             <select
-                                                                id="acdo_systembundle_tradesperson_federations"
-                                                                name="acdo_systembundle_tradesperson[federations][]"
+                                                                name="federationValue"
                                                                 size={ 10 }
                                                                 className="multiple"
                                                                 multiple
@@ -407,6 +394,9 @@ export const tradespeople = (props) => {
 
                                                             </select>
                                                         </div>
+                                                        {submitted && formFieldValidation(error, "federation_id", federationValue) &&
+                                                            <div className="help-block" style={{ color: 'red' }}>Please Select Federation Memberships</div>
+                                                        }
                                                     </div>
                                                     <div className="form_row  checkbox">
                                                         <div className="field_container">
@@ -584,6 +574,7 @@ export const tradespeople = (props) => {
                                                         </span>
                                                     </>
                                                     : null }
+                                                {postCodeError!=""?<div className="help-block" style={ { color: 'red' } }>postCodeError</div>:null}
                                             </div>
                                             { col2.map((field) =>
                                                 <Fields
@@ -622,19 +613,16 @@ export const tradespeople = (props) => {
                                                 <div className="field_container">
                                                     <div
                                                         className="fileinput single"
-                                                        id="acdo_systembundle_tradesperson_temp_image_fi_parent"
                                                     >
                                                         <Link href="#" className="button white ">
                                                             <a>Browse</a>
                                                         </Link>
                                                         <input
                                                             type="file"
-                                                            id="acdo_systembundle_tradesperson_temp_image"
                                                             name="acdo_systembundle_tradesperson[temp_image]"
                                                         />
                                                         <span
                                                             className="helptext psuedoinput"
-                                                            id="acdo_systembundle_tradesperson_temp_image_helptext"
                                                         />
                                                     </div>
                                                 </div>

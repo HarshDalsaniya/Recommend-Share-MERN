@@ -243,14 +243,14 @@ export const champions = (props) => {
                                 profile.
                             </p>
                         </div>
-                        <div className="contained" id="html">
+                        <div className="contained">
                             <p className="tcenter">
                                 Are you a R&amp;S Tradesperson? If so{" "}
                                 <Link href="/login?url=/champions.html%23embed"><a>log in</a></Link> to get your
                                 personalised code.
                             </p>
                             <p className="code-block-title">Copy this HTML code:</p>
-                            <div className="code-block" id="code_copy">
+                            <div className="code-block">
                                 &lt;a href="https://recommendandshare.com/"&gt;&lt;img
                                 src="https://recommendandshare.com/ras-logo.png" width="150"
                                 height="50" style="margin:0 0 10px;" alt="Recommend &amp;amp; Share"

@@ -12,7 +12,7 @@ export const Fields = (props) => {
                     <Form.Control type={props.field} className="form-control" name={props.fieldName} value={props.fieldValue} onChange={(e) => { props.fieldAction(e.target.value) }}></Form.Control>
                 </div>
                 {props.fieldValidation!="undefined" && props.fieldValidation[0] && typeof props.fieldValidation[2]!="undefined" && (props.fieldValidation[2]!="" || !props.fieldValidation[1]) &&
-                    <div className="help-block" style={{color:'red'}}>{typeof props.fieldValidation[2]!="undefined"?props.fieldValidation[2].message.replace("_"," "):props.fieldValidation[2]}</div>
+                    <div className="help-block" style={{color:'red'}}>{typeof props.fieldValidation[2]!="undefined"?props.fieldValidation[2].message.replace(/_/g," "):props.fieldValidation[2]}</div>
                 }
             </div>
             </>

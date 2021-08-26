@@ -80,7 +80,7 @@ export const recommend = (props) => {
                                         <div className="form_row  text">
                                             <label htmlFor="feedback_text_recommendation" />
                                             <div className="field_container">
-                                                <div id="feedback_text_recommendation" className="displayText">
+                                                <div className="displayText">
                                                     <p className="semi-shallow text-green">Leave a Positive Recommendation</p>
                                                 </div>
                                             </div>
@@ -88,7 +88,6 @@ export const recommend = (props) => {
                                                 <div className="field_container">
                                                     <input
                                                         type="text"
-                                                        id="feedback_title"
                                                         name="feedback[title]"
                                                         placeholder="Title"
                                                       
@@ -97,7 +96,6 @@ export const recommend = (props) => {
                                                 <div className="form_row very-short text" style={ { marginTop: '2rem   ' } }>
                                                     <div className="field_container">
                                                         <textarea
-                                                            id="feedback_review"
                                                             name="feedback[review]"
                                                             required="required"
                                                             className="very-short"

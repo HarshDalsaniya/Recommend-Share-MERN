@@ -359,7 +359,6 @@ export const register = (props) => {
                                                         <div className={gdpr_agreed_date == true ? "_checkbox on" : "_checkbox"}>
                                                             <input
                                                                 type="checkbox"
-                                                                id="register_tradesperson_gdpr_policy"
                                                                 name="gdpr_agreed_date"
                                                                 required="required"
                                                                 value={1}

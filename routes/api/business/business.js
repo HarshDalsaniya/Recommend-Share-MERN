@@ -122,20 +122,25 @@ router.post('/tradespeople', function (req,res, callback){
     // console.log(req.body)
     var errors = new Array();
     errors = {blankValue:{},invalidValue:{},verifyError:{}};
-    var required_params=['name', 'email', 'trade_id', 'federation_id', 'mobile', 'address_line_1', 'address_town', 'address_county', 'address_postcode']
+    var required_params=['name', 'email', 'trade_id', 'federation_id', 'mobile', 'address_line_1', 'address_town', 'address_county', 'address_postcode', 'owner_name']
     var elem = functions.validateReqParam(post, required_params);
     var valid = elem.missing.length == 0 && elem.blank.length == 0; 
     if(!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(post.email)){
         valid=false
         errors.invalidValue.email="This value is not a valid email address."
     }
-    if(post.vat_registered!=true){
-        valid=false
-        errors.invalidValue.vat_registered=""
-    }
+    // if(post.vat_registered!=true){
+    //     valid=false
+    //     errors.invalidValue.vat_registered=""
+    // }
+    console.log(post.mobile.length)
     if(post.mobile.length>10 || post.mobile.length<10){
         valid=false
         errors.invalidValue.mobile="Mobile No. should be 10 digit"
+    }
+    if(post.established!=null && post.established!="" && !post.established.match(/^(\d{4})(\/|-)(\d{1,2})(\/|-)(\d{1,2})$/)){
+        valid=false
+        errors.invalidValue.established="Established Date is not Valid"
     }
     if(!/^[a-zA-Z\s]*$/.test(post.name)){
         valid=false
@@ -152,7 +157,6 @@ router.post('/tradespeople', function (req,res, callback){
                     response = general.response_format(false, messages.ERROR_PROCESSING, {});
                     res.send(response);
                 }
-               
                 else if (result.length == 0 ) { 
                     var sql = `select * from user where email="${post.email}"`
                     connection.query(sql,function (err , userData){
@@ -201,7 +205,7 @@ router.post('/tradespeople', function (req,res, callback){
                                     response = general.response_format(false, messages.ERROR_PROCESSING, {});
                                     res.send(response);
                                 }
-                                // console.log(insert.insertId)
+                                console.log(insert)
                                 if(insert.length != 0 ){                                                         
                                     var insertfedration=``;
                                     post.federation_id.forEach(element => {
@@ -227,8 +231,9 @@ router.post('/tradespeople', function (req,res, callback){
                     });                 
                                  
                 }else{
-                    response = general.response_format(false, "email is already registered", {});
-                    res.send(response);
+                    errors.invalidValue.email="Email is already registered"
+                        response = general.response_format(false, errors, {});
+                        res.send(response);
 
                 }
             })

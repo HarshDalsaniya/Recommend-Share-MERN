@@ -283,7 +283,7 @@ export const ProfileForm = (props) => {
                     </div>
                 </div>
             </div>
-            <input type="hidden" id="profile__token" name="profile[_token]" defaultValue="04H6KISBzHWAWL7N2czvzTnBPLbRVnV3c6TxDEBnRY0" />
+            <input type="hidden" name="profile[_token]" defaultValue="04H6KISBzHWAWL7N2czvzTnBPLbRVnV3c6TxDEBnRY0" />
             <div className="buttons ">
                 <Button type="submit">
                     Save Details
@@ -327,7 +327,7 @@ export const ProfileImage = (props) => {
                             <img src={typeof show_profile!="undefined"?show_profile:"https://recommendandshare.com/media/cache/avatar/assets/images/generic-avatar.png"} className="avatar avatar-selector" />
                         </a>
                     </p>
-                    <div id="profile_image">
+                    <div >
                         <div className="form_row  file">
                             <div className="field_container">
                                 <div className="fileinput single">
@@ -341,7 +341,7 @@ export const ProfileImage = (props) => {
                                 </div>
                             </div>
                         </div>
-                        <input type="hidden" id="profile_image__token" name="profile_image[_token]" defaultValue="QPqj_Bp32ryxO6cNwMUlgW0g3AU_Ub636y9iUuHGHKg" />
+                        <input type="hidden" name="profile_image[_token]" defaultValue="QPqj_Bp32ryxO6cNwMUlgW0g3AU_Ub636y9iUuHGHKg" />
                     </div>
                     <div className="buttons ">
                         <Link href="/profile/image/clear">
@@ -380,7 +380,7 @@ export const ConnectFacebook = (props) =>{
                 <div className="contained shallow">
                     <p>You can use your facebook account to login once it's connected.</p>
                     <p className="shallow tcenter">
-                        <span id="fb_status" />
+                        <span/>
                     </p>
                 </div>
             </div>

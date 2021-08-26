@@ -83,8 +83,8 @@ export const secure = (props) => {
                                             <h3 className="invite-heading">Invite a Tradesperson</h3>
                                             <p className="invite-text">Invite a tradesperson and help us expand the Recommend &amp; Share community with tradespeople that consumers can rely on.</p>
                                             <form action="/secure/invite" className="d-block d-md-flex justify-content-between align-items-center" method="get">
-                                                <input type="email" name="email" id="customer-email" placeholder="Tradesperson's Email" required />
-                                                <button type="submit" id="invite-btn">
+                                                <input type="email" name="email"  placeholder="Tradesperson's Email" required />
+                                                <button type="submit" >
                                                     Invite
                                                 </button>
                                                 <input type="hidden" name="type" defaultValue="tradesperson" />

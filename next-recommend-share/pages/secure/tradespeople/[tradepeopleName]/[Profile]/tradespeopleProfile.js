@@ -21,7 +21,6 @@ export const tradespeopleDetails = (props) => {
                                 <span className="sharethis-inline-share-title">Share this:</span>
                                 <div
                                     className="sharethis-inline-share-buttons st-right  st-inline-share-buttons st-animated"
-                                    id="st-1"
                                     >
                                     <div
                                         className="st-btn st-first st-remove-label"

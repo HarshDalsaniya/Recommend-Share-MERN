@@ -100,7 +100,7 @@ export const recommend = (props) => {
                                             <div className="form_row  text">
                                                 <label htmlFor="feedback_text_recommendation" />
                                                 <div className="field_container">
-                                                    <div id="feedback_text_recommendation" className="displayText">
+                                                    <div className="displayText">
                                                         <p className="semi-shallow text-green">Leave a Positive Recommendation</p>
                                                     </div>
                                                 </div>
@@ -108,7 +108,6 @@ export const recommend = (props) => {
                                                     <div className="field_container">
                                                         <input
                                                             type="text"
-                                                            id="feedback_title"
                                                             name="feedback[title]"
                                                             placeholder="Title"
 
@@ -117,7 +116,6 @@ export const recommend = (props) => {
                                                     <div className="form_row very-short text" style={ { marginTop: '2rem   ' } }>
                                                         <div className="field_container">
                                                             <textarea
-                                                                id="feedback_review"
                                                                 name="feedback[review]"
                                                                 required="required"
                                                                 className="very-short"
@@ -148,12 +146,11 @@ export const recommend = (props) => {
                                             <label className="required">Would you recommend?</label>
                                             <div className="field_container">
                                                 <div className="expanded-list-wrapper yes-no">
-                                                    <ul className="expanded-list" id="exp_list" style={{marginBottom:'1rem' , marginLeft:'0.5rem'}}>
+                                                    <ul className="expanded-list" style={{marginBottom:'1rem' , marginLeft:'0.5rem'}}>
                                                         <li className="expanded-list-row">
                                                             <div className={ recommendCheckBox == true ? "_checkbox _radio on " : "_checkbox _radio" }>
                                                                 <input
                                                                     type="radio"
-                                                                    id="invite_tradesperson_recommendation_0"
                                                                     name="invite_tradesperson_yes"
                                                                     required="required"
                                                                     value={ 1 }
@@ -175,7 +172,6 @@ export const recommend = (props) => {
                                                             <div className={ recommendCheckBox == false ? "_checkbox _radio on" : "_checkbox _radio" }>
                                                                 <input
                                                                     type="radio"
-                                                                    id="invite_tradesperson_recommendation_1"
                                                                     name="invite_tradesperson[recommendation]"
                                                                     required="required"
                                                                     value={ 0 }
@@ -199,7 +195,6 @@ export const recommend = (props) => {
                                                         <div className="field_container">
                                                             <input
                                                                 type="text"
-                                                                id="feedback_title"
                                                                 name="feedback[title]"
                                                                 placeholder="Title"
 
@@ -208,7 +203,6 @@ export const recommend = (props) => {
                                                         <div className="form_row very-short text" style={ { marginTop: '2rem   ' } }>
                                                             <div className="field_container">
                                                                 <textarea
-                                                                    id="feedback_review"
                                                                     name="feedback[review]"
                                                                     required="required"
                                                                     className="very-short"

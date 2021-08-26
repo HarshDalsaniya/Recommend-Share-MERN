@@ -48,13 +48,13 @@ export const NavBar = (props) => {
                             <img src={require('../../images/logo/logo-on-dark.svg')} height={ 65 } width={ 200 } alt="" />
                         </Link>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav">
-                            <div id="nav-icon3">
+                            <div>
                                 <span></span>
                                 <span></span>
                                 <span></span>
                             </div>
                         </Navbar.Toggle>
-                        <Navbar.Collapse id="responsive-navbar-nav">
+                        <Navbar.Collapse>
                             <Nav className="navbar-nav ms-auto mb-2 mb-lg-0 navbar-item-bg">
                                 <li className="nav-item">
                                     <Link href="/home-improvements-and-maintenance" >
@@ -101,7 +101,7 @@ export const NavBar = (props) => {
 
                                             <li className="nav-item dropdown d-block d-lg-flex align-items-center">
                                                 <Dropdown >
-                                                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                                    <Dropdown.Toggle variant="success">
                                                         <img
                                                             src={`${process.env.IMAGE_PATH}/images/${profile}` } 
                                                             className="avatar"

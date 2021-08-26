@@ -95,27 +95,27 @@ export const BusinessInfo = (props) => {
                         <div className="box white">
                             <div className="contained shallow">
                                 <form method="post" action="/secure/tradespeople/handyplus/recommend">
-                                    <div id="feedback">
+                                    <div >
                                         <div className="form_row  text">
                                             <label htmlFor="feedback_text_recommendation" />
                                             <div className="field_container">
-                                                <div id="feedback_text_recommendation" className="displayText">
+                                                <div className="displayText">
                                                     <p className="semi-shallow text-green">Leave a Positive Recommendation</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <input type="hidden" id="feedback_recommendation" name="feedback[recommendation]" defaultValue={1} />
+                                        <input type="hidden" name="feedback[recommendation]" defaultValue={1} />
                                         <div className="form_row  text">
                                             <div className="field_container">
-                                                <input type="text" id="feedback_title" name="feedback[title]" placeholder="Title" />
+                                                <input type="text" name="feedback[title]" placeholder="Title" />
                                             </div>
                                         </div>
                                         <div className="form_row very-short text">
                                             <div className="field_container">
-                                                <textarea id="feedback_review" name="feedback[review]" required="required" className="very-short" placeholder="Say something about your experience with this tradesperson" defaultValue={""} />
+                                                <textarea name="feedback[review]" required="required" className="very-short" placeholder="Say something about your experience with this tradesperson" defaultValue={""} />
                                             </div>
                                         </div>
-                                        <input type="hidden" id="feedback__token" name="feedback[_token]" defaultValue="My302e3CXN7lP_64QL1zTIc4dis9ov05IQAjlGwfkZU" />
+                                        <input type="hidden" name="feedback[_token]" defaultValue="My302e3CXN7lP_64QL1zTIc4dis9ov05IQAjlGwfkZU" />
                                     </div>
                                     <div className="buttons tcenter">
                                         <button type="submit">
