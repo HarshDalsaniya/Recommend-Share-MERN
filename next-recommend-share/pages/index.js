@@ -14,9 +14,9 @@ export default function Home() {
     <React.Fragment>
   
      <Banner 
-     backgroundImage = "/banner/home-banner-new-D.jpg"/>
+     backgroundImage = {require("../images/banner/home-banner-new-D.jpg")}/>
       <ThePower 
-      powerImage = "/dashboard/hero-power-community.svg"/>
+      powerImage = {require("../images/dashboard/hero-power-community.svg")}/>
       <TheNewWay/>
       <HowDoes />
       <Box />

@@ -103,7 +103,7 @@ export const RecommendedTradesperson = (props) => {
         <div className="col-lg-4 mb-3 mb-lg-0">
             <div className="start-box">
                 <div className="search-box power-heading">
-                    <img src="/logo/search-icon.png" />
+                    <img src={require("../../images/logo/search-icon.png")} />
                     <h3>Search a Recommended Tradesperson</h3>
                 </div>
                 <p className="start-text">If you're looking for a specific tradesperson in the Recommend &amp; Share community, you can search for them here.</p>

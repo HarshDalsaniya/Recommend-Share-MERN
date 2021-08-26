@@ -41,7 +41,7 @@ export const NavBar = (props) => {
                         className="navbar navbar-expand-lg"
                     >
                         <Link className="navbar-brand" href="/">
-                            <img src='/logo/logo-on-dark.svg' height={ 65 } width={ 200 } alt="" />
+                            <img src={require('../../images/logo/logo-on-dark.svg')} height={ 65 } width={ 200 } alt="" />
                         </Link>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav">
                             <div id="nav-icon3">
@@ -99,11 +99,12 @@ export const NavBar = (props) => {
                                                 <Dropdown >
                                                     <Dropdown.Toggle variant="success" id="dropdown-basic">
                                                         <img
-                                                            src={"http://localhost:3000/images/"+profile } 
+                                                            src={`${process.env.IMAGE_PATH}/images/${profile}` } 
                                                             className="avatar"
                                                             style={{
                                                                 width: '40px',
-                                                                height: '40px'
+                                                                height: '40px',
+                                                                objectFit:"cover"
                                                             }}
                                                         />
                                                         <span className="ms-2">{ localstorageItem.name }</span>
@@ -112,7 +113,7 @@ export const NavBar = (props) => {
                                                         <Dropdown.Item>My Dashboard</Dropdown.Item> 
                                                         <Dropdown.Divider />                                                       
                                                         {userbussines.length>0 ? userbussines.map((bussines)=>
-                                                        <Dropdown.Item key={"buss_"+bussines.name}><a href="/">{typeof bussiness!=null?bussines.name:""}</a></Dropdown.Item>
+                                                        <Dropdown.Item key={"buss_"+bussines.name}><Link href="/"><a>{typeof bussiness!=null?bussines.name:""}</a></Link></Dropdown.Item>
                                                         ) : ""}                                                                                                           
                                                         <Dropdown.Item ><Link href="/secure/tradespeople/create"><a>Add a Business</a></Link></Dropdown.Item>
                                                         <Dropdown.Divider />

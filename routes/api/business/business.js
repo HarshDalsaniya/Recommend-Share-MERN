@@ -27,15 +27,13 @@ var md5 = require('md5');
 var session = require('express-session');
 const { check, validationResult } = require('express-validator/check');
 const { sanitizeBody, matchedData } = require('express-validator/filter');
-var cors = require("cors");
 var address = require('address');
 var { machineId, machineIdSync } = require('node-machine-id');
 const { json } = require('body-parser');
 
-router.use(cors())
 var general = gnl.func();
 
-router.get("/trade_options",cors(),(req,res)=>{
+router.get("/trade_options",(req,res)=>{
     req.getConnection((err,connection)=>{
         if (err) {
                     console.log(err);
@@ -55,7 +53,7 @@ router.get("/trade_options",cors(),(req,res)=>{
     });
 });
 
-router.get('/faq_question' , cors(),(req,res)=> {
+router.get('/faq_question', (req,res)=> {
     req.getConnection((err,connection)=>{
         if (err) {
                     console.log(err);
@@ -75,7 +73,7 @@ router.get('/faq_question' , cors(),(req,res)=> {
     });    
 })
 
-router.get('/federation',cors(),(req,res) => {
+router.get('/federation', (req,res) => {
     req.getConnection((err,connection)=>{
         if(err){
             console.log(err);
@@ -95,7 +93,7 @@ router.get('/federation',cors(),(req,res) => {
     });
 });
 
-router.post('/getuserbussiness',cors(),(req,res)=>{
+router.post('/getuserbussiness', (req,res)=>{
     req.getConnection((err,connection)=>{
         if(err){
             console.log(err);
@@ -118,18 +116,37 @@ router.post('/getuserbussiness',cors(),(req,res)=>{
     });
 });
 
-router.post('/tradespeople',cors(), function (req,res, callback){
+router.post('/tradespeople', function (req,res, callback){
     var post = req.body;
     resoponse ={};
-    var required_params=['name' , 'email']
+    // console.log(req.body)
+    var errors = new Array();
+    errors = {blankValue:{},invalidValue:{},verifyError:{}};
+    var required_params=['name', 'email', 'trade_id', 'federation_id', 'mobile', 'address_line_1', 'address_town', 'address_county', 'address_postcode']
     var elem = functions.validateReqParam(post, required_params);
-    var valid = elem.missing.length == 0 && elem.blank.length == 0;   
+    var valid = elem.missing.length == 0 && elem.blank.length == 0; 
+    if(!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(post.email)){
+        valid=false
+        errors.invalidValue.email="This value is not a valid email address."
+    }
+    if(post.vat_registered!=true){
+        valid=false
+        errors.invalidValue.vat_registered=""
+    }
+    if(post.mobile.length>10 || post.mobile.length<10){
+        valid=false
+        errors.invalidValue.mobile="Mobile No. should be 10 digit"
+    }
+    if(!/^[a-zA-Z\s]*$/.test(post.name)){
+        valid=false
+        errors.invalidValue.name="Full Name is not Valid"
+    }  
     if (valid) {
         console.log('valid')
         req.getConnection(function(err , connection){
             var sql = `select * from tradesperson where email ="${post.email}" or mobile="${post.mobile}"`;           
             connection.query(sql,function (err,result){
-                console.log(result);
+                // console.log(result);
                 if (err) {
                     console.log(err);
                     response = general.response_format(false, messages.ERROR_PROCESSING, {});
@@ -190,9 +207,9 @@ router.post('/tradespeople',cors(), function (req,res, callback){
                                     post.federation_id.forEach(element => {
                                         insertfedration += `insert into tradespeople_federations set tradesperson_id = "${insert.insertId}" , federation_id = "${element}";`
                                     });
-                                    console.log(insertfedration)
+                                    // console.log(insertfedration)
                                     connection.query(insertfedration, function(err,finalresult){
-                                        console.log(insertfedration)
+                                        // console.log(insertfedration)
                                         if (err) {
                                             console.log(err);
                                             response = general.response_format(false, messages.ERROR_PROCESSING, {});
@@ -219,8 +236,15 @@ router.post('/tradespeople',cors(), function (req,res, callback){
         });
     }
     else {
-        console.log("in blank data")     
-        response = general.response_format(false, "blank value", {});
+        console.log("in blank data")
+        
+        var str = functions.loadErrorTemplate(elem);
+        console.log(elem)
+        async.forEachOf(str.split("\n ")[1].replace(" should not be blank",'').split(","),(value,key,callback)=>{
+            errors.invalidValue[value]?delete errors.invalidValue[value]:null
+            value!=""?errors.blankValue[value]="Please Enter your "+value:null
+        })
+        response = general.response_format(false, errors, {});
         res.send(response);
     }
 

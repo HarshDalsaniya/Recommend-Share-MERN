@@ -27,14 +27,9 @@ var md5 = require('md5');
 var session = require('express-session');
 const { check, validationResult } = require('express-validator/check');
 const { sanitizeBody, matchedData } = require('express-validator/filter');
-var cors = require("cors");
 var address = require('address');
 var { machineId, machineIdSync } = require('node-machine-id');
 const { json } = require('body-parser');
-
-
-
-router.use(cors())
 
 var general = gnl.func();
 
@@ -46,8 +41,6 @@ router.get('/list', (req, res) => {
             response = general.response_format(false, messages.DATABASE_CONNECTION_ERROR, {});
             res.send(response);
         } else {
-            var post = req.body.searchFilter
-            var searchFields=[]
             var sql= `SELECT 
                         image,
                         name,
@@ -74,9 +67,9 @@ router.get('/list', (req, res) => {
             req.query.start ? sql = sql+ ` LIMIT ${req.query.start},20`:null
 
             // sql +=keyword+" limit "+start+", "+20; 
-            console.log(sql)
+            // console.log(sql)
             connection.query(sql, function (err, data) {
-                console.log("this.sql======================>",this.sql);
+                // console.log("this.sql======================>",this.sql);
                 if (err) {
                     console.log(err);
                     response = general.response_format(false, messages.ERROR_PROCESSING, {});

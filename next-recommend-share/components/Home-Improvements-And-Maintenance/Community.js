@@ -17,7 +17,7 @@ export const Community = (props) => {
                                     the same goals, vision, and passion for CHANGE!{" "}
                                 </div>
                                 <div className="community-box1-img mt-3">
-                                    <img src="/images/Jigsaw_image_300.png" alt="Jigsaw" />
+                                    <img src={require("../../images/images/Jigsaw_image_300.png")} alt="Jigsaw" />
                                 </div>
                             </div>
                         </Col>

@@ -987,7 +987,7 @@ a:hover {
 /* ###############  section 1  ############## */
 
 .bringing-back {
-    background: url('/images/home-improvements-banner.jpg') 0% 0% no-repeat padding-box;
+    background: url('../../images/images/home-improvements-banner.jpg') 0% 0% no-repeat padding-box;
     background-size: cover;
     padding: 3rem 0;
      padding-top: 8rem; 
@@ -1731,7 +1731,6 @@ a:hover {
     margin-bottom: 0.5rem;
     object-fit: cover;
     object-position: center;
-    display: none;
 }
 
 .user-icons i {
@@ -2061,7 +2060,7 @@ form ._select {
     }
     .building-trust {
         padding-top: 7rem;
-        background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/banner/home-banner-new-M.jpg') 0% 0% no-repeat padding-box;
+        background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../images/banner/home-banner-new-M.jpg') 0% 0% no-repeat padding-box;
         background-position: center !important;
         background-size: cover !important;
         -moz-background-size: cover;

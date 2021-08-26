@@ -38,7 +38,7 @@ export const Founder_Banner = (props) => {
                             <Row>
                                 <Col md={ 2 }>
                                     <div>
-                                        <img src="/images/garry-lewis.png"  />
+                                        <img src={require("../../images/images/garry-lewis.png")}  />
                                     </div>
                                 </Col>
                                 <Col md={ 10 }>
@@ -147,11 +147,11 @@ export const GrateNews = (props) => {
                 <h3 className="all-blue-heading">GREAT NEWS!</h3>
                 <div className="great-news-logo-box">
                     <Link href="/">
-                        <img src={ `${props.logo}` } alt />
+                        <img src={ `${props.logo}` } />
                     </Link>
                 </div>
                 <div className="the-new-environment-img">
-                    <img src={ `${props.banner}` } alt />
+                    <img src={ `${props.banner}` } />
                 </div>
                 <div className="w-md-75 m-auto border-bottom border-2">
                     <p className="all-gray-text">

@@ -28,15 +28,9 @@ var session = require('express-session');
 const { check, validationResult } = require('express-validator/check');
 const { sanitizeBody, matchedData } = require('express-validator/filter');
 var upload = require('../../../config/file-upload');
-var cors = require("cors");
 var address = require('address');
 var { machineId, machineIdSync } = require('node-machine-id');
 const { json } = require('body-parser');
-
-
-
-
-router.use(cors())
 
 var general = gnl.func();
 
@@ -44,7 +38,7 @@ router.get("/harsh", (req, res) => {
     res.send("hello world");
 });
 
-router.post("/",cors(),(req,res)=>{
+router.post("/", (req,res)=>{
     response = {};
     req.getConnection((err,connection)=>{
         console.log(req.body)
@@ -62,7 +56,7 @@ router.post("/",cors(),(req,res)=>{
     })
 })
 
-router.post('/userUpdate', cors(), function (req, res, next) {
+router.post('/userUpdate', function (req, res, next) {
     var post = req.body;
     response = {};
     // console.log("testestest", post)
@@ -147,7 +141,7 @@ router.post('/userUpdate', cors(), function (req, res, next) {
     }
 });
 
-router.post('/userProfilePic', cors(), upload.fields([{name:"profile_image"}]), (req,res)=>{
+router.post('/userProfilePic', upload.fields([{name:"profile_image"}]), (req,res)=>{
     response = {};
     var errors = new Array();
     errors = {blankValue:{},invalidValue:{},verifyError:{}};

@@ -7,10 +7,10 @@ export const about_us = (props) => {
     return (
         <div>
            <About            
-           bannerbackgoudimg="/banner/garry-brick-bg.png"
-           bannerbackgoundimg2="/banner/garry-brick.png"
-           bannerbackgoundimg2="/banner/garry-quote-end.png"
-           bannerbackgoundimg2="/banner/garry-quote-start.png"
+           bannerbackgoudimg={require("../images/banner/garry-brick-bg.png")}
+           bannerbackgoundimg2={require("../images/banner/garry-brick.png")}
+           bannerbackgoundimg2={require("../images/banner/garry-quote-end.png")}
+           bannerbackgoundimg2={require("../images/banner/garry-quote-start.png")}
            />
          
         </div>

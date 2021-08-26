@@ -27,14 +27,9 @@ var md5 = require('md5');
 var session = require('express-session');
 const { check, validationResult } = require('express-validator/check');
 const { sanitizeBody, matchedData } = require('express-validator/filter');
-var cors = require("cors");
 var address = require('address');
 var { machineId, machineIdSync } = require('node-machine-id');
 const { json } = require('body-parser');
-
-
-
-router.use(cors())
 
 var general = gnl.func();
 
@@ -88,7 +83,7 @@ router.get('/list', (req, res) => {
     })
 });
 
-router.get("/trade_options",cors(),(req,res)=>{
+router.get("/trade_options", (req,res)=>{
     req.getConnection((err,connection)=>{
         if (err) {
                     console.log(err);
@@ -108,7 +103,7 @@ router.get("/trade_options",cors(),(req,res)=>{
     });
 });
 
-router.post('/tradespeople',cors(), function (req,res, callback){
+router.post('/tradespeople', function (req,res, callback){
     var post = req.body;
     resoponse ={};
     var required_params=['name' , 'email']

@@ -2,22 +2,22 @@ import axios from "axios"
 
 
 const login = (user) => {
-    return axios.post(`http://localhost:4000/api/user/login`, { email: user.email, password: user.password })
+    return axios.post(`${process.env.API}/user/login`, { email: user.email, password: user.password })
         .then((result) => result)
         .catch((error) => console.log(error))
 }
 const register = (user, path) => {
-    return axios.post(`http://localhost:4000/api/user${path}`, user)
+    return axios.post(`${process.env.API}/user${path}`, user)
         .then((result) => result)
         .catch((error) => console.log(error))
 }
 const tradesPeople = (tradespeople) => {
-    return axios.post(`http://localhost:4000/api/business/tradespeople` , tradespeople)
+    return axios.post(`${process.env.API}/business/tradespeople` , tradespeople)
         .then((result) => result)
         .catch((error) => console.log(error))
 }
 const forgotPassword = (email) => {
-    return axios.post(`http://localhost:4000/api/user/forgotpassword`, { email: email })
+    return axios.post(`${process.env.API}/user/forgotpassword`, { email: email })
         .then((result) => result)
         .catch((error) => console.log(error))
 }
@@ -25,47 +25,47 @@ const resetPassword = (user) => {
     const queryParams = new URLSearchParams(window.location.search);
     const Key = queryParams.get('uniqueKey');
     console.log(Key);
-    return axios.post(`http://localhost:4000/api/user/reset-password?uniqueKey=${Key}`, user)
+    return axios.post(`${process.env.API}/user/reset-password?uniqueKey=${Key}`, user)
         .then((result) => result)
         .catch((error) => console.log(error))
 }
 const changePassword = (user) => {
-    return axios.post(`http://localhost:4000/api/user/changepassword`, user)
+    return axios.post(`${process.env.API}/user/changepassword`, user)
         .then((result) => result)
         .catch((error) => console.log(error))
 }
 const VerifyKey = () => {
     const queryParams = new URLSearchParams(window.location.search);
     const Key = queryParams.get('uniqueKey');
-    return axios.get(`http://localhost:4000/api/user/uniqueKeyVerify/${Key}`)
+    return axios.get(`${process.env.API}/user/uniqueKeyVerify/${Key}`)
         .then((result) => result)
         .catch((error) => console.log(error))
 }
 const logout = () => {
     const Token = JSON.parse(localStorage.getItem('Recommend_Share_current_user'))
-    return axios.post(`http://localhost:4000/api/user/logout/${Token.token}`)
+    return axios.post(`${process.env.API}/user/logout/${Token.token}`)
         .then((result) => result)
         .catch((error) => console.log(error))
 }
 
 const userData = (email) => {
-    return axios.post(`http://localhost:4000/api/profile`,{email:email})
+    return axios.post(`${process.env.API}/profile`,{email:email})
         .then((result) => result)
         .catch((error) => console.log(error))
 }
 
 const updateProfile = (profileData) => {
-    return axios.post(`http://localhost:4000/api/profile/userUpdate`,profileData)
+    return axios.post(`${process.env.API}/profile/userUpdate`,profileData)
         .then((result) => result)
         .catch((error) => console.log(error))
 }
 const userBusiness = (id)=>{
-    return axios.post('http://localhost:4000/api/business/getuserbussiness',{id:id})
+    return axios.post(`${process.env.API}/business/getuserbussiness`,{id:id})
         .then((result) => result)
         .catch((error) => console.log(error))
 }
 const contactUs=(emaildata) => {
-    return axios.post('http://localhost:4000/api/general/contactUs', emaildata)
+    return axios.post(`${process.env.API}/general/contactUs`, emaildata)
     .then((result) => result)
     .catch((error) => console.log(error))
 
@@ -73,19 +73,19 @@ const contactUs=(emaildata) => {
 
 const updateProfilePhoto = (profilePhoto) => {
     profilePhoto.append("email",JSON.parse(localStorage.getItem('Recommend_Share_current_user')).email)
-    return axios.post(`http://localhost:4000/api/profile/userProfilePic`,profilePhoto)
+    return axios.post(`${process.env.API}/profile/userProfilePic`,profilePhoto)
         .then((result) => result)
         .catch((error) => console.log(error))
 }
 
 const tradList = () =>{
-   return axios.get(`http://localhost:4000/api/business/trade_options`)
+   return axios.get(`${process.env.API}/business/trade_options`)
             .then((res) => res)
 }
 
 const businessSearch = (searchFilter) =>{
     console.log(searchFilter.email)
-    var path=`http://localhost:4000/api/feedback/list?`
+    var path=`${process.env.API}/feedback/list?`
 
         searchFilter.name != null ? path = path + "name=" + searchFilter.name : ""
 

@@ -14,7 +14,7 @@ export const Footer = (props) => {
                   <Link href="/">
                   <a>
                     <img
-                      src="/logo/logo-on-light.svg"
+                      src={require("../../images/logo/logo-on-light.svg")}
                       alt="Recommend and Share"
                     />
                   </a>

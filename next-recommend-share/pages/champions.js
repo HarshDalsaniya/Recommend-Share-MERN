@@ -223,7 +223,7 @@ export const champions = (props) => {
                                     CLICK HERE TO SHOW YOUR SUPPORT!
                                 </a>
                                 <div className="garry-lewis-image">
-                                    <img src="/images/garry-lewis.png" />
+                                    <img src={require("../images/images/garry-lewis.png")} />
                                 </div>
                             </div>
                         </Col>

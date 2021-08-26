@@ -31,7 +31,7 @@ export const HowDoes = (props) => {
                                 >
                                     <div className="item">
                                         <img
-                                            src="/banner/howitworks1_03.png"
+                                            src={require("../../images/banner/howitworks1_03.png")}
                                             alt="First slide"
                                         />
                                         <div className="howitworks-slider-btn">
@@ -53,7 +53,7 @@ export const HowDoes = (props) => {
                                     </div>
                                     <div className="item">
                                         <img
-                                            src="/banner/howitworks2_03.png"
+                                            src={require("../../images/banner/howitworks2_03.png")}
                                             alt="First slide"
                                         />
                                         <div className="count-step mt-3">
@@ -62,7 +62,7 @@ export const HowDoes = (props) => {
                                     </div>
                                     <div className="item">
                                         <img
-                                            src="/banner/howitworks3_03.png"
+                                            src={require("../../images/banner/howitworks3_03.png")}
                                             alt="First slide"
                                         />
                                         <div className="count-step mt-3">
@@ -71,7 +71,7 @@ export const HowDoes = (props) => {
                                     </div>
                                     <div className="item">
                                         <img
-                                            src="/banner/howitworks4_03.png"
+                                            src={require("../../images/banner/howitworks4_03.png")}
                                             alt="First slide"
                                         />
                                         <div className="count-step mt-3">
@@ -130,7 +130,7 @@ export const HowDoes = (props) => {
                                 <span>Garry Lewis</span>
                             </div>
                             <div className="garry-lewis-image">
-                                <img src="/banner/garry-lewis.png" />
+                                <img src={require("../../images/banner/garry-lewis.png")} />
                             </div>
                         </div>
                     </Col>

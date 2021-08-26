@@ -7,22 +7,22 @@ import { Carousel } from 'react-responsive-carousel';
 
 export const WhatPeople = (props) => {
     const images = [
-        { url: "/dashboard/slider_img_1.jpg" },
-        { url: "/dashboard/slider_img_2.jpg" },
-        { url: "/dashboard/slider_img_3.jpg" },
-        { url: "/dashboard/slider_img_4.jpg" },
-        { url: "/dashboard/slider_img_5.jpg" },
-        { url: "/dashboard/slider_img_6.jpg" },
-        { url: "/dashboard/slider_img_7.jpg" },
-        { url: "/dashboard/slider_img_8.jpg" },
-        { url: "/dashboard/slider_img_9.jpg" },
-        { url: "/dashboard/slider_img_10.png" },
-        { url: "/dashboard/slider_img_11.png" },
-        { url: "/dashboard/slider_img_12.png" },
-        { url: "/dashboard/slider_img_13.png" },
-        { url: "/dashboard/slider_img_14.png" },
-        { url: "/dashboard/slider_img_15.png" },
-        { url: "/dashboard/slider_img_16.png" },
+        { url: require("../../images/dashboard/slider_img_1.jpg") },
+        { url: require("../../images/dashboard/slider_img_2.jpg") },
+        { url: require("../../images/dashboard/slider_img_3.jpg") },
+        { url: require("../../images/dashboard/slider_img_4.jpg") },
+        { url: require("../../images/dashboard/slider_img_5.jpg") },
+        { url: require("../../images/dashboard/slider_img_6.jpg") },
+        { url: require("../../images/dashboard/slider_img_7.jpg") },
+        { url: require("../../images/dashboard/slider_img_8.jpg") },
+        { url: require("../../images/dashboard/slider_img_9.jpg") },
+        { url: require("../../images/dashboard/slider_img_10.png") },
+        { url: require("../../images/dashboard/slider_img_11.png") },
+        { url: require("../../images/dashboard/slider_img_12.png") },
+        { url: require("../../images/dashboard/slider_img_13.png") },
+        { url: require("../../images/dashboard/slider_img_14.png") },
+        { url: require("../../images/dashboard/slider_img_15.png") },
+        { url: require("../../images/dashboard/slider_img_16.png") },
     ];
 
 

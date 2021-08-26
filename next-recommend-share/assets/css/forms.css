@@ -142,7 +142,7 @@ form select {
 }
 
 form input.datepicker {
-  background-image: url(/mages/form-icon-calendar.svg);
+  background-image: url(../../images/images/form-icon-calendar.svg);
   background-position: calc( 100% - 15px) center;
   background-repeat: no-repeat;
   background-size: 20px 20px;
@@ -156,7 +156,7 @@ form ._select {
   text-align: left;
   overflow: hidden;
   position: relative;
-  background-image: url(/images/form-icon-select-bg.svg);
+  background-image: url(../../images/images/form-icon-select-bg.svg);
   background-position: calc( 100% - 15px) center;
   background-repeat: no-repeat;
   background-size: 11px 7px;
@@ -203,7 +203,7 @@ form ._select.small span {
 
 form ._checkbox {
   background: none;
-  background-image: url(/images/form-icon-cbox.svg);
+  background-image: url(../../images/images/form-icon-cbox.svg);
   overflow: hidden;
   position: relative;
   width: 26px;
@@ -222,7 +222,7 @@ form ._checkbox {
 
 form ._radio {
   background: none;
-  background-image: url(/dashboard/form-icon-radio.svg);
+  background-image: url(../../images/dashboard/form-icon-radio.svg);
   overflow: hidden;
   position: relative;
   width: 26px;
@@ -239,11 +239,11 @@ form ._radio {
 }
 
 form ._checkbox.on {
-  background-image: url(/dashboard/form-icon-cbox-on.svg);
+  background-image: url(../../images/dashboard/form-icon-cbox-on.svg);
 }
 
 form ._radio.on {
-  background-image: url(/dashboard/form-icon-radio-on.svg);
+  background-image: url(../../images/dashboard/form-icon-radio-on.svg);
 }
 
 form .expanded-list-wrapper {

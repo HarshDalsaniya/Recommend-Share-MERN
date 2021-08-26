@@ -23,7 +23,6 @@ var lodash = require('lodash');
 var moment = require('moment');
 var gnl = require('../../../services/general');
 var md5 = require('md5');
-var cors = require("cors");
 // const { response } = require('express');
 // const { post } = require('./login');
 // const console = require('console');
@@ -33,14 +32,10 @@ var Promise = require('promise');
 // var User = require('../../../models/userDocument');
 var fs = require('fs');
 
-
-
-router.use(cors())
-
 var general = gnl.func();
 
 
-router.post('/contactUs', cors(), function (req, res) {
+router.post('/contactUs', function (req, res) {
     var post = req.body;
     response = {};
     console.log("testestest", post)

@@ -23,7 +23,6 @@ var lodash = require('lodash');
 var moment = require('moment');
 var gnl = require('../../../services/general');
 var md5 = require('md5');
-var cors = require("cors");
 // const { response } = require('express');
 // const { post } = require('./login');
 // const console = require('console');
@@ -34,12 +33,11 @@ var Promise = require('promise');
 var fs = require('fs');
 // const { response } = require('../../../app');
 
-router.use(cors())
 // router.use(multer())
 var general = gnl.func();
 
 // Forgotpasword Api
-router.post('/forgotpassword', cors(), function (req, res) {
+router.post('/forgotpassword', function (req, res) {
     var post = req.body;
     response = {};
     console.log("testestest", post)
@@ -115,7 +113,7 @@ router.post('/forgotpassword', cors(), function (req, res) {
 
 // Reset-password API
 
-router.post('/reset-password', cors(), function (req, res) {
+router.post('/reset-password', function (req, res) {
     var post = req.body;
     // var id = req.query.id;
     // var uniqueKey = req.query.uniqueKey;
@@ -175,7 +173,7 @@ router.post('/reset-password', cors(), function (req, res) {
 });
 
 // check uniqueKey API 
-router.get('/uniqueKeyVerify/:uniqueKey', cors(), function (req, res) {
+router.get('/uniqueKeyVerify/:uniqueKey', function (req, res) {
     response = {};
     req.getConnection(function (err, connection) {
         if (err) {
@@ -205,7 +203,7 @@ router.get('/uniqueKeyVerify/:uniqueKey', cors(), function (req, res) {
 })
 
 //change password API
-router.post('/changepassword', cors(), function (req, res) {
+router.post('/changepassword', function (req, res) {
     response = {}
     var post = req.body;
     response = {};

@@ -27,7 +27,7 @@ export const home_improvements_and_maintenance = (props) => {
                                 <Container>
                                     <Row className="pb-3 align-items-center">
                                         <Col md="3">
-                                            <img src="/images/hero-community-equal-relationship.svg" />
+                                            <img src={require("../images/images/hero-community-equal-relationship.svg")} />
                                         </Col>
                                         <Col md="9" className="ps-md-0">
                                             <div>
@@ -55,7 +55,7 @@ export const home_improvements_and_maintenance = (props) => {
                                 <Container>
                                     <Row className="pb-3 align-items-center">
                                         <Col md="3" className="d-flex">
-                                            <img src="/images/hero-community-environment.svg" />
+                                            <img src={require("../images/images/hero-community-environment.svg")} />
                                         </Col>
                                         <Col md="9" className="ps-md-0">
                                             <div>

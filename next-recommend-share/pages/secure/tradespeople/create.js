@@ -12,7 +12,7 @@ import Fields from '../../../components/Form-Fields/Fields';
 import axios from 'axios'
 import { formFieldValidation } from "../../../services/formValidation"
 import { tradesPeopleRegister } from "../../../redux/bussiness/action"
-
+import { userTradeBussines } from '../../../redux/bussiness/action'
 export const tradespeople = (props) => {
 
 
@@ -20,24 +20,24 @@ export const tradespeople = (props) => {
     const reState = useSelector(state => state);
     const { error, tradespeople } = reState.businessReducer;
     const dispatch = useDispatch();
-    const [businessName, setBusinessName] = useState('');
+    const [businessName, setBusinessName] = useState('Makadiya LTD');
     // const [day, setDay] = useState('');
     // const [month, setMonth] = useState('');
     // const [year, setYear] = useState('');
     const [established, setEstablished] = useState([]);
-    const [companyNo, setcompanyName] = useState('');
-    const [trade, setTrade] = useState('');
-    const [ownerName, setOwnerName] = useState('');
+    const [companyNo, setcompanyName] = useState('004654563');
+    const [trade, setTrade] = useState('5');
+    const [ownerName, setOwnerName] = useState('Maulik');
     const [email, setEmailAddress] = useState(typeof tradesPeople!='undefined' ?tradepeople.email:(JSON.parse(localStorage.getItem("Recommend_Share_current_user")).email));
-    const [webSite, setWebSite] = useState('');
+    const [webSite, setWebSite] = useState('droptechnolab.com');
     const [phoneNumber, setPhoneNumber] = useState('');
-    const [mobileNumber, setMobileNumber] = useState('');
-    const [address_postcode, setAddress_postcode] = useState('');
+    const [mobileNumber, setMobileNumber] = useState('9714220411');
+    const [address_postcode, setAddress_postcode] = useState('SR8 3HT');
     const [select_postcode, setSelectPostcode] = useState('');
-    const [address_line_1, setAddress_line_1] = useState('');
+    const [address_line_1, setAddress_line_1] = useState('24 Hazel Crescent');
     const [address_line_2, setAddress_line_2] = useState('');
-    const [address_town, setAddress_town] = useState('');
-    const [address_county, setAddress_country] = useState('');
+    const [address_town, setAddress_town] = useState('Peterlee');
+    const [address_county, setAddress_country] = useState('uk');
     const [federationValue, setFederationValue] = useState([]);
     const [selectTreadOption, setSelectTreadOption] = useState([]);
     const [federation, setFederationOption] = useState([]);
@@ -148,7 +148,7 @@ export const tradespeople = (props) => {
                 federation_id: federationValue
             }
             dispatch(tradesPeopleRegister(tradepersonData))
-
+            dispatch(userTradeBussines(localStorage.getItem("Recommend_Share_current_user") == null ? '' : JSON.parse(localStorage.getItem("Recommend_Share_current_user")).id))
         }
     }
 
@@ -159,7 +159,7 @@ export const tradespeople = (props) => {
             fieldName: "address_line_1",
             fieldValue: address_line_1,
             fieldAction: setAddress_line_1,
-            fieldValidation: [submitted, address_line_1,]
+            fieldValidation: [submitted, address_line_1, formFieldValidation(error, "address_line_1", address_line_1)]
         },
         {
             field: "text",
@@ -175,7 +175,7 @@ export const tradespeople = (props) => {
             fieldName: "address_town",
             fieldValue: address_town,
             fieldAction: setAddress_town,
-            fieldValidation: [submitted, address_town,]
+            fieldValidation: [submitted, address_town, formFieldValidation(error, "address_town", address_town)]
         },
         {
             field: "text",
@@ -183,7 +183,7 @@ export const tradespeople = (props) => {
             fieldName: "address_county",
             fieldValue: address_county,
             fieldAction: setAddress_country,
-            fieldValidation: [submitted, address_county,]
+            fieldValidation: [submitted, address_county, formFieldValidation(error, "address_county", address_county)]
         }
     ]
     //   dayLoop 
@@ -229,7 +229,7 @@ export const tradespeople = (props) => {
                                                         fieldName="businessName"
                                                         fieldValue={ businessName }
                                                         fieldAction={ setBusinessName }
-                                                        fieldValidation={ [submitted, businessName,] }
+                                                        fieldValidation={ [submitted, businessName, formFieldValidation(error, "name", businessName)] }
                                                     />
                                                     <div className="form_row  date">
                                                         <label>Established date</label>
@@ -257,7 +257,6 @@ export const tradespeople = (props) => {
                                                                         ) }
 
                                                                     </select>
-                                                                    <a className="caret"></a>
                                                                     <span>Day</span>
                                                                 </div>
                                                                 <div className="_select">
@@ -282,7 +281,6 @@ export const tradespeople = (props) => {
                                                                             <option key={ "month_" + month } value={ month }>{ month }</option>
                                                                         ) }
                                                                     </select>
-                                                                    <a className="caret"></a>
                                                                     <span>Month</span>
                                                                 </div>
                                                                 <div className="_select">
@@ -302,12 +300,11 @@ export const tradespeople = (props) => {
                                                                             right: 0
                                                                         } }
                                                                     >
-                                                                        {/* <option value>Year</option> */}
+                                                                        <option value>Year</option>
                                                                         { Years.map((year) =>
                                                                             <option key={ "month_" + year } value={ year } >{ year }</option>
                                                                         ) }
                                                                     </select>
-                                                                    <a className="caret"></a>
                                                                     <span>Year</span>
                                                                 </div>
                                                             </div>
@@ -321,17 +318,17 @@ export const tradespeople = (props) => {
                                                         fieldName="companyNo"
                                                         fieldValue={ companyNo }
                                                         fieldAction={ setcompanyName }
-                                                        fieldValidation={ [submitted, companyNo,] }
+                                                        fieldValidation={ [submitted, companyNo, formFieldValidation(error, "companyNo", companyNo)] }
                                                     />
                                                     <Fields
                                                         key="field_Trade"
                                                         field="select"
                                                         fieldLabel="Trade"
-                                                        fieldName="Trade"
+                                                        fieldName="trade"
                                                         fieldOption={ selectTreadOption }
                                                         fieldValue={ trade }
                                                         fieldAction={ setTrade }
-                                                        fieldValidation={ [submitted, trade,] }
+                                                        fieldValidation={ [submitted, trade, formFieldValidation(error, "trade", trade)] }
                                                     />
 
                                                 </div>
@@ -340,37 +337,37 @@ export const tradespeople = (props) => {
                                                         key="field_OwnerName"
                                                         field="text"
                                                         fieldLabel="Owner's Name"
-                                                        fieldName="OwnerName"
+                                                        fieldName="ownerName"
                                                         fieldValue={ ownerName }
                                                         fieldAction={ setOwnerName }
-                                                        fieldValidation={ [submitted, ownerName,] }
+                                                        fieldValidation={ [submitted, ownerName, formFieldValidation(error, "ownerName", ownerName)] }
                                                     />
                                                     <Fields
                                                         key="field_Email"
                                                         field="email"
                                                         fieldLabel="Email Address"
-                                                        fieldName="EmailAddress"
+                                                        fieldName="email"
                                                         fieldValue={ email }
                                                         fieldAction={ setEmailAddress }
-                                                        fieldValidation={ [submitted, email,] }
+                                                        fieldValidation={ [submitted, email, formFieldValidation(error, "email", email)] }
                                                     />
                                                     <Fields
                                                         key="field_website"
                                                         field="text"
                                                         fieldLabel="Website"
-                                                        fieldName="Website"
+                                                        fieldName="webSite"
                                                         fieldValue={ webSite }
                                                         fieldAction={ setWebSite }
-                                                        fieldValidation={ [submitted, webSite,] }
+                                                        fieldValidation={ [submitted, webSite, formFieldValidation(error, "webSite", webSite)] }
                                                     />
                                                     <Fields
                                                         key="field_PhoneNumber"
                                                         field="numeric"
                                                         fieldLabel="Phone Number"
-                                                        fieldName="PhoneNumber"
+                                                        fieldName="phoneNumber"
                                                         fieldValue={ phoneNumber }
                                                         fieldAction={ setPhoneNumber }
-                                                        fieldValidation={ [submitted, phoneNumber,] }
+                                                        fieldValidation={ [submitted] }
                                                     />
                                                     <Fields
                                                         key="field_MobileNumber"
@@ -379,7 +376,7 @@ export const tradespeople = (props) => {
                                                         fieldName="mobileNumber"
                                                         fieldValue={ mobileNumber }
                                                         fieldAction={ setMobileNumber }
-                                                        fieldValidation={ [submitted, mobileNumber,] }
+                                                        fieldValidation={ [submitted, mobileNumber, formFieldValidation(error, "mobileNumber", mobileNumber)] }
                                                     />
 
                                                 </div>
@@ -615,6 +612,7 @@ export const tradespeople = (props) => {
                                                         src="https://recommendandshare.com/media/cache/avatar/assets/images/generic-avatar.png"
                                                         className="avatar avatar-selector"
                                                     />
+                                                    
                                                 </a>
                                             </p>
                                             <div className="form_row  file">
@@ -626,10 +624,8 @@ export const tradespeople = (props) => {
                                                         className="fileinput single"
                                                         id="acdo_systembundle_tradesperson_temp_image_fi_parent"
                                                     >
-                                                        <Link href="#">
-                                                        <a className="button white ">
-                                                            Browse
-                                                        </a>
+                                                        <Link href="#" className="button white ">
+                                                            <a>Browse</a>
                                                         </Link>
                                                         <input
                                                             type="file"
@@ -659,9 +655,9 @@ export const tradespeople = (props) => {
                                             <p className="smaller tall-top shallow">
                                                 By creating a tradesperson's profile you agree to be bound by our{ " " }
                                                 <Link href="/terms-of-use">
-                                                <a className="blank-link" target="_blank">
-                                                    terms and conditions
-                                                </a>
+                                                    <a className="blank-link" target="_blank">
+                                                        terms and conditions
+                                                    </a>
                                                 </Link>
                                             </p>
                                         </div>

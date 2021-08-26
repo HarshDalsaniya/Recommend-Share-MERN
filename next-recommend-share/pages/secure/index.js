@@ -7,15 +7,14 @@ import { NegativeRecommendation, PositiveRecommendation, RecommendedTradesperson
 export const secure = (props) => {
 
     const [localstorageItem, setLocalStorageItem] = useState()
-   
+   const [profile, setProfile] = useState('')
     useEffect(() => {
-        
         const interval = setInterval(() => {
             setLocalStorageItem(JSON.parse(localStorage.getItem('Recommend_Share_current_user')));
+            setProfile(localStorage.getItem("Recommend_Share_current_user") == null ? '' : JSON.parse(localStorage.getItem("Recommend_Share_current_user")).profile_Picture)
         }, 1000);
         return () => clearInterval(interval);   
-    }, [setLocalStorageItem])   
-
+    }, [setLocalStorageItem,setProfile])   
     return (
         <section className="content login-body">
             <Container>
@@ -25,7 +24,7 @@ export const secure = (props) => {
                     {/* typeof localstorageItem != ('undefined' || null)? localstorageItem.name : '' */}
                 <div className="profile-page" style={{marginTop:"1rem"}}>
                     <section className="profile-page-image">
-                        <img src="/images/consumer_login.jpg" />
+                        <img src={require("../../images/images/consumer_login.jpg")} />
                     </section>
                     <section className="profile-text-box">
                         <div className="container">
@@ -95,12 +94,13 @@ export const secure = (props) => {
                                     <div className="col-md-4 user-name-box">
                                         <div>
                                             <div className="user-icons">
-                                                <img src="https://recommendandshare.com/media/cache/avatar/uploads/customers/sam-avatar-1626495954.png" alt="sam" />
-                                                <i className="fas fa-user-circle" aria-hidden="true" />
+                                                {typeof profile!='undefined' && profile!=null && profile!="" ?
+                                                    <img src={`${process.env.IMAGE_PATH}/images/${profile}`} alt="profile" />
+                                                :<i className="fas fa-user-circle" aria-hidden="true" />}
                                             </div>
                                             <div className="user-name">
                                                 {/* {localstorageItem!="undefined" ? localstorageItem:""} */}
-                                                {console.log(typeof localstorageItem)}
+                                                {/* {console.log(typeof localstorageItem)} */}
                                                 <div>Name: {typeof localstorageItem!="undefined" && localstorageItem!=null? localstorageItem.name:""}</div>
                                             </div>
                                         </div>

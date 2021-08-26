@@ -18,7 +18,7 @@ const INIT_STATE = {
     error: '',
     message: '',
     tradespeople: '',
-    userbussines:'',
+    userbussines:[],
     contactus_data : ''
 };
 

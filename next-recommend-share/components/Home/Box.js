@@ -19,7 +19,7 @@ export const Box = (props) => {
                             <Row pb={ 3 }>
                                 <Col md={ 6 }>
                                     <img
-                                        src="/dashboard/hero-community-equal-relationship.svg"
+                                        src={require("../../images/dashboard/hero-community-equal-relationship.svg")}
                                         
                                     />
                                 </Col>
@@ -52,7 +52,7 @@ export const Box = (props) => {
                         <Container>
                             <Row pb={ 3 }>
                                 <Col md={ 6 } className="d-flex">
-                                    <img src="/dashboard/hero-community-environment.svg"  />
+                                    <img src={require("../../images/dashboard/hero-community-environment.svg")}  />
                                 </Col>
                                 <Col md={ 6 } className="d-flex flex-column justify-content-between ps-md-0" >
                                     <div>

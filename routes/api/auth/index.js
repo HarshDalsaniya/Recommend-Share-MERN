@@ -27,14 +27,10 @@ var md5 = require('md5');
 var session = require('express-session');
 const { check, validationResult } = require('express-validator/check');
 const { sanitizeBody, matchedData } = require('express-validator/filter');
-var cors = require("cors");
+
 var address = require('address');
 var { machineId, machineIdSync } = require('node-machine-id');
 const { json } = require('body-parser');
-
-
-
-router.use(cors())
 
 var general = gnl.func();
 
@@ -42,7 +38,7 @@ router.get("/harsh", (req, res) => {
     res.send("hello world");
 });
 
-router.post('/login', cors(), function (req, res, callBack) {
+router.post('/login', function (req, res, callBack) {
     var post = req.body;
     response = {};
     // console.log("testestest", post)
@@ -151,7 +147,7 @@ router.post('/login', cors(), function (req, res, callBack) {
     }
 });
 
-router.post('/register', cors(), function (req, res, next) {
+router.post('/register', function (req, res, next) {
     var post = req.body;
     response = {};
     // console.log("testestest", post)
@@ -326,7 +322,7 @@ router.post('/register', cors(), function (req, res, next) {
     }
 });
 
-router.post('/logout/:token', cors(), function (req, res, next) {
+router.post('/logout/:token',function (req, res, next) {
     response = {};
     req.getConnection(function (err, connection) {
         var sql = `delete from user_token where token="${req.params.token}"`
@@ -345,7 +341,7 @@ router.post('/logout/:token', cors(), function (req, res, next) {
 });
 
 // Forgotpasword Api
-router.post('/forgotpassword', cors(), function (req, res) {
+router.post('/forgotpassword', function (req, res) {
     var post = req.body;
     response = {};
     console.log("testestest", post)
@@ -421,7 +417,7 @@ router.post('/forgotpassword', cors(), function (req, res) {
 
 // Reset-password API
 
-router.post('/reset-password', cors(), function (req, res) {
+router.post('/reset-password', function (req, res) {
     var post = req.body;
     // var id = req.query.id;
     // var uniqueKey = req.query.uniqueKey;
@@ -476,7 +472,7 @@ router.post('/reset-password', cors(), function (req, res) {
 });
 
 // check uniqueKey API 
-router.get('/uniqueKeyVerify/:uniqueKey', cors(), function (req, res) {
+router.get('/uniqueKeyVerify/:uniqueKey', function (req, res) {
     response = {};
     req.getConnection(function (err, connection) {
         if (err) {
@@ -506,7 +502,7 @@ router.get('/uniqueKeyVerify/:uniqueKey', cors(), function (req, res) {
 })
 
 //change password API
-router.post('/changepassword', cors(), function (req, res) {
+router.post('/changepassword', function (req, res) {
     response = {}
     var post = req.body;
     response = {};

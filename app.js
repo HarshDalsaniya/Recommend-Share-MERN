@@ -10,10 +10,13 @@ var session = require('express-session');
 var multer= require('multer');
 var bodyparser = require('body-parser');
 require('dotenv').config();
+var cors = require("cors");
 
 var indexRouter = require('./routes/index');
 
 var app = express();
+
+app.use(cors())
 
 app.use(logger('dev'));
 app.use(express.json());
