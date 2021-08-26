@@ -65,11 +65,11 @@ exports.func = function () {
             // return hashedpassword
         },  
 
-       validateHashedPassword : function (password)
-       {
-         return bcrypt.compare(password[0], password[1])
-            .then((res)=>{console.log(res),res})
-            .catch((err)=>err)
+       validateHashedPassword : function (password){
+        var result = bcrypt.compareSync(password[0], password[1])
+         return result
+            // .then((res)=>{console.log("general ------->",res),res})
+            // .catch((err)=>err)
 
        }
        

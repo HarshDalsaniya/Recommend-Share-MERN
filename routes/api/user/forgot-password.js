@@ -220,7 +220,11 @@ router.post('/changepassword', function (req, res) {
                 newPassword: post.newPassword,
                 repeatNewPassword: post.repeatNewPassword
             };
-            var sql = `select * from user where password="${md5(data.currentPassword)}"`;
+
+            let pass = [data.currentPassword , post.currentPassword]
+            const passVerify =  general.validateHashedPassword(pass)
+            console.log(passVerify)
+            var sql = `select password from user`;
             connection.query(sql, function (err, result) {
                 if (err) {                    
                     response = general.response_format(false, messages.ERROR_PROCESSING, {});
@@ -228,8 +232,11 @@ router.post('/changepassword', function (req, res) {
                 }
                 else if (result.length > 0) {
                     if (data.newPassword == data.repeatNewPassword) {
-                        var sql = `update user set password="${md5(post.newPassword)}" where password="${md5(post.currentPassword)}"`
+                        const bcryptPass =  general.hashPassword(data.newPassword)                                             
+
+                        var sql = `update user set password="${bcryptPass}" where password="${result[0].password}"`
                         connection.query(sql, function (err, updatedpassword) {
+                            console.log("password sql" ,sql)
                             if (err) { 
                                 console.log("errror")                               
                                 response = general.response_format(false, messages.ERROR_PROCESSING, {});

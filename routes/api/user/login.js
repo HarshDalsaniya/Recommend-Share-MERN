@@ -60,11 +60,12 @@ router.post('/login', function (req, res, callBack) {
                 password: post.password
             };
             // c62ac98937679cd7fa090c411b5bba9c             
-            var sql = `select id,name,email,image from user where email="${data.email}"`;
+            var sql = `select id,name,email,image, password from user where email="${data.email}"`;
             // const token = general.generateAccessToken({ email: req.body.email });
-            connection.query(sql,  function  (err, result) {              
-
+            connection.query(sql, function  (err, result) {
+                // console.log(result[0].password)                         
                 if((result.length == 0) || (result[0].password == 'undefined') ) {
+               
                     errors.verifyError.userNotFound="Invalid Username and Password"
                     response = general.response_format(false, errors);
                     res.send(response);
@@ -72,16 +73,21 @@ router.post('/login', function (req, res, callBack) {
                                 // comapare the hasing password     
                 const pass=[data.password, result[0].password]
 
-                const passVerify =  general.validateHashedPassword(pass)                                     
-
-                console.log("this.sql======================>", this.sql);
+                const passVerify =  general.validateHashedPassword(pass)               
+  
+                console.log("this.sql======================>",sql);
                 if (err) {
                     console.log(err);   
                     response = general.response_format(false, messages.ERROR_PROCESSING, {});
                     res.send(response);
                 }
+           
+                 if ( passVerify == false) {
+                    errors.verifyError.userNotFound="Invalid Username and Password"
+                    response = general.response_format(false, errors);
+                    res.send(response);
 
-                if (passVerify) {
+                }else{ 
                     var sql2 = `select * from user_token where userId="${result[0].id}"`
                     connection.query(sql2, function (err, result_2) {
                         if (err) {
@@ -138,6 +144,7 @@ router.post('/login', function (req, res, callBack) {
                         }
                     })
                 }
+                
             }
         });           
     });

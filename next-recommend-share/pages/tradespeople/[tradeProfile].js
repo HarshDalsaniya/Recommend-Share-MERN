@@ -181,8 +181,7 @@ export const tradespeopleDetails = (props) => {
                                     title:'Public liability insurance:',
                                     value: tradeData.insured
                                 },
-                            ]
-                            }
+                            ]}                           
                             
                             />
 
