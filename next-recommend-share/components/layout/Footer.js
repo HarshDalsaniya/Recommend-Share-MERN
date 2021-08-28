@@ -1,8 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
-import { connect } from 'react-redux'
 
-export const Footer = (props) => {
+function Footer() {
   return (
     <div>
       <footer>
@@ -113,12 +112,4 @@ export const Footer = (props) => {
   )
 }
 
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Footer)
+export default Footer

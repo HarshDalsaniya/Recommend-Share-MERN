@@ -7,7 +7,7 @@ import {TradesPeople_Profile_Details} from '../../../../redux/treadspeople/actio
 import { UserCard } from '../../../../components/TradePeople/TradepeopleView'
 
 
-export const recommend = (props) => {
+export default function recommend(props){
     const { query } = useRouter();
     const slug = query.tradepeopleName 
     const dispatch = useDispatch();
@@ -25,6 +25,7 @@ export const recommend = (props) => {
     }, [setTradeData,tradespeopleData.length!=0])
 
     return (
+        <React.StrictMode>
         <>
         <section className="content login-body" style={ { marginTop: "5rem" } }>
             <Container>
@@ -57,7 +58,7 @@ export const recommend = (props) => {
                             IconOption = {[
                                 {
                                     title:'Date Joined:',
-                                    value: typeof tradeData.established != 'undefined' ? tradeData.established.slice(0,4) : ''
+                                    value: typeof tradeData.established != 'undefined' ? '' : ''
                                 },
                                 {
                                     title:'Managed account:',
@@ -234,15 +235,6 @@ export const recommend = (props) => {
 
         </section>
         </>
+        </React.StrictMode>
     )
 }
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(recommend)

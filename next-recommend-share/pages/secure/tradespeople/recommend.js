@@ -6,9 +6,10 @@ import { connect, useSelector } from 'react-redux'
 import { UserCard } from '../../../components/TradePeople/TradepeopleView'
 
 
-export const recommend = (props) => {
+export default function recommend(props){
   
     return (
+        <React.StrictMode>
         <section className="content login-body" style={ { marginTop: "5rem" } }>
             <Container>
                 <p className="h2">
@@ -122,15 +123,6 @@ export const recommend = (props) => {
                 </div>
             </Container>
         </section>
+        </React.StrictMode>
     )
 }
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(recommend)

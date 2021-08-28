@@ -1,20 +1,12 @@
 import React from 'react'
-import { connect } from 'react-redux'
+
 import EditPassword  from '../components/Profile/EditPassword'
 
 
-export const password = (props) => {
+export default function password(props){
     return (
+      <React.StrictMode>
       <EditPassword/>
+      </React.StrictMode>
     )
 }
-
-const mapStateToProps = (state) => ({
-    
-})
-
-const mapDispatchToProps = {
-    
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(password)

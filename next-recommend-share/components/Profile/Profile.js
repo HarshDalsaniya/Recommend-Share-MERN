@@ -42,10 +42,12 @@ export const ProfileForm = (props) => {
     
     const getAddress = () => {
         if (address_postcode != '') {
+            try{
             axios.get(`https://api.getaddress.io/find/${address_postcode}?api-key=xR5ryKXzb0SevSwn3OX7VQ31904`)
                 .then((res) => {
                     setSelectPostcode(res.data.addresses)
                 })
+            }catch(err){}
         }
     }
     const putAddress = (value) => {
@@ -411,4 +413,4 @@ export const RemoveAC = (props) => {
 
 
 
-export default connect(null, null)(ProfileForm, ProfileImage, ProfileStatus, ConnectFacebook, RemoveAC)
+export default (ProfileForm, ProfileImage, ProfileStatus, ConnectFacebook, RemoveAC)

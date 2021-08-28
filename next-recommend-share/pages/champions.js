@@ -1,13 +1,15 @@
 import React from 'react'
 import Link from "next/link"
-import { connect } from 'react-redux'
+
 import { Container,
          Row,
          Col
 } from "react-bootstrap"
 
-export const champions = (props) => {
+export default function champions(props){
     return (
+        <React.Fragment>
+       
         <div>
             <section className="content">
                 <Container>
@@ -285,15 +287,7 @@ export const champions = (props) => {
                 </Container>
             </section>
         </div>
+       
+        </React.Fragment>
     )
 }
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(champions)

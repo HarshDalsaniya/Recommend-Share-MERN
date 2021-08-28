@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import {
     Container,
     Row,
@@ -8,7 +7,7 @@ import {
     Button
 } from "react-bootstrap"
 
-export const TheNewWay = (props) => {
+export default function TheNewWay(props){
     const Content = [
         {
             heading : "Transparency",
@@ -65,13 +64,3 @@ export const TheNewWay = (props) => {
        
     )
 }
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TheNewWay)

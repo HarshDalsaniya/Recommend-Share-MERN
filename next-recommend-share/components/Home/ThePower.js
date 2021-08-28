@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import {
     Container,
     Row,
@@ -8,7 +7,7 @@ import {
     Button
 } from "react-bootstrap"
 
-export const ThePower = (props) => {
+export default function ThePower(props){
     return (
         <Container>
             <section className="the-power">
@@ -88,13 +87,3 @@ export const ThePower = (props) => {
          </Container>
     )
 }
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ThePower)

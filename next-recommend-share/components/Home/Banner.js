@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-import { connect } from 'react-redux'
 import {
     Container,
     Row,
@@ -9,7 +8,7 @@ import {
     Button
 } from "react-bootstrap"
 
-export const Banner = (props) => {   
+export default function Banner(props){   
     
     return (
         <div className="site">
@@ -64,13 +63,3 @@ export const Banner = (props) => {
         </div>
     )
 }
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Banner)

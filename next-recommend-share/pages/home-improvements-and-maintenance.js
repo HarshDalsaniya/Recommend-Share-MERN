@@ -1,12 +1,14 @@
 import React from 'react'
-import { connect } from 'react-redux'
+
 import { Col, Container, Row } from "react-bootstrap"
 import Link from "next/link"
 import Community from '../components/Home-Improvements-And-Maintenance/Community'
 import JoinCommunity from '../components/Home-Improvements-And-Maintenance/join-community'
 
-export const home_improvements_and_maintenance = (props) => {
+export default function home_improvements_and_maintenance(props){
     return (
+        <React.Fragment>
+       
         <div>
             <section className="bringing-back">
                 <Container>
@@ -84,15 +86,7 @@ export const home_improvements_and_maintenance = (props) => {
             <Community />
             <JoinCommunity />
         </div>
+       
+        </React.Fragment>
     )
 }
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(home_improvements_and_maintenance)

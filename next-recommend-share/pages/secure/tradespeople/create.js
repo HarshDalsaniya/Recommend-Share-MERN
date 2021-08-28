@@ -14,7 +14,7 @@ import { formFieldValidation } from "../../../services/formValidation"
 import { tradesPeopleRegister } from "../../../redux/bussiness/action"
 import { userTradeBussines } from '../../../redux/bussiness/action'
 import { tradOption } from '../../../redux/treadspeople/action';
-export const tradespeople = (props) => {
+export default function tradespeople(props){
 
 
 
@@ -27,11 +27,12 @@ export const tradespeople = (props) => {
     const [companyNo, setcompanyName] = useState('004654563');
     const [trade, setTrade] = useState('');
     const [ownerName, setOwnerName] = useState('Maulik');
-    const [email, setEmailAddress] = useState(typeof tradesPeople!='undefined' ?tradepeople.email:(JSON.parse(localStorage.getItem("Recommend_Share_current_user")).email));
+    const [email, setEmailAddress] = useState(typeof tradesPeople!='undefined' ?tradepeople.email:(localStorage.getItem("Recommend_Share_current_user")?JSON.parse(localStorage.getItem("Recommend_Share_current_user")).email:null));
     const [webSite, setWebSite] = useState('droptechnolab.com');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [mobileNumber, setMobileNumber] = useState('9714220411');
     const [address_postcode, setAddress_postcode] = useState('SR8 3HT');
+    const [postCodeError, setPostCodeError] = useState('')
     const [select_postcode, setSelectPostcode] = useState('');
     const [address_line_1, setAddress_line_1] = useState('24 Hazel Crescent');
     const [address_line_2, setAddress_line_2] = useState('');
@@ -67,18 +68,20 @@ export const tradespeople = (props) => {
         }
         return 0;
     })
-    let postCodeError="";
     const getAddress = async () => {
-        if (address_postcode != '') {
-            try{
+        try {
+            if (address_postcode != '' && address_postcode.match(/^(([A-Z]{1,2}[0-9][A-Z0-9]?|ASCN|STHL|TDCU|BBND|[BFS]IQQ|PCRN|TKCA) ?[0-9][A-Z]{2}|BFPO ?[0-9]{1,4}|(KY[0-9]|MSR|VG|AI)[ -]?[0-9]{4}|[A-Z]{2} ?[0-9]{2}|GE ?CX|GIR ?0A{2}|SAN ?TA1)$/)) {
                 await axios.get(`https://api.getaddress.io/find/${address_postcode}?api-key=xR5ryKXzb0SevSwn3OX7VQ31904`)
-                .then((res) => {
-                    // console.log(res)
-                    setSelectPostcode(res.data.addresses)
-                })
-            }catch(err){
-                postCodeError="Please Valid Post Code Enter"
+                    .then((res) => {
+                        // console.log(res)
+                        setSelectPostcode(res.data.addresses)
+                    })
+            }else{
+                setPostCodeError("Please Valid Post Code Enter")
             }
+            
+        } catch (err) {
+            setPostCodeError("Please Valid Post Code Enter")
         }
     }
     // console.log(federation)
@@ -88,12 +91,12 @@ export const tradespeople = (props) => {
         setAddress_town(value.split(',')[5])
         setSelectPostcode('')
     }
-    const onSubmit = (e) => {
+    const onSubmit = async(e) => {
         e.preventDefault();
         setSubmitted(true)
         // console.log(federation)
         const date=established.year!=(true||"undefined") && established.month!=(true||"undefined") && established.day!=(true||"undefined")? (established.year + "-" + established.month + "-" + established.day).match(/^(\d{4})(\/|-)(\d{1,2})(\/|-)(\d{1,2})$/)!=null?(established.year + "-" + established.month + "-" + established.day):null:null;
-        if (businessName != "" && ownerName != "" && email != "" && mobileNumber != "" && trade != "" && notification_received_sms!=false && notification_received_email != false && notification_marketing_email != false) {
+        if (businessName != "" && ownerName != "" && email != "" && mobileNumber != "" && trade != "" && notification_received_sms!=false && notification_received_email != false && notification_marketing_email != false && postCodeError=="") {
             const tradepersonData = {
                 trade_id: trade,
                 created: null,
@@ -127,8 +130,8 @@ export const tradespeople = (props) => {
                 notification_marketing_email: notification_marketing_email,
                 federation_id: federationValue
             }
-            dispatch(tradesPeopleRegister(tradepersonData))
-            dispatch(userTradeBussines(localStorage.getItem("Recommend_Share_current_user") == null ? '' : JSON.parse(localStorage.getItem("Recommend_Share_current_user")).id))
+            await dispatch(tradesPeopleRegister(tradepersonData))
+            await dispatch(userTradeBussines(localStorage.getItem("Recommend_Share_current_user") == null ? '' : JSON.parse(localStorage.getItem("Recommend_Share_current_user")).id))
         }
     }
 
@@ -188,6 +191,7 @@ export const tradespeople = (props) => {
 
 
     return (
+        <React.StrictMode>
         <div className="login-body pt-3">
             <section className="" style={ { marginTop: "5rem" } }>
                 <Container>
@@ -554,7 +558,7 @@ export const tradespeople = (props) => {
                                                 >
                                                     Postcode
                                                 </label>
-                                                <Form.Control type="text" name="address_postcode" key="field_address_postcode" style={ { width: "calc( 100% - 103px )" } } value={ address_postcode } onChange={ (e) => { setAddress_postcode(e.target.value) } } />
+                                                <Form.Control type="text" name="address_postcode" key="field_address_postcode" style={ { width: "calc( 100% - 103px )" } } value={ address_postcode } onChange={ (e) => { setAddress_postcode(e.target.value),setPostCodeError("") } } />
                                                 <Button className="button square postcode-btn" style={ { marginTop: "-50px" } } onClick={ () => { getAddress() } }>
                                                     LOOKUP
                                                 </Button>
@@ -574,7 +578,7 @@ export const tradespeople = (props) => {
                                                         </span>
                                                     </>
                                                     : null }
-                                                {postCodeError!=""?<div className="help-block" style={ { color: 'red' } }>postCodeError</div>:null}
+                                                {postCodeError!=""?<div className="help-block" style={ { color: 'red' } }>{postCodeError}</div>:null}
                                             </div>
                                             { col2.map((field) =>
                                                 <Fields
@@ -666,16 +670,6 @@ export const tradespeople = (props) => {
             </section>
 
         </div>
+        </React.StrictMode>
     )
 }
-
-const mapStateToProps = (businessReducer) => {
-    const { loading, error, tradespeople } = businessReducer
-    return { loading, error, tradespeople };
-}
-
-const mapDispatchToProps = {
-    tradesPeopleRegister: tradesPeopleRegister
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(tradespeople)

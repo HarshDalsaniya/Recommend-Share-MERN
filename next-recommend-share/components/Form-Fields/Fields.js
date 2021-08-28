@@ -1,7 +1,6 @@
 import React,{useEffect} from 'react'
-import { connect } from 'react-redux'
 import { Row, Col, Form, FormControl, Button, InputGroup } from "react-bootstrap"
-export const Fields = (props) => {
+export default function Fields(props){
     if (props.field == "password" || props.field =="email" || props.field =="text" || props.field =="numeric" ) {        
         // console.log(props)
         return (
@@ -53,5 +52,3 @@ export const Fields = (props) => {
         )
     }
 }
-
-export default Fields

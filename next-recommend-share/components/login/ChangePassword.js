@@ -12,7 +12,7 @@ import {
 import Fields from '../Form-Fields/Fields';
 import { resetPasswordUser } from '../../redux/auth/action';
 
-export const ChangePassword = (props) => {
+export default function ChangePassword(props){
 
     const birds = useSelector(state => state);
     const dispatch = useDispatch();
@@ -90,13 +90,3 @@ export const ChangePassword = (props) => {
     </div>
     )
 }
-
-const mapStateToProps = (authUser) => {
-    const { loding, userEmail, error } = authUser
-    return {loding, userEmail, error };
-}
-const mapDispatchToProps = {
-    resetPasswordUserAction:resetPasswordUser
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChangePassword)

@@ -1,8 +1,7 @@
 import React from 'react'
 import Link from "next/link"
-import { connect } from 'react-redux'
 
-export const BusinessInfo = (props) => {
+export default function BusinessInfo(props){
     return (
         <section className="content">
             <div className="container">
@@ -131,13 +130,3 @@ export const BusinessInfo = (props) => {
         </section>
     )
 }
-
-const mapStateToProps = (state) => ({
-    
-})
-
-const mapDispatchToProps = {
-    
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(BusinessInfo)

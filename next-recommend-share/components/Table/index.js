@@ -1,9 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
+
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory, { PaginationProvider } from 'react-bootstrap-table2-paginator';
 
-export const index = (props) => {
+export default function index(props){
     const paginationOption = {
         custom: true,
         totalSize: props.data.length,
@@ -86,13 +86,3 @@ export const index = (props) => {
         </PaginationProvider>
     )
 }
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(index)

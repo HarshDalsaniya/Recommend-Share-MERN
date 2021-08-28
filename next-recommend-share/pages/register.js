@@ -25,6 +25,7 @@ export const register = (props) => {
     const [password, setPassword] = useState('maulik@123');
     const [confirm_password, setConfirm_password] = useState('maulik@123');
     const [address_postcode, setAddress_postcode] = useState('M32BY');
+    const [postCodeError, setPostCodeError] = useState('')
     const [select_postcode, setSelectPostcode] = useState('');
     const [address_line_1, setAddress_line_1] = useState('Ladbrokes Ltd');
     const [address_line_2, setAddress_line_2] = useState(' 123 Deansgate');
@@ -59,12 +60,20 @@ export const register = (props) => {
             })
     }, [setSelectTreadOption])
 
-    const getAddress = () => {
-        if (address_postcode != '') {
-            axios.get(`https://api.getaddress.io/find/${address_postcode}?api-key=xR5ryKXzb0SevSwn3OX7VQ31904`)
-                .then((res) => {
-                    setSelectPostcode(res.data.addresses)
-                })
+    const getAddress = async () => {
+        try {
+            if (address_postcode != '' && address_postcode.match(/^(([A-Z]{1,2}[0-9][A-Z0-9]?|ASCN|STHL|TDCU|BBND|[BFS]IQQ|PCRN|TKCA) ?[0-9][A-Z]{2}|BFPO ?[0-9]{1,4}|(KY[0-9]|MSR|VG|AI)[ -]?[0-9]{4}|[A-Z]{2} ?[0-9]{2}|GE ?CX|GIR ?0A{2}|SAN ?TA1)$/)) {
+                await axios.get(`https://api.getaddress.io/find/${address_postcode}?api-key=xR5ryKXzb0SevSwn3OX7VQ31904`)
+                    .then((res) => {
+                        // console.log(res)
+                        setSelectPostcode(res.data.addresses)
+                    })
+            }else{
+                setPostCodeError("Please Valid Post Code Enter")
+            }
+            
+        } catch (err) {
+            setPostCodeError("Please Valid Post Code Enter")
         }
     }
     const putAddress = (value) => {
@@ -76,7 +85,7 @@ export const register = (props) => {
     const onSubmit = (e) => {
         e.preventDefault();
         setSubmitted(true)
-        if (name != "" && email != "" && mobile != "" && password != "" && confirm_password != "" && address_postcode != "" && address_line_1 != "" && address_town != "" && address_county != "" && terms_agreed_date != false && gdpr_agreed_date != false) {
+        if (name != "" && email != "" && mobile != "" && password != "" && confirm_password != "" && address_postcode != "" && address_line_1 != "" && address_town != "" && address_county != "" && terms_agreed_date != false && gdpr_agreed_date != false && postCodeError=="") {
             const userData = {
                 name: name,
                 email: email,
@@ -194,6 +203,7 @@ export const register = (props) => {
         }
     ]
     return (
+        <React.StrictMode>
         <div className="login-body pt-3">
             <Container fluid>
                 <Row style={{marginTop: "5rem"}}>
@@ -300,6 +310,7 @@ export const register = (props) => {
                                                             </span>
                                                         </>
                                                         : null}
+                                                    {postCodeError!=""?<div className="help-block" style={ { color: 'red' } }>{postCodeError}</div>:null}
                                                 </div>
                                                 {col2.map((field) =>
                                                     <Fields
@@ -412,6 +423,7 @@ export const register = (props) => {
                 </Row>
             </Container>
         </div>
+        </React.StrictMode>
     )
 }
 

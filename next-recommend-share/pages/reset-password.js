@@ -2,14 +2,14 @@ import React, { useEffect } from 'react'
 import { connect, useDispatch, useSelector } from 'react-redux'
 import ResetPassword from '../components/login/ResetPassword'
 import { useUrlSearchParams } from 'use-url-search-params';
-import { ChangePassword } from '../components/login/ChangePassword';
+import ChangePassword from '../components/login/ChangePassword';
 import { verifyUniqueKey } from '../redux/auth/action';
 
 import router from 'next/router';
 import ErrorPage from '../components/others/ErrorPage';
 
 
-export const reset_password = (props) => {
+export default function reset_password(props){
 
     const userKeyverify = useSelector(state => state);
     const dispatch = useDispatch();
@@ -20,6 +20,7 @@ export const reset_password = (props) => {
     }, [])
     // console.log(birds)
     return (
+        <React.StrictMode>
         <div style={{marginTop : "5rem"}}>
             {
                 typeof params.uniqueKey != 'undefined' ?
@@ -29,15 +30,6 @@ export const reset_password = (props) => {
                     : <ResetPassword /> }
 
         </div>
+        </React.StrictMode>
     )
 }
-
-const mapStateToProps = (authUser) => {
-    const { loding, key, error } = authUser
-    return { loding, key, error };
-}
-const mapDispatchToProps = {
-    verifyUniqueKeyAction: verifyUniqueKey
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(reset_password)

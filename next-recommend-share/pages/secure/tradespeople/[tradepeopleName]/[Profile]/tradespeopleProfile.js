@@ -2,13 +2,14 @@ import React from 'react'
 import Link from "next/link"
 import { useRouter } from 'next/router';
 import { Container , Row } from 'react-bootstrap'
-import { connect } from 'react-redux'
+
 import { ColorBox, UserCard } from '../../../../../components/TradePeople/TradepeopleView'
 
-export const tradespeopleDetails = (props) => {
+export default function tradespeopleDetails(props){
     const { query } = useRouter();
 
     return (
+        <React.StrictMode>
        <section className="login-body" style={ { marginTop: "5rem" } }>
            <Container>
                <div className="contained shallow">
@@ -245,15 +246,6 @@ export const tradespeopleDetails = (props) => {
                     </div>
            </Container>
        </section>
+       </React.StrictMode>
     )
 }
-
-const mapStateToProps = (state) => ({
-    
-})
-
-const mapDispatchToProps = {
-    
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(tradespeopleDetails)

@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
+
 import { useRouter } from 'next/router';
 import Link from "next/link"
 import {
@@ -237,4 +237,4 @@ export const ColorBox = (props) => {
     )
 }
 
-export default connect(null, null)(Tradepeoplecontent, IconsDetails, CustomersContractors, IconDetails2, UserCard, ColorBox)
+export default (Tradepeoplecontent, IconsDetails, CustomersContractors, IconDetails2, UserCard, ColorBox)

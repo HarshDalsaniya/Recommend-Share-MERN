@@ -1,7 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
-export const Faq = (props) => {
+export default function Faq(props){
     return (
         <div className="box grey">
             <h3>Q. { props.question }</h3>
@@ -13,13 +12,3 @@ export const Faq = (props) => {
         </div>
     )
 }
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Faq)

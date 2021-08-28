@@ -1,9 +1,8 @@
 import React from 'react'
 import Link from "next/link"
-import { connect } from 'react-redux'
 import { Container, Row, Col } from "react-bootstrap"
 
-export const JoinCommunity = (props) => {
+export default function JoinCommunity(props){
     return (
         <section className="join-community-box mt-5">
             <Container>
@@ -56,13 +55,3 @@ export const JoinCommunity = (props) => {
         </section>
     )
 }
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(JoinCommunity)

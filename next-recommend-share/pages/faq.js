@@ -2,9 +2,9 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import Link from "next/link"
 import { connect, useDispatch, useSelector } from 'react-redux'
-import { Faq } from '../components/FAQ/Faq'
+import Faq from '../components/FAQ/Faq'
 
-export const faq = (props) => {
+export default function faq(props){
 
     const reState = useSelector(state => state);
     const { error } = reState;
@@ -26,6 +26,8 @@ export const faq = (props) => {
 
 
     return (
+        <React.Fragment>
+       
             <section className="content">
                 <div className="container" style={{marginTop: "5rem"}}>
                     <div className="twelve columns alpha">
@@ -45,15 +47,8 @@ export const faq = (props) => {
                     </div>
                 </div>
             </section>
+           
+            </React.Fragment>
     )
 }
 
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(faq)

@@ -1,9 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { Col, Container, Row } from "react-bootstrap"
 import Link from "next/link"
 
-export const Community = (props) => {
+export default function Community(props){
     return (
         <section className="py-5">
             <Container className="container">
@@ -86,13 +85,3 @@ export const Community = (props) => {
         </section>
     )
 }
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Community)

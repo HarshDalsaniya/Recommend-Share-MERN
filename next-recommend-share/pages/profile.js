@@ -10,7 +10,7 @@ import {
 import { ConnectFacebook, ProfileForm, ProfileImage, ProfileStatus, RemoveAC } from '../components/Profile/Profile'
 import { userProfile } from '../redux/Profile/action'
 
-export const profile = (props) => {
+export default function profile(){
     const dispatch = useDispatch();
     const reState = useSelector(state => state);
     const {error, userData} = reState.profileReducer;
@@ -20,6 +20,7 @@ export const profile = (props) => {
         dispatch(userProfile(JSON.parse(localStorage.getItem("Recommend_Share_current_user")).email))
     }, [])
     return (
+        <React.StrictMode>
         <div className="login-body" style={{marginTop: "5.1rem"}}>
             <section className="content">
                 <div className="container">
@@ -60,16 +61,6 @@ export const profile = (props) => {
                 </div>
             </div>
         </div>
-
+        </React.StrictMode>
     )
 }
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(profile)

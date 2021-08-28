@@ -6,7 +6,7 @@ import { connect, useSelector,useDispatch } from 'react-redux'
 import { ColorBox, UserCard } from '../../components/TradePeople/TradepeopleView'
 import {TradesPeople_Profile_Details} from '../../redux/treadspeople/action'
 
-export const tradespeopleDetails = (props) => {
+export default function tradespeopleDetails(props){
     const { query } = useRouter();
     const slug = query.tradeProfile 
     const dispatch = useDispatch();
@@ -24,6 +24,7 @@ export const tradespeopleDetails = (props) => {
 
 
     return (
+        <React.StrictMode>
        <section className="login-body" style={ { marginTop: "5rem" } }>
            <Container>
                <div className="contained shallow">
@@ -258,15 +259,6 @@ export const tradespeopleDetails = (props) => {
                     </div>
            </Container>
        </section>
+       </React.StrictMode>
     )
 }
-
-const mapStateToProps = (state) => ({
-    
-})
-
-const mapDispatchToProps = {
-    
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(tradespeopleDetails)

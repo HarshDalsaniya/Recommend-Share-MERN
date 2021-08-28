@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { Container,
     Row,
     Col,
@@ -7,7 +6,7 @@ import { Container,
     Button
     } from "react-bootstrap"
     
-export const Section = (props) => {
+export default function Section(props){
     return (
         <div>
            
@@ -16,13 +15,3 @@ export const Section = (props) => {
         </div>
     )
 }
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Section)

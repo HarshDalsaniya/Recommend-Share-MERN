@@ -8,7 +8,7 @@ import { userTradeBussines } from '../../redux/bussiness/action'
 
 
 
-export const NavBar = (props) => {
+export default function NavBar(props){
     const { route } = useRouter();
 
     const businessState = useSelector(state => state);
@@ -145,6 +145,3 @@ export const NavBar = (props) => {
         </>
     )
 }
-
-
-export default connect(null, null)(NavBar)

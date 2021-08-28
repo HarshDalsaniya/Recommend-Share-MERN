@@ -9,7 +9,7 @@ import { formFieldValidation } from "../../services/formValidation"
 import { useRouter } from 'next/router';
 import { searchBusiness } from '../../redux/treadspeople/action';
 
-export const FilterForm = (props) => {
+export default function FilterForm(props){
     const { query } = useRouter();
     const reState = useSelector(state => state);
     const dispatch =new useDispatch()
@@ -49,7 +49,6 @@ export const FilterForm = (props) => {
         setEmail("")
         setTelephone("")
     }
-    console.log(typeof tradespeopleTrade)
     const onSubmit = (e) => {
         e.preventDefault();
         const search={
@@ -163,5 +162,3 @@ export const FilterForm = (props) => {
         </form>
     )
 }
-
-export default FilterForm

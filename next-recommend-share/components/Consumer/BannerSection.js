@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import Link from "next/link"
 import {
     Container,
@@ -295,4 +294,4 @@ export const WhatPeopleSlider = (props) => {
         </>
     )
 }
-export default connect(null, null)(BannerSection, Founder_Banner, Content, VimeoVideo, TheSolution, GrateNews, WhatPeopleSlider)
+export default (BannerSection, Founder_Banner, Content, VimeoVideo, TheSolution, GrateNews, WhatPeopleSlider)

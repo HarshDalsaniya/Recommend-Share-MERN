@@ -24,11 +24,12 @@ export const login = (props) => {
             email:_username,
             password:_password
         }
-        // if(user.email!=""&&user.password!=""){
+        if(user.email!=""&&user.password!=""){
                 props.login(user,"/")
-        // }
+        }
     }
     return (
+        <React.StrictMode>
         <div className="login-body pt-3">
             <Container fluid>
                 <Row style={{marginTop: "5rem"}}>
@@ -82,6 +83,7 @@ export const login = (props) => {
                 </Row>
             </Container>
         </div>
+        </React.StrictMode>
     )
 }
 

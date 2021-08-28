@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from "next/link"
-import { connect } from 'react-redux'
 import {
     Carousel,
     Row,
@@ -8,7 +7,7 @@ import {
     Container,
 } from "react-bootstrap"
 
-export const Box = (props) => {
+export default function Box(props){
     return (
         <>
         <Container>
@@ -91,13 +90,3 @@ export const Box = (props) => {
         </>
     )
 }
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Box)

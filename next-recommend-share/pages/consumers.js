@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
-import { connect } from 'react-redux'
+
 import {
     BannerSection,
     Founder_Banner,
@@ -10,8 +10,9 @@ import {
     WhatPeopleSlider
 } from '../components/Consumer/BannerSection'
 
-export const consumers = (props) => {
+export default function consumers(props){
     return (
+        <React.StrictMode>
         <div className="the-new-community">
             <BannerSection />
             <Founder_Banner />
@@ -71,15 +72,6 @@ export const consumers = (props) => {
 
             />
         </div>
+        </React.StrictMode>
     )
 }
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(consumers)

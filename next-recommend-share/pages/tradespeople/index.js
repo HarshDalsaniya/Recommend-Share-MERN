@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router';
 import { connect, useSelector, useDispatch } from 'react-redux'
 import Router from 'next/router'
-import { FilterForm } from '../../components/Tradepeople/FilterForm'
+import FilterForm from '../../components/Tradepeople/FilterForm'
 import { searchBusiness } from '../../redux/treadspeople/action';
 import Link from 'next/link'
 import Table from '../../components/Table';
 
 
-export const index = (props) => {
+export default function index(props){
     const { query,pathname } = useRouter();
     const reState = useSelector(state => state);
     const { error, searchResult } = reState.tradePeople;
@@ -113,6 +113,7 @@ export const index = (props) => {
     //                         { query.action ==("recommend"||'warn') ? query.action : "View" }
     //                     </Link>
     return (
+        <React.StrictMode>
         <section className="login-body content" style={{ marginTop: "5rem" }}>
             <div className="container">
                 <div className="twelve columns alpha">
@@ -171,15 +172,6 @@ export const index = (props) => {
                 </p>
             </div>
         </section>
+        </React.StrictMode>
     )
 }
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(index)

@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from "next/link"
-import { connect } from 'react-redux'
 import {
     Row,
     Col,
@@ -10,7 +9,7 @@ import {
 } from "react-bootstrap"
 import { Carousel } from 'react-responsive-carousel';
 
-export const HowDoes = (props) => {
+export default function HowDoes(props){
 
     return (
         <Container>
@@ -140,12 +139,3 @@ export const HowDoes = (props) => {
         </Container >
     )
 }
-
-const mapStateToProps = (state) => ({
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(HowDoes)

@@ -1,10 +1,10 @@
 import React , { useEffect,useState }  from 'react'
 import Link from "next/link"
 import { Container } from 'react-bootstrap'
-import { connect } from 'react-redux'
+
 import { NegativeRecommendation, PositiveRecommendation, RecommendedTradesperson } from '../../components/Secure/SearchBox'
 
-export const secure = (props) => {
+export default function secure (props){
 
     const [localstorageItem, setLocalStorageItem] = useState()
    const [profile, setProfile] = useState('')
@@ -16,6 +16,8 @@ export const secure = (props) => {
         return () => clearInterval(interval);   
     }, [setLocalStorageItem,setProfile])   
     return (
+        <React.Fragment>
+        <React.StrictMode>
         <section className="content login-body">
             <Container>
                 <div className="flashMessageofuser success" role="alert" style={{marginTop:"7rem"}}>
@@ -119,15 +121,7 @@ export const secure = (props) => {
                 </div>
             </Container>
         </section>
+        </React.StrictMode>
+        </React.Fragment>
     )
 }
-
-const mapStateToProps = (state) => ({
-    
-})
-
-const mapDispatchToProps = {
-    
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(secure)

@@ -5,7 +5,7 @@ import { Container,Row,Col} from "react-bootstrap"
 import { formFieldValidation } from "../services/formValidation"
 import {contactUsData} from "../redux/bussiness/action"
 
-export const contact_us = (props) => {
+export default function contact_us(props){
     const reState = useSelector(state => state);
     const { error } = reState.businessReducer;
     const dispatch = useDispatch();
@@ -63,6 +63,7 @@ export const contact_us = (props) => {
         }
     ]
     return (
+        <React.StrictMode>
         <section className="login-body pt-3">
             <Container>
                 <div className="eight columns alpha offset-by-two" style={{marginTop: "5rem"}}>
@@ -118,17 +119,6 @@ export const contact_us = (props) => {
                 </div>
             </Container>
         </section>
-
+        </React.StrictMode>
     )
 }
-
-const mapStateToProps = (businessReducer) => {
-    const { loding,contactus_data, error } = businessReducer
-    return { loding,contactus_data, error };
-}
-
-const mapDispatchToProps = {
-    contactUsData: contactUsData
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(contact_us)

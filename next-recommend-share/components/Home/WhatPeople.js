@@ -1,11 +1,10 @@
 import React from 'react'
 import { Col, Container, Row} from "react-bootstrap"
 import Link from "next/link"
-import { connect } from 'react-redux'
 import SimpleImageSlider from "react-simple-image-slider";
 import { Carousel } from 'react-responsive-carousel';
 
-export const WhatPeople = (props) => {
+export default function WhatPeople(props){
     const images = [
         { url: require("../../images/dashboard/slider_img_1.jpg") },
         { url: require("../../images/dashboard/slider_img_2.jpg") },
@@ -55,13 +54,3 @@ export const WhatPeople = (props) => {
         </>
     )
 }
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(WhatPeople)

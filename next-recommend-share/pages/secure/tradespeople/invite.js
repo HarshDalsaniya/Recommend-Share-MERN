@@ -4,7 +4,7 @@ import { connect, useSelector } from 'react-redux'
 import Fields from '../../../components/Form-Fields/Fields';
 import { formFieldValidation } from "../../../services/formValidation"
 
-export const invite = (props) => {
+export default function invite (props){
 
     const reState = useSelector(state => state);
     const { error } = reState.authUser;
@@ -14,6 +14,7 @@ export const invite = (props) => {
     const [recommendCheckBox, setRecommendCheckBox] = useState(true)
     const [submitted, setSubmitted] = useState(false);
     return (
+        <React.StrictMode>
         <section className="content login-body" style={ { marginTop: "5rem" } }>
             <Container>
                 <form>
@@ -154,15 +155,6 @@ export const invite = (props) => {
                 </form>
             </Container>
         </section>
+        </React.StrictMode>
     )
 }
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(invite)

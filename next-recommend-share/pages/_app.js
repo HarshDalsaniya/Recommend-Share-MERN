@@ -13,8 +13,8 @@ import { DefaultSeo } from 'next-seo';
 import Router from 'next/router'
 import React, {Component} from 'react'
 import { wrapper } from "../redux/store"
-import { Footer } from '../components/layout/Footer'
-import { NavBar } from '../components/NavBar/NavBar'
+import Footer from '../components/layout/Footer'
+import NavBar from '../components/NavBar/NavBar'
 import isAuthenticate from "../helper/userAuthRedirect";
 
 class MyApp extends App {
@@ -29,8 +29,8 @@ class MyApp extends App {
   state = {
     loading: true,
   };
-  async componentDidMount() {
-    await isAuthenticate(Router.pathname)
+  componentDidMount() {
+    isAuthenticate(Router.pathname)
     this.timerHandle = setTimeout(() => this.setState({ loading: false }), 2000); 
   }
   componentWillUnmount() {
@@ -39,8 +39,10 @@ class MyApp extends App {
           this.timerHandle = 0;
       }
   }
-  async componentDidUpdate(){
-    await isAuthenticate(Router.pathname)
+  componentDidUpdate(prevProps){
+    if(prevProps.myProps !== this.props.myProp) {
+      isAuthenticate(Router.pathname)
+    }
   }
   render () {
     

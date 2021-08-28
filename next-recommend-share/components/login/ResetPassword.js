@@ -15,7 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { formFieldValidation } from "../../services/formValidation"
 
 
-export const ResetPassword = (props) => {
+export default function ResetPassword(props){
 
     const reState = useSelector(state => state);
     const { error } = reState.authUser;
@@ -83,14 +83,3 @@ export const ResetPassword = (props) => {
         </>
     )
 }
-
-const mapStateToProps = ({ authUser }) => {
-    const { loding, message, userEmail, error } = authUser
-    return { loding, message, userEmail, error };
-}
-
-const mapDispatchToProps = {
-    forgotPasswordAction: forgotPasswordUser
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ResetPassword)

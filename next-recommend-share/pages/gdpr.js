@@ -1,21 +1,13 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { Gdpr } from '../components/Information/Gdpr'
 
-export const gdpr = (props) => {
+import Gdpr from '../components/Information/Gdpr'
+
+export default function gdpr(props){
     return (
+        <React.StrictMode>
         <div className="login-body">
             <Gdpr/>
         </div>
+        </React.StrictMode>
     )
 }
-
-const mapStateToProps = (state) => ({
-    
-})
-
-const mapDispatchToProps = {
-    
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(gdpr)

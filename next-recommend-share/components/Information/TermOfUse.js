@@ -1,7 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
-export const TermOfUse = (props) => {
+export default function TermOfUse(props){
     return (
         <div className="termofuse">
             <section className="content">
@@ -228,13 +227,3 @@ export const TermOfUse = (props) => {
         </div>
     )
 }
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TermOfUse)

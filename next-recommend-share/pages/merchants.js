@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
+
 import Link from "next/link"
 import {
     Container,
@@ -12,8 +12,9 @@ import { VimeoVideo } from '../components/Consumer/BannerSection'
 import { BannerSection, Founder_Banner,GrateNews,WhatPeopleSlider } from '../components/Consumer/BannerSection'
 import { MerchantsView, ProblemPluging,CharitiesSupport,CharitiesPlateform } from '../components/Merchants/MerchantsView'
 
-export const merchants = (props) => {
+export default function merchants(props){
     return (
+        <React.StrictMode>
         <>
             <BannerSection />
             <Founder_Banner />
@@ -99,15 +100,6 @@ export const merchants = (props) => {
 
 
         </>
+        </React.StrictMode>
     )
 }
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(merchants)

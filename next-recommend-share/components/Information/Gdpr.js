@@ -1,9 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import Link from "next/link"
 
 
-export const Gdpr = (props) => {
+export default function Gdpr(props){
     return (
         <div className="gdpr">
             <section className="content">
@@ -216,13 +215,3 @@ export const Gdpr = (props) => {
         </div>
     )
 }
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Gdpr)

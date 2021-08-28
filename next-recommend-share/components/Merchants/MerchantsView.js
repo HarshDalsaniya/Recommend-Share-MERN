@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import Link from "next/link"
 import {
     Container,
@@ -212,4 +211,4 @@ export const CharitiesPlateform = (props) => {
     )
 }
 
-export default connect(null, null)(MerchantsView, ProblemPluging, CharitiesSupport,CharitiesPlateform)
+export default (MerchantsView, ProblemPluging, CharitiesSupport,CharitiesPlateform)

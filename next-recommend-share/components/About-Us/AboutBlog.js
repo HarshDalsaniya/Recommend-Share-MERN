@@ -1,7 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
-export const AboutBlog = (props) => {
+function AboutBlog(props){
     return (
         <div>
             <section className="content">
@@ -97,13 +96,4 @@ export const AboutBlog = (props) => {
         </div>
     )
 }
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(AboutBlog)
+export default AboutBlog

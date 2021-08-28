@@ -1,11 +1,10 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import {
     Container, Section,
 } from 'react-bootstrap';
-import { AboutBlog } from './AboutBlog';
+import AboutBlog from './AboutBlog';
 
-export const About = (props) => {
+function About(props) {
     return (
         <div className="login-body">
             <section className="swipe garry-brick" style={{background:`url(${props.bannerbackgoudimg}) left bottom repeat-x`}} >           
@@ -41,12 +40,4 @@ export const About = (props) => {
     )
 }
 
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(About)
+export default About

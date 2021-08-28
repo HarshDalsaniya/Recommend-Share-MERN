@@ -1,21 +1,13 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { TermOfUse } from '../components/Information/TermOfUse'
 
-export const terms_of_use = (props) => {
+import TermOfUse from '../components/Information/TermOfUse'
+
+export default function terms_of_use(props){
     return (
+        <React.StrictMode>
         <div className="login-body">
             <TermOfUse/>
         </div>
+        </React.StrictMode>
     )
 }
-
-const mapStateToProps = (state) => ({
-    
-})
-
-const mapDispatchToProps = {
-    
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(terms_of_use)

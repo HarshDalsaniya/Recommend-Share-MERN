@@ -1,11 +1,12 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
-import { connect } from 'react-redux'
+
 import { BannerSection, Content, Founder_Banner, VimeoVideo, TheSolution, GrateNews, WhatPeopleSlider } from '../../components/Consumer/BannerSection'
 import { Tradepeoplecontent, IconsDetails, CustomersContractors, IconDetails2 } from '../../components/TradePeople/TradepeopleView'
 
-export const tradepeoplehtml = (props) => {
+export default function tradepeoplehtml(props){
     return (
+        <React.StrictMode>
         <div>
             <BannerSection />
             <Founder_Banner />
@@ -67,15 +68,6 @@ export const tradepeoplehtml = (props) => {
 
             />
         </div>
+        </React.StrictMode>
     )
 }
-
-const mapStateToProps = (state) => ({
-
-})
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(tradepeoplehtml)
