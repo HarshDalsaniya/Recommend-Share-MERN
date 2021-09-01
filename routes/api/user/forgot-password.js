@@ -208,6 +208,8 @@ router.post('/changepassword', function (req, res) {
     var post = req.body;
     response = {};
     console.log("test-test", req.body)
+    var errors = new Array();
+    errors = {blankValue:{},invalidValue:{},verifyError:{}};
 
     var required_params = ['currentPassword', 'newPassword', 'repeatNewPassword'];
 
@@ -216,19 +218,26 @@ router.post('/changepassword', function (req, res) {
     if (valid) {
         req.getConnection(function (err, connection) {
             var data = {
+                id : post.id,
                 currentPassword: post.currentPassword,
                 newPassword: post.newPassword,
                 repeatNewPassword: post.repeatNewPassword
-            };
-
-            let pass = [data.currentPassword , post.currentPassword]
-            const passVerify =  general.validateHashedPassword(pass)
-            console.log(passVerify)
-            var sql = `select password from user`;
+            };         
+           
+            var sql = `select password from user where id = "${data.id}"`;
             connection.query(sql, function (err, result) {
                 if (err) {                    
                     response = general.response_format(false, messages.ERROR_PROCESSING, {});
                     res.send(response);
+                }
+                let pass = [data.currentPassword , result[0].password]
+                const passVerify =  general.validateHashedPassword(pass)                
+                console.log(passVerify)
+                if(passVerify == false){   
+                    errors.verifyError.currentPasswordnotvalid="current password is not valid"
+                    response = general.response_format(false, errors);
+                    res.send(response);
+                  
                 }
                 else if (result.length > 0) {
                     if (data.newPassword == data.repeatNewPassword) {
@@ -249,23 +258,24 @@ router.post('/changepassword', function (req, res) {
                             }
                         });
                     } else { 
-                        console.log("not changed")                       
-                        response = general.response_format(false, "password did not match", {});
-                        res.send(response);
+                        console.log("not changed") 
+                        errors.verifyError.passwordnotmatch="Password Did not match"
+                        response = general.response_format(false, errors);
+                        res.send(response);                      
                     }
-                } else {   
-                    console.log("password not match")                
-                    response = general.response_format(false, "current password is not valid", {});
-                    res.send(response);
-                }
+                } 
             });
         });
     } else {
-        console.log("in blank data")
         var str = functions.loadErrorTemplate(elem);
-        response = general.response_format(false, messages.UNIQUE_ERROR + str, {});
+        async.forEachOf(str.split("\n ")[1].replace(" should not be blank",'').split(","),(value,key,callback)=>{
+            console.log(value)
+            errors.invalidValue[value]?delete errors.invalidValue[value]:null
+            value!=""?errors.blankValue[value]="Please Enter your "+value:null
+        })
+        response = general.response_format(false, errors, {});
         res.send(response);
-    }
+    }    
 
 });
 

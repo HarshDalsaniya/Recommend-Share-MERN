@@ -13,36 +13,71 @@ import { forgotPasswordUser } from '../../redux/auth/action';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { formFieldValidation } from "../../services/formValidation"
-
+import{ToastifyNotification , Toastify} from "../../helper/notification"
 
 export const ResetPassword = (props) => {
 
     const reState = useSelector(state => state);
     const { error } = reState.authUser;
+    // const { message } = reState.authUser;
     const dispatch = useDispatch();
-    // console.log(props)
+  
+    // console.log(message)
 
     // useEffect(() => {
     //     if(props.message == "User Data")
-    //     toast("Wow so easy!");
+    //     
     //    console.log("success")
     // }, [props.message,toast])
     // console.log(dispatch(forgotPasswordAction()))
     const [_useremail, setUserEmail] = useState("");
     const [submitted, setSubmitted] = useState(false)
-    const [flesh, setFlesh] = useState()
-
+    
     const onForgotPassword = (e) => {
         e.preventDefault()
         setSubmitted(true)
-        if (_useremail !== '') {
-            dispatch(forgotPasswordUser(_useremail))
+        if (_useremail !== '') {           
+             dispatch(forgotPasswordUser(_useremail))  
+             console.log(props)
+            props.error == 'Invalid email' ?
+              ToastifyNotification({   
+                type:'error',              
+                message :'Opps...Given email is wrong ...!!',
+                position:"top-right",
+                hideProgressBar:'false',
+                closeOnClick: 'true',
+                pauseOnHover: 'true',
+                draggable: 'true',
+                progress: '',
+            }): ToastifyNotification({   
+                type:'info',              
+                message :'Chech your Email',
+                position:"top-right",
+                hideProgressBar:'false',
+                closeOnClick: 'true',
+                pauseOnHover: 'true',
+                draggable: 'true',
+                progress: '',
+            }) 
+          
         }
-    }
-    
+    }   
+   
    return (
         <>
         {/* {flesh!="" ? <ToastContainer /> : null} */}
+        <Toastify
+            position="top-right "
+            autoClose="2000"
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            />
+          
              
             <section className="content login-body">
                 <Container>
@@ -69,7 +104,7 @@ export const ResetPassword = (props) => {
                                                 ‹ Login
                                             </a>
                                             </Link>
-                                            <button type="submit"  onClick={()=>{setFlesh(toast("Check your Email!"))}}>
+                                            <button type="submit">
                                                 Submit
                                             </button>
                                         </div>
@@ -85,12 +120,12 @@ export const ResetPassword = (props) => {
 }
 
 const mapStateToProps = ({ authUser }) => {
-    const { loding, message, userEmail, error } = authUser
-    return { loding, message, userEmail, error };
+    const { loding, message, error } = authUser
+    return { loding, message, error };
 }
 
 const mapDispatchToProps = {
-    forgotPasswordAction: forgotPasswordUser
+    // forgotPasswordAction: forgotPasswordUser
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ResetPassword)

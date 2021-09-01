@@ -11,27 +11,31 @@ import {
 } from "react-bootstrap"
 import Fields from '../Form-Fields/Fields';
 import { changeUserPassword } from '../../redux/auth/action';
+import { formFieldValidation } from "../../services/formValidation"
 
 export const EditPassword = (props) => {
-
     
-    const birds = useSelector(state => state);
     const dispatch = useDispatch();
+    const reState = useSelector(state => state);
+    const { error } = reState.authUser;
+    console.log(reState.authUser)
 
 
     const [_userCurrentPassword, setUserCurrentPassword] = useState("");
     const [_userNewPassword, setUserNewPassword] = useState("");
-    const [_userReapeatPassword ,setUsrRepeatPassword] = useState("");
+    const [repeatNewPassword ,setUsrRepeatPassword] = useState("");
     const [submitted, setSubmitted] = useState(false)
 
        const onChnagePassword =(e)=>{
         e.preventDefault()
-        // console.log("change password") 
-        if(_userCurrentPassword !== ''|| _userNewPassword !== ''){
+        console.log("change password") 
+        setSubmitted(true)
+        if(_userCurrentPassword !== ''|| _userNewPassword !== '' || repeatNewPassword !== ''){
             const user = {
+                id:JSON.parse(localStorage.getItem('Recommend_Share_current_user')).id,
                 currentPassword:_userCurrentPassword,
                 newPassword:_userNewPassword,
-                repeatNewPassword:_userReapeatPassword
+                repeatNewPassword:repeatNewPassword
             }
             dispatch(changeUserPassword(user))
         }
@@ -45,6 +49,10 @@ export const EditPassword = (props) => {
                         <h1>Password</h1>
                         <p>You can edit your password below.</p>
                         <div className="box white">
+                        {typeof error.verifyError!='undefined' && error.verifyError!=''?
+                                    <div className="help-block mb-2" style={{color:'red'}}>{error.verifyError.currentPasswordnotvalid}</div>
+                                :null}
+                       
                             <form onSubmit ={onChnagePassword}>
                                 <div className="form-content">
                                     <Fields
@@ -53,19 +61,23 @@ export const EditPassword = (props) => {
                                         fieldName="_userCurrentPassword"
                                         fieldValue={ _userCurrentPassword }
                                         fieldAction={ setUserCurrentPassword }
-                                        fieldValidation={ submitted, _userCurrentPassword, { message: "Please Enter your UserName" } }
+                                        fieldValidation={ [submitted, _userCurrentPassword, formFieldValidation(error, "currentPassword",_userCurrentPassword )] }
                                     />
                                     <label className="help">Enter your current password to continue</label>
 
                                 </div>
+                                {typeof error.verifyError!='undefined' && error.verifyError!=''?
+                                <div className="help-block mb-2" style={{color:'red'}}>{error.verifyError.passwordnotmatch}</div>
+                            :null}
                                 <div className="form-content">
+                              
                                     <Fields
                                         field="password"
                                         fieldLabel="New password"
                                         fieldName="_userNewPassword"
                                         fieldValue={ _userNewPassword }
                                         fieldAction={ setUserNewPassword }
-                                        fieldValidation={ submitted, _userNewPassword, { message: "Please Enter your UserName" } }
+                                        fieldValidation={ [submitted, _userNewPassword, formFieldValidation(error, "newPassword",_userNewPassword )]}
                                     />
                                     <label className="help">Must be at least 6 characters.</label>
 
@@ -74,10 +86,10 @@ export const EditPassword = (props) => {
                                     <Fields
                                         field="password"
                                         fieldLabel="Repeat Password"
-                                        fieldName="_userReapeatPassword"
-                                        fieldValue={ _userReapeatPassword }
+                                        fieldName="repeatNewPassword"
+                                        fieldValue={ repeatNewPassword }
                                         fieldAction={ setUsrRepeatPassword }
-                                        fieldValidation={ submitted, _userReapeatPassword, { message: "Please Enter your UserName" } }
+                                        fieldValidation={ [submitted, repeatNewPassword, formFieldValidation(error, "repeatNewPassword",repeatNewPassword )]}
                                     />
                                 </div>
 
@@ -95,7 +107,6 @@ export const EditPassword = (props) => {
                         </div>
                     </div>
                 </div>
-
             </Container>
         </section>
     )
@@ -103,7 +114,7 @@ export const EditPassword = (props) => {
 
 const mapStateToProps = (authUser) => {
     const { loding, currentUser, error } = authUser
-    return {loding, currentUser, error };
+    // return {loding, currentUser, error };
 }
 const mapDispatchToProps = {
     changeUserPasswordAction:changeUserPassword

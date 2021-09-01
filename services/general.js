@@ -1,7 +1,7 @@
 var fs = require('fs');
 var jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
+const saltRounds = 13;
 require("dotenv").config();
 exports.func = function () {
     return {
@@ -57,19 +57,12 @@ exports.func = function () {
 
         hashPassword : function (userPassword){
             return bcrypt.hashSync(userPassword, saltRounds)
-                
-            // bcrypt.hash(userPassword, saltRounds) 
-            //     .then((res)=>{hashedpassword=res})
-            //     .catch((err)=>err) 
-            // console.log(hashedpassword)
-            // return hashedpassword
+
         },  
 
        validateHashedPassword : function (password){
         var result = bcrypt.compareSync(password[0], password[1])
-         return result
-            // .then((res)=>{console.log("general ------->",res),res})
-            // .catch((err)=>err)
+         return result         
 
        }
        

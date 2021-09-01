@@ -68,6 +68,7 @@ exports.func = function(){
         },
         verifyToken (req,res,next){
             var token = req.headers['x-access-token'];
+            console.log("token---->>",token)
             if(!token){
                 return res.send({
                     status : 0,

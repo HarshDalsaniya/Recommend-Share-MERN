@@ -23,6 +23,7 @@ import {
 const INIT_STATE = {
     currentUser: false,
     loading: false,
+    usermail:'',
     error: '',
     message: ''
 };
@@ -72,22 +73,20 @@ const authReducer = (state = INIT_STATE, action) => {
             return {
                 ...state,
                 loading: true,
-                error: ''
+                usermail: action.payload
             }
         case FORGOT_PASSWORD_SUCCESS:
-
             return {
                 ...state,
                 loading: false,
-                message: action.payload
+                error: action.payload
             }
 
         case FORGOT_PASSWORD_ERROR:
             return {
                 ...state,
-                loading: false,
-                useEmail: '',
-                error: ''
+                loading: false,               
+                error: action.payload
             }
         //Reset password
         case RESET_PASSWORD:
@@ -128,6 +127,7 @@ const authReducer = (state = INIT_STATE, action) => {
                 error: ''
             }
         case CHANGE_PASSWORD_ERROR:
+            console.log(action.payload)
             return {
                 ...state,
                 loading: false,

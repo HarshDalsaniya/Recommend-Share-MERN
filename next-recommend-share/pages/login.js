@@ -41,7 +41,7 @@ export const login = (props) => {
                                 <p className="form-text">Please use your account details to log in. If you do not have an account, why not <Link href="/register"><a >create one</a></Link>?</p>
                                 <div className="form-content">
                                 {typeof error.verifyError!='undefined' && error.verifyError!=''?
-                                    <div className="help-block mb-2" style={{color:'red'}}>{error.verifyError.userNotFound}</div>
+                                    <div className="help-block mb-2" style={{color:'red'}}>{error.verifyError.currentPasswordnotvalid}</div>
                                 :null}
                                     <form onSubmit={onSubmit}>
                                         <Fields 
