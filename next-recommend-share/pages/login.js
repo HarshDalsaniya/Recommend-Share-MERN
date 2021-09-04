@@ -38,6 +38,7 @@ export const login = (props) => {
                     progress: '',
                 })
         // }
+        }
     }
     return (
         <div className="login-body" >
