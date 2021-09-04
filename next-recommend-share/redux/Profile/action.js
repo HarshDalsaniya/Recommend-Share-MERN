@@ -76,7 +76,7 @@ export const profilePhotoUpdate = (profilPhoto) => {
         updateProfilePhoto(profilPhoto)
             .then((result) => {
                 console.log(result)
-                if (result.data.status == true) {
+                if (result.data.status == true) {                  
                     const item = {
                         profile_Picture: result.data.data
                     } 

@@ -12,6 +12,8 @@ import {
 import Fields from '../Form-Fields/Fields';
 import { changeUserPassword } from '../../redux/auth/action';
 import { formFieldValidation } from "../../services/formValidation"
+import{ToastifyNotification , Toastify} from "../../helper/notification"
+
 
 export const EditPassword = (props) => {
     
@@ -37,12 +39,36 @@ export const EditPassword = (props) => {
                 newPassword:_userNewPassword,
                 repeatNewPassword:repeatNewPassword
             }
-            dispatch(changeUserPassword(user))
+           dispatch(changeUserPassword(user))
+            ToastifyNotification({   
+                type:'success',              
+                message :'Password Changed successFully...!!',
+                position:"top-right",
+                hideProgressBar:'false',
+                closeOnClick: 'true',
+                pauseOnHover: 'true',
+                draggable: 'true',
+                progress: '',
+            })
+
         }
     }
 
     return (
+        <>
+        <Toastify
+            position="top-right "
+            autoClose="2000"
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+         />
         <section className="content login-body">
+            
             <Container>
                 <div className="contained">
                     <div className=" six columns alpha offset-by-three password-heading ">
@@ -109,6 +135,7 @@ export const EditPassword = (props) => {
                 </div>
             </Container>
         </section>
+        </>
     )
 }
 

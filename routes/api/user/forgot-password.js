@@ -203,7 +203,7 @@ router.get('/uniqueKeyVerify/:uniqueKey', function (req, res) {
 })
 
 //change password API
-router.post('/changepassword', function (req, res) {
+router.post('/changepassword',  functions.verifyToken,function (req, res) {
     response = {}
     var post = req.body;
     response = {};

@@ -5,6 +5,8 @@ import { Row, Col, Button} from "react-bootstrap"
 import { formFieldValidation } from "../../services/formValidation"
 import Fields from '../Form-Fields/Fields'
 import { profileUpadate, profilePhotoUpdate } from '../../redux/Profile/action';
+import{ToastifyNotification , Toastify} from "../../helper/notification"
+
 
 export const ProfileForm = (props) => {
     const {error, userData} = props
@@ -314,10 +316,32 @@ export const ProfileImage = (props) => {
             let formData = new FormData();
             formData.append("profile_image",profile_image)
             dispatch(profilePhotoUpdate(formData))
+            ToastifyNotification({   
+                type:'info',              
+                message :'Profile Update successFully...!!',
+                position:"top-right",
+                hideProgressBar:'false',
+                closeOnClick: 'true',
+                pauseOnHover: 'true',
+                draggable: 'true',
+                progress: '',
+            })
         }
     }
     // console.log(profile_image)
     return (
+        <>
+         <Toastify
+            position="top-right "
+            autoClose="2000"
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+         />
         <div className="contained">
             <h2>Profile Image</h2>
             <div className="box white">
@@ -356,6 +380,7 @@ export const ProfileImage = (props) => {
                 </form>
             </div>
         </div>
+        </>
     )
 }
 

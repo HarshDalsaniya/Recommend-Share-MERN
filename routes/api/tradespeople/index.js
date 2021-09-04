@@ -211,7 +211,7 @@ router.post('/tradespeople', function (req,res, callback){
 
 });
 
-router.get('/tradespeopleDetails/:slug', function(req ,res) {
+router.get('/tradespeopleDetails/:slug', functions.verifyToken, function(req ,res) {
     var slug = req.params.slug
     console.log(slug)
     req.getConnection(function(err, connection){

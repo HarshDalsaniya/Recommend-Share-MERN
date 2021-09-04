@@ -7,6 +7,7 @@ import { ColorBox, UserCard } from '../../../../../components/TradePeople/Tradep
 
 export const tradespeopleDetails = (props) => {
     const { query } = useRouter();
+    
 
     return (
        <section className="login-body" style={ { marginTop: "5rem" } }>

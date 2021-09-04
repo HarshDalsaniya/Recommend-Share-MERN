@@ -92,7 +92,7 @@ export const contactUsData  = (emaildata)=>{
             if(result.data.status == true){
                 dispatch({
                     type:USER_CONTACT_US_SUCCESS,
-                    payload:result.data.data
+                    payload:result.data.message
                 })
             }else{
                 dispatch({

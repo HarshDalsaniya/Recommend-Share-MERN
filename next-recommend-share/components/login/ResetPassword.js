@@ -10,8 +10,6 @@ import {
 import Link from "next/link"
 import Fields from '../Form-Fields/Fields';
 import { forgotPasswordUser } from '../../redux/auth/action';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { formFieldValidation } from "../../services/formValidation"
 import{ToastifyNotification , Toastify} from "../../helper/notification"
 
@@ -38,7 +36,7 @@ export const ResetPassword = (props) => {
         setSubmitted(true)
         if (_useremail !== '') {           
              dispatch(forgotPasswordUser(_useremail))  
-             console.log(props)
+             
             props.error == 'Invalid email' ?
               ToastifyNotification({   
                 type:'error',              

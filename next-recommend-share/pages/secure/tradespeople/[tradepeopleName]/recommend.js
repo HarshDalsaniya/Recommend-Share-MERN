@@ -57,7 +57,7 @@ export const recommend = (props) => {
                             IconOption = {[
                                 {
                                     title:'Date Joined:',
-                                    value: typeof tradeData.established != 'undefined' ? tradeData.established.slice(0,4) : ''
+                                    value: typeof tradeData.established != 'undefined' && null  ? tradeData.established.slice(0,4) : ''
                                 },
                                 {
                                     title:'Managed account:',
