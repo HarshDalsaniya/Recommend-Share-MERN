@@ -67,7 +67,7 @@ router.post('/contactUs', function (req, res) {
             message:post.message             
       
         }
-        console.log("hello")
+        
         // console.log(data)
         emailBody = [{name:data.name},{telephone:data.telephone}, {comapany_bussiness:data.comapany_bussiness},{message:data.message}]
         funcEmail(data.email , 'conatact Us' , emailBody , 'harshrdtl@gmail.com' ,'contactUs')        

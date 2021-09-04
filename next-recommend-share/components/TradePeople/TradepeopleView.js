@@ -225,12 +225,18 @@ export const UserCard = (props) => {
 }
 
 export const ColorBox = (props) => {
+    // console.log("color box==>",props)
+    var values = props.value
+    console.log(values[0])
+    
     return (
         <a
             href="/tradespeople/1st-cs/activity?type=recommendations"
             className={`box ${props.color} rounded less semi-shallow`}
         >
-            <span className="huge shallow">{props.value}</span>
+            {values.map((value)=>
+            <span className="huge shallow">{value.data}</span>
+            )}
             <br />
             <span className="tiny shallow">{props.caption}</span>
         </a>

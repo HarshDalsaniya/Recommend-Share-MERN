@@ -4,10 +4,12 @@ import Fields from '../components/Form-Fields/Fields';
 import { Container,Row,Col} from "react-bootstrap"
 import { formFieldValidation } from "../services/formValidation"
 import {contactUsData} from "../redux/bussiness/action"
+import{ToastifyNotification , Toastify} from "../helper/notification"
 
 export default function contact_us(props){
     const reState = useSelector(state => state);
     const { error } = reState.businessReducer;
+    const {contactus_data} = reState.businessReducer
     const dispatch = useDispatch();
     const [name, setName]  =useState('');
     const [email, setEmail] =useState('');
@@ -26,7 +28,31 @@ export default function contact_us(props){
             comapany_bussiness:company,
             message:message
         }
-        dispatch(contactUsData(data))
+        dispatch(contactUsData(data))   
+        console.log(email)
+        if(email!= "" && telephone!="" && name!="" && message!="" ){
+            ToastifyNotification({   
+                type:'success',              
+                message :'thanks for Contact with Us..!!',
+                position:"top-right",
+                hideProgressBar:'false',
+                closeOnClick: 'true',
+                pauseOnHover: 'true',
+                draggable: 'true',
+                progress: '',
+            }) 
+        } 
+       
+        // ToastifyNotification({   
+        //     type:'error',              
+        //     message :'something wrong...!!',
+        //     position:"top-right",
+        //     hideProgressBar:'false',
+        //     closeOnClick: 'true',
+        //     pauseOnHover: 'true',
+        //     draggable: 'true',
+        //     progress: '',
+        // })
     }
     const formField = [
         {
@@ -65,6 +91,17 @@ export default function contact_us(props){
     return (
         <React.StrictMode>
         <section className="login-body pt-3">
+         <Toastify
+            position="top-right "
+            autoClose="2000"
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+         />
             <Container>
                 <div className="eight columns alpha offset-by-two" style={{marginTop: "5rem"}}>
                     {/* // ContentBlock ID: contact-us // */}

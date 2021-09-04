@@ -11,6 +11,7 @@ import {
 } from "react-bootstrap"
 import Fields from '../Form-Fields/Fields';
 import { resetPasswordUser } from '../../redux/auth/action';
+import{ToastifyNotification , Toastify} from "../../helper/notification"
 
 export default function ChangePassword(props){
 
@@ -30,11 +31,32 @@ export default function ChangePassword(props){
                 confirm_New_password:_userConfirmPassword
             }
             dispatch(resetPasswordUser(user))
+            ToastifyNotification({   
+                type:'success',              
+                message :'Password Changed successFully...!!',
+                position:"top-right",
+                hideProgressBar:'false',
+                closeOnClick: 'true',
+                pauseOnHover: 'true',
+                draggable: 'true',
+                progress: '',
+            })
         }
     }
 
     return (
         <div className="login-body">
+        <Toastify
+            position="top-right "
+            autoClose="2000"
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+        />
         <selection className="content">
         <Container>
             <div className="contained">
@@ -52,8 +74,7 @@ export default function ChangePassword(props){
                                     fieldAction={ setUserNewPassword }
                                     fieldValidation={ submitted, _userNewPassword, { message: "Please Enter your UserName" } }
                                     
-                                />
-                                   
+                                />                                   
                                 <label className="help">Enter New password.</label>
 
                             </div>

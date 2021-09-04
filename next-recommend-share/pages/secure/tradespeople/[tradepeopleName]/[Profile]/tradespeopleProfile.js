@@ -7,6 +7,7 @@ import { ColorBox, UserCard } from '../../../../../components/TradePeople/Tradep
 
 export default function tradespeopleDetails(props){
     const { query } = useRouter();
+    
 
     return (
         <React.StrictMode>

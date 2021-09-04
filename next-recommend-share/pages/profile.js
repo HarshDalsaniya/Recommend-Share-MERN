@@ -15,6 +15,7 @@ export default function profile(){
     const reState = useSelector(state => state);
     const {error, userData} = reState.profileReducer;
     const [profile, setProfile] =useState('')
+    
 
     useEffect(() => {
         dispatch(userProfile(JSON.parse(localStorage.getItem("Recommend_Share_current_user")).email))

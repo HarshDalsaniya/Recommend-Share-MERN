@@ -38,7 +38,7 @@ router.get("/harsh", (req, res) => {
     res.send("hello world");
 });
 
-router.post("/", (req,res)=>{
+router.post("/", functions.verifyToken,(req,res)=>{
     response = {};
     req.getConnection((err,connection)=>{
         console.log(req.body)
@@ -56,7 +56,7 @@ router.post("/", (req,res)=>{
     })
 })
 
-router.post('/userUpdate', function (req, res, next) {
+router.post('/userUpdate', functions.verifyToken,function (req, res, next) {
     var post = req.body;
     response = {};
     // console.log("testestest", post)
@@ -141,7 +141,7 @@ router.post('/userUpdate', function (req, res, next) {
     }
 });
 
-router.post('/userProfilePic', upload.fields([{name:"profile_image"}]), (req,res)=>{
+router.post('/userProfilePic',functions.verifyToken,upload.fields([{name:"profile_image"}]), (req,res,next)=>{
     response = {};
     var errors = new Array();
     errors = {blankValue:{},invalidValue:{},verifyError:{}};
@@ -162,8 +162,7 @@ router.post('/userProfilePic', upload.fields([{name:"profile_image"}]), (req,res
                             if (err) throw(err);   
                             try{
                                 var sql = `update user set image='${req.files.profile_image[0].filename}' where email='${req.body.email}'`;
-                                connection.query(sql, function (err, updateResult) {
-                                    // console.log("this.sql======================>",this.sql);
+                                connection.query(sql, function (err, updateResult) {                                   
                                     if (err) {
                                         console.log(err);
                                         response = general.response_format(false, messages.ERROR_PROCESSING, {});

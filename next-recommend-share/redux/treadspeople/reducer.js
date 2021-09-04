@@ -8,12 +8,17 @@ import {
     TRADESPEOPLE_DETAILS,
     TRADESPEOPLE_DETAILS_SUCCESS,
     TRADESPEOPLE_DETAILS_ERROR,
+    RECOMMENDATION,
+    RECOMMENDATION_SUCCESS,
+    RECOMMENDATION_ERROR
 } from '../action-type'
 
 const INIT_STATE = {
     tradeOptions:[],
     tradespeopleData:[],
+    recommendation:[],
     loading: false,
+    
     error: '',
 };
 
@@ -78,6 +83,29 @@ const tradePeople = (state = INIT_STATE, action) => {
                 ...state,
                 loading: false,
                 error: action.payload.message
+            }
+            
+// Recommendation
+
+        case RECOMMENDATION:
+            return {
+                ...state,
+                loading: true,
+                error: ''
+            }
+        case RECOMMENDATION_SUCCESS:
+            console.log("reducer-->",action.payload)
+            return {
+                ...state,              
+                loading: false,
+                recommendation: action.payload,
+                error: ''
+            }
+        case RECOMMENDATION_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
             }
 
         default:

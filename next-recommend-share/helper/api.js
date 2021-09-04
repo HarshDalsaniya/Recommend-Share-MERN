@@ -1,5 +1,5 @@
 import axios from "axios"
-
+import {getCurrentUser} from "./Utils"
 
 const login = (user) => {
     return axios.post(`${process.env.API}/user/login`, { email: user.email, password: user.password })
@@ -30,7 +30,14 @@ const resetPassword = (user) => {
         .catch((error) => console.log(error))
 }
 const changePassword = (user) => {
-    return axios.post(`${process.env.API}/user/changepassword`, user)
+    const header={
+        headers:{        
+            "Access-Control-Allow-Origin": "*",
+            "Content-type": "Application/json",
+            "x-access-token": getCurrentUser().token
+        }
+    }
+    return axios.post(`${process.env.API}/user/changepassword`, user,header)
         .then((result) => result)
         .catch((error) => console.log(error))
 }
@@ -42,20 +49,34 @@ const VerifyKey = () => {
         .catch((error) => console.log(error))
 }
 const logout = () => {
-    const Token = JSON.parse(localStorage.getItem('Recommend_Share_current_user'))
+    const Token = JSON.parse(localStorage.getItem('Recommend_Share_current_user'))  
     return axios.post(`${process.env.API}/user/logout/${Token.token}`)
         .then((result) => result)
         .catch((error) => console.log(error))
 }
 
 const userData = (email) => {
-    return axios.post(`${process.env.API}/profile`,{email:email})
+    const header={
+        headers:{        
+            "Access-Control-Allow-Origin": "*",
+            "Content-type": "Application/json",
+            "x-access-token": getCurrentUser().token
+        }
+    }
+    return axios.post(`${process.env.API}/profile`,{email:email},header)
         .then((result) => result)
         .catch((error) => console.log(error))
 }
 
 const updateProfile = (profileData) => {
-    return axios.post(`${process.env.API}/profile/userUpdate`,profileData)
+    const header={
+        headers:{        
+            "Access-Control-Allow-Origin": "*",
+            "Content-type": "Application/json",
+            "x-access-token": getCurrentUser().token
+        }
+    }
+    return axios.post(`${process.env.API}/profile/userUpdate`,profileData,header)
         .then((result) => result)
         .catch((error) => console.log(error))
 }
@@ -73,7 +94,14 @@ const contactUs=(emaildata) => {
 
 const updateProfilePhoto = (profilePhoto) => {
     profilePhoto.append("email",JSON.parse(localStorage.getItem('Recommend_Share_current_user')).email)
-    return axios.post(`${process.env.API}/profile/userProfilePic`,profilePhoto)
+    const header={
+        headers:{        
+            "Access-Control-Allow-Origin": "*",
+            "Content-type": "Application/json",
+            "x-access-token": getCurrentUser().token
+        }
+    }
+    return axios.post(`${process.env.API}/profile/userProfilePic`,profilePhoto,header)
         .then((result) => result)
         .catch((error) => console.log(error))
 }
@@ -84,7 +112,15 @@ const tradList = () =>{
 }
 
 const businessSearch = (searchFilter) =>{
-    var path=`${process.env.API}/feedback/list?`
+    var path=`${process.env.API}/feedback/list?` 
+    const header={
+        headers:{        
+            "Access-Control-Allow-Origin": "*",
+            "Content-type": "Application/json",
+            "x-access-token": getCurrentUser().token
+        }
+    }
+  
 
         searchFilter.name != null ? path = path + "name=" + searchFilter.name : ""
 
@@ -98,15 +134,36 @@ const businessSearch = (searchFilter) =>{
 
         searchFilter.action != "undefined" && searchFilter.action != "" && (searchFilter.action == "recommend" || searchFilter.action == "warn") ? (searchFilter.name || searchFilter.email || searchFilter.telephone || searchFilter.tradespeopleTrade || searchFilter.address_postcode) != null? path = path + "&action=" + searchFilter.action : path = path + "action=" + searchFilter.action  : ""
 
-    return axios.get(path)
-             .then((res) => res)
+    return axios.get(path,header)          
+        .then((res) => res)
+        .catch((error) => console.log(error))
  }
 
-const tradesPeopleDetails = (slug) =>{
-    return axios.get(`http://localhost:4000/api/tradespeople/tradespeopleDetails/${slug}`)
+const tradesPeopleDetails = (slug) =>{  
+    const header={
+        headers:{        
+            "Access-Control-Allow-Origin": "*",
+            "Content-type": "Application/json",
+            "x-access-token": getCurrentUser().token
+        }
+    }
+    return axios.get(`http://localhost:4000/api/tradespeople/tradespeopleDetails/${slug}`,header)
         .then((result) => result)
         .catch((error) => console.log(error))
 
+}
+
+const Recommendation =(tradepersonname)=>{
+    const header={
+        headers:{        
+            "Access-Control-Allow-Origin": "*",
+            "Content-type": "Application/json",
+            "x-access-token": getCurrentUser().token
+        }
+    }    
+    return axios.post(`${process.env.API}/feedback/recommendation`,{tradepersonname:tradepersonname},header)
+        .then((result)=>result)
+        .catch((error)=>console.log(error))
 }
 export {
     login,
@@ -124,5 +181,6 @@ export {
     tradList,
     businessSearch,
     contactUs,
-    tradesPeopleDetails
+    tradesPeopleDetails,
+    Recommendation
 }

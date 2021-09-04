@@ -7,11 +7,15 @@ import {
     BUSINESS_SEARCH_ERROR,
     TRADESPEOPLE_DETAILS,
     TRADESPEOPLE_DETAILS_SUCCESS,
-    TRADESPEOPLE_DETAILS_ERROR
+    TRADESPEOPLE_DETAILS_ERROR,
+    RECOMMENDATION,
+    RECOMMENDATION_SUCCESS,
+    RECOMMENDATION_ERROR,
 } from '../action-type'
 import { tradList, 
         businessSearch,
-        tradesPeopleDetails } from "../../helper/api"
+        tradesPeopleDetails,
+        Recommendation } from "../../helper/api"
 import Router from 'next/router'
 
 export const tradOption = () => {
@@ -98,4 +102,32 @@ export const TradesPeople_Profile_Details = (slug) =>{
         ))
     }
 
+}
+
+export const Recommendation_Data =(tradepersonname)=>{
+    return dispatch => {
+        dispatch({
+            type:RECOMMENDATION,
+            payload:tradepersonname
+        })
+        Recommendation(tradepersonname)                
+        .then((result)=>{
+            console.log("name--->",tradepersonname)
+            console.log("result---->",result)
+            if(result.data.status == true){
+                dispatch({
+                    type:RECOMMENDATION_SUCCESS,
+                    payload:result.data.data[0]
+                })
+            }else{
+                dispatch({
+                    type:RECOMMENDATION_ERROR,
+                    payload:result.data.data[0]
+                })
+            }
+        })
+        .catch((err)=> (
+            console.log(err)
+        ))
+    }
 }

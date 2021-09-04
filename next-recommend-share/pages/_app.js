@@ -7,7 +7,7 @@ import "../assets/css/login.css"
 import "../assets/css/forms.css"
 import "../assets/css/editor-css.css"
 import "../assets/css/grid.css"
-
+import 'react-toastify/dist/ReactToastify.css';
 import App from 'next/app';
 import { DefaultSeo } from 'next-seo';
 import Router from 'next/router'

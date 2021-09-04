@@ -166,7 +166,7 @@ export const changeUserPassword = (user) => {
     return dispatch => {
         dispatch({
             type : CHANGE_PASSWORD,
-            paylod: user
+            payload: user
         })
         changePassword(user)       
             .then((result) => {
@@ -175,12 +175,13 @@ export const changeUserPassword = (user) => {
                 if(result.data.status == true){
                     dispatch({
                         type : CHANGE_PASSWORD_SUCCESS,
-                        paylod : result.data.message
+                        payload : result.data.data
                     })
                 }else{
+                    console.log(result.data.message)
                     dispatch({
                         type : CHANGE_PASSWORD_ERROR,
-                        paylod : result.data
+                        payload : result.data.message
                     })
                 }
             })
@@ -199,7 +200,7 @@ export const verifyUniqueKey =() =>{
                     payload : result.data.status
                 })
             }else{
-                console.log(err)
+                console.log("uniqueKey error")
             }
         })
         .catch((err) => {

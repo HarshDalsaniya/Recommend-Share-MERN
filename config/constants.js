@@ -3,7 +3,8 @@ const USER_IMAGE_PATH = "/uploads/user/"; // user image path
 const NO_IMAGE_PATH = "site/no_image.jpg"; // for showing no image where image is not avaialable
 const NOT_NULL_ARRAY = ['undefined', null, '', 'null'];
 const DEFAULT_API_LANGUAGE = 'en'; // Declaring default language
-const JWT_SECRET_KEY = "samnewproject";//"jwtsecretkey";
+const JWT_SECRET_KEY = "asdjhfgjhgsjdhfjsgfshdgfjhshdfhjggjhdgjkljkljklfhuefhfghfhrtusdfb";//"jwtsecretkey";
+
 const ADMIN_EMAIL = 'harshrdtl@gmail.com';
 
 module.exports = {

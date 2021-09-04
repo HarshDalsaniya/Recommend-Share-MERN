@@ -33,7 +33,7 @@ const { json } = require('body-parser');
 
 var general = gnl.func();
 
-router.get('/list', (req, res) => {
+router.get('/list', functions.verifyToken,(req, res, next)=>{
     response = {};
     req.getConnection(function (err, connection) {
         if (err) {
@@ -68,7 +68,7 @@ router.get('/list', (req, res) => {
 
             // sql +=keyword+" limit "+start+", "+20; 
             // console.log(sql)
-            connection.query(sql, function (err, data) {
+            connection.query(sql, function (err, data ) {
                 // console.log("this.sql======================>",this.sql);
                 if (err) {
                     console.log(err);
@@ -83,5 +83,42 @@ router.get('/list', (req, res) => {
         }
     })
 });
+
+router.post('/recommendation', functions.verifyToken,(req,res,next)=>{
+    response = {};
+    req.getConnection(function (err, connection){
+        if (err) {
+            console.log(err);
+            response = general.response_format(false, messages.DATABASE_CONNECTION_ERROR, {});
+            res.send(response);
+        }else{
+            let name = req.body.tradepersonname
+            var sql =`SELECT (SELECT COUNT(recommendation) from feedback WHERE recommendation=1 and tradesperson_name="${name}")as Received_positive, 
+                    (SELECT COUNT(recommendation) from feedback WHERE recommendation=0 and tradesperson_name="${name}")as Received_nagative,
+                    (SELECT COUNT(left_by_user) from feedback WHERE left_by_user=1 and tradesperson_name="${name}")as Given_positive,
+                    (SELECT COUNT(left_by_user) from feedback WHERE left_by_user=0 and tradesperson_name="${name}")as Given_nagative 
+                    FROM feedback WHERE tradesperson_name="${name}" GROUP BY 'Received_positive'`
+                
+                    connection.query(sql, function (err, result ) {
+                    // console.log("this.sql======================>",this.sql);
+                        if (err) {
+                            console.log(err);
+                            response = general.response_format(false, messages.ERROR_PROCESSING, {});
+                            res.send(response);
+                        }
+                        else if(!result.length>0){
+                            response = general.response_format(false, "No Data found");
+                            res.send(response);
+                        }
+                        else {
+                            response = general.response_format(true, "Recommendation Data", result);
+                            res.send(response);
+                        }
+                    });
+
+            }
+    });
+
+})
 
 module.exports = router
