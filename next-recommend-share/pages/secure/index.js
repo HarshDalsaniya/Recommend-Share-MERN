@@ -7,14 +7,18 @@ import { NegativeRecommendation, PositiveRecommendation, RecommendedTradesperson
 export default function secure (props){
 
     const [localstorageItem, setLocalStorageItem] = useState()
+    const [idfromlocal , setIdfromlocal] = useState('')
    const [profile, setProfile] = useState('')
     useEffect(() => {
         const interval = setInterval(() => {
             setLocalStorageItem(JSON.parse(localStorage.getItem('Recommend_Share_current_user')));
-            setProfile(localStorage.getItem("Recommend_Share_current_user") == null ? '' : JSON.parse(localStorage.getItem("Recommend_Share_current_user")).profile_Picture)
+            setProfile(localStorage.getItem("Recommend_Share_current_user") == null ? '' : JSON.parse(localStorage.getItem("Recommend_Share_current_user")).profile_Picture);
+         setIdfromlocal(localStorage.getItem("Recommend_Share_current_user") == null ? '' : JSON.parse(localStorage.getItem("Recommend_Share_current_user")).id);
         }, 1000);
         return () => clearInterval(interval);   
-    }, [setLocalStorageItem,setProfile])   
+    }, [setLocalStorageItem,setProfile,setIdfromlocal])   
+
+    let id = idfromlocal;
     return (
         <React.Fragment>
         <React.StrictMode>
@@ -37,7 +41,7 @@ export default function secure (props){
                                             <h3 className="recieved-heading">Recieved</h3>
                                             <div className="row">
                                                 <div className="col-md-6 text-center mb-3 mb-md-0 text-md-start">
-                                                    <Link href="/secure/customers/608-45de82f7502c3a8657e3b9923e26e8f8/activity?type=recommendations">
+                                                    <Link href={`/secure/customers/${id}/activity?type=recommendations`}>
                                                     <a>
                                                         <div className="recieved-number-1">0</div>
                                                         <div className="recieved-text">Positive Recommendation</div>
@@ -45,7 +49,7 @@ export default function secure (props){
                                                     </Link>
                                                 </div>
                                                 <div className="col-md-6 text-center text-md-start">
-                                                    <Link href="/secure/customers/608-45de82f7502c3a8657e3b9923e26e8f8/activity?type=warnings">
+                                                    <Link href="">
                                                     <a>
                                                         <div className="recieved-number-2">0</div>
                                                         <div className="recieved-text">Negative Recommendation</div>
@@ -58,7 +62,7 @@ export default function secure (props){
                                             <h3 className="recieved-heading">Given</h3>
                                             <div className="row">
                                                 <div className="col-md-6 text-center mb-3 mb-md-0 text-md-start">
-                                                    <Link href="/secure/customers/608-45de82f7502c3a8657e3b9923e26e8f8/activity/given?type=recommendations">
+                                                    <Link href="">
                                                     <a>
                                                         <div className="recieved-number-1">0</div>
                                                         <div className="recieved-text">Positive Recommendation</div>
@@ -66,7 +70,7 @@ export default function secure (props){
                                                     </Link>
                                                 </div>
                                                 <div className="col-md-6 text-center text-md-start">
-                                                    <Link href="/secure/customers/608-45de82f7502c3a8657e3b9923e26e8f8/activity/given?type=warnings">
+                                                    <Link href="">
                                                     <a>
                                                         <div className="recieved-number-2">0</div>
                                                         <div className="recieved-text">Negative Recommendation</div>

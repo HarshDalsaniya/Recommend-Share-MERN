@@ -66,6 +66,7 @@
     "socket.io": "^2.3.0",
     "socketio-jwt": "^4.5.0",
     "stripe": "^6.36.0",
+    "twilio": "^3.67.1",
     "zcrmsdk": "^1.0.3"
   }
 }

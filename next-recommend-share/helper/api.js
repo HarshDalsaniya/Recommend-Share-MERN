@@ -165,6 +165,20 @@ const Recommendation =(tradepersonname)=>{
         .then((result)=>result)
         .catch((error)=>console.log(error))
 }
+
+const UserData = (id)=>{
+    const header={
+        headers:{        
+            "Access-Control-Allow-Origin": "*",
+            "Content-type": "Application/json",
+            "x-access-token": getCurrentUser().token
+        }
+    }    
+    return axios.get(`${process.env.API}/profile/userDetails/${id}`,header)
+    .then((result)=>result)
+    .catch((error)=>console.log(error))
+    
+}
 export {
     login,
     register,
@@ -182,5 +196,6 @@ export {
     businessSearch,
     contactUs,
     tradesPeopleDetails,
-    Recommendation
+    Recommendation,
+    UserData,
 }

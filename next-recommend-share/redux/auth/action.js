@@ -18,6 +18,9 @@ import {
     CHANGE_PASSWORD_SUCCESS,
     CHANGE_PASSWORD_ERROR,
     UNIQKEY_VERIFY,
+    USER_DETAILS,
+    USER_DETAILS_SUCCESS,
+    USER_DETAILS_ERROR,
 } from "../action-type"
 import Router from "next/router"
 import { currentUser } from "../../constants/defaultValues";
@@ -28,7 +31,8 @@ import {
     forgotPassword,
     resetPassword,
     changePassword,
-    VerifyKey
+    VerifyKey,
+    UserData
 } from "../../helper/api"
 import { setCurrentUser } from "../../helper/Utils";
 
@@ -235,5 +239,33 @@ export const logoutUser = () => {
             .catch((err) => (
                 console.log(err)
             ))
+    }
+}
+
+export const UserAction =(id)=>{
+    return dispatch => {
+        dispatch({
+            type : USER_DETAILS,
+            payload : id
+        })
+        UserData(id)
+        // console.log(id)
+        .then((result) => {
+            console.log(result)
+            if(result.data.status == true){
+                dispatch ({
+                    type : USER_DETAILS_SUCCESS,
+                    payload : result.data.data[0]
+                })  
+            }else{
+                dispatch({
+                    type : USER_DETAILS_ERROR,
+                    payload : result.data.message
+                })
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
 }
