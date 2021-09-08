@@ -14,12 +14,7 @@ import { changeUserPassword } from '../../redux/auth/action';
 import { formFieldValidation } from "../../services/formValidation"
 import{ToastifyNotification , Toastify} from "../../helper/notification"
 
-<<<<<<< HEAD
 export default function EditPassword(props){
-=======
->>>>>>> c2022c46bdfb3a050fb14687fe1add02d7601339
-
-export const EditPassword = (props) => {
     
     const dispatch = useDispatch();
     const reState = useSelector(state => state);
@@ -142,16 +137,3 @@ export const EditPassword = (props) => {
         </>
     )
 }
-<<<<<<< HEAD
-=======
-
-const mapStateToProps = (authUser) => {
-    const { loding, currentUser, error } = authUser
-    // return {loding, currentUser, error };
-}
-const mapDispatchToProps = {
-    changeUserPasswordAction:changeUserPassword
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(EditPassword)
->>>>>>> c2022c46bdfb3a050fb14687fe1add02d7601339
