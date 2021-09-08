@@ -28,10 +28,12 @@ export const customerProfile = (props) => {
           <Container>
              <h2>Customer Profile</h2>
                 <div className="contained shallow">
-                    <div className="box white">
+                
+                    <div className="box white">     
+
                         <UserCard 
                             title={`${user_profileData.name}`}
-                            title_href={'/secure/'}
+                            title_href={'/secure/'}                          
                             details={ [
                                 {
                                     option : 'Telephone:',

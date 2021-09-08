@@ -2780,7 +2780,10 @@ ul.notifications li.all a {
     font-weight: 500;
     color: inherit;
 } */
-
+.edit{
+	margin-left: 10px;
+	
+}
 .flashMessageofuser{
 	background: #fff;
     color: #44962e;

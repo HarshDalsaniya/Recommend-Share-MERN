@@ -153,6 +153,7 @@ export const UserCard = (props) => {
     const Name = query.tradepeopleName
     var Options = props.details
     var IconsView = props.IconOption
+   
     return (
         <>
             <Row>
@@ -173,12 +174,21 @@ export const UserCard = (props) => {
                 <div className="tenpointfive columns">
                     <div className="contained semi-shallow">
                         <Row>
-                            <div className="six columns alpha mob-tcenter ">
-                                <p className="h3 shallow">
-                                    <Link href={props.title_href} className="black">
-                                        {props.title}
+                            <div className="six columns alpha mob-tcenter">
+                                <p className="h3 shallow">                                   
+                                    <Link href={props.title_href}>
+                                        {props.title}                                                                                   
                                     </Link>
-                                </p>
+                                    {console.log(props)}
+                                    {/* {props.editIcon == 'yes' ? 
+                                    <>
+                                    <i className="fa fa-pencil-square edit" aria-hidden="true" />
+                                    <Link href={props.editIconPath}>                                        
+                                        Edit                                   
+                                    </Link> 
+                                    </>:''  }                          */}                               
+                                    
+                              </p>
                             </div>
                         </Row>
                     </div>

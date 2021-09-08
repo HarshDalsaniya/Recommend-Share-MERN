@@ -6,6 +6,7 @@ import { formFieldValidation } from "../../services/formValidation"
 import Fields from '../Form-Fields/Fields'
 import { profileUpadate, profilePhotoUpdate } from '../../redux/Profile/action';
 import{ToastifyNotification , Toastify} from "../../helper/notification"
+import {getCurrentUser} from "../../helper/Utils"
 
 
 export const ProfileForm = (props) => {
@@ -301,6 +302,7 @@ export const ProfileImage = (props) => {
     const dispatch = useDispatch();
     const [profile_image, setProfile_image] = useState();
     const [show_profile, setShowProfile] = useState();
+       console.log("http://localhost:4000/images/"+getCurrentUser().profile_Picture) 
     const getBase64 = (e) => {
         var file = e.target.files[0]
         let reader = new FileReader()
@@ -315,19 +317,20 @@ export const ProfileImage = (props) => {
     const onSubmit = (e) =>{
         e.preventDefault();
         if(profile_image!=""){
-            let formData = new FormData();
-            formData.append("profile_image",profile_image)
-            dispatch(profilePhotoUpdate(formData))
-            ToastifyNotification({   
-                type:'info',              
-                message :'Profile Update successFully...!!',
-                position:"top-right",
-                hideProgressBar:'false',
-                closeOnClick: 'true',
-                pauseOnHover: 'true',
-                draggable: 'true',
-                progress: '',
-            })
+            // let formData = new FormData();
+            // formData.append("profile_image",profile_image)
+            var profile = profile_image.name
+            dispatch(profilePhotoUpdate(profile))
+            // ToastifyNotification({   
+            //     type:'info',              
+            //     message :'Profile Update successFully...!!',
+            //     position:"top-right",
+            //     hideProgressBar:'false',
+            //     closeOnClick: 'true',
+            //     pauseOnHover: 'true',
+            //     draggable: 'true',
+            //     progress: '',
+            // })
         }
     }
     // console.log(profile_image)
@@ -349,8 +352,8 @@ export const ProfileImage = (props) => {
             <div className="box white">
                 <form encType="multipart/form-data" onSubmit={onSubmit}>
                     <p className="semi-shallow tcenter">
-                        <a onClick={()=>{props.setProfile(typeof show_profile!="undefined"?show_profile:"https://recommendandshare.com/media/cache/avatar/assets/images/generic-avatar.png")}} data-featherlight="image" className="avatar-link">
-                            <img src={typeof show_profile!="undefined"?show_profile:"https://recommendandshare.com/media/cache/avatar/assets/images/generic-avatar.png"} className="avatar avatar-selector" />
+                        <a onClick={()=>{props.setProfile(typeof show_profile!="undefined"?show_profile:"http://localhost:4000/images/"+getCurrentUser().profile_Picture)}} data-featherlight="image" className="avatar-link">
+                            <img src={typeof show_profile!="undefined"?show_profile:"http://localhost:4000/images/"+getCurrentUser().profile_Picture} className="avatar avatar-selector" />
                         </a>
                     </p>
                     <div >
@@ -370,7 +373,7 @@ export const ProfileImage = (props) => {
                         <input type="hidden" name="profile_image[_token]" defaultValue="QPqj_Bp32ryxO6cNwMUlgW0g3AU_Ub636y9iUuHGHKg" />
                     </div>
                     <div className="buttons ">
-                        <Link href="/profile/image/clear">
+                        <Link href="">
                         <a  className="confirm button small light fleft">
                             Clear
                         </a>

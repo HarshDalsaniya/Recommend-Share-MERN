@@ -92,8 +92,9 @@ const contactUs=(emaildata) => {
 
 }
 
-const updateProfilePhoto = (profilePhoto) => {
-    profilePhoto.append("email",JSON.parse(localStorage.getItem('Recommend_Share_current_user')).email)
+const updateProfilePhoto = (profile_image , email) => {
+  
+    var email =  getCurrentUser().email 
     const header={
         headers:{        
             "Access-Control-Allow-Origin": "*",
@@ -101,8 +102,8 @@ const updateProfilePhoto = (profilePhoto) => {
             "x-access-token": getCurrentUser().token
         }
     }
-    return axios.post(`${process.env.API}/profile/userProfilePic`,profilePhoto,header)
-        .then((result) => result)
+    return axios.post(`${process.env.API}/profile/userProfilePic`,{email:email,profile_image:profile_image},header)
+        .then((result) => console.log(result))
         .catch((error) => console.log(error))
 }
 

@@ -67,14 +67,16 @@ export const profileUpadate = (profileData) => {
     }
 }
 
-export const profilePhotoUpdate = (profilPhoto) => {
+export const profilePhotoUpdate = (profile_image) => {
     return dispatch => {
         dispatch({
             type: USER_UPDATE_PROFILE_PHOTO,
-            paload: profilPhoto
+            paload: profile_image
         })
-        updateProfilePhoto(profilPhoto)
+        updateProfilePhoto(profile_image)
+      
             .then((result) => {
+                console.log("action->>",profile_image)
                 console.log(result)
                 if (result.data.status == true) {                  
                     const item = {
