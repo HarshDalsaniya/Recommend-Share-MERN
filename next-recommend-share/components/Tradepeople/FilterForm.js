@@ -9,7 +9,7 @@ import { formFieldValidation } from "../../services/formValidation"
 import { useRouter } from 'next/router';
 import { searchBusiness } from '../../redux/treadspeople/action';
 
-export default function FilterForm(props){
+export const FilterForm=(props)=>{
     const { query } = useRouter();
     const reState = useSelector(state => state);
     const dispatch =new useDispatch()
@@ -162,3 +162,68 @@ export default function FilterForm(props){
         </form>
     )
 }
+
+export const CustomersSearch = (props) =>{
+
+    const [surname, setSurname] = useState('');
+    const [housenum, setHousenum] = useState('');
+    const [postcode, setPostcode] = useState('');
+    const [submitted, setSubmitted] = useState(false);
+
+    return(        
+        <form>
+            <Row style={{margin:"auto"}}>
+                <div className="four columns alpha">
+                    <div className="form_row  text">
+                        <Fields
+                                field="text"
+                                fieldLabel="Customer's Surname"
+                                fieldName="surname"
+                                fieldValue={surname}
+                                fieldAction={setSurname}
+                                fieldValidation={submitted, surname}
+                            />
+                    </div>
+                </div>
+                <div className="four columns">
+                    <div className="form_row  text">
+                        <Fields
+                            field="text"
+                            fieldLabel="House Number / Name"
+                            fieldName="housenum"
+                            fieldValue={housenum}
+                            fieldAction={setHousenum}
+                            fieldValidation={submitted, housenum}
+                        />
+                    </div>
+                </div>
+                <div className="four columns">
+                     <div className="form_row  text">
+                        <Fields
+                            field="text"
+                            fieldLabel="Customer's Postcode"
+                            fieldName="postcode"
+                            fieldValue={postcode}
+                            fieldAction={setPostcode}
+                            fieldValidation={submitted, postcode}
+                        />
+                    </div>
+                </div>
+                
+            </Row>
+            <div className="buttons tright shallow">
+                <a className="button clear" onClick={()=>allClear()}>
+                    <i className="fa fa-undo" aria-hidden="true" /> Reset
+                </a>
+                &nbsp;
+                <button type="submit">
+                    Search
+                </button>
+            </div>
+            <p className="tiny tcenter shallow">All fields are required.</p>
+        </form>
+        
+    )
+}
+
+export default(FilterForm,CustomersSearch)

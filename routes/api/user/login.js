@@ -29,6 +29,8 @@ const { check, validationResult } = require('express-validator/check');
 const { sanitizeBody, matchedData } = require('express-validator/filter');
 var address = require('address');
 var { machineId, machineIdSync } = require('node-machine-id');
+const config = require('../../../services/config');
+require('dotenv').config();
 
 var general = gnl.func();
 
@@ -359,5 +361,43 @@ router.post('/logout/:token', function (req, res, next) {
         });
     });
 });
+
+
+const client = require("twilio")(config.accountSID, config.authTokne)
+router.get('/testotp' ,(req,res) => {   
+    client.verify.services(config.serviceID)
+                .verifications
+                .create({
+                    to: `+${req.query.phonenumber}`,
+                    channel: req.query.channel
+                })
+                .then((data) =>{
+                res.send(data)
+                })         
+
+})
+
+router.get('/verifyotp' ,(req,res)=> {
+    client.verify.services(config.serviceID)
+    .verificationChecks
+    .create({
+        to: `+${req.query.phonenumber}`,
+        code : req.query.code
+    })
+    .then((data) =>{
+        if(data.status == 'approved'){
+            res.status(200).send(data)
+        }else{
+            res.json(error[{
+                status : false,
+                message : "Invalida Otp"
+            }
+            ])
+        }
+        
+        
+    })  
+})
+
 
 module.exports = router;

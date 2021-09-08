@@ -17,7 +17,10 @@ import {
     CHANGE_PASSWORD,
     CHANGE_PASSWORD_SUCCESS,
     CHANGE_PASSWORD_ERROR,
-    UNIQKEY_VERIFY
+    UNIQKEY_VERIFY,
+    USER_DETAILS,
+    USER_DETAILS_SUCCESS,
+    USER_DETAILS_ERROR,
 } from "../action-type"
 
 const INIT_STATE = {
@@ -25,7 +28,9 @@ const INIT_STATE = {
     loading: false,
     usermail:'',
     error: '',
-    message: ''
+    message: '',
+    userData:[]
+
 };
 
 const authReducer = (state = INIT_STATE, action) => {
@@ -44,6 +49,25 @@ const authReducer = (state = INIT_STATE, action) => {
                 currentUser: true
             }
         case LOGIN_USER_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        // user data 
+        case USER_DETAILS:
+            return {
+                ...state,
+                loading: true,
+               
+            }
+        case USER_DETAILS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                userData : action.payload
+            }
+        case USER_DETAILS_ERROR:
             return {
                 ...state,
                 loading: false,

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router';
 import { connect, useSelector, useDispatch } from 'react-redux'
 import Router from 'next/router'
-import FilterForm from '../../components/Tradepeople/FilterForm'
+import {FilterForm} from '../../components/Tradepeople/FilterForm'
 import { searchBusiness } from '../../redux/treadspeople/action';
 import Link from 'next/link'
 import Table from '../../components/Table';

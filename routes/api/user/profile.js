@@ -192,4 +192,58 @@ router.post('/userProfilePic',functions.verifyToken,upload.fields([{name:"profil
     }
 })
 
+router.get('/userDetails/:id', functions.verifyToken, function(req ,res) {
+    var id = req.params.id
+    // console.log(slug)
+    req.getConnection(function(err, connection){
+        if(err) {   
+            console.log(err);
+            response = general.response_format(false, messages.ERROR_PROCESSING, {});
+            res.send(response);
+        }
+        sql = `SELECT id,
+                      email ,                     
+                      telephone, 
+                      name,
+                      enabled,
+                      system,
+                      mobile,
+                      dob,
+                      address_line_1,
+                      address_line_2,
+                      address_town,
+                      address_county,
+                      address_postcode,
+                      facebook_token,
+                      facebook_user_id,
+                      registration_complete,
+                      verify_code,
+                      verified,
+                      image,
+                      terms_agreed_date,
+                      gdpr_agreed_date,
+                      created,
+                      updated,
+                      verify_date,
+                      notification_received_sms,
+                      notification_received_email,
+                      hash,
+                      notification_marketing_email
+                      from user
+                      where id="${id}"`
+            connection.query(sql , function(err,result){
+            // console.log("------------->",sql , result);
+            if (err){
+                console.log(err);
+                response = general.response_format(false, messages.ERROR_PROCESSING, {});
+                res.send(response);
+            }
+            response = general.response_format(true, "User details", result);
+            res.send(response);
+        });
+    });
+
+});
+
+
 module.exports = router
