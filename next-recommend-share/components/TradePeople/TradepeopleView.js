@@ -174,12 +174,12 @@ export const UserCard = (props) => {
                 <div className="tenpointfive columns">
                     <div className="contained semi-shallow">
                         <Row>
-                            <div className="six columns alpha mob-tcenter">
-                                <p className="h3 shallow">                                   
+                            <div className="six columns alpha mob-tcenter  ">
+                                <p className="h3 shallow font">                                   
                                     <Link href={props.title_href}>
                                         {props.title}                                                                                   
                                     </Link>
-                                    {console.log(props)}
+                                    {/* {console.log(props)} */}
                                     {/* {props.editIcon == 'yes' ? 
                                     <>
                                     <i className="fa fa-pencil-square edit" aria-hidden="true" />

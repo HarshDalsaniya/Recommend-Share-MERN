@@ -11,12 +11,17 @@ var multer= require('multer');
 var bodyparser = require('body-parser');
 require('dotenv').config();
 var cors = require("cors");
+const passport = require("passport")
+const FacebookStrategy = require("passport-facebook").Strategy
 
 var indexRouter = require('./routes/index');
 
 var app = express();
 
 app.use(cors())
+app.use(passport.initialize())
+app.use(passport.session())
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -32,6 +37,16 @@ app.use(connection(mysql,dbConfig));
 
 // user Login API
 app.use('/api/user', require('./routes/api/user/login'),function (err, req, res, next) {
+  console.log(err);
+  res.json({status: 0,message: "Oops! Something went wrong"});
+});
+
+app.use('/api/facebook', require('./routes/api/facebook/facebooklogin'),function (err, req, res, next) {
+  console.log(err);
+  res.json({status: 0,message: "Oops! Something went wrong"});
+});
+
+app.use('/api/google', require('./routes/api/googleAuth/google'),function (err, req, res, next) {
   console.log(err);
   res.json({status: 0,message: "Oops! Something went wrong"});
 });

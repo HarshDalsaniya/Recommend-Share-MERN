@@ -49,7 +49,7 @@ export default function secure (props){
                                                     </Link>
                                                 </div>
                                                 <div className="col-md-6 text-center text-md-start">
-                                                    <Link href="">
+                                                    <Link href={`/secure/customers/${id}/activity?type=warnings`}>
                                                     <a>
                                                         <div className="recieved-number-2">0</div>
                                                         <div className="recieved-text">Negative Recommendation</div>
@@ -62,7 +62,7 @@ export default function secure (props){
                                             <h3 className="recieved-heading">Given</h3>
                                             <div className="row">
                                                 <div className="col-md-6 text-center mb-3 mb-md-0 text-md-start">
-                                                    <Link href="">
+                                                    <Link href={`/secure/customers/${id}/activity/given?type=recommendations`}>
                                                     <a>
                                                         <div className="recieved-number-1">0</div>
                                                         <div className="recieved-text">Positive Recommendation</div>
@@ -70,7 +70,7 @@ export default function secure (props){
                                                     </Link>
                                                 </div>
                                                 <div className="col-md-6 text-center text-md-start">
-                                                    <Link href="">
+                                                    <Link href={`/secure/customers/${id}/activity/given?type=warnings`}>
                                                     <a>
                                                         <div className="recieved-number-2">0</div>
                                                         <div className="recieved-text">Negative Recommendation</div>

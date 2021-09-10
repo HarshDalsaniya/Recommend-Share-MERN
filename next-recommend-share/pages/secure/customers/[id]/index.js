@@ -24,7 +24,7 @@ export const customerProfile = (props) => {
 
 
     return (
-      <section className="content login-body" style={{marginTop:"5rem"}}>
+      <section className="content login-body font" style={{marginTop:"5rem"}}>
           <Container>
              <h2>Customer Profile</h2>
                 <div className="contained shallow">
@@ -63,7 +63,7 @@ export const customerProfile = (props) => {
                     </div>
                     <div className="recieved-box">
                         <div className="row">
-                            <div className="col-md-6 mb-4 mb-md-0">
+                            <div className="col-md-6 mb-4 mb-md-0 font">
                                 <h3 className="recieved-heading">Recieved</h3>
                                 <div className="row">
                                     <div className="col-md-6 text-center mb-3 mb-md-0 text-md-start">

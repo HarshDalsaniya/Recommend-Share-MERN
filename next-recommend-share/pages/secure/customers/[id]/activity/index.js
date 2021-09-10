@@ -23,14 +23,15 @@ export const activity = (props) => {
     }, [setUser_profileData,userData.length != 0])
     return (
         <>
-        <section className="content login-body" style={{marginTop:"5rem"}}>
+        <section className="content login-body font" style={{marginTop:"5rem"}}>
         <Container>
         <p className="h2">
-            <Link href={`/secure/customers/${Id}`} className="back black">              
+        <i class="fa fa-chevron-circle-left font" aria-hidden="true"></i>
+            <Link href={`/secure/customers/${Id}`} className="back black font">              
                 Back to Profile               
              </Link>
             </p>
-           <h2>Customer Profile</h2>
+           
               <div className="contained shallow">
                   <div className="box white">
                   <UserCard 
@@ -64,7 +65,7 @@ export const activity = (props) => {
                   </div>                 
               </div>
             
-              <div className="contained shallow mob-not-shallow">
+              <div className="contained shallow mob-not-shallow font">
               {query.type == "recommendations" ? 
                 <>
                     <h2>Positive Recommendations Received</h2>
@@ -72,7 +73,7 @@ export const activity = (props) => {
                         <div className="contained shallow tcenter">
                             <p className="shallow">
                                 Nobody has left a <span className="text-green">positive recommendation</span>{" "}
-                                for <strong>sam</strong>.
+                                for <strong>{user_profileData.name}</strong>.
                                 </p>
                         </div>
                     </div>
@@ -83,7 +84,7 @@ export const activity = (props) => {
                     <div className="contained shallow tcenter">
                         <p className="shallow">
                             Nobody has left a <span className="text-red">negative recommendation</span>{" "}
-                            for <strong>sam</strong>.
+                            for <strong>{user_profileData.name}</strong>.
                             </p>
                     </div>
                 </div>

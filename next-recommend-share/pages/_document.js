@@ -1,5 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-
+import favicon from "../public/favicon.ico"
 class MyDocument extends Document {
     
     static async getInitialProps(ctx) {
@@ -11,7 +11,7 @@ class MyDocument extends Document {
         return (
             <Html lang="zxx">
                 <Head>
-                    
+                <link rel="shortcut icon" href={favicon} type="image/x-icon" />
                 <link href="https://fonts.googleapis.com/css?family=Open+Sans|Work+Sans" rel="stylesheet" />
                 </Head>
                 <body className="marketing">
@@ -22,6 +22,7 @@ class MyDocument extends Document {
                     <script defer src="/your-path-to-fontawesome/js/fontawesome.js"></script>           */}
                     <script src="https://kit.fontawesome.com/368022d8f5.js"></script>
                 </body>
+                
             </Html>
         )
     }
