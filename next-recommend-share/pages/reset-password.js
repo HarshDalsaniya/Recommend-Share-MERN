@@ -9,7 +9,7 @@ import router from 'next/router';
 import ErrorPage from '../components/others/ErrorPage';
 
 
-export default function reset_password(props){
+export default function reset_password(props) {
 
     const userKeyverify = useSelector(state => state);
     const dispatch = useDispatch();
@@ -21,15 +21,17 @@ export default function reset_password(props){
     // console.log(birds)
     return (
         <React.StrictMode>
-        <div style={{marginTop : "5rem"}}>
-            {
-                typeof params.uniqueKey != 'undefined' ?
-                    userKeyverify.authUser.key == true ?
-                        <ChangePassword />
-                        : <ErrorPage />
-                    : <ResetPassword /> }
+            <React.Fragment>
+                <div style={{ marginTop: "5rem" }}>
+                    {
+                        typeof params.uniqueKey != 'undefined' ?
+                            userKeyverify.authUser.key == true ?
+                                <ChangePassword />
+                                : <ErrorPage />
+                            : <ResetPassword />}
 
-        </div>
+                </div>
+            </React.Fragment>
         </React.StrictMode>
     )
 }

@@ -1,16 +1,17 @@
-import React,{useState} from "react"
+import React, { useState } from "react"
 import { connect, useSelector } from 'react-redux'
-import { Container,
-         Row,
-         Col,
-         Form,
-         Button
-        } from "react-bootstrap"
+import {
+    Container,
+    Row,
+    Col,
+    Form,
+    Button
+} from "react-bootstrap"
 import { loginUser } from '../redux/auth/action';
 import Fields from '../components/Form-Fields/Fields';
 import Link from "next/link"
 import { formFieldValidation } from "../services/formValidation"
-import{ToastifyNotification , Toastify} from "../helper/notification"
+import { ToastifyNotification, Toastify } from "../helper/notification"
 
 export const login = (props) => {
     const reState = useSelector(state => state);
@@ -21,81 +22,83 @@ export const login = (props) => {
     const onSubmit = (e) => {
         e.preventDefault();
         setSubmitted(true)
-        const user={
-            email:_username,
-            password:_password
+        const user = {
+            email: _username,
+            password: _password
         }
-        if(user.email!=""&&user.password!=""){
-                props.login(user,"/")
-                ToastifyNotification({   
-                    // type:'success',              
-                    message :'Login SuccessFully...!!',
-                    position:"top-right",
-                    hideProgressBar:'false',
-                    closeOnClick: 'true',
-                    pauseOnHover: 'true',
-                    draggable: 'true',
-                    progress: '',
-                })
-        // }
+        if (user.email != "" && user.password != "") {
+            props.login(user, "/")
+            ToastifyNotification({
+                // type:'success',              
+                message: 'Login SuccessFully...!!',
+                position: "top-right",
+                hideProgressBar: 'false',
+                closeOnClick: 'true',
+                pauseOnHover: 'true',
+                draggable: 'true',
+                progress: '',
+            })
+            // }
         }
     }
     return (
-        <div className="login-body" >
-        <section className="content" style={{marginTop:"5rem"}}>
-              <Toastify
-                position="top-right "
-                autoClose="2000"
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
-            <Container>
-                <div className="six columns alpha offset-by-three">
-                    <div className="contained">
-                    <h1>Login</h1>
-                    <div className="box white">
-                        <p className="form-text">Please use your account details to log in. If you do not have an account, why not <Link href="/register"><a >create one</a></Link>?</p>
-                        {typeof error.verifyError!='undefined' && error.verifyError!=''?
-                                    <div className="help-block mb-2" style={{color:'red'}}>{error.verifyError.currentPasswordnotvalid}</div>
-                                :null}
-                                <form onSubmit={onSubmit}>
-                                        <Fields 
-                                            field = "email"
-                                            fieldLabel = "Your Email"
-                                            fieldName = "_username"
-                                            fieldValue = {_username}
-                                            fieldAction = {setUsername}
-                                            fieldValidation = {[submitted, _username, formFieldValidation(error,"email",_username)]}
-                                        />
-                                        <Fields 
-                                            field = "password"
-                                            fieldLabel = "Your Password"
-                                            fieldName = "_password"
-                                            fieldValue = {_password}
-                                            fieldAction = {setPassword}
-                                            fieldValidation = {[submitted, _password, formFieldValidation(error,"password",_password)]}
-                                        />
-                                        <p className="tcenter small">Forgotten your password? <Link href="/reset-password"><a className="form-link" >Request a new one</a></Link>.</p>
-                                        <div className="buttons tcenter">
-                                            <Button type="submit" className="light big">Login Now</Button>
-                                        </div>
-                                        <input type="hidden" name="_target_path" value="/"></input>
-                                    </form>
+        <React.StrictMode>
+            <React.Fragment>
+                <div className="login-body" >
+                    <section className="content" style={{ marginTop: "5rem" }}>
+                        <Toastify
+                            position="top-right "
+                            autoClose="2000"
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                        />
+                        <Container>
+                            <div className="six columns alpha offset-by-three">
+                                <div className="contained">
+                                    <h1>Login</h1>
+                                    <div className="box white">
+                                        <p className="form-text">Please use your account details to log in. If you do not have an account, why not <Link href="/register"><a >create one</a></Link>?</p>
+                                        {typeof error.verifyError != 'undefined' && error.verifyError != '' ?
+                                            <div className="help-block mb-2" style={{ color: 'red' }}>{error.verifyError.currentPasswordnotvalid}</div>
+                                            : null}
+                                        <form onSubmit={onSubmit}>
+                                            <Fields
+                                                field="email"
+                                                fieldLabel="Your Email"
+                                                fieldName="_username"
+                                                fieldValue={_username}
+                                                fieldAction={setUsername}
+                                                fieldValidation={[submitted, _username, formFieldValidation(error, "email", _username)]}
+                                            />
+                                            <Fields
+                                                field="password"
+                                                fieldLabel="Your Password"
+                                                fieldName="_password"
+                                                fieldValue={_password}
+                                                fieldAction={setPassword}
+                                                fieldValidation={[submitted, _password, formFieldValidation(error, "password", _password)]}
+                                            />
+                                            <p className="tcenter small">Forgotten your password? <Link href="/reset-password"><a className="form-link" >Request a new one</a></Link>.</p>
+                                            <div className="buttons tcenter">
+                                                <Button type="submit" className="light big">Login Now</Button>
+                                            </div>
+                                            <input type="hidden" name="_target_path" value="/"></input>
+                                        </form>
 
-                    </div>
-                    </div>
-                    <div className="contained">
-                        <p className="h1">Login with Facebook</p>
-                        <div className="box white">
-                            <div className="contained shallow">
-                                <p>You can use your facebook account to login.</p>
-                                <p className="shallow tcenter">
-                                {/* <fb:login-button
+                                    </div>
+                                </div>
+                                <div className="contained">
+                                    <p className="h1">Login with Facebook</p>
+                                    <div className="box white">
+                                        <div className="contained shallow">
+                                            <p>You can use your facebook account to login.</p>
+                                            <p className="shallow tcenter">
+                                                {/* <fb:login-button
                                     data-size="large"
                                     data-button-type="continue_with"
                                     data-show-faces="false"
@@ -132,32 +135,34 @@ export const login = (props) => {
                                     />
                                     </span>
                                 </fb:login-button> */}
-                                <span id="fb_status" />
-                                </p>
-                            </div>
-                            </div>
-                            <p className="tcenter small">
-                            Having trouble logging in? <a href="/contact-us.html">Contact us</a> for help.
-                            </p>
+                                                <span id="fb_status" />
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p className="tcenter small">
+                                        Having trouble logging in? <a href="/contact-us.html">Contact us</a> for help.
+                                    </p>
 
 
-                    </div>
+                                </div>
+                            </div>
+                            {/* ***** */}
+
+                        </Container>
+                    </section>
                 </div>
-                {/* ***** */}
-            
-            </Container>
-        </section>
-     </div>
+            </React.Fragment>
+        </React.StrictMode>
     )
 }
 
 const mapStateToProps = (authUser) => {
     const { loding, currentUser, error } = authUser
-    return {loding, currentUser, error};
+    return { loding, currentUser, error };
 }
 
 const mapDispatchToProps = {
-    login:loginUser
+    login: loginUser
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(login)

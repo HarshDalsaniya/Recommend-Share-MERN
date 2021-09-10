@@ -68,10 +68,10 @@ export const register = (props) => {
                         // console.log(res)
                         setSelectPostcode(res.data.addresses)
                     })
-            }else{
+            } else {
                 setPostCodeError("Please Valid Post Code Enter")
             }
-            
+
         } catch (err) {
             setPostCodeError("Please Valid Post Code Enter")
         }
@@ -85,7 +85,7 @@ export const register = (props) => {
     const onSubmit = (e) => {
         e.preventDefault();
         setSubmitted(true)
-        if (name != "" && email != "" && mobile != "" && password != "" && confirm_password != "" && address_postcode != "" && address_line_1 != "" && address_town != "" && address_county != "" && terms_agreed_date != false && gdpr_agreed_date != false && postCodeError=="") {
+        if (name != "" && email != "" && mobile != "" && password != "" && confirm_password != "" && address_postcode != "" && address_line_1 != "" && address_town != "" && address_county != "" && terms_agreed_date != false && gdpr_agreed_date != false && postCodeError == "") {
             const userData = {
                 name: name,
                 email: email,
@@ -204,225 +204,227 @@ export const register = (props) => {
     ]
     return (
         <React.StrictMode>
-        <div className="login-body pt-3">
-            <Container fluid>
-                <Row style={{marginTop: "5rem"}}>
-                    <Col md="2">
-                    </Col>
-                    <Col md="8" className="mb-4">
-                        <div className="box mx-auto ">
-                            <h1>Create an Account</h1>
-                            <div className="form-box">
-                                {typeof params.type != "undefined" && params.type == "tradesperson" ?
-                                    <p>
-                                        Create your free <strong>business account</strong> by filling in the form
-                                        below.
-                                        <br />
-                                        If you <strong>do not have a business</strong>, you just need a{" "}
-                                        <Link href="/register"><a onClick={() => { setParams({ type: null }), setTradespeopleName(''), settradespeopleTrade('') }}> customer account </a></Link> instead.
-                                    </p>
-                                    :
-                                    <p>Create your free <strong>customer account</strong> by filling in the form below.
-                                        <br />Are you a <strong>tradesperson</strong>? You can
-                                        <Link href="/register?type=tradesperson"><a onClick={() => setParams({ type: "tradesperson" })}> create a business listing </a></Link>
-                                        for free, or continue to register and create your listing later.
-                                    </p>
-                                }
-                                <form onSubmit={onSubmit}>
-                                    {typeof error.verifyError != 'undefined' && error.verifyError != '' ?
-                                        <div className="help-block mb-2" style={{ color: 'red' }}>{error.verifyError.registerError}</div>
-                                        : null}
-                                    <div className="contained">
+            <React.Fragment>
+                <div className="login-body pt-3">
+                    <Container fluid>
+                        <Row style={{ marginTop: "5rem" }}>
+                            <Col md="2">
+                            </Col>
+                            <Col md="8" className="mb-4">
+                                <div className="box mx-auto ">
+                                    <h1>Create an Account</h1>
+                                    <div className="form-box">
                                         {typeof params.type != "undefined" && params.type == "tradesperson" ?
-                                            <>
-                                                <h3>Business Details</h3>
-                                                <Fields
-                                                    key="field_tradespeopleName"
-                                                    field="text"
-                                                    fieldLabel="Business Name"
-                                                    fieldName="tradespeopleName"
-                                                    fieldValue={tradespeopleName}
-                                                    fieldAction={setTradespeopleName}
-                                                    fieldValidation={[submitted, tradespeopleName, formFieldValidation(error, "name", tradespeopleName)]}
-                                                />
-                                                <Fields
-                                                    key="field_tradespeopleTrade"
-                                                    field="select"
-                                                    fieldLabel="Select a Trade"
-                                                    fieldName="tradespeopleTrade"
-                                                    fieldOption={selectTreadOption}
-                                                    fieldAction={setTradespeopleTrade}
-                                                    fieldValidation={[submitted, tradespeopleTrade, formFieldValidation(error, "tradespeopleTrade", tradespeopleTrade)]}
-                                                />
-                                            </>
-                                            : null}
-                                    </div>
-                                    <div className="contained">
-                                        <Row>
-                                            <Col md={6}>
-                                                <h3>Your Details</h3>
-                                                {col1.map((field) =>{
-                                                    return (typeof field.fieldOption != "undefined" ?
+                                            <p>
+                                                Create your free <strong>business account</strong> by filling in the form
+                                                below.
+                                                <br />
+                                                If you <strong>do not have a business</strong>, you just need a{" "}
+                                                <Link href="/register"><a onClick={() => { setParams({ type: null }), setTradespeopleName(''), settradespeopleTrade('') }}> customer account </a></Link> instead.
+                                            </p>
+                                            :
+                                            <p>Create your free <strong>customer account</strong> by filling in the form below.
+                                                <br />Are you a <strong>tradesperson</strong>? You can
+                                                <Link href="/register?type=tradesperson"><a onClick={() => setParams({ type: "tradesperson" })}> create a business listing </a></Link>
+                                                for free, or continue to register and create your listing later.
+                                            </p>
+                                        }
+                                        <form onSubmit={onSubmit}>
+                                            {typeof error.verifyError != 'undefined' && error.verifyError != '' ?
+                                                <div className="help-block mb-2" style={{ color: 'red' }}>{error.verifyError.registerError}</div>
+                                                : null}
+                                            <div className="contained">
+                                                {typeof params.type != "undefined" && params.type == "tradesperson" ?
+                                                    <>
+                                                        <h3>Business Details</h3>
                                                         <Fields
-                                                            key={"field_" + field.fieldName}
-                                                            field={field.field}
-                                                            fieldLabel={field.fieldLabel}
-                                                            fieldName={field.fieldName}
-                                                            fieldValue={field.fieldValue}
-                                                            fieldOption={field.fieldOption}
-                                                            fieldAction={field.fieldAction}
-                                                            fieldValidation={field.fieldValidation}
+                                                            key="field_tradespeopleName"
+                                                            field="text"
+                                                            fieldLabel="Business Name"
+                                                            fieldName="tradespeopleName"
+                                                            fieldValue={tradespeopleName}
+                                                            fieldAction={setTradespeopleName}
+                                                            fieldValidation={[submitted, tradespeopleName, formFieldValidation(error, "name", tradespeopleName)]}
                                                         />
-                                                        :
                                                         <Fields
-                                                            key={"field_" + field.fieldName}
-                                                            field={field.field}
-                                                            fieldLabel={field.fieldLabel}
-                                                            fieldName={field.fieldName}
-                                                            fieldValue={field.fieldValue}
-                                                            fieldAction={field.fieldAction}
-                                                            fieldValidation={field.fieldValidation}
-                                                        />)
-                                                })}
-                                            </Col>
-                                            <Col md={6}>
-                                                <h3>Your Address</h3>
-                                                <div className="form-field">
-                                                    <Form.Label className="form-lable">Postcode</Form.Label>
-                                                    <div className="d-flex justify-content-between">
-                                                        <Form.Control type="text" name="address_postcode" key="field_address_postcode" style={{ width: "calc( 100% - 103px )" }} value={address_postcode} onChange={(e) => { setAddress_postcode(e.target.value) }} />
-                                                        <Button className="button square postcode-btn" onClick={() => { getAddress() }}>
-                                                            LOOKUP
-                                                        </Button>
-                                                    </div>
-                                                    {submitted && formFieldValidation(error, "address_postcode", address_postcode) != "undefined" && formFieldValidation(error, "address_postcode", address_postcode) != "" &&
-                                                        <div className="help-block" style={{ color: 'red' }}>{typeof formFieldValidation(error, "address_postcode", address_postcode) != "undefined" ? formFieldValidation(error, "address_postcode", address_postcode).message : formFieldValidation(error, "address_postcode", address_postcode)}</div>
-                                                    }
-                                                    {select_postcode != '' ?
-                                                        <>
-                                                            <span className="postcode-lookup results">
-                                                                <select className="postcode-lookup-sel" onChange={(e) => putAddress(e.target.value)} defaultValue="">
-                                                                    <option disabled>Select your address</option>
-                                                                    {select_postcode.map((option) =>
-                                                                        <option key={"key_" + option} value={option}>{option}</option>
-                                                                    )}
-                                                                </select>
-                                                            </span>
-                                                        </>
-                                                        : null}
-                                                    {postCodeError!=""?<div className="help-block" style={ { color: 'red' } }>{postCodeError}</div>:null}
-                                                </div>
-                                                {col2.map((field) =>
-                                                    <Fields
-                                                        key={"field_" + field.fieldName}
-                                                        field={field.field}
-                                                        fieldLabel={field.fieldLabel}
-                                                        fieldName={field.fieldName}
-                                                        fieldValue={field.fieldValue}
-                                                        fieldAction={field.fieldAction}
-                                                        fieldValidation={field.fieldValidation}
-                                                    />
-                                                )}
-                                            </Col>
-                                        </Row>
-                                    </div>
-                                    <div className="contained">
-                                        <div className="row1">
-                                            <div className="twelve columns alpha">
-                                                <div className="form_row  checkbox">
-                                                    <div className="field_container">
-                                                        <div className={terms_agreed_date == true ? "_checkbox on" : "_checkbox"}>
-                                                            <input
-                                                                type="checkbox"
-                                                                name="terms_agreed_date"
-                                                                required="required"
-                                                                value={1}
-                                                                className="_checkbox_input ready"
-                                                                onClick={() => setTerms_agreed_date(!terms_agreed_date)}
-                                                                style={{
-                                                                    opacity: 0,
-                                                                    position: "absolute",
-                                                                    top: 0,
-                                                                    width: "26px",
-                                                                    height: "24px"
-                                                                }}
-                                                            />
+                                                            key="field_tradespeopleTrade"
+                                                            field="select"
+                                                            fieldLabel="Select a Trade"
+                                                            fieldName="tradespeopleTrade"
+                                                            fieldOption={selectTreadOption}
+                                                            fieldAction={setTradespeopleTrade}
+                                                            fieldValidation={[submitted, tradespeopleTrade, formFieldValidation(error, "tradespeopleTrade", tradespeopleTrade)]}
+                                                        />
+                                                    </>
+                                                    : null}
+                                            </div>
+                                            <div className="contained">
+                                                <Row>
+                                                    <Col md={6}>
+                                                        <h3>Your Details</h3>
+                                                        {col1.map((field) => {
+                                                            return (typeof field.fieldOption != "undefined" ?
+                                                                <Fields
+                                                                    key={"field_" + field.fieldName}
+                                                                    field={field.field}
+                                                                    fieldLabel={field.fieldLabel}
+                                                                    fieldName={field.fieldName}
+                                                                    fieldValue={field.fieldValue}
+                                                                    fieldOption={field.fieldOption}
+                                                                    fieldAction={field.fieldAction}
+                                                                    fieldValidation={field.fieldValidation}
+                                                                />
+                                                                :
+                                                                <Fields
+                                                                    key={"field_" + field.fieldName}
+                                                                    field={field.field}
+                                                                    fieldLabel={field.fieldLabel}
+                                                                    fieldName={field.fieldName}
+                                                                    fieldValue={field.fieldValue}
+                                                                    fieldAction={field.fieldAction}
+                                                                    fieldValidation={field.fieldValidation}
+                                                                />)
+                                                        })}
+                                                    </Col>
+                                                    <Col md={6}>
+                                                        <h3>Your Address</h3>
+                                                        <div className="form-field">
+                                                            <Form.Label className="form-lable">Postcode</Form.Label>
+                                                            <div className="d-flex justify-content-between">
+                                                                <Form.Control type="text" name="address_postcode" key="field_address_postcode" style={{ width: "calc( 100% - 103px )" }} value={address_postcode} onChange={(e) => { setAddress_postcode(e.target.value) }} />
+                                                                <Button className="button square postcode-btn" onClick={() => { getAddress() }}>
+                                                                    LOOKUP
+                                                                </Button>
+                                                            </div>
+                                                            {submitted && formFieldValidation(error, "address_postcode", address_postcode) != "undefined" && formFieldValidation(error, "address_postcode", address_postcode) != "" &&
+                                                                <div className="help-block" style={{ color: 'red' }}>{typeof formFieldValidation(error, "address_postcode", address_postcode) != "undefined" ? formFieldValidation(error, "address_postcode", address_postcode).message : formFieldValidation(error, "address_postcode", address_postcode)}</div>
+                                                            }
+                                                            {select_postcode != '' ?
+                                                                <>
+                                                                    <span className="postcode-lookup results">
+                                                                        <select className="postcode-lookup-sel" onChange={(e) => putAddress(e.target.value)} defaultValue="">
+                                                                            <option disabled>Select your address</option>
+                                                                            {select_postcode.map((option) =>
+                                                                                <option key={"key_" + option} value={option}>{option}</option>
+                                                                            )}
+                                                                        </select>
+                                                                    </span>
+                                                                </>
+                                                                : null}
+                                                            {postCodeError != "" ? <div className="help-block" style={{ color: 'red' }}>{postCodeError}</div> : null}
                                                         </div>
-                                                        <label
-                                                            className="sub required"
-                                                            htmlFor="register_tradesperson_terms_and_conditions"
-                                                        >
-                                                            Please confirm you have read and accept our{" "}
-                                                            <Link href="/terms-of-use">
-                                                            <a className="blank-link" target="_blank">
-                                                                Terms and Conditions
-                                                            </a>
-                                                            </Link>
-                                                            .
-                                                        </label>
-                                                    </div>
-                                                    {submitted && terms_agreed_date != true &&
-                                                        <div className="help-block" style={{ color: 'red' }}>This Field is Required</div>
-                                                    }
-                                                </div>
-                                                <div className="form_row  checkbox">
-                                                    <div className="field_container">
-                                                        <div className={gdpr_agreed_date == true ? "_checkbox on" : "_checkbox"}>
-                                                            <input
-                                                                type="checkbox"
-                                                                name="gdpr_agreed_date"
-                                                                required="required"
-                                                                value={1}
-                                                                className="_checkbox_input ready"
-                                                                onClick={() => setGdpr_agreed_date(!gdpr_agreed_date)}
-                                                                style={{
-                                                                    opacity: 0,
-                                                                    position: "absolute",
-                                                                    top: 0,
-                                                                    width: "26px",
-                                                                    height: "24px"
-                                                                }}
+                                                        {col2.map((field) =>
+                                                            <Fields
+                                                                key={"field_" + field.fieldName}
+                                                                field={field.field}
+                                                                fieldLabel={field.fieldLabel}
+                                                                fieldName={field.fieldName}
+                                                                fieldValue={field.fieldValue}
+                                                                fieldAction={field.fieldAction}
+                                                                fieldValidation={field.fieldValidation}
                                                             />
+                                                        )}
+                                                    </Col>
+                                                </Row>
+                                            </div>
+                                            <div className="contained">
+                                                <div className="row1">
+                                                    <div className="twelve columns alpha">
+                                                        <div className="form_row  checkbox">
+                                                            <div className="field_container">
+                                                                <div className={terms_agreed_date == true ? "_checkbox on" : "_checkbox"}>
+                                                                    <input
+                                                                        type="checkbox"
+                                                                        name="terms_agreed_date"
+                                                                        required="required"
+                                                                        value={1}
+                                                                        className="_checkbox_input ready"
+                                                                        onClick={() => setTerms_agreed_date(!terms_agreed_date)}
+                                                                        style={{
+                                                                            opacity: 0,
+                                                                            position: "absolute",
+                                                                            top: 0,
+                                                                            width: "26px",
+                                                                            height: "24px"
+                                                                        }}
+                                                                    />
+                                                                </div>
+                                                                <label
+                                                                    className="sub required"
+                                                                    htmlFor="register_tradesperson_terms_and_conditions"
+                                                                >
+                                                                    Please confirm you have read and accept our{" "}
+                                                                    <Link href="/terms-of-use">
+                                                                        <a className="blank-link" target="_blank">
+                                                                            Terms and Conditions
+                                                                        </a>
+                                                                    </Link>
+                                                                    .
+                                                                </label>
+                                                            </div>
+                                                            {submitted && terms_agreed_date != true &&
+                                                                <div className="help-block" style={{ color: 'red' }}>This Field is Required</div>
+                                                            }
                                                         </div>
-                                                        <label
-                                                            className="sub required"
-                                                            htmlFor="register_tradesperson_gdpr_policy"
-                                                        >
-                                                            Please confirm you have read and agree to our{" "}
-                                                            <Link href="/gdpr">
-                                                            <a className="blank-link" target="_blank">
-                                                                GDPR policy
-                                                            </a>
-                                                            </Link>
-                                                            .
-                                                        </label>
+                                                        <div className="form_row  checkbox">
+                                                            <div className="field_container">
+                                                                <div className={gdpr_agreed_date == true ? "_checkbox on" : "_checkbox"}>
+                                                                    <input
+                                                                        type="checkbox"
+                                                                        name="gdpr_agreed_date"
+                                                                        required="required"
+                                                                        value={1}
+                                                                        className="_checkbox_input ready"
+                                                                        onClick={() => setGdpr_agreed_date(!gdpr_agreed_date)}
+                                                                        style={{
+                                                                            opacity: 0,
+                                                                            position: "absolute",
+                                                                            top: 0,
+                                                                            width: "26px",
+                                                                            height: "24px"
+                                                                        }}
+                                                                    />
+                                                                </div>
+                                                                <label
+                                                                    className="sub required"
+                                                                    htmlFor="register_tradesperson_gdpr_policy"
+                                                                >
+                                                                    Please confirm you have read and agree to our{" "}
+                                                                    <Link href="/gdpr">
+                                                                        <a className="blank-link" target="_blank">
+                                                                            GDPR policy
+                                                                        </a>
+                                                                    </Link>
+                                                                    .
+                                                                </label>
+                                                            </div>
+                                                            {submitted && gdpr_agreed_date != true &&
+                                                                <div className="help-block" style={{ color: 'red' }}>First Name is required</div>
+                                                            }
+                                                        </div>
                                                     </div>
-                                                    {submitted && gdpr_agreed_date != true &&
-                                                        <div className="help-block" style={{ color: 'red' }}>First Name is required</div>
-                                                    }
                                                 </div>
                                             </div>
-                                        </div>
+                                            <div className="buttons tcenter">
+                                                <Button type="submit" className="light big">Create My Account</Button>
+                                            </div>
+                                            <input type="hidden" name="_target_path" value="/"></input>
+                                        </form>
                                     </div>
-                                    <div className="buttons tcenter">
-                                        <Button type="submit" className="light big">Create My Account</Button>
+                                    <h1>Register with Facebook</h1>
+                                    <div className="form-box">
+                                        <p>You can use your facebook account to login.</p>
                                     </div>
-                                    <input type="hidden" name="_target_path" value="/"></input>
-                                </form>
-                            </div>
-                            <h1>Register with Facebook</h1>
-                            <div className="form-box">
-                                <p>You can use your facebook account to login.</p>
-                            </div>
 
-                            <p className="tcenter small m-5">You can use your facebook account to create your account.</p>
-                        </div>
-                    </Col>
-                    <Col md="2">
-                    </Col>
-                </Row>
-            </Container>
-        </div>
+                                    <p className="tcenter small m-5">You can use your facebook account to create your account.</p>
+                                </div>
+                            </Col>
+                            <Col md="2">
+                            </Col>
+                        </Row>
+                    </Container>
+                </div>
+            </React.Fragment>
         </React.StrictMode>
     )
 }

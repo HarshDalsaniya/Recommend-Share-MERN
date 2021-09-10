@@ -16,6 +16,7 @@ import { wrapper } from "../redux/store"
 import Footer from '../components/layout/Footer'
 import NavBar from '../components/NavBar/NavBar'
 import isAuthenticate from "../helper/userAuthRedirect";
+import { Provider } from 'next-auth/client'
 
 class MyApp extends App {
   static async getInitialProps ({ Component, ctx }) {
@@ -28,6 +29,7 @@ class MyApp extends App {
   }
   state = {
     loading: true,
+    goPath:null
   };
   componentDidMount() {
     isAuthenticate(Router.pathname)
@@ -46,17 +48,23 @@ class MyApp extends App {
   }
   render () {
     
-      const { Component, pageProps } = this.props
+    const { Component, pageProps, router } = this.props
+    // const userAuth = isAuthenticate(router.pathname)
+    //                   .then(res=>res)
+
     return (
       <React.Fragment>
         {this.state.loading==false?
           <div className="site">
-          {/* {console.log(this.state.current)} */}
             <NavBar/>
             <Component { ...pageProps } />
             <Footer />
           </div>
-        :null}
+        :
+        <div style={{ position: 'absolute',top: '50%',left: '50%',margin: '-50px 0px 0px -50px'}}>
+          <i className="fa fa-refresh fa-spin fa-4x fa-fw" aria-hidden="true"></i>
+        </div>
+        }
       </React.Fragment>
     )
   }
