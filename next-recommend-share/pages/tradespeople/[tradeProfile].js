@@ -191,7 +191,7 @@ export default function tradespeopleDetails(props) {
 
                         </div>
                     </div>
-                    <div className="contained shallow mob-not-shallow">
+                    <div className="contained shallow mob-not-shallow font">
                         <h2>Activity Overview</h2>
                         <div className="box white">
                             <div className="contained semi-shallow">

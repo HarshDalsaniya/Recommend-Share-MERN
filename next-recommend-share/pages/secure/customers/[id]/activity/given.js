@@ -25,14 +25,14 @@ export const activity = (props) => {
     
     return (
         <>
-            <section className="content login-body" style={ { marginTop: "5rem" } }>
+            <section className="content login-body font" style={ { marginTop: "5rem" } }>
                 <Container>
-                    <p className="h2">
+                    <p className="h2 font">
+                    <i class="fa fa-chevron-circle-left font" aria-hidden="true"></i>
                         <Link href={ `/secure/customers/${Id}` } className="back black">
                             Back to Profile
                         </Link>
-                    </p>
-                    <h2>Customer Profile</h2>
+                    </p>                   
                     <div className="contained shallow">
                         <div className="box white">
                         <UserCard 
@@ -66,14 +66,14 @@ export const activity = (props) => {
                         </div>
                     </div>
 
-                    <div className="contained shallow mob-not-shallow">
+                    <div className="contained shallow mob-not-shallow font">
                         { query.type == "recommendations" ?
                             <>
                                 <h2>Positive Recommendations Received</h2>
                                 <div className="box white">
                                     <div className="contained shallow tcenter">
                                         <p className="shallow">
-                                            <strong>sam</strong> has not left any{ " " }
+                                            <strong>{user_profileData.name}</strong> has not left any{ " " }
                                             <span className="text-green">positive recommendations</span>.
                                         </p>
                                     </div>
@@ -84,7 +84,7 @@ export const activity = (props) => {
                                 <div className="box white">
                                     <div className="contained shallow tcenter">
                                         <p className="shallow">
-                                            <strong>sam</strong> has not left any{ " " }
+                                            <strong>{user_profileData.name}</strong> has not left any{ " " }
                                             <span className="text-red">negative recommendations</span>.
                                         </p>
                                     </div>

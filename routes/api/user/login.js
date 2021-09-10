@@ -393,8 +393,7 @@ router.get('/verifyotp' ,(req,res)=> {
                 message : "Invalida Otp"
             }
             ])
-        }
-        
+        }       
         
     })  
 })
